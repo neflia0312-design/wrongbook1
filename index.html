@@ -4,7 +4,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="app-build" content="V4.11.2-20260816">
+<meta name="app-build" content="V4.11.3-20260816">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1303,7 +1303,7 @@ body.category-modal-open .nav{
 
 @media(min-width:700px){body{padding:20px 0}.app{min-height:calc(100vh - 40px);border-radius:36px;overflow:hidden;box-shadow:0 20px 80px rgba(74,64,58,.16)}.nav{bottom:20px}.modal{align-items:center}.sheet{border-radius:30px;max-height:80vh}}
 
-/* V4.11.2 精准穿搭拆解 */
+/* V4.11.3 精准穿搭拆解 */
 .lookbook-anatomy{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
 .lookbook-anatomy-item{background:var(--soft,#f6f0ed);border-radius:16px;padding:10px;min-width:0}
 .lookbook-anatomy-item .swatch{width:100%;height:42px;border-radius:11px;border:1px solid rgba(60,50,46,.08);margin-bottom:8px}
@@ -1359,7 +1359,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V4.11.2 STYLE DNA + LOOKBOOK：画像占比 + 全球穿搭账号 */
+/* V4.11.3 STYLE DNA + LOOKBOOK：画像占比 + 全球穿搭账号 */
 .dna-distribution{margin-top:14px;padding:14px;border-radius:20px;background:#faf6f3;border:1px solid #eee6e1}
 .dna-distribution-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .dna-distribution-title b{font-size:12px;color:#514a45}.dna-distribution-title span{font-size:9px;color:#9a9089}
@@ -1377,7 +1377,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V4.11.2 搭配图鉴 */
+/* V4.11.3 搭配图鉴 */
 .navinner{grid-template-columns:repeat(5,1fr)!important}
 .nav button{min-width:0}
 .lookbook-entry{width:100%;border:0;background:linear-gradient(135deg,#4a443f,#746b64);color:#fff;border-radius:24px;padding:17px 18px;margin:2px 0 14px;display:flex;align-items:center;justify-content:space-between;text-align:left;box-shadow:0 12px 30px rgba(65,56,50,.16)}
@@ -1396,11 +1396,11 @@ body.category-modal-open .nav{
 
 </head>
 <body>
-<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V4.11.2</div>
+<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V4.11.3</div>
 <div class="app">
   <header class="topbar">
     <div class="brandrow">
-      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V4.11.2 STYLE DNA + LOOKBOOK</small></div>
+      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V4.11.3 STYLE DNA + LOOKBOOK</small></div>
       <button class="iconbtn" onclick="openDataSettings()">⋯</button>
     </div>
   </header>
@@ -1571,7 +1571,7 @@ body.category-modal-open .nav{
       <div class="lookbook-intro">
         <div class="kicker">STYLE REFERENCE MATCHER</div>
         <h3>把喜欢的穿搭，翻译成你的衣橱</h3>
-        <p>导入一张你喜欢的穿搭图。App 会结合这张参考图、近期 Style DNA 和你已经录入的全部衣橱单品，生成多套相似搭配；缺少的品类会单独列出来。</p>
+        <p>导入一张你喜欢的穿搭图。App 会先锁定人物主体，再结合人物穿搭结构、近期 Style DNA 和全部衣橱单品生成相似搭配；背景环境不再作为前台配色依据。</p>
         <div class="lookbook-actions">
           <button class="btn" id="lookbookPickBtn">＋ 导入喜欢的穿搭</button>
           <button class="btn secondary" onclick="generateLookbookOutfits(true)">换一组搭配</button>
@@ -1591,15 +1591,7 @@ body.category-modal-open .nav{
           <div id="lookbookTargetDNA" class="lookbook-target-dna"></div>
         </div>
       </div>
-
-      <div class="lookbook-panel">
-        <div class="lookbook-card-head"><b>参考图精准拆解</b><span id="lookbookAnatomyStatus">等待识别</span></div>
-        <div class="lookbook-gap-note">先识别参考图里的主要单品与颜色，再逐项对照你的衣橱。缺哪一件，会直接指出具体颜色 + 品类。</div>
-        <div class="lookbook-anatomy" id="lookbookAnatomy"></div>
-        <div class="lookbook-exact-note" id="lookbookExactNote"></div>
-      </div>
-
-      <div class="lookbook-panel">
+<div class="lookbook-panel">
         <div class="lookbook-card-head"><b>我的相似搭配</b><span id="lookbookSetCount">0 套</span></div>
         <div class="lookbook-outfit-grid" id="lookbookOutfitGrid"></div>
       </div>
@@ -2529,7 +2521,7 @@ document.getElementById("styleDNAInput").addEventListener("change",async e=>{
   }catch(err){console.error(err);alert("Style DNA 文件读取失败："+(err?.message||"格式不正确"))}
 });
 
-/* ---------- V4.11.2 搭配图鉴：精准色彩/单品拆解 ---------- */
+/* ---------- V4.11.3 搭配图鉴：人物主体优先识别 ---------- */
 let lookbookReference={image:"",palette:null,createdAt:0,garments:[]};
 let lookbookSeed=0;
 
@@ -2590,17 +2582,38 @@ function lightNeutralInRect(ctx,w,h,rx,ry,rw,rh){
 }
 async function analyzeReferenceGarments(dataURL){
   const img=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=dataURL});
-  const W=180,H=Math.max(220,Math.round(180*img.height/img.width));const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0,W,H);
+  const W=220,H=Math.max(280,Math.round(220*img.height/img.width));
+  const c=document.createElement('canvas');c.width=W;c.height=H;
+  const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0,W,H);
+
+  // V4.11.3: first locate the likely person center from skin pixels.
+  // All clothing sampling is then constrained to a narrow body corridor so walls,
+  // pavement, furniture and other background colors are not used as foreground cues.
   const cx=subjectCenterFromSkin(x,W,H);
-  let inner=dominantInRect(x,W,H,Math.max(.05,cx-.11),.25,.22,.27);const light=lightNeutralInRect(x,W,H,Math.max(.05,cx-.13),.25,.26,.30);
-  const outerL=dominantInRect(x,W,H,Math.max(.02,cx-.34),.18,.21,.40),outerR=dominantInRect(x,W,H,Math.min(.77,cx+.12),.18,.21,.40);
-  const chroma=c=>Math.max(c.r,c.g,c.b)-Math.min(c.r,c.g,c.b);let outer=chroma(outerR)>chroma(outerL)+12?outerR:(chroma(outerL)>chroma(outerR)+12?outerL:(colorDistance(outerL,inner)>colorDistance(outerR,inner)?outerL:outerR));
-  const bottom=dominantInRect(x,W,H,Math.max(.05,cx-.20),.53,.40,.39);
+  const bodyX=Math.max(.08,Math.min(.62,cx-.16));
+
+  let inner=dominantInRect(x,W,H,bodyX,.25,.32,.24);
+  const light=lightNeutralInRect(x,W,H,bodyX,.24,.32,.27);
+
+  const outerL=dominantInRect(x,W,H,Math.max(.06,cx-.27),.20,.15,.34);
+  const outerR=dominantInRect(x,W,H,Math.min(.79,cx+.12),.20,.15,.34);
+  const chroma=c=>Math.max(c.r,c.g,c.b)-Math.min(c.r,c.g,c.b);
+  let outer=chroma(outerR)>chroma(outerL)+12?outerR:
+            (chroma(outerL)>chroma(outerR)+12?outerL:
+            (colorDistance(outerL,inner)>colorDistance(outerR,inner)?outerL:outerR));
+
+  const bottom=dominantInRect(x,W,H,Math.max(.08,cx-.18),.52,.36,.36);
   if(light&&colorInfo(inner).family==='black'&&colorInfo(bottom).family==='black')inner=light;
-  const garments=[];const ciInner=colorInfo(inner),ciBottom=colorInfo(bottom),ciOuter=colorInfo(outer);
-  if(colorDistance(outer,inner)>65)garments.push({role:'outer',label:'外套/叠穿层',color:ciOuter.name,family:ciOuter.family,rgb:outer,hex:rgbHex(outer)});
+
+  const garments=[];
+  const ciInner=colorInfo(inner),ciBottom=colorInfo(bottom),ciOuter=colorInfo(outer);
+  if(colorDistance(outer,inner)>65){
+    garments.push({role:'outer',label:'外套/叠穿层',color:ciOuter.name,family:ciOuter.family,rgb:outer,hex:rgbHex(outer)});
+  }
   garments.push({role:'top',label:'上衣',color:ciInner.name,family:ciInner.family,rgb:inner,hex:rgbHex(inner)});
-  if(colorDistance(bottom,inner)>28||ciBottom.family!==ciInner.family)garments.push({role:'bottom',label:'下装',color:ciBottom.name,family:ciBottom.family,rgb:bottom,hex:rgbHex(bottom)});
+  if(colorDistance(bottom,inner)>28||ciBottom.family!==ciInner.family){
+    garments.push({role:'bottom',label:'下装',color:ciBottom.name,family:ciBottom.family,rgb:bottom,hex:rgbHex(bottom)});
+  }
   return garments;
 }
 function referencePaletteText(){const gs=lookbookReference.garments||[];if(gs.length)return gs.map(g=>g.color).join(' / ');const p=lookbookReference.palette;if(!p)return "中性低饱和";return colorInfo(p).name}
@@ -2610,17 +2623,19 @@ function roleFit(item,role){const b=lookbookBucket(item);if(role==='outer')retur
 function referenceItemScore(item,g){let s=deterministicDNAScore(item)*.35+roleFit(item,g.role);const f=itemColorFamily(item);if(f===g.family)s+=38;else if(f==='unknown')s+=4;else if(['white','gray','black','neutral'].includes(f)&&['white','gray','black','neutral'].includes(g.family))s+=12;else s-=10;return s}
 function candidatesForGarment(g){return [...items()].map(x=>({x,score:referenceItemScore(x,g)})).filter(v=>roleFit(v.x,g.role)>0).sort((a,b)=>b.score-a.score)}
 function garmentMatch(g,rank=0){const a=candidatesForGarment(g);const exact=a.filter(v=>itemColorFamily(v.x)===g.family);const pool=exact.length?exact:a;const v=pool[rank]||pool[0];return v&&v.score>25?v.x:null}
-function renderLookbookAnatomy(){
-  const box=document.getElementById('lookbookAnatomy'),st=document.getElementById('lookbookAnatomyStatus'),note=document.getElementById('lookbookExactNote');if(!box)return;const gs=lookbookReference.garments||[];
-  if(!gs.length){box.innerHTML='<div class="lookbook-empty" style="grid-column:1/-1">导入参考图后，会拆成外套 / 上衣 / 下装，并识别各自颜色。</div>';if(st)st.textContent='等待识别';if(note)note.textContent='';return}
-  box.innerHTML=gs.map(g=>{const m=garmentMatch(g);return `<div class="lookbook-anatomy-item"><div class="swatch" style="background:${g.hex}"></div><b>${esc(g.color)} · ${esc(g.label)}</b><small>${m?`衣橱匹配：${esc(m.name)}`:'衣橱未找到同色同类单品'}</small><em class="${m?'have':'missing'}">${m?'已有':'缺失'}</em></div>`}).join('');
-  const miss=gs.filter(g=>!garmentMatch(g));if(st)st.textContent=miss.length?`缺 ${miss.length} 类`:'可完整复刻';if(note)note.innerHTML=miss.length?`优先缺口：<b>${miss.map(g=>`${g.color}${g.label}`).join('、')}</b>。先复刻已有单品，再补这一层，比泛泛推荐新品更实用。`:'你的衣橱已经能完成这张参考图的核心配色与品类复刻。';
+function renderLookbookAnatomy(){ return; }
+function renderLookbookTarget(){
+  const box=document.getElementById("lookbookTargetDNA");if(!box)return;
+  const dna=getStyleDNA();const styles=(dna?.styles||[]).slice(0,4);
+  box.innerHTML=(styles.length
+    ? styles.map(x=>`<div class="lookbook-target-style"><b>${esc(x.cn||x.name)}</b><span>${Math.round(x.score||0)}%</span></div>`).join("")
+    : `<div class="lookbook-placeholder">先定位人物主体，再分析人物身上的穿搭结构；环境背景不参与前台配色展示。</div>`)
+    + `<div class="lookbook-target-style"><b>识别策略</b><span>人物主体优先</span></div>`;
 }
-function renderLookbookTarget(){const box=document.getElementById("lookbookTargetDNA");if(!box)return;const dna=getStyleDNA();const styles=(dna?.styles||[]).slice(0,4);const gs=lookbookReference.garments||[];box.innerHTML=(styles.length?styles.map(x=>`<div class="lookbook-target-style"><b>${esc(x.cn||x.name)}</b><span>${Math.round(x.score||0)}%</span></div>`).join(""):`<div class="lookbook-placeholder">Style DNA 作为第二层条件；参考图的单品与配色优先级更高。</div>`)+gs.map(g=>`<div class="lookbook-target-style"><b>${esc(g.label)}</b><span>${esc(g.color)}</span></div>`).join('')+(gs.length?`<div class="lookbook-palette">${gs.map(g=>`<i title="${esc(g.color)}" style="background:${g.hex}"></i>`).join('')}</div>`:"");}
 function renderLookbookReference(){const box=document.getElementById("lookbookReferencePreview"),status=document.getElementById("lookbookReferenceStatus");if(!box)return;if(lookbookReference.image){box.innerHTML=`<img src="${lookbookReference.image}" alt="参考穿搭">`;if(status)status.textContent="已导入"}else{box.innerHTML='<div class="lookbook-placeholder">导入一张穿搭图后开始匹配</div>';if(status)status.textContent="未导入"}renderLookbookTarget();renderLookbookAnatomy();}
 function chooseRotated(arr,idx){if(!arr.length)return null;return arr[(idx+lookbookSeed)%arr.length]}
 function outfitSetScore(set){const a=set.filter(Boolean);return a.length?Math.round(a.reduce((n,x)=>n+deterministicDNAScore(x),0)/a.length):0}
-function lookbookReason(set){const dna=(getStyleDNA()?.styles||[]).slice(0,2).map(x=>x.cn||x.name).join(" × ")||"近期审美";return `${dna} · 参考图优先配色 ${referencePaletteText()}；先复刻核心单品，再做自由变化。`;}
+function lookbookReason(set){const dna=(getStyleDNA()?.styles||[]).slice(0,2).map(x=>x.cn||x.name).join(" × ")||"近期审美";return `${dna} · 参考图穿搭结构优先 ${referencePaletteText()}；先复刻核心单品，再做自由变化。`;}
 function generateLookbookOutfits(rotate=false){
   if(rotate)lookbookSeed++;const grid=document.getElementById("lookbookOutfitGrid");if(!grid)return;const all=[...items()];
   if(!all.length){grid.innerHTML='<div class="lookbook-empty">衣橱还没有单品。先把衣服导入衣橱，再回来生成图鉴。</div>';return}
@@ -2628,83 +2643,25 @@ function generateLookbookOutfits(rotate=false){
   const gs=lookbookReference.garments||[];const exact=gs.map(g=>garmentMatch(g,0));const exactLabels=gs.map(g=>g.label);
   const sets=[];sets.push({label:'1:1 核心复刻',items:exact,types:exactLabels});
   for(let r=1;r<=3;r++){sets.push({label:['同色替换','轮廓变化','Style DNA 延伸'][r-1],items:gs.map(g=>garmentMatch(g,r)),types:exactLabels})}
-  grid.innerHTML=sets.map((obj,i)=>{const set=obj.items;const missing=gs.filter((g,j)=>!set[j]);const score=Math.max(0,Math.min(99,Math.round(94-missing.length*18-i*5)));return `<div class="lookbook-outfit"><div class="lookbook-outfit-head"><b>${obj.label}</b><span>${score}% MATCH</span></div><div class="lookbook-slots">${set.map((x,j)=>x?`<div class="lookbook-slot"><img src="${x.aiImage||x.image}"><b>${esc(x.name)}</b><small>${esc(x.category||"")} · 对应 ${esc(gs[j]?.color||'')}</small></div>`:`<div class="lookbook-slot missing">缺失<br><b>${esc(gs[j]?.color||'')}</b><br>${esc(obj.types[j]||'单品')}</div>`).join("")}</div><div class="lookbook-outfit-reason">${missing.length?`已有 ${set.filter(Boolean).length}/${set.length} 个核心单品；缺 ${missing.map(g=>`${g.color}${g.label}`).join('、')}。`:'核心配色与品类已覆盖，可直接照着穿。'} ${esc(lookbookReason(set))}</div></div>`}).join('');
+  grid.innerHTML=sets.map((obj,i)=>{const set=obj.items;const missing=gs.filter((g,j)=>!set[j]);const score=Math.max(0,Math.min(99,Math.round(94-missing.length*18-i*5)));return `<div class="lookbook-outfit"><div class="lookbook-outfit-head"><b>${obj.label}</b><span>${score}% MATCH</span></div><div class="lookbook-slots">${set.map((x,j)=>x?`<div class="lookbook-slot"><img src="${x.aiImage||x.image}"><b>${esc(x.name)}</b><small>${esc(x.category||"")}</small></div>`:`<div class="lookbook-slot missing">缺失<br><b>${esc(obj.types[j]||'单品')}</b></div>`).join("")}</div><div class="lookbook-outfit-reason">${missing.length?`已有 ${set.filter(Boolean).length}/${set.length} 个核心单品；缺 ${missing.map(g=>g.label).join('、')}。`:'核心穿搭层级已覆盖，可直接参考搭配。'} ${esc(lookbookReason(set))}</div></div>`}).join('');
   document.getElementById("lookbookSetCount").textContent=`${sets.length} 套`;renderLookbookGaps();renderLookbookFormula();renderLookbookAnatomy();
 }
 function renderLookbookWardrobeMap(){const grid=document.getElementById("lookbookFitGrid"),sum=document.getElementById("lookbookFitSummary");if(!grid||!sum)return;const data=[...items()].map(x=>({x,score:deterministicDNAScore(x)})).sort((a,b)=>b.score-a.score);const high=data.filter(v=>v.score>=70),mid=data.filter(v=>v.score>=52&&v.score<70),low=data.filter(v=>v.score<52);sum.innerHTML=`<div class="lookbook-stat"><b>${high.length}</b><span>核心适配</span></div><div class="lookbook-stat"><b>${mid.length}</b><span>可转化</span></div><div class="lookbook-stat"><b>${low.length}</b><span>偏离近期</span></div>`;if(!data.length){grid.innerHTML='<div class="lookbook-empty">衣橱暂无单品</div>';renderLookbookGaps();return}const show=[...high.slice(0,5),...mid.slice(0,4),...low.slice(-2)].slice(0,11);grid.innerHTML=show.map(v=>`<div class="lookbook-fit-item"><span class="lookbook-fit-badge">${v.score}%</span><img src="${v.x.aiImage||v.x.image}"><b>${esc(v.x.name)}</b><small>${lookbookBand(v.score)}</small></div>`).join("");renderLookbookGaps();}
 const LOOKBOOK_GAP_LIBRARY={"Soft Y2K":[["贴身薄针织/开衫","贴身但轻薄，可与吊带、低腰下装叠穿","上装"],["低腰垂感长裤","灰、黑、咖或泥灰，裤腿自然堆叠","下装"],["蕾丝吊带层","做领口露边叠穿，比单穿更接近近期审美","叠穿"],["短裙/超短裤","与长袖薄针织形成比例对比","下装"],["低跟穆勒/细带鞋","减少运动感，增加 90s 女性化","鞋履"]],"90s Minimal":[["贴身圆领/方领上衣","白、灰、黑、雾蓝，线条干净","上装"],["垂感直筒长裤","轻薄、低饱和、不强调硬挺通勤感","下装"],["细肩带背心","单穿或作为针织/开衫内搭","叠穿"],["窄肩腋下包","体积小、结构简单","包袋"]],"Japanese Feminine":[["薄针织开衫","奶油、灰粉、浅灰，适合柔和叠穿","上装"],["中长半裙","窄 A 或柔软直筒，避免过度蓬松","裙装"],["玛丽珍/低跟鞋","保持轻盈和女性感","鞋履"]],"Korean Minimal":[["修身长袖T","低饱和浅色或灰色","上装"],["低腰宽腿长裤","面料垂顺，腰头简洁","下装"],["轻薄开衫","作为肩部/腰部叠穿层","叠穿"]],"Dark Feminine":[["黑色蕾丝内搭","领口少量露出即可","叠穿"],["深色修身长袖","黑/炭灰/藏蓝","上装"],["低跟尖头鞋","让宽松下装保持女性化","鞋履"]]};
 function gapCandidates(){
-  const ref=(lookbookReference.garments||[]).filter(g=>!garmentMatch(g)).map(g=>[`${g.color}${g.label}`,`参考图中存在，但你的衣橱没有找到同色同类单品。补这一件即可提高复刻完整度。`,g.label]);
+  const ref=(lookbookReference.garments||[]).filter(g=>!garmentMatch(g)).map(g=>[`${g.label}`,`参考图中存在这一穿搭层级，但你的衣橱暂未找到足够接近的同类单品。`,g.label]);
   const dna=getStyleDNA();const top=(dna?.styles||[])[0]?.name||"Soft Y2K";const base=LOOKBOOK_GAP_LIBRARY[top]||LOOKBOOK_GAP_LIBRARY["Soft Y2K"];const txt=items().map(x=>`${x.name||""} ${x.category||""}`).join(" ");const generic=base.filter(([name])=>!name.split(/[\/、]/).filter(x=>x.length>=2).some(k=>txt.includes(k))).slice(0,6);
   return [...ref,...generic].filter((x,i,a)=>a.findIndex(y=>y[0]===x[0])===i).slice(0,6);
 }
 function renderLookbookGaps(){const box=document.getElementById("lookbookGapGrid");if(!box)return;const gaps=gapCandidates();box.innerHTML=(gaps.length?gaps.map(([n,d,c])=>`<div class="lookbook-gap"><b>${esc(n)}</b><small>${esc(d)}</small><em>${esc(c)}</em></div>`).join(""):'<div class="lookbook-empty">当前衣橱已经覆盖参考图的核心单品与主要风格骨架。</div>');}
-function renderLookbookFormula(){const box=document.getElementById("lookbookFormula");if(!box)return;const dna=getStyleDNA();const top=(dna?.styles||[])[0]?.cn||"近期审美";const gs=lookbookReference.garments||[];const colors=gs.map(g=>g.color).join(' + ')||referencePaletteText();box.innerHTML=`<div class="lookbook-formula-row"><b>公式 01 · 精准复刻：</b> 先按 ${esc(colors)} 的顺序复刻参考图核心层级，不再只按 Style DNA 随机抓取高分单品。</div><div class="lookbook-formula-row"><b>公式 02 · 缺口优先：</b> 如果上衣和下装已有，只缺外套，就只把“外套的具体颜色 + 品类”标成缺失。</div><div class="lookbook-formula-row"><b>公式 03 · 三套变化：</b> 第 1 套保持同色同类；第 2 套只换同色近似款；第 3 套允许轮廓变化；第 4 套再叠加 ${esc(top)}。</div><div class="lookbook-formula-row"><b>公式 04 · 衣橱联动：</b> 删除或新增单品后，重新进入图鉴会按当前衣橱重新计算，不把已缺失的单品继续当作“已有”。</div>`;}
-async function handleLookbookFile(file){if(!file)return;const btn=document.getElementById("lookbookPickBtn"),old=btn?.textContent;try{if(btn)btn.textContent="精准拆解中…";const image=await fileToCompressedDataURL(file,900,.86);const palette=await avgPalette(image);const garments=await analyzeReferenceGarments(image);lookbookReference={image,palette,garments,createdAt:Date.now()};renderLookbookReference();generateLookbookOutfits(false);toast(`已识别 ${garments.map(g=>g.color+g.label).join(' / ')}`)}catch(err){console.error(err);alert("参考穿搭读取失败："+(err?.message||err))}finally{if(btn)btn.textContent=old||"＋ 导入喜欢的穿搭"}}
-document.getElementById("lookbookPickBtn")?.addEventListener("click",()=>document.getElementById("lookbookInput")?.click());
-document.getElementById("lookbookInput")?.addEventListener("change",async e=>{const f=e.target.files?.[0];e.target.value="";await handleLookbookFile(f)});
-
-const BRAND_LIBRARY=[
-  {name:"CHANEL",country:"France",subtitle:"Fashion Collections",url:"https://www.chanel.com/us/fashion/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.chanel.com/us/fashion/"},
-  {name:"DIOR",country:"France",subtitle:"Women’s Fashion",url:"https://www.dior.com/en_us/fashion/womens-fashion",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.dior.com/en_us/fashion/womens-fashion"},
-  {name:"LOUIS VUITTON",country:"France",subtitle:"Women’s Fashion Shows",url:"https://us.louisvuitton.com/eng-us/magazine/fashion-shows/_/N-t1qypv3",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://us.louisvuitton.com/eng-us/magazine/fashion-shows/_/N-t1qypv3"},
-  {name:"SAINT LAURENT",country:"France",subtitle:"Collections",url:"https://www.ysl.com/en-us",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.ysl.com/en-us"},
-  {name:"CELINE",country:"France",subtitle:"Collections",url:"https://www.celine.com/en-us/celine-women/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.celine.com/en-us/celine-women/"},
-  {name:"GIVENCHY",country:"France",subtitle:"Collections",url:"https://www.givenchy.com/us/en-US/collections/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.givenchy.com/us/en-US/collections/"},
-  {name:"BALENCIAGA",country:"France",subtitle:"All Collections",url:"https://www.balenciaga.com/en-us/discover/explore-collections",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.balenciaga.com/en-us/discover/explore-collections"},
-  {name:"VALENTINO",country:"Italy",subtitle:"Fashion Shows",url:"https://www.valentino.com/en-ad/v-universe/fashion-shows",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.valentino.com/en-ad/v-universe/fashion-shows"},
-  {name:"ALEXANDER MCQUEEN",country:"United Kingdom",subtitle:"Collections 2026",url:"https://www.alexandermcqueen.com/en-us/preaw23-womenswear-campaign",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.alexandermcqueen.com/en-us/preaw23-womenswear-campaign"},
-  {name:"LOEWE",country:"Spain",subtitle:"Collections",url:"https://www.loewe.com/usa/en/stories-collection",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.loewe.com/usa/en/stories-collection"},
-  {name:"HERMÈS",country:"France",subtitle:"Women’s Universe",url:"https://www.hermes.com/us/en/category/women/ready-wear/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.hermes.com/us/en/category/women/ready-wear/"},
-  {name:"SCHIAPARELLI",country:"France",subtitle:"Collections",url:"https://www.schiaparelli.com/en/collections",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.schiaparelli.com/en/collections"},
-  {name:"ALAÏA",country:"France",subtitle:"Collections",url:"https://www.maison-alaia.com/us",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.maison-alaia.com/us"},
-  {name:"CHLOÉ",country:"France",subtitle:"Collections",url:"https://www.chloe.com/us/chloe/shop-online/women/ready-to-wear",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.chloe.com/us/chloe/shop-online/women/ready-to-wear"},
-  {name:"COURRÈGES",country:"France",subtitle:"Collections",url:"https://www.courreges.com/us",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.courreges.com/us"},
-  {name:"RABANNE",country:"France",subtitle:"Collections",url:"https://fashion.rabanne.com/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://fashion.rabanne.com/"},
-  {name:"JACQUEMUS",country:"France",subtitle:"Collections",url:"https://www.jacquemus.com/en_us",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.jacquemus.com/en_us"},
-  {name:"MUGLER",country:"France",subtitle:"Fashion",url:"https://fashion.mugler.com/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://fashion.mugler.com/"},
-  {name:"JEAN PAUL GAULTIER",country:"France",subtitle:"Collections",url:"https://www.jeanpaulgaultier.com/us/en/collections",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.jeanpaulgaultier.com/us/en/collections"},
-  {name:"MAISON MARGIELA",country:"France",subtitle:"Collections",url:"https://www.maisonmargiela.com/en-us/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.maisonmargiela.com/en-us/"},
-  {name:"PRADA",country:"Italy",subtitle:"Women’s Collections",url:"https://www.prada.com/us/en/womens/ready-to-wear.html",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.prada.com/us/en/womens/ready-to-wear.html"},
-  {name:"MIU MIU",country:"Italy",subtitle:"Collections",url:"https://www.miumiu.com/us/en/collections/c/10195US",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.miumiu.com/us/en/collections/c/10195US"},
-  {name:"GUCCI",country:"Italy",subtitle:"Women’s Fashion",url:"https://www.gucci.com/us/en/ca/women/ready-to-wear-for-women-c-women-readytowear",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.gucci.com/us/en/ca/women/ready-to-wear-for-women-c-women-readytowear"},
-  {name:"FENDI",country:"Italy",subtitle:"Women’s Collections",url:"https://www.fendi.com/us-en/woman/ready-to-wear",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.fendi.com/us-en/woman/ready-to-wear"},
-  {name:"BOTTEGA VENETA",country:"Italy",subtitle:"Women’s Collection",url:"https://www.bottegaveneta.com/en-us/women/womens-ready-to-wear",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.bottegaveneta.com/en-us/women/womens-ready-to-wear"},
-  {name:"VERSACE",country:"Italy",subtitle:"Women’s Collection",url:"https://www.versace.com/us/en/women/clothing/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.versace.com/us/en/women/clothing/"},
-  {name:"DOLCE & GABBANA",country:"Italy",subtitle:"Women’s Fashion",url:"https://www.dolcegabbana.com/en-us/fashion/women/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.dolcegabbana.com/en-us/fashion/women/"},
-  {name:"GIORGIO ARMANI",country:"Italy",subtitle:"Women’s Collection",url:"https://www.armani.com/en-us/giorgio-armani/women",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.armani.com/en-us/giorgio-armani/women"},
-  {name:"FERRAGAMO",country:"Italy",subtitle:"Women’s Collection",url:"https://www.ferragamo.com/shop/us/en/women",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.ferragamo.com/shop/us/en/women"},
-  {name:"JIL SANDER",country:"Italy",subtitle:"Women’s Collection",url:"https://www.jilsander.com/en-us/women/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.jilsander.com/en-us/women/"},
-  {name:"MARNI",country:"Italy",subtitle:"Women’s Collection",url:"https://www.marni.com/en-us/women/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.marni.com/en-us/women/"},
-  {name:"MAX MARA",country:"Italy",subtitle:"Women’s Collection",url:"https://us.maxmara.com/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://us.maxmara.com/"},
-  {name:"ETRO",country:"Italy",subtitle:"Women’s Collection",url:"https://www.etro.com/us-en/women/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.etro.com/us-en/women/"},
-  {name:"MOSCHINO",country:"Italy",subtitle:"Women’s Collection",url:"https://us.moschino.com/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://us.moschino.com/"},
-  {name:"LORO PIANA",country:"Italy",subtitle:"Women’s Collection",url:"https://us.loropiana.com/en/woman",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://us.loropiana.com/en/woman"},
-  {name:"BRUNELLO CUCINELLI",country:"Italy",subtitle:"Women’s Collection",url:"https://shop.brunellocucinelli.com/en-us/women/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://shop.brunellocucinelli.com/en-us/women/"},
-  {name:"BURBERRY",country:"United Kingdom",subtitle:"Women’s Collection",url:"https://us.burberry.com/womens/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://us.burberry.com/womens/"},
-  {name:"JW ANDERSON",country:"United Kingdom",subtitle:"Collections",url:"https://www.jwanderson.com/us/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.jwanderson.com/us/"},
-  {name:"STELLA MCCARTNEY",country:"United Kingdom",subtitle:"Women’s Collection",url:"https://www.stellamccartney.com/us/en/women/ready-to-wear",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.stellamccartney.com/us/en/women/ready-to-wear"},
-  {name:"VICTORIA BECKHAM",country:"United Kingdom",subtitle:"Ready-to-Wear",url:"https://www.victoriabeckham.com/collections/ready-to-wear",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.victoriabeckham.com/collections/ready-to-wear"},
-  {name:"THE ROW",country:"United States",subtitle:"Collections",url:"https://www.therow.com/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.therow.com/"},
-  {name:"TOM FORD",country:"United States",subtitle:"Women’s Collection",url:"https://www.tomfordfashion.com/women/ready-to-wear/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.tomfordfashion.com/women/ready-to-wear/"},
-  {name:"RICK OWENS",country:"United States",subtitle:"Women’s Collection",url:"https://www.rickowens.eu/en/US/women/section/all",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.rickowens.eu/en/US/women/section/all"},
-  {name:"COMME DES GARÇONS",country:"Japan",subtitle:"Official",url:"https://www.comme-des-garcons.com/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.comme-des-garcons.com/"},
-  {name:"YOHJI YAMAMOTO",country:"Japan",subtitle:"Collections",url:"https://www.yohjiyamamoto.co.jp/en/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.yohjiyamamoto.co.jp/en/"},
-  {name:"ISSEY MIYAKE",country:"Japan",subtitle:"Collections",url:"https://www.isseymiyake.com/en/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.isseymiyake.com/en/"},
-  {name:"SACAI",country:"Japan",subtitle:"Collections",url:"https://www.sacai.jp/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.sacai.jp/"},
-  {name:"UNDERCOVER",country:"Japan",subtitle:"Collections",url:"https://undercoverism.com/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://undercoverism.com/"}
-];
-
-const TREND_DATA={
-  regions:[
-    {name:"Tokyo / 日本",subtitle:"Rakuten Fashion Week TOKYO",url:"https://rakutenfashionweektokyo.com/jp/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://rakutenfashionweektokyo.com/jp/"},
-    {name:"Seoul / 韩国",subtitle:"Seoul Fashion Week",url:"https://www.seoulfashionweek.org/hmpg/fawk/main.do",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.seoulfashionweek.org/hmpg/fawk/main.do"},
-    {name:"Shanghai / 中国",subtitle:"Shanghai Fashion Week",url:"https://shanghaifashionweek.com/page/shfw",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://shanghaifashionweek.com/page/shfw"},
-    {name:"Paris / 法国",subtitle:"Paris Fashion Week",url:"https://www.fhcm.paris/en/paris-fashion-week",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.fhcm.paris/en/paris-fashion-week"},
-    {name:"Milano / 意大利",subtitle:"Milano Fashion Week",url:"https://www.cameramoda.it/en/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.cameramoda.it/en/"},
-    {name:"New York / 美国",subtitle:"Official NYFW",url:"https://cfda.com/",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://cfda.com/"},
-    {name:"London / 英国",subtitle:"London Fashion Week",url:"https://www.britishfashioncouncil.co.uk/London-Fashion-Week",thumb:"https://image.thum.io/get/width/900/crop/1100/noanimate/https://www.britishfashioncouncil.co.uk/London-Fashion-Week"}
-  ]
+function renderLookbookFormula(){
+  const box=document.getElementById("lookbookFormula");if(!box)return;
+  const dna=getStyleDNA();const top=(dna?.styles||[])[0]?.cn||"近期审美";
+  box.innerHTML=
+    `<div class="lookbook-formula-row"><b>公式 01 · 人物优先：</b> 先定位参考图中的人物主体，再从人物区域判断上衣 / 下装 / 外套层级，背景墙面、地面和家具不参与前台配色展示。</div>`+
+    `<div class="lookbook-formula-row"><b>公式 02 · 衣橱优先：</b> 先找你已经拥有的同类单品完成核心复刻；没有的层级才标记为缺失。</div>`+
+    `<div class="lookbook-formula-row"><b>公式 03 · 三套变化：</b> 第 1 套尽量复刻原图结构，第 2 套换近似款，第 3 套改变轮廓，第 4 套再叠加 ${esc(top)}。</div>`+
+    `<div class="lookbook-formula-row"><b>公式 04 · 不展示伪精确颜色：</b> 本地识图无法可靠做人像语义分割时，不再把环境取样色当成“参考配色”展示给你。</div>`;
 };
 
 const BRAND_FAV_KEY="today_wear_luxury_favorites_v25";
