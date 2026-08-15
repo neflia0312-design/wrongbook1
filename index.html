@@ -4,7 +4,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="app-build" content="V4.11.4-20260816">
+<meta name="app-build" content="V5.0.0-20260816">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1303,7 +1303,7 @@ body.category-modal-open .nav{
 
 @media(min-width:700px){body{padding:20px 0}.app{min-height:calc(100vh - 40px);border-radius:36px;overflow:hidden;box-shadow:0 20px 80px rgba(74,64,58,.16)}.nav{bottom:20px}.modal{align-items:center}.sheet{border-radius:30px;max-height:80vh}}
 
-/* V4.11.4 精准穿搭拆解 */
+/* V5.0.0 精准穿搭拆解 */
 .lookbook-anatomy{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
 .lookbook-anatomy-item{background:var(--soft,#f6f0ed);border-radius:16px;padding:10px;min-width:0}
 .lookbook-anatomy-item .swatch{width:100%;height:42px;border-radius:11px;border:1px solid rgba(60,50,46,.08);margin-bottom:8px}
@@ -1359,7 +1359,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V4.11.4 STYLE DNA + LOOKBOOK：画像占比 + 全球穿搭账号 */
+/* V5.0.0 COLOR ATLAS：画像占比 + 全球穿搭账号 */
 .dna-distribution{margin-top:14px;padding:14px;border-radius:20px;background:#faf6f3;border:1px solid #eee6e1}
 .dna-distribution-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .dna-distribution-title b{font-size:12px;color:#514a45}.dna-distribution-title span{font-size:9px;color:#9a9089}
@@ -1377,7 +1377,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V4.11.4 搭配图鉴 */
+/* V5.0.0 搭配图鉴 */
 .navinner{grid-template-columns:repeat(5,1fr)!important}
 .nav button{min-width:0}
 .lookbook-entry{width:100%;border:0;background:linear-gradient(135deg,#4a443f,#746b64);color:#fff;border-radius:24px;padding:17px 18px;margin:2px 0 14px;display:flex;align-items:center;justify-content:space-between;text-align:left;box-shadow:0 12px 30px rgba(65,56,50,.16)}
@@ -1396,11 +1396,11 @@ body.category-modal-open .nav{
 
 </head>
 <body>
-<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V4.11.4</div>
+<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V5.0.0</div>
 <div class="app">
   <header class="topbar">
     <div class="brandrow">
-      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V4.11.4 STYLE DNA + LOOKBOOK</small></div>
+      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V5.0.0 COLOR ATLAS</small></div>
       <button class="iconbtn" onclick="openDataSettings()">⋯</button>
     </div>
   </header>
@@ -1413,7 +1413,7 @@ body.category-modal-open .nav{
         <div class="hero-actions">
           <button class="btn" onclick="openImporter()">＋ 导入</button>
           <button class="btn secondary" onclick="activateTab('inspiration')">灵感</button>
-          <button class="btn secondary" onclick="openLookbook()">搭配图鉴</button>
+          <button class="btn secondary" onclick="openLookbook()">色系图鉴</button>
         </div>
       </div>
 
@@ -1496,7 +1496,7 @@ body.category-modal-open .nav{
       <div class="sectionhead"><h2>STYLE DNA</h2><span>近期审美</span></div>
 
       <button class="lookbook-entry" onclick="openLookbook()">
-        <span><b>搭配图鉴</b><small>导入一张喜欢的穿搭 → 用你的衣橱生成相似搭配，并找出缺失单品</small></span>
+        <span><b>色系图鉴</b><small>按颜色与品类整理全部衣橱；导入参考穿搭后可一键查看对应色系</small></span>
         <i>↗</i>
       </button>
 
@@ -1565,52 +1565,46 @@ body.category-modal-open .nav{
       </div>
     </section>
 
+    
     <section id="lookbook" class="page">
-      <div class="sectionhead"><h2>搭配图鉴</h2><span>REFERENCE → MY CLOSET</span></div>
+      <div class="sectionhead"><h2>色系图鉴</h2><span>COLOR ATLAS · MY CLOSET</span></div>
 
-      <div class="lookbook-intro">
-        <div class="kicker">STYLE REFERENCE MATCHER</div>
-        <h3>把喜欢的穿搭，翻译成你的衣橱</h3>
-        <p>导入一张你喜欢的穿搭图。App 会先锁定人物主体，再结合人物穿搭结构、近期 Style DNA 和全部衣橱单品生成相似搭配；背景环境不再作为前台配色依据。</p>
+      <div class="lookbook-intro color-atlas-intro">
+        <div class="eyebrow">REFERENCE OUTFIT</div>
+        <h3>导入喜欢的穿搭 · 识别人物穿搭色系</h3>
+        <p>保留你最喜欢的参考穿搭入口。识别后会提取「人物身上的主要穿搭色系」，点击色系即可直接进入你衣橱中的对应颜色分类。</p>
         <div class="lookbook-actions">
           <button class="btn" id="lookbookPickBtn">＋ 导入喜欢的穿搭</button>
-          <button class="btn secondary" onclick="generateLookbookOutfits(true)">换一组搭配</button>
+          <button class="btn secondary" onclick="clearReferenceLook()">清除参考图</button>
         </div>
         <input id="lookbookInput" type="file" accept="image/*,.heic,.heif,.jpg,.jpeg,.png,.webp" style="display:none">
-      </div>
 
-      <div class="lookbook-reference-grid">
-        <div class="lookbook-reference-card">
-          <div class="lookbook-card-head"><b>参考穿搭</b><span id="lookbookReferenceStatus">未导入</span></div>
-          <div class="lookbook-reference-preview" id="lookbookReferencePreview">
-            <div class="lookbook-placeholder">导入一张穿搭图后开始匹配</div>
+        <div class="reference-color-row">
+          <div class="lookbook-reference-preview color-atlas-reference" id="lookbookReferencePreview">
+            <div class="lookbook-placeholder">导入一张穿搭图</div>
+          </div>
+          <div class="reference-color-info">
+            <div class="lookbook-card-head"><b>参考穿搭色系</b><span id="lookbookReferenceStatus">未导入</span></div>
+            <div id="referenceColorChips" class="reference-color-chips">
+              <div class="lookbook-placeholder">识别结果会出现在这里；点击色系即可筛选你的衣橱。</div>
+            </div>
           </div>
         </div>
-        <div class="lookbook-reference-card">
-          <div class="lookbook-card-head"><b>识别方向</b><span>Style DNA 联动</span></div>
-          <div id="lookbookTargetDNA" class="lookbook-target-dna"></div>
-        </div>
-      </div>
-<div class="lookbook-panel">
-        <div class="lookbook-card-head"><b>我的相似搭配</b><span id="lookbookSetCount">0 套</span></div>
-        <div class="lookbook-outfit-grid" id="lookbookOutfitGrid"></div>
       </div>
 
-      <div class="lookbook-panel">
-        <div class="lookbook-card-head"><b>衣橱适配图鉴</b><span>随衣橱自动更新</span></div>
-        <div class="lookbook-fit-summary" id="lookbookFitSummary"></div>
-        <div class="lookbook-fit-grid" id="lookbookFitGrid"></div>
+      <div class="lookbook-panel color-atlas-panel">
+        <div class="lookbook-card-head"><b>我的衣橱 · 按色系浏览</b><span id="colorAtlasCount">0 件</span></div>
+        <div class="color-atlas-note">所有已录入单品和以后新增的衣服都会自动归入色系；同一大色系内部按「浅 → 深」排列。无法准确归类时会自动建立「其他色」而不是丢失。</div>
+
+        <div class="atlas-type-tabs" id="atlasTypeTabs"></div>
+        <div class="atlas-color-tabs" id="atlasColorTabs"></div>
+        <div class="atlas-shade-scale" id="atlasShadeScale"></div>
+        <div class="atlas-grid" id="atlasGrid"></div>
       </div>
 
-      <div class="lookbook-panel">
-        <div class="lookbook-card-head"><b>我的风格缺口</b><span>建议补充，不代表必须购买</span></div>
-        <div class="lookbook-gap-note">优先显示「能明显增加现有衣橱搭配数量」的缺失单品，包括上衣、下装、裙装、外套、鞋包和叠穿层。</div>
-        <div class="lookbook-gap-grid" id="lookbookGapGrid"></div>
-      </div>
-
-      <div class="lookbook-panel">
-        <div class="lookbook-card-head"><b>搭配逻辑</b><span>可直接照着穿</span></div>
-        <div class="lookbook-formula" id="lookbookFormula"></div>
+      <div class="lookbook-panel atlas-summary-panel">
+        <div class="lookbook-card-head"><b>色系分布</b><span>自动随衣橱更新</span></div>
+        <div id="atlasSummary" class="atlas-summary"></div>
       </div>
     </section>
 
@@ -1666,7 +1660,7 @@ body.category-modal-open .nav{
       <button class="active" data-tab="wardrobe" onclick="activateTab('wardrobe')"><span class="ico">◫</span><span>衣橱</span></button>
       <button data-tab="import" onclick="activateTab('import')"><span class="ico">＋</span><span>导入</span></button>
       <button data-tab="inspiration" onclick="activateTab('inspiration')"><span class="ico">✦</span><span>灵感</span></button>
-      <button data-tab="lookbook" onclick="openLookbook()"><span class="ico">◇</span><span>图鉴</span></button>
+      <button data-tab="lookbook" onclick="openLookbook()"><span class="ico">◇</span><span>色系</span></button>
       <button data-tab="trends" onclick="activateTab('trends')"><span class="ico">◎</span><span>趋势</span></button>
     </div>
   </nav>
@@ -2077,7 +2071,7 @@ function handlePickedFile(f){
 }
 
 let inspirationSeed=0;
-// V4.11.4：趋势区兼容兜底。旧版本中 TREND_DATA 曾被移除，导致完整备份恢复完成后
+// V5.0.0：趋势区兼容兜底。旧版本中 TREND_DATA 曾被移除，导致完整备份恢复完成后
 // 在 renderTrendGrid() 阶段抛出 "Can't find variable: TREND_DATA"，从而误报“恢复失败”。
 const TREND_DATA = window.TREND_DATA || { regions: [] };
 let trendMode="regions";
@@ -2524,60 +2518,249 @@ document.getElementById("styleDNAInput").addEventListener("change",async e=>{
   }catch(err){console.error(err);alert("Style DNA 文件读取失败："+(err?.message||"格式不正确"))}
 });
 
-/* ---------- V4.11.4 搭配图鉴：人物主体优先识别 ---------- */
-const LOOKBOOK_REFERENCE_KEY="today_wear_lookbook_reference_v4114";
-let lookbookReference={image:"",palette:null,createdAt:0,garments:[]};
+/* ---------- V5.0.0 COLOR ATLAS：衣橱颜色 × 品类自动图鉴 ---------- */
+const LOOKBOOK_REFERENCE_KEY="today_wear_color_atlas_reference_v500";
+const COLOR_ATLAS_CACHE_KEY="today_wear_color_atlas_cache_v500";
+let lookbookReference={image:"",createdAt:0,garments:[]};
+let atlasType="all";
+let atlasColor="all";
+
+const ATLAS_COLOR_GROUPS=[
+  {id:"black",name:"黑色系",keys:["黑","墨","炭","玄"],from:"#9b9b9b",to:"#111111"},
+  {id:"white",name:"白色系",keys:["白","米白","奶白","象牙"],from:"#ffffff",to:"#d7d2ca"},
+  {id:"gray",name:"灰色系",keys:["灰","银","铅"],from:"#e6e6e6",to:"#555555"},
+  {id:"brown",name:"棕色系",keys:["棕","咖","褐","巧克力","栗"],from:"#d9c1aa",to:"#4a2d20"},
+  {id:"beige",name:"米/卡其",keys:["米","卡其","杏","燕麦","沙","驼"],from:"#f1e6d3",to:"#9e8060"},
+  {id:"blue",name:"蓝色系",keys:["蓝","宝蓝","藏蓝","牛仔蓝","雾蓝","天蓝"],from:"#d9edff",to:"#102a59"},
+  {id:"green",name:"绿色系",keys:["绿","青","薄荷","橄榄","军绿"],from:"#dcebdc",to:"#264a31"},
+  {id:"red",name:"红/粉色",keys:["红","粉","玫红","酒红","桃"],from:"#ffdce5",to:"#741e2b"},
+  {id:"purple",name:"紫色系",keys:["紫","薰衣草","葡萄"],from:"#eadfff",to:"#4f326a"},
+  {id:"yellow",name:"黄/橙色",keys:["黄","橙","姜黄","柠檬"],from:"#fff0b5",to:"#b9651b"},
+  {id:"other",name:"其他色",keys:[],from:"#ece8e4",to:"#8a817b"}
+];
+
+const ATLAS_TYPE_GROUPS=[
+  {id:"all",name:"全部"},
+  {id:"top",name:"上装"},
+  {id:"bottom",name:"下装"},
+  {id:"outer",name:"外套/叠穿"},
+  {id:"skirt",name:"裙装"},
+  {id:"dress",name:"连衣/连体"},
+  {id:"shoe",name:"鞋履"},
+  {id:"bag",name:"包袋"},
+  {id:"acc",name:"配饰"}
+];
+
+function openLookbook(){ activateTab("lookbook"); }
 
 function loadLookbookReference(){
   try{
     const saved=JSON.parse(localStorage.getItem(LOOKBOOK_REFERENCE_KEY)||"null");
-    if(saved&&saved.image) lookbookReference=saved;
+    if(saved&&saved.image)lookbookReference=saved;
   }catch(e){}
 }
 function saveLookbookReference(){
-  try{ localStorage.setItem(LOOKBOOK_REFERENCE_KEY,JSON.stringify(lookbookReference)); }catch(e){}
+  try{localStorage.setItem(LOOKBOOK_REFERENCE_KEY,JSON.stringify(lookbookReference))}catch(e){}
 }
-let lookbookSeed=0;
-
-function openLookbook(){ activateTab("lookbook"); }
-
-function deterministicDNAScore(item){
-  const dna=getStyleDNA()||{styles:[],keywords:[]};
-  const text=`${item.name||""} ${item.category||""} ${item.subtype||""}`.toLowerCase();
-  let score=34;
-  (dna.styles||[]).slice(0,6).forEach(st=>{const lib=STYLE_LIBRARY.find(x=>x.name===st.name||x.cn===st.cn);if(!lib)return;const hit=lib.keys.filter(k=>text.includes(String(k).toLowerCase())).length;score+=hit*(4+Math.min(8,(Number(st.score)||0)/12));});
-  (dna.keywords||[]).forEach(k=>{if(text.includes(String(k).toLowerCase()))score+=4});
-  [["灰",6],["黑",5],["白",4],["米",4],["棕",4],["蕾丝",7],["针织",5],["吊带",5],["修身",6],["低腰",5],["直筒",4],["垂",4],["半裙",4],["开衫",4]].forEach(([k,v])=>{if(text.includes(k))score+=v});
-  return Math.max(18,Math.min(98,Math.round(score)));
+function clearReferenceLook(){
+  lookbookReference={image:"",createdAt:0,garments:[]};
+  try{localStorage.removeItem(LOOKBOOK_REFERENCE_KEY)}catch(e){}
+  renderLookbookReference();
+  toast("已清除参考穿搭");
 }
-function lookbookBand(score){return score>=70?"核心适配":score>=52?"可转化":"偏离近期"}
-function lookbookBucket(item){
-  const t=`${item.category||""} ${item.name||""}`;
-  if(/连衣裙|连体|jumpsuit/i.test(t))return "dress";
-  if(/外套|夹克|西装|开衫|防晒|风衣|马甲/i.test(t))return "outer";
-  if(/裙|裤|半裙|短裤|牛仔/i.test(t))return "bottom";
-  if(/鞋|靴|拖鞋|凉鞋|乐福|玛丽珍/i.test(t))return "shoe";
-  if(/包|手袋|腋下包/i.test(t))return "bag";
-  if(/帽|项链|耳|腰带|眼镜|配饰/i.test(t))return "acc";
+
+function atlasItemType(item){
+  const t=`${item.category||""} ${item.name||""} ${item.subtype||""}`.toLowerCase();
+  if(/连衣裙|连体|jumpsuit|dress/.test(t))return "dress";
+  if(/外套|夹克|西装|开衫|防晒|风衣|大衣|马甲|披肩|coat|jacket|cardigan/.test(t))return "outer";
+  if(/半裙|短裙|长裙|裙装|skirt/.test(t))return "skirt";
+  if(/裤|短裤|五分裤|牛仔|西裤|leggings|pants|jeans|trousers/.test(t))return "bottom";
+  if(/鞋|靴|拖鞋|凉鞋|高跟|运动鞋|乐福|玛丽珍|shoe|sandal|boot/.test(t))return "shoe";
+  if(/包|手袋|腋下包|托特|bag|handbag/.test(t))return "bag";
+  if(/帽|项链|耳|腰带|眼镜|配饰|围巾|手套|袜/.test(t))return "acc";
   return "top";
 }
+
+function atlasTextColor(item){
+  const t=`${item.name||""} ${item.category||""} ${item.subtype||""}`.toLowerCase();
+  for(const g of ATLAS_COLOR_GROUPS){
+    if(g.id==="other")continue;
+    const hit=g.keys.find(k=>t.includes(k.toLowerCase()));
+    if(hit)return {family:g.id,source:"name"};
+  }
+  return null;
+}
+
+function rgbToHsl(r,g,b){
+  r/=255;g/=255;b/=255;
+  const max=Math.max(r,g,b),min=Math.min(r,g,b);
+  let h=0,s=0,l=(max+min)/2;
+  const d=max-min;
+  if(d){
+    s=l>.5?d/(2-max-min):d/(max+min);
+    switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;default:h=(r-g)/d+4}
+    h/=6;
+  }
+  return {h:h*360,s:s*100,l:l*100};
+}
+
+function classifyRgbColor(c){
+  const {r,g,b}=c;const hsl=rgbToHsl(r,g,b);
+  const lum=.2126*r+.7152*g+.0722*b;
+  const spread=Math.max(r,g,b)-Math.min(r,g,b);
+  let family="other";
+  if(lum<58)family="black";
+  else if(hsl.s<10&&lum>220)family="white";
+  else if(hsl.s<12&&lum<210)family="gray";
+  else if(hsl.s<18&&lum>165)family="beige";
+  else if(hsl.h>=18&&hsl.h<55&&hsl.s>18)family=lum<145?"brown":"beige";
+  else if(hsl.h>=55&&hsl.h<165)family="green";
+  else if(hsl.h>=165&&hsl.h<255)family="blue";
+  else if(hsl.h>=255&&hsl.h<320)family="purple";
+  else if(hsl.h>=320||hsl.h<18)family="red";
+  if(hsl.h>=40&&hsl.h<65&&hsl.s>35&&lum>125)family="yellow";
+  return {family,lum,hsl};
+}
+
+function sampleItemImageColor(dataURL){
+  return new Promise((resolve)=>{
+    if(!dataURL)return resolve({family:"other",lum:128,rgb:{r:150,g:145,b:140},source:"fallback"});
+    const im=new Image();
+    im.onload=()=>{
+      try{
+        const size=96,c=document.createElement("canvas");c.width=size;c.height=size;
+        const ctx=c.getContext("2d",{willReadFrequently:true});ctx.drawImage(im,0,0,size,size);
+        const d=ctx.getImageData(0,0,size,size).data;
+        const pts=[];
+        for(let y=7;y<size-7;y+=3){
+          for(let x=7;x<size-7;x+=3){
+            const i=(y*size+x)*4,r=d[i],g=d[i+1],b=d[i+2],a=d[i+3];
+            if(a<180)continue;
+            const lum=.2126*r+.7152*g+.0722*b;
+            const spread=Math.max(r,g,b)-Math.min(r,g,b);
+            // Skip near-white product background.
+            if(lum>242&&spread<18)continue;
+            pts.push([r,g,b]);
+          }
+        }
+        if(!pts.length)return resolve({family:"other",lum:128,rgb:{r:150,g:145,b:140},source:"fallback"});
+        // Median channels are much more stable than raw dominant color for white-background clothing images.
+        const med=k=>{const a=pts.map(p=>p[k]).sort((a,b)=>a-b);return a[Math.floor(a.length/2)]};
+        const rgb={r:med(0),g:med(1),b:med(2)};
+        const cls=classifyRgbColor(rgb);
+        resolve({...cls,rgb,source:"image"});
+      }catch(e){resolve({family:"other",lum:128,rgb:{r:150,g:145,b:140},source:"fallback"})}
+    };
+    im.onerror=()=>resolve({family:"other",lum:128,rgb:{r:150,g:145,b:140},source:"fallback"});
+    im.src=dataURL;
+  });
+}
+
+function atlasCacheRead(){
+  try{return JSON.parse(localStorage.getItem(COLOR_ATLAS_CACHE_KEY)||"{}")||{}}catch(e){return {}}
+}
+function atlasCacheWrite(v){
+  try{localStorage.setItem(COLOR_ATLAS_CACHE_KEY,JSON.stringify(v))}catch(e){}
+}
+
+async function classifyAtlasItem(item){
+  const textHit=atlasTextColor(item);
+  const key=String(item.id||item.createdAt||item.name||Math.random());
+  const cache=atlasCacheRead();
+  if(textHit){
+    // Text color is deliberately preferred when the user/material name already states the color.
+    const prev=cache[key];
+    const shade=prev?.shade??50;
+    return {family:textHit.family,shade,source:"name"};
+  }
+  if(cache[key]&&cache[key].fingerprint===`${item.image?.length||0}:${item.aiImage?.length||0}`)return cache[key];
+  const sampled=await sampleItemImageColor(item.aiImage||item.image);
+  const result={family:sampled.family,shade:Math.max(0,Math.min(100,100-(sampled.lum/255*100))),source:sampled.source,
+                fingerprint:`${item.image?.length||0}:${item.aiImage?.length||0}`};
+  cache[key]=result;atlasCacheWrite(cache);
+  return result;
+}
+
+async function buildAtlasData(){
+  const arr=[...items()];
+  return await Promise.all(arr.map(async item=>{
+    const color=await classifyAtlasItem(item);
+    return {item,type:atlasItemType(item),...color};
+  }));
+}
+
+function colorGroupById(id){return ATLAS_COLOR_GROUPS.find(x=>x.id===id)||ATLAS_COLOR_GROUPS.at(-1)}
+function typeGroupById(id){return ATLAS_TYPE_GROUPS.find(x=>x.id===id)||ATLAS_TYPE_GROUPS[0]}
+
+function renderAtlasTabs(data){
+  const typeBox=document.getElementById("atlasTypeTabs"),colorBox=document.getElementById("atlasColorTabs");
+  if(typeBox){
+    typeBox.innerHTML=ATLAS_TYPE_GROUPS.map(g=>{
+      const n=g.id==="all"?data.length:data.filter(x=>x.type===g.id).length;
+      return `<button class="atlas-tab ${atlasType===g.id?"active":""}" onclick="setAtlasType('${g.id}')">${g.name} · ${n}</button>`;
+    }).join("");
+  }
+  if(colorBox){
+    const scoped=atlasType==="all"?data:data.filter(x=>x.type===atlasType);
+    const present=ATLAS_COLOR_GROUPS.filter(g=>g.id==="other"||scoped.some(x=>x.family===g.id));
+    const allBtn=`<button class="atlas-color-tab ${atlasColor==="all"?"active":""}" onclick="setAtlasColor('all')"><i style="background:linear-gradient(90deg,#f3eee8,#847a73)"></i>全部<small>${scoped.length}</small></button>`;
+    colorBox.innerHTML=allBtn+present.map(g=>{
+      const n=scoped.filter(x=>x.family===g.id).length;
+      if(!n)return "";
+      return `<button class="atlas-color-tab ${atlasColor===g.id?"active":""}" onclick="setAtlasColor('${g.id}')"><i style="background:linear-gradient(90deg,${g.from},${g.to})"></i>${g.name}<small>${n}</small></button>`;
+    }).join("");
+  }
+}
+
+function setAtlasType(v){atlasType=v;if(atlasColor!=="all")atlasColor="all";renderColorAtlas()}
+function setAtlasColor(v){atlasColor=v;renderColorAtlas()}
+function jumpToAtlasColor(v){atlasColor=v;renderColorAtlas();document.getElementById("atlasColorTabs")?.scrollIntoView({behavior:"smooth",block:"center"})}
+
+function renderShadeScale(){
+  const box=document.getElementById("atlasShadeScale");if(!box)return;
+  if(atlasColor==="all"){box.innerHTML='<span>选择一个色系后，将按浅 → 深排列</span>';return}
+  const g=colorGroupById(atlasColor);
+  box.innerHTML=`<span>浅</span><div class="scale" style="background:linear-gradient(90deg,${g.from},${g.to})"></div><span>深</span>`;
+}
+
+async function renderColorAtlas(){
+  const grid=document.getElementById("atlasGrid");if(!grid)return;
+  grid.innerHTML='<div class="atlas-empty">正在整理你的衣橱色系…</div>';
+  const data=await buildAtlasData();
+  renderAtlasTabs(data);renderShadeScale();
+  let shown=data.filter(x=>(atlasType==="all"||x.type===atlasType)&&(atlasColor==="all"||x.family===atlasColor));
+  shown.sort((a,b)=>{
+    if(atlasColor!=="all")return a.shade-b.shade; // smaller shade = lighter first
+    const ca=ATLAS_COLOR_GROUPS.findIndex(g=>g.id===a.family),cb=ATLAS_COLOR_GROUPS.findIndex(g=>g.id===b.family);
+    return ca-cb || a.shade-b.shade;
+  });
+  document.getElementById("colorAtlasCount").textContent=`${shown.length} 件`;
+  grid.innerHTML=shown.length?shown.map(v=>{
+    const cg=colorGroupById(v.family),type=typeGroupById(v.type);
+    const shadeLabel=v.shade<34?"浅色":v.shade<67?"中等":"深色";
+    return `<div class="atlas-item" onclick="openItemDetail('${v.item.id}')">
+      <span class="shade-badge">${shadeLabel}</span>
+      <img src="${v.item.aiImage||v.item.image}">
+      <b>${esc(v.item.name)}</b>
+      <small>${cg.name} · ${type.name}</small>
+    </div>`;
+  }).join(""):'<div class="atlas-empty">这个「品类 × 色系」组合暂时没有单品。以后新导入的衣服会自动进入这里。</div>';
+  renderAtlasSummary(data);
+}
+
+function renderAtlasSummary(data){
+  const box=document.getElementById("atlasSummary");if(!box)return;
+  const total=Math.max(1,data.length);
+  const rows=ATLAS_COLOR_GROUPS.map(g=>({g,n:data.filter(x=>x.family===g.id).length})).filter(x=>x.n).sort((a,b)=>b.n-a.n);
+  box.innerHTML=rows.length?rows.map(({g,n})=>`<div class="atlas-summary-row">
+    <div class="atlas-summary-head"><b>${g.name}</b><span>${n} 件 · ${Math.round(n/total*100)}%</span></div>
+    <div class="atlas-summary-bar"><i style="width:${Math.max(4,n/total*100)}%"></i></div>
+  </div>`).join(""):'<div class="atlas-empty">衣橱暂无单品</div>';
+}
+
+/* 人物主体优先：参考图仅用于给用户“快速跳色系”，不参与衣橱单品自动归色 */
 function colorDistance(a,b){return Math.hypot((a.r||0)-(b.r||0),(a.g||0)-(b.g||0),(a.b||0)-(b.b||0))}
 function rgbHex(c){return '#'+[c.r,c.g,c.b].map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('')}
-function colorInfo(c){
-  const {r,g,b}=c;const mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn;const lum=.2126*r+.7152*g+.0722*b;
-  if(lum<55)return {name:"黑色",family:"black"};
-  if(lum<95&&d<35)return {name:"深灰色",family:"gray"};
-  if(lum>225&&d<28)return {name:"白色",family:"white"};
-  if(lum>190&&d<35)return {name:"米白/浅灰",family:"white"};
-  if(b>r*1.28&&b>g*1.12){if(b>135&&r<125)return {name:"宝蓝色",family:"blue"};return {name:"蓝色",family:"blue"}}
-  if(b>r*1.12&&b>g*1.04)return {name:"灰蓝色",family:"blue"};
-  if(r>g*1.28&&r>b*1.18)return {name:r>175?"红/粉色":"酒红/棕红",family:"red"};
-  if(r>105&&g>70&&b<95&&r>g*1.1)return {name:"棕色",family:"brown"};
-  if(r>175&&g>145&&b<120)return {name:"米黄/卡其",family:"beige"};
-  if(g>r*1.12&&g>b*1.08)return {name:"绿色",family:"green"};
-  if(d<45)return {name:"灰色",family:"gray"};
-  return {name:"中性色",family:"neutral"};
-}
 function isSkinish(r,g,b){const mx=Math.max(r,g,b),mn=Math.min(r,g,b);return r>92&&g>55&&b>35&&r>g&&g>b&&(mx-mn)>15&&Math.abs(r-g)>15}
 function dominantInRect(ctx,w,h,rx,ry,rw,rh){
   const x0=Math.max(0,Math.floor(w*rx)),y0=Math.max(0,Math.floor(h*ry)),x1=Math.min(w,Math.ceil(w*(rx+rw))),y1=Math.min(h,Math.ceil(h*(ry+rh)));
@@ -2589,149 +2772,79 @@ function subjectCenterFromSkin(ctx,w,h){
   const d=ctx.getImageData(0,0,w,h).data,xs=[];for(let y=0;y<h;y+=2){for(let x=0;x<w;x+=2){const i=(y*w+x)*4,r=d[i],g=d[i+1],b=d[i+2];if(isSkinish(r,g,b))xs.push(x)}}
   if(xs.length<18)return .5;xs.sort((a,b)=>a-b);return Math.max(.28,Math.min(.72,xs[Math.floor(xs.length/2)]/w));
 }
-function lightNeutralInRect(ctx,w,h,rx,ry,rw,rh){
-  const x0=Math.max(0,Math.floor(w*rx)),y0=Math.max(0,Math.floor(h*ry)),x1=Math.min(w,Math.ceil(w*(rx+rw))),y1=Math.min(h,Math.ceil(h*(ry+rh)));const im=ctx.getImageData(x0,y0,Math.max(1,x1-x0),Math.max(1,y1-y0)).data;const map=new Map();
-  for(let i=0;i<im.length;i+=12){let r=im[i],g=im[i+1],b=im[i+2];if(isSkinish(r,g,b))continue;const lum=.2126*r+.7152*g+.0722*b,spread=Math.max(r,g,b)-Math.min(r,g,b);if(lum<145||lum>248||spread>55)continue;r=Math.round(r/24)*24;g=Math.round(g/24)*24;b=Math.round(b/24)*24;const k=`${r},${g},${b}`;map.set(k,(map.get(k)||0)+1)}
-  let best=null,n=0;for(const [k,v] of map){if(v>n){n=v;best=k}}if(!best)return null;const [r,g,b]=best.split(',').map(Number);return {r,g,b};
-}
 async function analyzeReferenceGarments(dataURL){
   const img=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=dataURL});
-  const W=220,H=Math.max(280,Math.round(220*img.height/img.width));
-  const c=document.createElement('canvas');c.width=W;c.height=H;
-  const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0,W,H);
+  const W=220,H=Math.max(280,Math.round(220*img.height/img.width));const c=document.createElement("canvas");c.width=W;c.height=H;
+  const ctx=c.getContext("2d",{willReadFrequently:true});ctx.drawImage(img,0,0,W,H);
+  const cx=subjectCenterFromSkin(ctx,W,H),bodyX=Math.max(.08,Math.min(.62,cx-.16));
+  const samples=[
+    {role:"top",label:"上装",rgb:dominantInRect(ctx,W,H,bodyX,.26,.32,.22)},
+    {role:"bottom",label:"下装",rgb:dominantInRect(ctx,W,H,Math.max(.08,cx-.18),.53,.36,.33)}
+  ];
+  // Shoulder side sample may catch an outer layer. Only keep it if clearly different from top.
+  const side=dominantInRect(ctx,W,H,Math.max(.07,cx-.28),.20,.16,.31);
+  if(colorDistance(side,samples[0].rgb)>72)samples.unshift({role:"outer",label:"外套/叠穿",rgb:side});
+  return samples.map(s=>{
+    const cls=classifyRgbColor(s.rgb),g=colorGroupById(cls.family);
+    return {...s,family:cls.family,color:g.name,hex:rgbHex(s.rgb)};
+  }).filter((g,i,a)=>i===0||g.family!==a[i-1].family||g.role!==a[i-1].role);
+}
 
-  // V4.11.4: first locate the likely person center from skin pixels.
-  // All clothing sampling is then constrained to a narrow body corridor so walls,
-  // pavement, furniture and other background colors are not used as foreground cues.
-  const cx=subjectCenterFromSkin(x,W,H);
-  const bodyX=Math.max(.08,Math.min(.62,cx-.16));
-
-  let inner=dominantInRect(x,W,H,bodyX,.25,.32,.24);
-  const light=lightNeutralInRect(x,W,H,bodyX,.24,.32,.27);
-
-  const outerL=dominantInRect(x,W,H,Math.max(.06,cx-.27),.20,.15,.34);
-  const outerR=dominantInRect(x,W,H,Math.min(.79,cx+.12),.20,.15,.34);
-  const chroma=c=>Math.max(c.r,c.g,c.b)-Math.min(c.r,c.g,c.b);
-  let outer=chroma(outerR)>chroma(outerL)+12?outerR:
-            (chroma(outerL)>chroma(outerR)+12?outerL:
-            (colorDistance(outerL,inner)>colorDistance(outerR,inner)?outerL:outerR));
-
-  const bottom=dominantInRect(x,W,H,Math.max(.08,cx-.18),.52,.36,.36);
-  if(light&&colorInfo(inner).family==='black'&&colorInfo(bottom).family==='black')inner=light;
-
-  const garments=[];
-  const ciInner=colorInfo(inner),ciBottom=colorInfo(bottom),ciOuter=colorInfo(outer);
-  if(colorDistance(outer,inner)>65){
-    garments.push({role:'outer',label:'外套/叠穿层',color:ciOuter.name,family:ciOuter.family,rgb:outer,hex:rgbHex(outer)});
+function renderLookbookReference(){
+  const box=document.getElementById("lookbookReferencePreview"),status=document.getElementById("lookbookReferenceStatus"),chips=document.getElementById("referenceColorChips");
+  if(box){
+    box.innerHTML=lookbookReference.image?`<img src="${lookbookReference.image}" alt="参考穿搭">`:'<div class="lookbook-placeholder">导入一张穿搭图</div>';
   }
-  garments.push({role:'top',label:'上衣',color:ciInner.name,family:ciInner.family,rgb:inner,hex:rgbHex(inner)});
-  if(colorDistance(bottom,inner)>28||ciBottom.family!==ciInner.family){
-    garments.push({role:'bottom',label:'下装',color:ciBottom.name,family:ciBottom.family,rgb:bottom,hex:rgbHex(bottom)});
+  if(status)status.textContent=lookbookReference.image?"已导入":"未导入";
+  if(chips){
+    const gs=lookbookReference.garments||[];
+    chips.innerHTML=gs.length?gs.map(g=>{
+      const cg=colorGroupById(g.family);
+      return `<button class="reference-color-chip" onclick="jumpToAtlasColor('${g.family}')">
+        <i style="background:${g.hex||`linear-gradient(90deg,${cg.from},${cg.to})`}"></i>
+        <span>${g.label} · ${cg.name}<small>点击查看衣橱</small></span>
+      </button>`;
+    }).join(""):'<div class="lookbook-placeholder">识别结果会出现在这里；点击色系即可筛选你的衣橱。</div>';
   }
-  return garments;
 }
-function referencePaletteText(){const gs=lookbookReference.garments||[];if(gs.length)return gs.map(g=>g.color).join(' / ');const p=lookbookReference.palette;if(!p)return "中性低饱和";return colorInfo(p).name}
-const COLOR_KEYS={black:["黑","墨","炭"],white:["白","米白","奶油","象牙"],gray:["灰","银灰"],blue:["蓝","宝蓝","藏蓝","牛仔蓝","雾蓝"],brown:["棕","咖","褐","巧克力"],beige:["米","卡其","杏","燕麦"],green:["绿","青"],red:["红","粉","酒红"],neutral:["灰","白","黑","米","棕"]};
-function itemColorFamily(item){const t=`${item.name||''} ${item.category||''} ${item.subtype||''}`;for(const [f,ks] of Object.entries(COLOR_KEYS)){if(ks.some(k=>t.includes(k)))return f}return 'unknown'}
-function roleFit(item,role){const b=lookbookBucket(item);if(role==='outer')return b==='outer'?34:(b==='top'?5:-18);if(role==='top')return b==='top'?30:(b==='outer'?8:-16);if(role==='bottom')return b==='bottom'?34:-18;return 0}
-function referenceItemScore(item,g){let s=deterministicDNAScore(item)*.35+roleFit(item,g.role);const f=itemColorFamily(item);if(f===g.family)s+=38;else if(f==='unknown')s+=4;else if(['white','gray','black','neutral'].includes(f)&&['white','gray','black','neutral'].includes(g.family))s+=12;else s-=10;return s}
-function candidatesForGarment(g){return [...items()].map(x=>({x,score:referenceItemScore(x,g)})).filter(v=>roleFit(v.x,g.role)>0).sort((a,b)=>b.score-a.score)}
-function garmentMatch(g,rank=0){const a=candidatesForGarment(g);const exact=a.filter(v=>itemColorFamily(v.x)===g.family);const pool=exact.length?exact:a;const v=pool[rank]||pool[0];return v&&v.score>25?v.x:null}
-function renderLookbookAnatomy(){ return; }
-function renderLookbookTarget(){
-  const box=document.getElementById("lookbookTargetDNA");if(!box)return;
-  const dna=getStyleDNA();const styles=(dna?.styles||[]).slice(0,4);
-  box.innerHTML=(styles.length
-    ? styles.map(x=>`<div class="lookbook-target-style"><b>${esc(x.cn||x.name)}</b><span>${Math.round(x.score||0)}%</span></div>`).join("")
-    : `<div class="lookbook-placeholder">先定位人物主体，再分析人物身上的穿搭结构；环境背景不参与前台配色展示。</div>`)
-    + `<div class="lookbook-target-style"><b>识别策略</b><span>人物主体优先</span></div>`;
-}
-function renderLookbookReference(){const box=document.getElementById("lookbookReferencePreview"),status=document.getElementById("lookbookReferenceStatus");if(!box)return;if(lookbookReference.image){box.innerHTML=`<img src="${lookbookReference.image}" alt="参考穿搭">`;if(status)status.textContent="已导入"}else{box.innerHTML='<div class="lookbook-placeholder">导入一张穿搭图后开始匹配</div>';if(status)status.textContent="未导入"}renderLookbookTarget();renderLookbookAnatomy();}
-function chooseRotated(arr,idx){if(!arr.length)return null;return arr[(idx+lookbookSeed)%arr.length]}
-function outfitSetScore(set){const a=set.filter(Boolean);return a.length?Math.round(a.reduce((n,x)=>n+deterministicDNAScore(x),0)/a.length):0}
-function lookbookReason(set){const dna=(getStyleDNA()?.styles||[]).slice(0,2).map(x=>x.cn||x.name).join(" × ")||"近期审美";return `${dna} · 参考图穿搭结构优先 ${referencePaletteText()}；先复刻核心单品，再做自由变化。`;}
-function generateLookbookOutfits(rotate=false){
-  if(rotate)lookbookSeed++;const grid=document.getElementById("lookbookOutfitGrid");if(!grid)return;const all=[...items()];
-  if(!all.length){grid.innerHTML='<div class="lookbook-empty">衣橱还没有单品。先把衣服导入衣橱，再回来生成图鉴。</div>';return}
-  if(!lookbookReference.image){grid.innerHTML='<div class="lookbook-empty">请先导入一张你喜欢的穿搭参考图。</div>';return}
-  const gs=lookbookReference.garments||[];const exact=gs.map(g=>garmentMatch(g,0));const exactLabels=gs.map(g=>g.label);
-  const sets=[];sets.push({label:'1:1 核心复刻',items:exact,types:exactLabels});
-  for(let r=1;r<=3;r++){sets.push({label:['同色替换','轮廓变化','Style DNA 延伸'][r-1],items:gs.map(g=>garmentMatch(g,r)),types:exactLabels})}
-  grid.innerHTML=sets.map((obj,i)=>{const set=obj.items;const missing=gs.filter((g,j)=>!set[j]);const score=Math.max(0,Math.min(99,Math.round(94-missing.length*18-i*5)));return `<div class="lookbook-outfit"><div class="lookbook-outfit-head"><b>${obj.label}</b><span>${score}% MATCH</span></div><div class="lookbook-slots">${set.map((x,j)=>x?`<div class="lookbook-slot"><img src="${x.aiImage||x.image}"><b>${esc(x.name)}</b><small>${esc(x.category||"")}</small></div>`:`<div class="lookbook-slot missing">缺失<br><b>${esc(obj.types[j]||'单品')}</b></div>`).join("")}</div><div class="lookbook-outfit-reason">${missing.length?`已有 ${set.filter(Boolean).length}/${set.length} 个核心单品；缺 ${missing.map(g=>g.label).join('、')}。`:'核心穿搭层级已覆盖，可直接参考搭配。'} ${esc(lookbookReason(set))}</div></div>`}).join('');
-  document.getElementById("lookbookSetCount").textContent=`${sets.length} 套`;renderLookbookGaps();renderLookbookFormula();renderLookbookAnatomy();
-}
-function renderLookbookWardrobeMap(){const grid=document.getElementById("lookbookFitGrid"),sum=document.getElementById("lookbookFitSummary");if(!grid||!sum)return;const data=[...items()].map(x=>({x,score:deterministicDNAScore(x)})).sort((a,b)=>b.score-a.score);const high=data.filter(v=>v.score>=70),mid=data.filter(v=>v.score>=52&&v.score<70),low=data.filter(v=>v.score<52);sum.innerHTML=`<div class="lookbook-stat"><b>${high.length}</b><span>核心适配</span></div><div class="lookbook-stat"><b>${mid.length}</b><span>可转化</span></div><div class="lookbook-stat"><b>${low.length}</b><span>偏离近期</span></div>`;if(!data.length){grid.innerHTML='<div class="lookbook-empty">衣橱暂无单品</div>';renderLookbookGaps();return}const show=[...high.slice(0,5),...mid.slice(0,4),...low.slice(-2)].slice(0,11);grid.innerHTML=show.map(v=>`<div class="lookbook-fit-item"><span class="lookbook-fit-badge">${v.score}%</span><img src="${v.x.aiImage||v.x.image}"><b>${esc(v.x.name)}</b><small>${lookbookBand(v.score)}</small></div>`).join("");renderLookbookGaps();}
-const LOOKBOOK_GAP_LIBRARY={"Soft Y2K":[["贴身薄针织/开衫","贴身但轻薄，可与吊带、低腰下装叠穿","上装"],["低腰垂感长裤","灰、黑、咖或泥灰，裤腿自然堆叠","下装"],["蕾丝吊带层","做领口露边叠穿，比单穿更接近近期审美","叠穿"],["短裙/超短裤","与长袖薄针织形成比例对比","下装"],["低跟穆勒/细带鞋","减少运动感，增加 90s 女性化","鞋履"]],"90s Minimal":[["贴身圆领/方领上衣","白、灰、黑、雾蓝，线条干净","上装"],["垂感直筒长裤","轻薄、低饱和、不强调硬挺通勤感","下装"],["细肩带背心","单穿或作为针织/开衫内搭","叠穿"],["窄肩腋下包","体积小、结构简单","包袋"]],"Japanese Feminine":[["薄针织开衫","奶油、灰粉、浅灰，适合柔和叠穿","上装"],["中长半裙","窄 A 或柔软直筒，避免过度蓬松","裙装"],["玛丽珍/低跟鞋","保持轻盈和女性感","鞋履"]],"Korean Minimal":[["修身长袖T","低饱和浅色或灰色","上装"],["低腰宽腿长裤","面料垂顺，腰头简洁","下装"],["轻薄开衫","作为肩部/腰部叠穿层","叠穿"]],"Dark Feminine":[["黑色蕾丝内搭","领口少量露出即可","叠穿"],["深色修身长袖","黑/炭灰/藏蓝","上装"],["低跟尖头鞋","让宽松下装保持女性化","鞋履"]]};
-function gapCandidates(){
-  const ref=(lookbookReference.garments||[]).filter(g=>!garmentMatch(g)).map(g=>[`${g.label}`,`参考图中存在这一穿搭层级，但你的衣橱暂未找到足够接近的同类单品。`,g.label]);
-  const dna=getStyleDNA();const top=(dna?.styles||[])[0]?.name||"Soft Y2K";const base=LOOKBOOK_GAP_LIBRARY[top]||LOOKBOOK_GAP_LIBRARY["Soft Y2K"];const txt=items().map(x=>`${x.name||""} ${x.category||""}`).join(" ");const generic=base.filter(([name])=>!name.split(/[\/、]/).filter(x=>x.length>=2).some(k=>txt.includes(k))).slice(0,6);
-  return [...ref,...generic].filter((x,i,a)=>a.findIndex(y=>y[0]===x[0])===i).slice(0,6);
-}
-function renderLookbookGaps(){const box=document.getElementById("lookbookGapGrid");if(!box)return;const gaps=gapCandidates();box.innerHTML=(gaps.length?gaps.map(([n,d,c])=>`<div class="lookbook-gap"><b>${esc(n)}</b><small>${esc(d)}</small><em>${esc(c)}</em></div>`).join(""):'<div class="lookbook-empty">当前衣橱已经覆盖参考图的核心单品与主要风格骨架。</div>');}
-function renderLookbookFormula(){
-  const box=document.getElementById("lookbookFormula");if(!box)return;
-  const dna=getStyleDNA();const top=(dna?.styles||[])[0]?.cn||"近期审美";
-  box.innerHTML=
-    `<div class="lookbook-formula-row"><b>公式 01 · 人物优先：</b> 先定位参考图中的人物主体，再从人物区域判断上衣 / 下装 / 外套层级，背景墙面、地面和家具不参与前台配色展示。</div>`+
-    `<div class="lookbook-formula-row"><b>公式 02 · 衣橱优先：</b> 先找你已经拥有的同类单品完成核心复刻；没有的层级才标记为缺失。</div>`+
-    `<div class="lookbook-formula-row"><b>公式 03 · 三套变化：</b> 第 1 套尽量复刻原图结构，第 2 套换近似款，第 3 套改变轮廓，第 4 套再叠加 ${esc(top)}。</div>`+
-    `<div class="lookbook-formula-row"><b>公式 04 · 不展示伪精确颜色：</b> 本地识图无法可靠做人像语义分割时，不再把环境取样色当成“参考配色”展示给你。</div>`;
-};
 
-
-/* ---------- V4.11.4：搭配图鉴图片导入修复 ---------- */
 async function importLookbookReferenceFile(file){
   if(!file)return;
-  const btn=document.getElementById("lookbookPickBtn");
-  const old=btn?.textContent||"＋ 导入喜欢的穿搭";
+  const btn=document.getElementById("lookbookPickBtn"),old=btn?.textContent||"＋ 导入喜欢的穿搭";
   try{
-    if(btn){btn.disabled=true;btn.textContent="正在读取图片…";}
+    if(btn){btn.disabled=true;btn.textContent="正在读取图片…"}
     let dataURL;
-    try{
-      // 复用现有 iPhone 图片解码/压缩逻辑，避免 HEIC/JPEG 在 Safari 中直接 FileReader 后尺寸过大。
-      dataURL=await compressManualImage(file,1500,.84);
-    }catch(e){
-      dataURL=await fileToDataURL(file);
-    }
-    if(!dataURL||!String(dataURL).startsWith("data:image/")) throw new Error("图片读取失败");
-
-    if(btn)btn.textContent="识别人像穿搭中…";
-    const garments=await analyzeReferenceGarments(dataURL);
-
-    lookbookReference={
-      image:dataURL,
-      palette:null,
-      createdAt:Date.now(),
-      garments:Array.isArray(garments)?garments:[]
-    };
-    saveLookbookReference();
-    renderLookbookReference();
-    generateLookbookOutfits(false);
-    renderLookbookWardrobeMap();
-    renderLookbookGaps();
-    renderLookbookFormula();
-    toast(`参考穿搭已导入${garments?.length?` · 识别 ${garments.length} 个穿搭层级`:""}`);
+    try{dataURL=await compressManualImage(file,1500,.84)}catch(e){dataURL=await fileToDataURL(file)}
+    if(!dataURL||!String(dataURL).startsWith("data:image/"))throw new Error("图片读取失败");
+    if(btn)btn.textContent="识别人像穿搭…";
+    let garments=[];
+    try{garments=await analyzeReferenceGarments(dataURL)}catch(e){console.warn("reference color recognition skipped",e)}
+    lookbookReference={image:dataURL,createdAt:Date.now(),garments};
+    saveLookbookReference();renderLookbookReference();
+    if(garments[0]?.family)atlasColor=garments[0].family;
+    await renderColorAtlas();
+    toast(garments.length?`已识别 ${garments.map(g=>g.color).join(" / ")}`:"参考图已导入");
   }catch(err){
-    console.error("lookbook image import failed",err);
-    alert("穿搭图片导入失败："+(err?.message||err));
+    console.error("reference import failed",err);alert("穿搭图片导入失败："+(err?.message||err));
   }finally{
-    if(btn){btn.disabled=false;btn.textContent=old;}
-    const input=document.getElementById("lookbookInput");
-    if(input)input.value="";
+    if(btn){btn.disabled=false;btn.textContent=old}
+    const input=document.getElementById("lookbookInput");if(input)input.value="";
   }
 }
 function bindLookbookUpload(){
-  const btn=document.getElementById("lookbookPickBtn");
-  const input=document.getElementById("lookbookInput");
-  if(btn&&!btn.dataset.bound){
-    btn.dataset.bound="1";
-    btn.addEventListener("click",()=>input?.click());
-  }
-  if(input&&!input.dataset.bound){
-    input.dataset.bound="1";
-    input.addEventListener("change",e=>importLookbookReferenceFile(e.target.files?.[0]));
-  }
+  const btn=document.getElementById("lookbookPickBtn"),input=document.getElementById("lookbookInput");
+  if(btn&&!btn.dataset.bound){btn.dataset.bound="1";btn.addEventListener("click",()=>input?.click())}
+  if(input&&!input.dataset.bound){input.dataset.bound="1";input.addEventListener("change",e=>importLookbookReferenceFile(e.target.files?.[0]))}
 }
+
+// Compatibility wrappers: old call sites can remain without breaking the page.
+function renderLookbookTarget(){}
+function renderLookbookAnatomy(){}
+function generateLookbookOutfits(){return renderColorAtlas()}
+function renderLookbookWardrobeMap(){return renderColorAtlas()}
+function renderLookbookGaps(){}
+function renderLookbookFormula(){}
+
 
 const BRAND_FAV_KEY="today_wear_luxury_favorites_v25";
 const CUSTOM_BRAND_KEY="today_wear_custom_luxury_brands_v25";
@@ -3773,7 +3886,7 @@ async function restoreFullBackupFromFile(file){
     try{renderLiveInspiration();}catch(e){console.warn("renderLiveInspiration skipped",e)}
     try{renderTrendGrid();}catch(e){console.warn("renderTrendGrid skipped",e)}
     try{renderStyleDNA();}catch(e){console.warn("renderStyleDNA skipped",e)}
-    try{renderLookbookWardrobeMap();renderLookbookGaps();}catch(e){console.warn("lookbook refresh skipped",e)}
+    try{renderColorAtlas();}catch(e){console.warn("color atlas refresh skipped",e)}
     toast(`恢复完成：${__itemsCache.length} 件衣服 + ${restoredStyles.length} 张风格样本`);
   }catch(err){
     console.error("restore failed",err);
@@ -3786,6 +3899,7 @@ async function restoreFullBackupFromFile(file){
 document.addEventListener("DOMContentLoaded", async ()=>{
   loadLookbookReference();
   bindLookbookUpload();
+  renderLookbookReference();
   await initAppStorage();
   await loadStyleSamples();
   renderStyleDNA();
