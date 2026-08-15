@@ -4,7 +4,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="app-build" content="V4.11.3-20260816">
+<meta name="app-build" content="V4.11.4-20260816">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1303,7 +1303,7 @@ body.category-modal-open .nav{
 
 @media(min-width:700px){body{padding:20px 0}.app{min-height:calc(100vh - 40px);border-radius:36px;overflow:hidden;box-shadow:0 20px 80px rgba(74,64,58,.16)}.nav{bottom:20px}.modal{align-items:center}.sheet{border-radius:30px;max-height:80vh}}
 
-/* V4.11.3 精准穿搭拆解 */
+/* V4.11.4 精准穿搭拆解 */
 .lookbook-anatomy{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
 .lookbook-anatomy-item{background:var(--soft,#f6f0ed);border-radius:16px;padding:10px;min-width:0}
 .lookbook-anatomy-item .swatch{width:100%;height:42px;border-radius:11px;border:1px solid rgba(60,50,46,.08);margin-bottom:8px}
@@ -1359,7 +1359,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V4.11.3 STYLE DNA + LOOKBOOK：画像占比 + 全球穿搭账号 */
+/* V4.11.4 STYLE DNA + LOOKBOOK：画像占比 + 全球穿搭账号 */
 .dna-distribution{margin-top:14px;padding:14px;border-radius:20px;background:#faf6f3;border:1px solid #eee6e1}
 .dna-distribution-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .dna-distribution-title b{font-size:12px;color:#514a45}.dna-distribution-title span{font-size:9px;color:#9a9089}
@@ -1377,7 +1377,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V4.11.3 搭配图鉴 */
+/* V4.11.4 搭配图鉴 */
 .navinner{grid-template-columns:repeat(5,1fr)!important}
 .nav button{min-width:0}
 .lookbook-entry{width:100%;border:0;background:linear-gradient(135deg,#4a443f,#746b64);color:#fff;border-radius:24px;padding:17px 18px;margin:2px 0 14px;display:flex;align-items:center;justify-content:space-between;text-align:left;box-shadow:0 12px 30px rgba(65,56,50,.16)}
@@ -1396,11 +1396,11 @@ body.category-modal-open .nav{
 
 </head>
 <body>
-<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V4.11.3</div>
+<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V4.11.4</div>
 <div class="app">
   <header class="topbar">
     <div class="brandrow">
-      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V4.11.3 STYLE DNA + LOOKBOOK</small></div>
+      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V4.11.4 STYLE DNA + LOOKBOOK</small></div>
       <button class="iconbtn" onclick="openDataSettings()">⋯</button>
     </div>
   </header>
@@ -1444,7 +1444,7 @@ body.category-modal-open .nav{
         <h3>从 ChatGPT 素材包 / 旧备份一键导入</h3>
         <p>你一次把多张衣服原图发给 ChatGPT，我帮你生成 1:1 白底纯衣物素材、名称、类别和季节，并打包成一个 <b>.json 素材包</b>。回到这里选择一次文件，即可整批加入衣橱，不用逐件输入。</p>
         <div class="batch-actions">
-          <label class="btn" for="batchInput" style="cursor:pointer">导入素材包 / 旧备份</label>
+          <label class="btn" for="batchInput" style="cursor:pointer">导入素材包 / 恢复旧备份</label>
           <button class="btn secondary" onclick="showPackageHelp()">查看素材包说明</button>
         </div>
         <input id="batchInput" type="file" accept=".json,application/json" style="display:none">
@@ -1981,9 +1981,9 @@ async function initAppStorage(){
 
     __storageReady = true;
     render();
-    renderLiveInspiration();
-    renderTrendGrid();
-    renderStyleDNA();
+    try{renderLiveInspiration();}catch(e){console.warn("renderLiveInspiration skipped",e)}
+    try{renderTrendGrid();}catch(e){console.warn("renderTrendGrid skipped",e)}
+    try{renderStyleDNA();}catch(e){console.warn("renderStyleDNA skipped",e)}
   }catch(err){
     console.error("IndexedDB init failed",err);
     __storageReady = false;
@@ -2077,6 +2077,9 @@ function handlePickedFile(f){
 }
 
 let inspirationSeed=0;
+// V4.11.4：趋势区兼容兜底。旧版本中 TREND_DATA 曾被移除，导致完整备份恢复完成后
+// 在 renderTrendGrid() 阶段抛出 "Can't find variable: TREND_DATA"，从而误报“恢复失败”。
+const TREND_DATA = window.TREND_DATA || { regions: [] };
 let trendMode="regions";
 
 function pickInspirationItems(){
@@ -2521,8 +2524,19 @@ document.getElementById("styleDNAInput").addEventListener("change",async e=>{
   }catch(err){console.error(err);alert("Style DNA 文件读取失败："+(err?.message||"格式不正确"))}
 });
 
-/* ---------- V4.11.3 搭配图鉴：人物主体优先识别 ---------- */
+/* ---------- V4.11.4 搭配图鉴：人物主体优先识别 ---------- */
+const LOOKBOOK_REFERENCE_KEY="today_wear_lookbook_reference_v4114";
 let lookbookReference={image:"",palette:null,createdAt:0,garments:[]};
+
+function loadLookbookReference(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(LOOKBOOK_REFERENCE_KEY)||"null");
+    if(saved&&saved.image) lookbookReference=saved;
+  }catch(e){}
+}
+function saveLookbookReference(){
+  try{ localStorage.setItem(LOOKBOOK_REFERENCE_KEY,JSON.stringify(lookbookReference)); }catch(e){}
+}
 let lookbookSeed=0;
 
 function openLookbook(){ activateTab("lookbook"); }
@@ -2586,7 +2600,7 @@ async function analyzeReferenceGarments(dataURL){
   const c=document.createElement('canvas');c.width=W;c.height=H;
   const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0,W,H);
 
-  // V4.11.3: first locate the likely person center from skin pixels.
+  // V4.11.4: first locate the likely person center from skin pixels.
   // All clothing sampling is then constrained to a narrow body corridor so walls,
   // pavement, furniture and other background colors are not used as foreground cues.
   const cx=subjectCenterFromSkin(x,W,H);
@@ -2663,6 +2677,61 @@ function renderLookbookFormula(){
     `<div class="lookbook-formula-row"><b>公式 03 · 三套变化：</b> 第 1 套尽量复刻原图结构，第 2 套换近似款，第 3 套改变轮廓，第 4 套再叠加 ${esc(top)}。</div>`+
     `<div class="lookbook-formula-row"><b>公式 04 · 不展示伪精确颜色：</b> 本地识图无法可靠做人像语义分割时，不再把环境取样色当成“参考配色”展示给你。</div>`;
 };
+
+
+/* ---------- V4.11.4：搭配图鉴图片导入修复 ---------- */
+async function importLookbookReferenceFile(file){
+  if(!file)return;
+  const btn=document.getElementById("lookbookPickBtn");
+  const old=btn?.textContent||"＋ 导入喜欢的穿搭";
+  try{
+    if(btn){btn.disabled=true;btn.textContent="正在读取图片…";}
+    let dataURL;
+    try{
+      // 复用现有 iPhone 图片解码/压缩逻辑，避免 HEIC/JPEG 在 Safari 中直接 FileReader 后尺寸过大。
+      dataURL=await compressManualImage(file,1500,.84);
+    }catch(e){
+      dataURL=await fileToDataURL(file);
+    }
+    if(!dataURL||!String(dataURL).startsWith("data:image/")) throw new Error("图片读取失败");
+
+    if(btn)btn.textContent="识别人像穿搭中…";
+    const garments=await analyzeReferenceGarments(dataURL);
+
+    lookbookReference={
+      image:dataURL,
+      palette:null,
+      createdAt:Date.now(),
+      garments:Array.isArray(garments)?garments:[]
+    };
+    saveLookbookReference();
+    renderLookbookReference();
+    generateLookbookOutfits(false);
+    renderLookbookWardrobeMap();
+    renderLookbookGaps();
+    renderLookbookFormula();
+    toast(`参考穿搭已导入${garments?.length?` · 识别 ${garments.length} 个穿搭层级`:""}`);
+  }catch(err){
+    console.error("lookbook image import failed",err);
+    alert("穿搭图片导入失败："+(err?.message||err));
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent=old;}
+    const input=document.getElementById("lookbookInput");
+    if(input)input.value="";
+  }
+}
+function bindLookbookUpload(){
+  const btn=document.getElementById("lookbookPickBtn");
+  const input=document.getElementById("lookbookInput");
+  if(btn&&!btn.dataset.bound){
+    btn.dataset.bound="1";
+    btn.addEventListener("click",()=>input?.click());
+  }
+  if(input&&!input.dataset.bound){
+    input.dataset.bound="1";
+    input.addEventListener("change",e=>importLookbookReferenceFile(e.target.files?.[0]));
+  }
+}
 
 const BRAND_FAV_KEY="today_wear_luxury_favorites_v25";
 const CUSTOM_BRAND_KEY="today_wear_custom_luxury_brands_v25";
@@ -2755,7 +2824,7 @@ function setTrendMode(mode){
 function renderTrendGrid(){
   const box=document.getElementById("liveTrendGrid");
   if(!box)return;
-  const data=trendMode==="luxury"?getFavoriteBrands():(TREND_DATA.regions||[]);
+  const data=trendMode==="luxury"?getFavoriteBrands():(((typeof TREND_DATA!=="undefined"&&TREND_DATA&&Array.isArray(TREND_DATA.regions))?TREND_DATA.regions:[]));
   const count=document.getElementById("brandCount");
   if(count && trendMode==="luxury") count.textContent=`${data.length} 个品牌`;
 
@@ -3701,9 +3770,10 @@ async function restoreFullBackupFromFile(file){
     activeSeason="全部";
     closeDataSettings();
     render();
-    renderLiveInspiration();
-    renderTrendGrid();
-    renderStyleDNA();
+    try{renderLiveInspiration();}catch(e){console.warn("renderLiveInspiration skipped",e)}
+    try{renderTrendGrid();}catch(e){console.warn("renderTrendGrid skipped",e)}
+    try{renderStyleDNA();}catch(e){console.warn("renderStyleDNA skipped",e)}
+    try{renderLookbookWardrobeMap();renderLookbookGaps();}catch(e){console.warn("lookbook refresh skipped",e)}
     toast(`恢复完成：${__itemsCache.length} 件衣服 + ${restoredStyles.length} 张风格样本`);
   }catch(err){
     console.error("restore failed",err);
@@ -3714,6 +3784,8 @@ async function restoreFullBackupFromFile(file){
   }
 }
 document.addEventListener("DOMContentLoaded", async ()=>{
+  loadLookbookReference();
+  bindLookbookUpload();
   await initAppStorage();
   await loadStyleSamples();
   renderStyleDNA();
