@@ -4,7 +4,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="app-build" content="V5.0.0-20260816">
+<meta name="app-build" content="V5.0.1-20260816">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1303,7 +1303,7 @@ body.category-modal-open .nav{
 
 @media(min-width:700px){body{padding:20px 0}.app{min-height:calc(100vh - 40px);border-radius:36px;overflow:hidden;box-shadow:0 20px 80px rgba(74,64,58,.16)}.nav{bottom:20px}.modal{align-items:center}.sheet{border-radius:30px;max-height:80vh}}
 
-/* V5.0.0 精准穿搭拆解 */
+/* V5.0.1 精准穿搭拆解 */
 .lookbook-anatomy{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
 .lookbook-anatomy-item{background:var(--soft,#f6f0ed);border-radius:16px;padding:10px;min-width:0}
 .lookbook-anatomy-item .swatch{width:100%;height:42px;border-radius:11px;border:1px solid rgba(60,50,46,.08);margin-bottom:8px}
@@ -1359,7 +1359,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V5.0.0 COLOR ATLAS：画像占比 + 全球穿搭账号 */
+/* V5.0.1 COLOR ATLAS：画像占比 + 全球穿搭账号 */
 .dna-distribution{margin-top:14px;padding:14px;border-radius:20px;background:#faf6f3;border:1px solid #eee6e1}
 .dna-distribution-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .dna-distribution-title b{font-size:12px;color:#514a45}.dna-distribution-title span{font-size:9px;color:#9a9089}
@@ -1377,7 +1377,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V5.0.0 搭配图鉴 */
+/* V5.0.1 搭配图鉴 */
 .navinner{grid-template-columns:repeat(5,1fr)!important}
 .nav button{min-width:0}
 .lookbook-entry{width:100%;border:0;background:linear-gradient(135deg,#4a443f,#746b64);color:#fff;border-radius:24px;padding:17px 18px;margin:2px 0 14px;display:flex;align-items:center;justify-content:space-between;text-align:left;box-shadow:0 12px 30px rgba(65,56,50,.16)}
@@ -1394,13 +1394,296 @@ body.category-modal-open .nav{
 @media(max-width:390px){.lookbook-reference-grid{grid-template-columns:1fr}.lookbook-outfit-grid{grid-template-columns:1fr}.lookbook-fit-grid{grid-template-columns:repeat(2,1fr)}.nav button{font-size:8px}.nav button .ico{font-size:17px}}
 </style>
 
+
+<style>
+/* ===== V5.0.1 MOBILE + COLOR ATLAS FINAL OVERRIDES ===== */
+
+/* 1. 强制整个 App 始终等于手机可视宽度，彻底禁止横向撑开 */
+html{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+  -webkit-text-size-adjust:100%;
+}
+body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden !important;
+  padding:0 !important;
+}
+.app{
+  width:100% !important;
+  max-width:520px !important;
+  min-width:0 !important;
+  margin:0 auto !important;
+  overflow-x:hidden !important;
+  border-radius:0 !important;
+}
+main,.page,.page.active,#lookbook{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  overflow-x:hidden !important;
+}
+.page{padding-left:14px !important;padding-right:14px !important}
+.topbar{width:100%;max-width:100%;overflow:hidden}
+.brandrow,.sectionhead,.lookbook-intro,.lookbook-panel{
+  min-width:0 !important;
+  max-width:100% !important;
+}
+.lookbook-intro,.lookbook-panel{
+  width:100% !important;
+  overflow:hidden !important;
+}
+
+/* 桌面才恢复卡片式外框 */
+@media(min-width:700px){
+  body{padding:20px 0 !important}
+  .app{width:min(520px,100%) !important;border-radius:36px !important}
+}
+
+/* 2. 参考穿搭区域手机布局 */
+.reference-color-row{
+  display:grid !important;
+  grid-template-columns:112px minmax(0,1fr) !important;
+  gap:12px !important;
+  width:100% !important;
+  min-width:0 !important;
+  align-items:start !important;
+  margin-top:14px !important;
+}
+.reference-color-info{min-width:0 !important;overflow:hidden}
+.color-atlas-reference{
+  width:112px !important;
+  max-width:100% !important;
+  aspect-ratio:4/5 !important;
+}
+.reference-color-chips{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:7px !important;
+  min-width:0 !important;
+}
+.reference-color-chip{
+  max-width:100% !important;
+  min-width:0 !important;
+  border:1px solid var(--line) !important;
+  background:#fff !important;
+  border-radius:999px !important;
+  padding:7px 9px !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:7px !important;
+  color:var(--ink) !important;
+  font-size:9px !important;
+}
+.reference-color-chip i{
+  flex:0 0 18px !important;
+  width:18px !important;height:18px !important;border-radius:50% !important;
+  border:1px solid rgba(60,50,45,.08) !important;
+}
+.reference-color-chip span{min-width:0;white-space:normal}
+.reference-color-chip small{display:block;font-size:7px;color:var(--muted);margin-top:1px}
+
+/* 3. 像衣橱一样的「分栏点击模式」 */
+.atlas-filter-title{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:10px !important;
+  margin:12px 1px 7px !important;
+}
+.atlas-filter-title b{font-size:12px !important;color:var(--ink) !important}
+.atlas-filter-title span{font-size:8px !important;color:var(--muted) !important}
+.atlas-color-title{margin-top:8px !important}
+
+.atlas-type-tabs,
+.atlas-color-tabs{
+  display:flex !important;
+  flex-wrap:nowrap !important;
+  gap:7px !important;
+  width:100% !important;
+  max-width:100% !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  padding:1px 1px 8px !important;
+  scrollbar-width:none !important;
+  -webkit-overflow-scrolling:touch !important;
+  scroll-snap-type:x proximity;
+}
+.atlas-type-tabs::-webkit-scrollbar,
+.atlas-color-tabs::-webkit-scrollbar{display:none !important}
+
+.atlas-tab,
+.atlas-color-tab{
+  appearance:none !important;
+  -webkit-appearance:none !important;
+  flex:0 0 auto !important;
+  white-space:nowrap !important;
+  min-width:auto !important;
+  min-height:38px !important;
+  border:1px solid var(--line) !important;
+  background:#fff !important;
+  border-radius:999px !important;
+  padding:9px 13px !important;
+  font-size:10px !important;
+  font-weight:760 !important;
+  color:#746c65 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:6px !important;
+  box-shadow:none !important;
+  scroll-snap-align:start;
+}
+.atlas-tab.active,
+.atlas-color-tab.active{
+  background:var(--active,#6f6862) !important;
+  color:#fff !important;
+  border-color:var(--active,#6f6862) !important;
+}
+.atlas-color-tab i{
+  width:24px !important;
+  height:14px !important;
+  flex:0 0 24px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(60,50,45,.10) !important;
+}
+.atlas-color-tab.active i{
+  border-color:rgba(255,255,255,.58) !important;
+}
+.atlas-color-tab span{font-size:10px !important}
+.atlas-color-tab small{
+  font-size:8px !important;
+  color:#a29a93 !important;
+}
+.atlas-color-tab.active small{color:rgba(255,255,255,.72) !important}
+
+/* 浅 → 深的可视刻度 */
+.atlas-shade-scale{
+  width:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:7px !important;
+  min-height:25px !important;
+  margin:1px 0 11px !important;
+}
+.atlas-shade-scale span{flex:0 0 auto;font-size:8px !important;color:var(--muted) !important}
+.atlas-shade-scale .scale{
+  flex:1 1 auto !important;
+  min-width:0 !important;
+  height:9px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(70,60,55,.07) !important;
+}
+
+/* 4. 衣服卡片：绝不允许原图尺寸撑破布局 */
+.atlas-grid{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:9px !important;
+  overflow:hidden !important;
+}
+.atlas-item{
+  width:100% !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+  position:relative !important;
+  background:#faf7f4 !important;
+  border:1px solid #eee7e2 !important;
+  border-radius:18px !important;
+  padding:6px !important;
+}
+.atlas-item img{
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+  height:auto !important;
+  aspect-ratio:1/1 !important;
+  object-fit:contain !important;
+  border-radius:13px !important;
+  background:#fff !important;
+}
+.atlas-item b{
+  display:block !important;
+  min-width:0 !important;
+  padding:0 2px !important;
+  margin-top:5px !important;
+  font-size:9px !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+.atlas-item small{display:block;font-size:7px !important;color:var(--muted) !important;padding:0 2px 2px}
+.atlas-item .shade-badge{
+  position:absolute !important;
+  z-index:2 !important;
+  top:10px !important;
+  left:10px !important;
+  padding:4px 6px !important;
+  border-radius:999px !important;
+  font-size:7px !important;
+  line-height:1 !important;
+  font-weight:800 !important;
+  color:#fff !important;
+  background:rgba(70,63,58,.78) !important;
+}
+.atlas-empty{
+  grid-column:1/-1 !important;
+  width:100% !important;
+  border:1px dashed #ded3cc !important;
+  border-radius:18px !important;
+  padding:22px 12px !important;
+  text-align:center !important;
+  font-size:9px !important;
+  color:#9c928b !important;
+  line-height:1.7 !important;
+}
+
+/* 5. 色系分布也保持双栏手机卡片 */
+.atlas-summary{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:8px !important;
+  width:100% !important;
+}
+.atlas-summary-row{
+  min-width:0 !important;
+  background:#faf7f4 !important;
+  border-radius:15px !important;
+  padding:10px !important;
+}
+.atlas-summary-head{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.atlas-summary-head b{font-size:9px !important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.atlas-summary-head span{font-size:7px !important;color:var(--muted) !important;white-space:nowrap}
+.atlas-summary-bar{height:6px;border-radius:999px;background:#eee8e4;overflow:hidden;margin-top:7px}
+.atlas-summary-bar i{display:block;height:100%;border-radius:999px;background:#81776f}
+
+/* 超窄屏 */
+@media(max-width:360px){
+  .page{padding-left:11px !important;padding-right:11px !important}
+  .reference-color-row{grid-template-columns:96px minmax(0,1fr) !important}
+  .color-atlas-reference{width:96px !important}
+  .atlas-tab,.atlas-color-tab{padding:8px 11px !important;font-size:9px !important}
+}
+
+/* 横屏/大屏仍然保持 App 自身宽度，不让图鉴铺满整个浏览器 */
+@media(orientation:landscape) and (max-height:500px){
+  .app{max-width:520px !important}
+}
+</style>
+
 </head>
 <body>
-<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V5.0.0</div>
+<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V5.0.1</div>
 <div class="app">
   <header class="topbar">
     <div class="brandrow">
-      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V5.0.0 COLOR ATLAS</small></div>
+      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V5.0.1 COLOR ATLAS</small></div>
       <button class="iconbtn" onclick="openDataSettings()">⋯</button>
     </div>
   </header>
@@ -1596,7 +1879,9 @@ body.category-modal-open .nav{
         <div class="lookbook-card-head"><b>我的衣橱 · 按色系浏览</b><span id="colorAtlasCount">0 件</span></div>
         <div class="color-atlas-note">所有已录入单品和以后新增的衣服都会自动归入色系；同一大色系内部按「浅 → 深」排列。无法准确归类时会自动建立「其他色」而不是丢失。</div>
 
+        <div class="atlas-filter-title"><b>按品类</b><span>上装 / 下装 / 外套等</span></div>
         <div class="atlas-type-tabs" id="atlasTypeTabs"></div>
+        <div class="atlas-filter-title atlas-color-title"><b>按色系</b><span>点击后按浅 → 深排列</span></div>
         <div class="atlas-color-tabs" id="atlasColorTabs"></div>
         <div class="atlas-shade-scale" id="atlasShadeScale"></div>
         <div class="atlas-grid" id="atlasGrid"></div>
@@ -2071,7 +2356,7 @@ function handlePickedFile(f){
 }
 
 let inspirationSeed=0;
-// V5.0.0：趋势区兼容兜底。旧版本中 TREND_DATA 曾被移除，导致完整备份恢复完成后
+// V5.0.1：趋势区兼容兜底。旧版本中 TREND_DATA 曾被移除，导致完整备份恢复完成后
 // 在 renderTrendGrid() 阶段抛出 "Can't find variable: TREND_DATA"，从而误报“恢复失败”。
 const TREND_DATA = window.TREND_DATA || { regions: [] };
 let trendMode="regions";
@@ -2518,7 +2803,7 @@ document.getElementById("styleDNAInput").addEventListener("change",async e=>{
   }catch(err){console.error(err);alert("Style DNA 文件读取失败："+(err?.message||"格式不正确"))}
 });
 
-/* ---------- V5.0.0 COLOR ATLAS：衣橱颜色 × 品类自动图鉴 ---------- */
+/* ---------- V5.0.1 COLOR ATLAS：衣橱颜色 × 品类自动图鉴 ---------- */
 const LOOKBOOK_REFERENCE_KEY="today_wear_color_atlas_reference_v500";
 const COLOR_ATLAS_CACHE_KEY="today_wear_color_atlas_cache_v500";
 let lookbookReference={image:"",createdAt:0,garments:[]};
@@ -2703,17 +2988,22 @@ function renderAtlasTabs(data){
   if(colorBox){
     const scoped=atlasType==="all"?data:data.filter(x=>x.type===atlasType);
     const present=ATLAS_COLOR_GROUPS.filter(g=>g.id==="other"||scoped.some(x=>x.family===g.id));
-    const allBtn=`<button class="atlas-color-tab ${atlasColor==="all"?"active":""}" onclick="setAtlasColor('all')"><i style="background:linear-gradient(90deg,#f3eee8,#847a73)"></i>全部<small>${scoped.length}</small></button>`;
+    const allBtn=`<button class="atlas-color-tab ${atlasColor==="all"?"active":""}" onclick="setAtlasColor('all')"><span>全部色系</span><small>${scoped.length}</small></button>`;
     colorBox.innerHTML=allBtn+present.map(g=>{
       const n=scoped.filter(x=>x.family===g.id).length;
       if(!n)return "";
-      return `<button class="atlas-color-tab ${atlasColor===g.id?"active":""}" onclick="setAtlasColor('${g.id}')"><i style="background:linear-gradient(90deg,${g.from},${g.to})"></i>${g.name}<small>${n}</small></button>`;
+      return `<button class="atlas-color-tab ${atlasColor===g.id?"active":""}" onclick="setAtlasColor('${g.id}')"><i style="background:linear-gradient(90deg,${g.from},${g.to})"></i><span>${g.name}</span><small>${n}</small></button>`;
     }).join("");
   }
 }
 
 function setAtlasType(v){atlasType=v;if(atlasColor!=="all")atlasColor="all";renderColorAtlas()}
-function setAtlasColor(v){atlasColor=v;renderColorAtlas()}
+function setAtlasColor(v){
+  atlasColor=v;
+  renderColorAtlas().then(()=>{
+    document.getElementById("atlasShadeScale")?.scrollIntoView({behavior:"smooth",block:"nearest"});
+  });
+}
 function jumpToAtlasColor(v){atlasColor=v;renderColorAtlas();document.getElementById("atlasColorTabs")?.scrollIntoView({behavior:"smooth",block:"center"})}
 
 function renderShadeScale(){
@@ -2730,7 +3020,7 @@ async function renderColorAtlas(){
   renderAtlasTabs(data);renderShadeScale();
   let shown=data.filter(x=>(atlasType==="all"||x.type===atlasType)&&(atlasColor==="all"||x.family===atlasColor));
   shown.sort((a,b)=>{
-    if(atlasColor!=="all")return a.shade-b.shade; // smaller shade = lighter first
+    if(atlasColor!=="all")return a.shade-b.shade; // V5.0.1：同色系严格按浅 → 深
     const ca=ATLAS_COLOR_GROUPS.findIndex(g=>g.id===a.family),cb=ATLAS_COLOR_GROUPS.findIndex(g=>g.id===b.family);
     return ca-cb || a.shade-b.shade;
   });
