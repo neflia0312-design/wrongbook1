@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="app-build" content="V4.11.1-20260816">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1343,7 +1347,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V4.11.0 STYLE DNA + LOOKBOOK：画像占比 + 全球穿搭账号 */
+/* V4.11.1 STYLE DNA + LOOKBOOK：画像占比 + 全球穿搭账号 */
 .dna-distribution{margin-top:14px;padding:14px;border-radius:20px;background:#faf6f3;border:1px solid #eee6e1}
 .dna-distribution-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .dna-distribution-title b{font-size:12px;color:#514a45}.dna-distribution-title span{font-size:9px;color:#9a9089}
@@ -1361,7 +1365,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V4.11.0 搭配图鉴 */
+/* V4.11.1 搭配图鉴 */
 .navinner{grid-template-columns:repeat(5,1fr)!important}
 .nav button{min-width:0}
 .lookbook-entry{width:100%;border:0;background:linear-gradient(135deg,#4a443f,#746b64);color:#fff;border-radius:24px;padding:17px 18px;margin:2px 0 14px;display:flex;align-items:center;justify-content:space-between;text-align:left;box-shadow:0 12px 30px rgba(65,56,50,.16)}
@@ -1380,10 +1384,11 @@ body.category-modal-open .nav{
 
 </head>
 <body>
+<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V4.11.1</div>
 <div class="app">
   <header class="topbar">
     <div class="brandrow">
-      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V4.11.0 STYLE DNA + LOOKBOOK</small></div>
+      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V4.11.1 STYLE DNA + LOOKBOOK</small></div>
       <button class="iconbtn" onclick="openDataSettings()">⋯</button>
     </div>
   </header>
@@ -2505,7 +2510,7 @@ document.getElementById("styleDNAInput").addEventListener("change",async e=>{
   }catch(err){console.error(err);alert("Style DNA 文件读取失败："+(err?.message||"格式不正确"))}
 });
 
-/* ---------- V4.11.0 搭配图鉴 ---------- */
+/* ---------- V4.11.1 搭配图鉴 ---------- */
 let lookbookReference={image:"",palette:null,createdAt:0};
 let lookbookSeed=0;
 
