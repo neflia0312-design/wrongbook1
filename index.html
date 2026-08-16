@@ -4,7 +4,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="app-build" content="V5.0.4-20260816">
+<meta name="app-build" content="V5.0.5-20260816">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1303,7 +1303,7 @@ body.category-modal-open .nav{
 
 @media(min-width:700px){body{padding:20px 0}.app{min-height:calc(100vh - 40px);border-radius:36px;overflow:hidden;box-shadow:0 20px 80px rgba(74,64,58,.16)}.nav{bottom:20px}.modal{align-items:center}.sheet{border-radius:30px;max-height:80vh}}
 
-/* V5.0.4 精准穿搭拆解 */
+/* V5.0.5 精准穿搭拆解 */
 .lookbook-anatomy{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
 .lookbook-anatomy-item{background:var(--soft,#f6f0ed);border-radius:16px;padding:10px;min-width:0}
 .lookbook-anatomy-item .swatch{width:100%;height:42px;border-radius:11px;border:1px solid rgba(60,50,46,.08);margin-bottom:8px}
@@ -1359,7 +1359,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V5.0.4 COLOR ATLAS：画像占比 + 全球穿搭账号 */
+/* V5.0.5 COLOR ATLAS：画像占比 + 全球穿搭账号 */
 .dna-distribution{margin-top:14px;padding:14px;border-radius:20px;background:#faf6f3;border:1px solid #eee6e1}
 .dna-distribution-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .dna-distribution-title b{font-size:12px;color:#514a45}.dna-distribution-title span{font-size:9px;color:#9a9089}
@@ -1377,7 +1377,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V5.0.4 搭配图鉴 */
+/* V5.0.5 搭配图鉴 */
 .navinner{grid-template-columns:repeat(5,1fr)!important}
 .nav button{min-width:0}
 .lookbook-entry{width:100%;border:0;background:linear-gradient(135deg,#4a443f,#746b64);color:#fff;border-radius:24px;padding:17px 18px;margin:2px 0 14px;display:flex;align-items:center;justify-content:space-between;text-align:left;box-shadow:0 12px 30px rgba(65,56,50,.16)}
@@ -1396,7 +1396,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* ===== V5.0.4 MOBILE + COLOR ATLAS FINAL OVERRIDES ===== */
+/* ===== V5.0.5 MOBILE + COLOR ATLAS FINAL OVERRIDES ===== */
 
 /* 1. 强制整个 App 始终等于手机可视宽度，彻底禁止横向撑开 */
 html{
@@ -1679,7 +1679,7 @@ main,.page,.page.active,#lookbook{
 
 
 <style>
-/* ===== V5.0.4 CLEAN UI + MANUAL COLOR CORRECTION ===== */
+/* ===== V5.0.5 CLEAN UI + MANUAL COLOR CORRECTION ===== */
 .color-atlas-intro p,
 .color-atlas-note{display:none !important}
 
@@ -1734,7 +1734,7 @@ main,.page,.page.active,#lookbook{
 
 
 <style>
-/* ===== V5.0.4 MULTI COLOR TAGS ===== */
+/* ===== V5.0.5 MULTI COLOR TAGS ===== */
 .atlas-color-edit{display:none!important}
 .atlas-color-multi{position:relative;margin-top:6px}
 .atlas-color-multi>summary{
@@ -1759,7 +1759,7 @@ main,.page,.page.active,#lookbook{
 
 
 <style>
-/* ===== V5.0.4 CATEGORY SYNC + TRUE MULTI COLOR PICKER ===== */
+/* ===== V5.0.5 CATEGORY SYNC + TRUE MULTI COLOR PICKER ===== */
 .atlas-color-multi{display:none!important}
 .atlas-color-picker-btn{
   width:100%;
@@ -1812,13 +1812,162 @@ main,.page,.page.active,#lookbook{
 }
 </style>
 
+
+<style>
+/* ===== V5.0.5 FIXED MODAL + CATEGORY/COLOR LIVE SYNC ===== */
+body.atlas-modal-lock{
+  position:fixed!important;
+  left:0;right:0;width:100%;
+  overflow:hidden!important;
+  touch-action:none;
+}
+#atlasColorPickerModal.show,
+#atlasColorManagerModal.show{
+  display:flex!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:99999!important;
+  align-items:flex-end!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+  overscroll-behavior:contain!important;
+  background:rgba(45,40,37,.38)!important;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+#atlasColorPickerModal .atlas-picker-sheet,
+#atlasColorManagerModal .atlas-manager-sheet{
+  position:relative!important;
+  width:100%!important;
+  max-width:520px!important;
+  height:min(78dvh,760px)!important;
+  max-height:min(78dvh,760px)!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border-radius:28px 28px 0 0!important;
+  background:#fcfaf8!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+#atlasColorPickerModal .atlas-picker-head,
+#atlasColorManagerModal .atlas-picker-head{
+  position:relative!important;
+  top:auto!important;
+  flex:0 0 auto!important;
+  margin:0!important;
+  padding:18px 18px 10px!important;
+  background:#fcfaf8!important;
+}
+#atlasPickerCount{
+  flex:0 0 auto;
+  padding:0 18px 8px;
+  margin:0!important;
+}
+#atlasColorPickerOptions{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;
+  touch-action:pan-y!important;
+  padding:6px 18px 16px!important;
+}
+#atlasColorPickerModal .atlas-picker-actions{
+  position:relative!important;
+  bottom:auto!important;
+  flex:0 0 auto!important;
+  margin:0!important;
+  padding:10px 18px calc(12px + env(safe-area-inset-bottom))!important;
+  background:#fcfaf8!important;
+  border-top:1px solid #eee6e0;
+  z-index:5;
+}
+.atlas-filter-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.atlas-manage-color-btn{
+  border:1px solid #e4dcd6;
+  background:#f6f1ed;
+  color:#756d67;
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:9px;
+  font-weight:800;
+}
+.atlas-manager-add{
+  flex:0 0 auto;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  padding:6px 18px 12px;
+}
+.atlas-manager-add input{
+  min-width:0;
+  border:1px solid #e5ddd7;
+  border-radius:13px;
+  background:#fff;
+  padding:11px 12px;
+  font-size:11px;
+}
+.atlas-manager-add button{
+  border:0;
+  border-radius:13px;
+  background:#756d66;
+  color:#fff;
+  padding:0 14px;
+  font-weight:800;
+}
+.atlas-manager-list{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:0 18px 12px;
+}
+.atlas-manager-row{
+  display:grid;
+  grid-template-columns:42px 1fr auto;
+  align-items:center;
+  gap:9px;
+  padding:9px 0;
+  border-bottom:1px solid #eee7e2;
+}
+.atlas-manager-row i{
+  width:42px;height:24px;border-radius:999px;border:1px solid rgba(0,0,0,.06);
+}
+.atlas-manager-row input{
+  min-width:0;
+  border:1px solid #e5ddd7;
+  border-radius:11px;
+  padding:9px 10px;
+  background:#fff;
+  font-size:10px;
+  font-weight:750;
+  color:#5f5853;
+}
+.atlas-manager-row button{
+  border:0;background:#f2ece8;color:#8a7770;border-radius:10px;
+  padding:8px 9px;font-size:9px;font-weight:750;
+}
+.atlas-manager-row button:disabled{opacity:.35}
+.atlas-manager-foot{
+  flex:0 0 auto;
+  padding:10px 18px calc(12px + env(safe-area-inset-bottom));
+  color:#9a918b;font-size:9px;line-height:1.5;border-top:1px solid #eee7e2;
+}
+</style>
+
 </head>
 <body>
-<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V5.0.4</div>
+<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V5.0.5</div>
 <div class="app">
   <header class="topbar">
     <div class="brandrow">
-      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V5.0.4 COLOR ATLAS</small></div>
+      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V5.0.5 COLOR ATLAS</small></div>
       <button class="iconbtn" onclick="openDataSettings()">⋯</button>
     </div>
   </header>
@@ -2013,7 +2162,10 @@ main,.page,.page.active,#lookbook{
         <div class="lookbook-card-head"><b>我的衣橱 · 按色系浏览</b><span id="colorAtlasCount">0 件</span></div>
         <div class="atlas-filter-title"><b>按品类</b></div>
         <div class="atlas-type-tabs" id="atlasTypeTabs"></div>
-        <div class="atlas-filter-title atlas-color-title"><b>按色系</b></div>
+        <div class="atlas-filter-title atlas-color-title">
+          <b>按色系</b>
+          <button class="atlas-manage-color-btn" onclick="openAtlasColorManager()">管理色系</button>
+        </div>
         <div class="atlas-color-tabs" id="atlasColorTabs"></div>
         <div class="atlas-shade-scale" id="atlasShadeScale"></div>
         <div class="atlas-grid" id="atlasGrid"></div>
@@ -2174,6 +2326,27 @@ main,.page,.page.active,#lookbook{
   </div>
 </div>
 
+
+<div class="modal" id="atlasColorManagerModal" onclick="if(event.target===this)closeAtlasColorManager()">
+  <div class="sheet atlas-manager-sheet">
+    <div class="atlas-picker-head">
+      <div>
+        <small>COLOR SYSTEM</small>
+        <h2>管理色系</h2>
+      </div>
+      <button class="category-sheet-close" onclick="closeAtlasColorManager()">×</button>
+    </div>
+    <div class="atlas-manager-add">
+      <input id="atlasNewColorName" placeholder="例如：薄荷色 / 奶油黄">
+      <button onclick="addAtlasColor()">+ 新增</button>
+    </div>
+    <div id="atlasColorManagerList" class="atlas-manager-list"></div>
+    <div class="atlas-manager-foot">
+      修改名称或新增后，会立即同步到“按色系”、单品多选和色系统计。
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -2188,12 +2361,13 @@ const IMPORT_CATEGORY_MODE_KEY="today_wear_import_category_mode_v42";
   App 不再创建/恢复任何写死的默认分类。
 */
 function currentUserCategories(){
+  let ordered=[];
   try{
     const raw=JSON.parse(localStorage.getItem(CAT_ORDER_KEY)||"[]");
-    return Array.isArray(raw) ? [...new Set(raw.filter(Boolean))] : [];
-  }catch(e){
-    return [];
-  }
+    ordered=Array.isArray(raw)?raw.filter(Boolean):[];
+  }catch(e){}
+  const actual=items().map(x=>String(x.category||"").trim()).filter(Boolean);
+  return [...new Set([...ordered,...actual])];
 }
 
 function categoryMatchScore(category,item){
@@ -2507,7 +2681,7 @@ function handlePickedFile(f){
 }
 
 let inspirationSeed=0;
-// V5.0.4：趋势区兼容兜底。旧版本中 TREND_DATA 曾被移除，导致完整备份恢复完成后
+// V5.0.5：趋势区兼容兜底。旧版本中 TREND_DATA 曾被移除，导致完整备份恢复完成后
 // 在 renderTrendGrid() 阶段抛出 "Can't find variable: TREND_DATA"，从而误报“恢复失败”。
 const TREND_DATA = window.TREND_DATA || { regions: [] };
 let trendMode="regions";
@@ -2954,7 +3128,7 @@ document.getElementById("styleDNAInput").addEventListener("change",async e=>{
   }catch(err){console.error(err);alert("Style DNA 文件读取失败："+(err?.message||"格式不正确"))}
 });
 
-/* ---------- V5.0.4 COLOR ATLAS：衣橱颜色 × 品类自动图鉴 ---------- */
+/* ---------- V5.0.5 COLOR ATLAS：衣橱颜色 × 品类自动图鉴 ---------- */
 const LOOKBOOK_REFERENCE_KEY="today_wear_color_atlas_reference_v500";
 const COLOR_ATLAS_CACHE_KEY="today_wear_color_atlas_cache_v500";
 const COLOR_ATLAS_OVERRIDE_KEY="today_wear_color_atlas_override_v503";
@@ -2962,7 +3136,7 @@ let lookbookReference={image:"",createdAt:0,garments:[]};
 let atlasType="all";
 let atlasColor="all";
 
-const ATLAS_COLOR_GROUPS=[
+const ATLAS_COLOR_DEFAULTS=[
   {id:"black",name:"黑色系",keys:["黑","墨","炭","玄"],from:"#9b9b9b",to:"#111111"},
   {id:"white",name:"白色系",keys:["白","米白","奶白","象牙"],from:"#ffffff",to:"#d7d2ca"},
   {id:"gray",name:"灰色系",keys:["灰","银","铅"],from:"#e6e6e6",to:"#555555"},
@@ -2975,6 +3149,82 @@ const ATLAS_COLOR_GROUPS=[
   {id:"yellow",name:"黄/橙色",keys:["黄","橙","姜黄","柠檬"],from:"#fff0b5",to:"#b9651b"},
   {id:"other",name:"其他色",keys:[],from:"#ece8e4",to:"#8a817b"}
 ];
+const ATLAS_COLOR_GROUPS_KEY="today_wear_color_groups_v505";
+let ATLAS_COLOR_GROUPS=loadAtlasColorGroups();
+
+function loadAtlasColorGroups(){
+  try{
+    const raw=JSON.parse(localStorage.getItem(ATLAS_COLOR_GROUPS_KEY)||"null");
+    if(Array.isArray(raw)&&raw.length)return raw;
+  }catch(e){}
+  return ATLAS_COLOR_DEFAULTS.map(x=>({...x}));
+}
+function saveAtlasColorGroups(){
+  localStorage.setItem(ATLAS_COLOR_GROUPS_KEY,JSON.stringify(ATLAS_COLOR_GROUPS));
+}
+function atlasColorId(){
+  return "custom_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,6);
+}
+function openAtlasColorManager(){
+  renderAtlasColorManager();
+  document.getElementById("atlasColorManagerModal")?.classList.add("show");
+  lockAtlasModalScroll();
+}
+function closeAtlasColorManager(){
+  document.getElementById("atlasColorManagerModal")?.classList.remove("show");
+  unlockAtlasModalScroll();
+}
+function renderAtlasColorManager(){
+  const box=document.getElementById("atlasColorManagerList");
+  if(!box)return;
+  box.innerHTML=ATLAS_COLOR_GROUPS.map((g,i)=>`
+    <div class="atlas-manager-row">
+      <i style="background:linear-gradient(90deg,${g.from},${g.to})"></i>
+      <input value="${esc(g.name)}" oninput="renameAtlasColor('${g.id}',this.value)" aria-label="色系名称">
+      <button onclick="removeAtlasColor('${g.id}')" ${ATLAS_COLOR_GROUPS.length<=1?"disabled":""}>删除</button>
+    </div>`).join("");
+}
+function renameAtlasColor(id,name){
+  const g=ATLAS_COLOR_GROUPS.find(x=>x.id===id);
+  if(!g)return;
+  g.name=String(name||"").trim()||g.name;
+  saveAtlasColorGroups();
+  renderColorAtlas();
+}
+function addAtlasColor(){
+  const input=document.getElementById("atlasNewColorName");
+  const name=String(input?.value||"").trim();
+  if(!name){toast("先输入色系名称");return}
+  const palette=[
+    ["#f7e7ef","#ad597e"],["#e4edf8","#44658f"],["#e7f0e2","#54704d"],
+    ["#efe4d8","#765640"],["#f3e8d0","#b58b4a"],["#e8e2ef","#66537c"]
+  ];
+  const pair=palette[ATLAS_COLOR_GROUPS.length%palette.length];
+  ATLAS_COLOR_GROUPS.splice(Math.max(ATLAS_COLOR_GROUPS.length-1,0),0,{
+    id:atlasColorId(),name,keys:[],from:pair[0],to:pair[1]
+  });
+  saveAtlasColorGroups();
+  if(input)input.value="";
+  renderAtlasColorManager();
+  renderColorAtlas();
+  toast("已增加新色系");
+}
+function removeAtlasColor(id){
+  const used=Object.values(atlasOverrideRead()).some(v=>(Array.isArray(v)?v:[v]).includes(id));
+  if(used&&!confirm("有衣物正在使用这个色系。删除后，这些衣物会恢复自动识别。继续吗？"))return;
+  ATLAS_COLOR_GROUPS=ATLAS_COLOR_GROUPS.filter(x=>x.id!==id);
+  const map=atlasOverrideRead();
+  Object.keys(map).forEach(k=>{
+    let arr=Array.isArray(map[k])?map[k]:[map[k]];
+    arr=arr.filter(x=>x!==id);
+    if(arr.length)map[k]=arr; else delete map[k];
+  });
+  atlasOverrideWrite(map);
+  saveAtlasColorGroups();
+  if(atlasColor===id)atlasColor="all";
+  renderAtlasColorManager();
+  renderColorAtlas();
+}
 
 function atlasCategoryList(data=[]){
   const own=currentUserCategories();
@@ -3059,6 +3309,19 @@ function clearAtlasOverride(itemId){
   toast("已恢复自动识别");
 }
 
+let atlasModalScrollY=0;
+function lockAtlasModalScroll(){
+  if(document.body.classList.contains("atlas-modal-lock"))return;
+  atlasModalScrollY=window.scrollY||document.documentElement.scrollTop||0;
+  document.body.classList.add("atlas-modal-lock");
+  document.body.style.top=`-${atlasModalScrollY}px`;
+}
+function unlockAtlasModalScroll(){
+  if(!document.body.classList.contains("atlas-modal-lock"))return;
+  document.body.classList.remove("atlas-modal-lock");
+  document.body.style.top="";
+  window.scrollTo(0,atlasModalScrollY);
+}
 let atlasPickerItemId=null;
 let atlasPickerDraft=[];
 
@@ -3071,9 +3334,11 @@ function openAtlasColorPicker(itemId){
   atlasPickerDraft=[...new Set((manual?.length?manual:(cached?.families||[cached?.family]).filter(Boolean))||[])];
   renderAtlasColorPicker();
   document.getElementById("atlasColorPickerModal")?.classList.add("show");
+  lockAtlasModalScroll();
 }
 function closeAtlasColorPicker(){
   document.getElementById("atlasColorPickerModal")?.classList.remove("show");
+  unlockAtlasModalScroll();
   atlasPickerItemId=null;
   atlasPickerDraft=[];
 }
@@ -3298,7 +3563,7 @@ async function renderColorAtlas(){
   renderAtlasTabs(data);renderShadeScale();
   let shown=data.filter(x=>(atlasType==="all"||x.type===atlasType)&&(atlasColor==="all"||atlasFamiliesOf(x).includes(atlasColor)));
   shown.sort((a,b)=>{
-    if(atlasColor!=="all")return a.shade-b.shade; // V5.0.4：同色系严格按浅 → 深
+    if(atlasColor!=="all")return a.shade-b.shade; // V5.0.5：同色系严格按浅 → 深
     const ca=ATLAS_COLOR_GROUPS.findIndex(g=>g.id===a.family),cb=ATLAS_COLOR_GROUPS.findIndex(g=>g.id===b.family);
     return ca-cb || a.shade-b.shade;
   });
