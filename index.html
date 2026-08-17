@@ -4,7 +4,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="app-build" content="V5.0.7-20260816">
+<meta name="app-build" content="V5.0.8-20260816">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1303,7 +1303,7 @@ body.category-modal-open .nav{
 
 @media(min-width:700px){body{padding:20px 0}.app{min-height:calc(100vh - 40px);border-radius:36px;overflow:hidden;box-shadow:0 20px 80px rgba(74,64,58,.16)}.nav{bottom:20px}.modal{align-items:center}.sheet{border-radius:30px;max-height:80vh}}
 
-/* V5.0.7 精准穿搭拆解 */
+/* V5.0.8 精准穿搭拆解 */
 .lookbook-anatomy{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
 .lookbook-anatomy-item{background:var(--soft,#f6f0ed);border-radius:16px;padding:10px;min-width:0}
 .lookbook-anatomy-item .swatch{width:100%;height:42px;border-radius:11px;border:1px solid rgba(60,50,46,.08);margin-bottom:8px}
@@ -1359,7 +1359,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V5.0.7 COLOR ATLAS：画像占比 + 全球穿搭账号 */
+/* V5.0.8 COLOR ATLAS：画像占比 + 全球穿搭账号 */
 .dna-distribution{margin-top:14px;padding:14px;border-radius:20px;background:#faf6f3;border:1px solid #eee6e1}
 .dna-distribution-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .dna-distribution-title b{font-size:12px;color:#514a45}.dna-distribution-title span{font-size:9px;color:#9a9089}
@@ -1377,7 +1377,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* V5.0.7 搭配图鉴 */
+/* V5.0.8 搭配图鉴 */
 .navinner{grid-template-columns:repeat(5,1fr)!important}
 .nav button{min-width:0}
 .lookbook-entry{width:100%;border:0;background:linear-gradient(135deg,#4a443f,#746b64);color:#fff;border-radius:24px;padding:17px 18px;margin:2px 0 14px;display:flex;align-items:center;justify-content:space-between;text-align:left;box-shadow:0 12px 30px rgba(65,56,50,.16)}
@@ -1396,7 +1396,7 @@ body.category-modal-open .nav{
 
 
 <style>
-/* ===== V5.0.7 MOBILE + COLOR ATLAS FINAL OVERRIDES ===== */
+/* ===== V5.0.8 MOBILE + COLOR ATLAS FINAL OVERRIDES ===== */
 
 /* 1. 强制整个 App 始终等于手机可视宽度，彻底禁止横向撑开 */
 html{
@@ -1679,7 +1679,7 @@ main,.page,.page.active,#lookbook{
 
 
 <style>
-/* ===== V5.0.7 CLEAN UI + MANUAL COLOR CORRECTION ===== */
+/* ===== V5.0.8 CLEAN UI + MANUAL COLOR CORRECTION ===== */
 .color-atlas-intro p,
 .color-atlas-note{display:none !important}
 
@@ -1734,7 +1734,7 @@ main,.page,.page.active,#lookbook{
 
 
 <style>
-/* ===== V5.0.7 MULTI COLOR TAGS ===== */
+/* ===== V5.0.8 MULTI COLOR TAGS ===== */
 .atlas-color-edit{display:none!important}
 .atlas-color-multi{position:relative;margin-top:6px}
 .atlas-color-multi>summary{
@@ -1759,7 +1759,7 @@ main,.page,.page.active,#lookbook{
 
 
 <style>
-/* ===== V5.0.7 CATEGORY SYNC + TRUE MULTI COLOR PICKER ===== */
+/* ===== V5.0.8 CATEGORY SYNC + TRUE MULTI COLOR PICKER ===== */
 .atlas-color-multi{display:none!important}
 .atlas-color-picker-btn{
   width:100%;
@@ -1814,7 +1814,7 @@ main,.page,.page.active,#lookbook{
 
 
 <style>
-/* ===== V5.0.7 FIXED MODAL + CATEGORY/COLOR LIVE SYNC ===== */
+/* ===== V5.0.8 FIXED MODAL + CATEGORY/COLOR LIVE SYNC ===== */
 body.atlas-modal-lock{
   position:fixed!important;
   left:0;right:0;width:100%;
@@ -1963,7 +1963,7 @@ body.atlas-modal-lock{
 
 
 <style>
-/* ===== V5.0.7 AUTO COLOR CLASSIFICATION + MULTI FILTER ===== */
+/* ===== V5.0.8 AUTO COLOR CLASSIFICATION + MULTI FILTER ===== */
 .atlas-color-tab.multi-active{
   box-shadow:inset 0 0 0 2px rgba(255,255,255,.72),0 0 0 1px #756d66;
 }
@@ -1974,7 +1974,7 @@ body.atlas-modal-lock{
 
 
 <style>
-/* ===== V5.0.7 COLOR → CATEGORY WARDROBE ===== */
+/* ===== V5.0.8 COLOR → CATEGORY WARDROBE ===== */
 #atlasGrid:has(.atlas-category-wardrobe){
   display:block!important;
 }
@@ -2052,13 +2052,166 @@ body.atlas-modal-lock{
 }
 </style>
 
+
+<style>
+/* ===== V5.0.8 首页衣橱手机屏幕适配 ===== */
+
+/* 首页衣橱本身绝不产生横向宽度 */
+#wardrobe{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  overflow-x:hidden !important;
+  box-sizing:border-box !important;
+}
+
+/* P1 那种真正自适应的双栏：两列共同吃满当前可用宽度 */
+#wardrobe #wardrobeGrid{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:9px !important;
+  box-sizing:border-box !important;
+  overflow:hidden !important;
+}
+
+/* 单品卡不能再被图片、文字、标签反向撑宽 */
+#wardrobe #wardrobeGrid > .item{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+  overflow:hidden !important;
+  padding:9px !important;
+  border-radius:22px !important;
+}
+
+#wardrobe #wardrobeGrid .pic{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  aspect-ratio:1/1.08 !important;
+  overflow:hidden !important;
+  box-sizing:border-box !important;
+}
+
+#wardrobe #wardrobeGrid .pic img{
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+}
+
+/* 名称 + 白底素材标签保持在卡片内部 */
+#wardrobe #wardrobeGrid .meta{
+  width:100% !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) auto !important;
+  align-items:end !important;
+  gap:6px !important;
+  box-sizing:border-box !important;
+  padding:9px 2px 2px !important;
+}
+
+#wardrobe #wardrobeGrid .meta > div{
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+}
+
+#wardrobe #wardrobeGrid .meta b{
+  display:block !important;
+  width:100% !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+#wardrobe #wardrobeGrid .meta small{
+  display:block !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+#wardrobe #wardrobeGrid .smallpill{
+  flex:0 0 auto !important;
+  max-width:58px !important;
+  padding:6px 7px !important;
+  font-size:8px !important;
+  line-height:1.15 !important;
+  white-space:normal !important;
+  text-align:center !important;
+  overflow-wrap:anywhere !important;
+}
+
+/* 修改分类、删除按钮也限制在各自卡片里面 */
+#wardrobe #wardrobeGrid .card-edit{
+  max-width:74px !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+#wardrobe #wardrobeGrid .delete{
+  right:12px !important;
+  top:12px !important;
+}
+
+/* 季节 / 品类只允许自身横向滑动，不再把整个首页撑宽 */
+#wardrobe .chips,
+#wardrobe .seasonbar{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+}
+
+/* 小屏继续保持双栏，但缩小间距，效果与 P1 一致 */
+@media(max-width:390px){
+  #wardrobe #wardrobeGrid{
+    gap:8px !important;
+  }
+  #wardrobe #wardrobeGrid > .item{
+    padding:8px !important;
+    border-radius:20px !important;
+  }
+  #wardrobe #wardrobeGrid .meta{
+    gap:4px !important;
+    padding-top:8px !important;
+  }
+  #wardrobe #wardrobeGrid .smallpill{
+    max-width:52px !important;
+    padding:5px 6px !important;
+    font-size:7px !important;
+  }
+}
+
+@media(max-width:340px){
+  #wardrobe #wardrobeGrid{
+    gap:7px !important;
+  }
+  #wardrobe #wardrobeGrid > .item{
+    padding:7px !important;
+  }
+}
+</style>
+
 </head>
 <body>
-<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V5.0.7</div>
+<div id="buildBadge" style="position:fixed;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:99999;background:rgba(40,36,33,.78);color:#fff;padding:5px 8px;border-radius:999px;font:600 11px/1 -apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;letter-spacing:.04em;pointer-events:none">V5.0.8</div>
 <div class="app">
   <header class="topbar">
     <div class="brandrow">
-      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V5.0.7 COLOR ATLAS</small></div>
+      <div class="brand">今天穿什么 <small>WHAT TO WEAR TODAY · V5.0.8 COLOR ATLAS</small></div>
       <button class="iconbtn" onclick="openDataSettings()">⋯</button>
     </div>
   </header>
@@ -2838,7 +2991,7 @@ function handlePickedFile(f){
 }
 
 let inspirationSeed=0;
-// V5.0.7：趋势区兼容兜底。旧版本中 TREND_DATA 曾被移除，导致完整备份恢复完成后
+// V5.0.8：趋势区兼容兜底。旧版本中 TREND_DATA 曾被移除，导致完整备份恢复完成后
 // 在 renderTrendGrid() 阶段抛出 "Can't find variable: TREND_DATA"，从而误报“恢复失败”。
 const TREND_DATA = window.TREND_DATA || {
   regions:[
@@ -3295,7 +3448,7 @@ document.getElementById("styleDNAInput").addEventListener("change",async e=>{
   }catch(err){console.error(err);alert("Style DNA 文件读取失败："+(err?.message||"格式不正确"))}
 });
 
-/* ---------- V5.0.7 COLOR ATLAS：衣橱颜色 × 品类自动图鉴 ---------- */
+/* ---------- V5.0.8 COLOR ATLAS：衣橱颜色 × 品类自动图鉴 ---------- */
 const LOOKBOOK_REFERENCE_KEY="today_wear_color_atlas_reference_v500";
 const COLOR_ATLAS_CACHE_KEY="today_wear_color_atlas_cache";
 const COLOR_ATLAS_OVERRIDE_KEY="today_wear_color_atlas_override";
@@ -5029,7 +5182,7 @@ async function exportFullBackup(){
     const a=document.createElement("a");
     const d=new Date();
     const pad=n=>String(n).padStart(2,"0");
-    const name=`今天穿什么_完整备份_V5.0.7_${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}.json`;
+    const name=`今天穿什么_完整备份_V5.0.8_${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}.json`;
     a.href=url;
     a.download=name;
     document.body.appendChild(a);
@@ -5166,7 +5319,7 @@ window.addEventListener("pageshow", async e=>{
       <label class="data-restore-btn" for="fullBackupInput" style="text-align:center;cursor:pointer">导入备份并恢复</label>
       <input id="fullBackupInput" type="file" accept=".json,application/json" style="display:none">
     </div>
-    <div class="data-settings-meta" id="backupMetaText">V5.0.7 完整备份会同时保存衣橱、分类、自定义色系、多色标记、Style DNA 与全部风格样本；文件只保存在你自己选择的位置，不会上传服务器。</div>
+    <div class="data-settings-meta" id="backupMetaText">V5.0.8 完整备份会同时保存衣橱、分类、自定义色系、多色标记、Style DNA 与全部风格样本；文件只保存在你自己选择的位置，不会上传服务器。</div>
   </div>
 </div>
 
