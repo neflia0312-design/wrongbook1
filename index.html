@@ -653,7 +653,7 @@ body.scanLock371{overflow:hidden!important;position:fixed!important;width:100%!i
 .ulineWord377{font-size:15px;font-weight:700;line-height:1.6;word-break:break-word}
 
 
-/* ===== V3.8.3 All Questions = expanded list + reliable page scroll ===== */
+/* ===== V3.9.0 All Questions = expanded list + reliable page scroll ===== */
 body.bookIndexOpen382{
   position:static!important;
   top:auto!important;
@@ -731,9 +731,14 @@ body.bookIndexOpen382 #readerArea{
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+<style id="v390style">
+.v390Continue{margin:10px 0;padding:10px 12px;border-radius:12px;background:#f2eeea;font-size:12px;color:#666;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.v390Continue b{color:#222}.v390Mini{font-size:10px;color:#888}.v390WrongBadge{display:inline-flex;align-items:center;gap:4px;padding:5px 8px;border-radius:999px;background:#f7e8e8;color:#a3585b;font-size:10px;margin-left:6px}.v390Card{border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px}.v390Grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.v390VariantSet{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-top:9px}.v390VariantSet button{white-space:nowrap}.v390Pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#efebe7;font-size:10px;color:#666}.v390Warn{padding:10px 12px;border-radius:12px;background:#f7f2ee;color:#756e68;font-size:11px;line-height:1.55}
+</style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.8.3</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.9.0</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -747,7 +752,7 @@ body.bookIndexOpen382 #readerArea{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.4.2 起：主屏幕版会检查线上版本。以后升级只需要替换 GitHub 的 index.html；若检测到新版，会提示刷新，不需要每次重新添加主屏幕。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.8.3 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
+<p class="small">当前版本：V3.9.0 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -1617,7 +1622,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.8.3';
+const APP_VERSION='3.9.0';
 async function checkOnlineVersion(){
   try{
     const r=await fetch('./version.json?t='+Date.now(),{cache:'no-store'});
@@ -3722,13 +3727,13 @@ function closeUnderline377(){
 }
 
 
-/* ===== V3.8.3 cleanup page scroll state when leaving All Questions ===== */
+/* ===== V3.9.0 cleanup page scroll state when leaving All Questions ===== */
 document.querySelectorAll('nav button').forEach(btn=>{
   btn.addEventListener('click',()=>document.body.classList.remove('bookIndexOpen382'));
 });
 
 
-/* ===== V3.8.3 subject-aware backup import routing ===== */
+/* ===== V3.9.0 subject-aware backup import routing ===== */
 function normSubject383(v){
   return String(v||'').trim().replace(/\s+/g,'').toLowerCase();
 }
@@ -3830,10 +3835,114 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
         }else if(Array.isArray(payload.qs)) payload.qs=rr.routed;
         else payload.questions=rr.routed;
       }
-    }catch(e){ console.warn('V3.8.3 auto route fallback',e); }
+    }catch(e){ console.warn('V3.9.0 auto route fallback',e); }
     return old.apply(this,args);
   };
 });
 
+</script>
+
+<script id="v390patch">
+/* ===== V3.9.0 智能刷题版 ===== */
+const V390_PROGRESS_KEY='wrongbook_v390_progress';
+const V390_VARIANT_KEY='wrongbook_v390_variants';
+function v390Read(k,fallback={}){try{return JSON.parse(localStorage.getItem(k)||'null')||fallback}catch(e){return fallback}}
+function v390Write(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function v390Shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function v390BookQs(id){return id==='__all__'?D.qs:D.qs.filter(q=>bookIdOf(q)===id)}
+function v390SaveReaderProgress(bookId,qid){const m=v390Read(V390_PROGRESS_KEY,{});m[bookId]={qid,at:Date.now()};v390Write(V390_PROGRESS_KEY,m)}
+function v390LastIndex(bookId,qs){const m=v390Read(V390_PROGRESS_KEY,{}),qid=m[bookId]?.qid;if(!qid)return 0;const i=qs.findIndex(q=>q.id===qid);return i>=0?i:0}
+function v390MarkResult(q,correct){if(!q)return;if(correct){q.consecutiveCorrect=Number(q.consecutiveCorrect||0)+1}else{q.mistakeCount=Number(q.mistakeCount||0)+1;q.lastWrongAt=Date.now();q.consecutiveCorrect=0}q.lastAnsweredAt=Date.now()}
+function v390Mistakes(id){return v390BookQs(id).filter(q=>Number(q.mistakeCount||0)>0)}
+function v390CorrectText(q){const opts=q.opts||q.options||[];const a=String(q.ans||q.answer||'').trim().toUpperCase(),i='ABCD'.indexOf(a);return i>=0?String(opts[i]||'').replace(/^[A-D][\.、\s]+/i,'').trim():''}
+function v390CleanOpt(x){return String(x||'').replace(/^[A-D][\.、\s]+/i,'').trim()}
+
+/* 1. 错题笔记：记忆每本上一次做到的题目 ID */
+function openBookV3(id){
+  const qs=D.qs.filter(q=>bookIdOf(q)===id),idx=v390LastIndex(id,qs);
+  readerV3={book:id,i:idx};page('reader');drawReaderV3();
+}
+const v390OldTurnV3=turnV3;
+turnV3=async function(d){
+  await v390OldTurnV3(d);
+  const qs=D.qs.filter(q=>bookIdOf(q)===readerV3.book),q=qs[readerV3.i];if(q)v390SaveReaderProgress(readerV3.book,q.id);
+}
+const v390OldDrawReaderV3=drawReaderV3;
+drawReaderV3=function(){
+  v390OldDrawReaderV3();
+  const qs=D.qs.filter(q=>bookIdOf(q)===readerV3.book),q=qs[readerV3.i];if(q)v390SaveReaderProgress(readerV3.book,q.id);
+  const stage=document.querySelector('#readerArea .readerStage');if(!stage||!qs.length)return;
+  if(!document.getElementById('v390ReaderResume')){
+    const bar=document.createElement('div');bar.id='v390ReaderResume';bar.className='v390Continue';
+    bar.innerHTML=`<span>已定位上次进度：<b>${readerV3.i+1} / ${qs.length}</b></span><button class="secondary" onclick="readerV3.i=0;drawReaderV3()">从头开始</button>`;
+    stage.parentNode.insertBefore(bar,stage);
+  }
+  const mode=document.querySelector('#readerArea .modeBar');
+  if(mode&&!mode.querySelector('.v390WrongMode')){
+    const b=document.createElement('button');b.className='modeBtn v390WrongMode';b.textContent=`自动错题 ${v390Mistakes(readerV3.book).length||''}`;b.onclick=()=>startMistakeQuiz390(readerV3.book);mode.appendChild(b);
+    const v=document.createElement('button');v.className='modeBtn';v.textContent='智能变式 ✦';v.onclick=()=>openVariantHub390(readerV3.book);mode.appendChild(v);
+  }
+}
+const v390OldReaderPick=readerPick;
+readerPick=function(qid,i){
+  const q=D.qs.find(x=>x.id===qid),ans=String(q?.ans||q?.answer||'').toUpperCase();
+  const correct='ABCD'[i]===ans;v390MarkResult(q,correct);save();return v390OldReaderPick(qid,i);
+}
+
+/* 2. 自动错题池 + 4. 真随机题序 */
+function startSubjectQuiz(id){
+  page('study');const pool=v390BookQs(id).filter(q=>q.type==='choice');
+  quiz={list:v390Shuffle(pool),i:0,score:0,locked:false,scope:id,v390Mode:'random'};drawQuiz();
+}
+function startMistakeQuiz390(id){
+  page('study');const pool=v390Mistakes(id).filter(q=>q.type==='choice');
+  quiz={list:v390Shuffle(pool),i:0,score:0,locked:false,scope:id,v390Mode:'mistakes'};drawQuiz();
+}
+function drawQuiz(){
+  if(!quiz.list.length){$('studyArea').innerHTML=`<div class="quiz" style="text-align:center"><h2>${quiz.v390Mode==='mistakes'?'自动错题':'随机刷题'}</h2><p>当前没有可练习的选择题。</p><button class="primary" onclick="subjectMenu('${quiz.scope}')">返回</button></div>`;return}
+  const q=quiz.list[quiz.i],raw=(q.v390VariantOptions||q.opts||q.options||[]).map(v390CleanOpt);
+  const origAns=q.v390VariantAnswer||String(q.ans||q.answer||'').toUpperCase();
+  let arr=raw.map((t,i)=>({t,orig:'ABCD'[i]}));arr=v390Shuffle(arr);q.tmp=arr;q.v390RuntimeAns=origAns;
+  const wrong=Number(q.mistakeCount||0),streak=Number(q.consecutiveCorrect||0);
+  $('studyArea').innerHTML=`<div class="quiz"><div><button class="sheetBack memBack358" onclick="subjectMenu('${quiz.scope}')">‹ 返回</button></div><div class="small">${quiz.i+1}/${quiz.list.length} · 得分 ${quiz.score}${quiz.v390Mode==='mistakes'?` · 自动错题`:''}</div><div class="q">${esc(q.text)}</div>${wrong?`<div class="v390WrongBadge">错 ${wrong} 次 · 连对 ${streak}</div>`:''}<div class="options">${arr.map((o,i)=>`<button id="op${i}" class="opt" onclick="pick('${q.id}',${i})">${'ABCD'[i]}. ${esc(o.t)}</button>`).join('')}</div><div id="fb"></div></div>`
+}
+function pick(qid,i){
+  if(quiz.locked)return;quiz.locked=true;let q=quiz.list.find(x=>x.id===qid)||D.qs.find(x=>x.id===qid);if(!q)return;
+  const ans=q.v390RuntimeAns||String(q.ans||q.answer||'').toUpperCase(),ok=q.tmp[i].orig===ans;
+  const real=D.qs.find(x=>x.id===qid);if(ok){quiz.score++;if(real)real.right=Number(real.right||0)+1}else if(real)real.wrong=Number(real.wrong||0)+1;
+  if(real)v390MarkResult(real,ok);
+  $('op'+i).classList.add(ok?'ok':'bad');q.tmp.forEach((o,j)=>{if(o.orig===ans)$('op'+j).classList.add('ok')});
+  $('fb').innerHTML=`<div class="small" style="margin-top:10px">${ok?'回答正确':'已自动加入该错题本的「自动错题」'}</div><button class="primary" style="width:100%;margin-top:10px" onclick="nextQuiz()">下一题</button>`;save();
+}
+function nextQuiz(){quiz.i++;quiz.locked=false;if(quiz.i>=quiz.list.length){$('studyArea').innerHTML=`<div class="quiz" style="text-align:center"><h2>完成</h2><div class="stat">${quiz.score}/${quiz.list.length}</div><button class="primary" onclick="${quiz.v390Mode==='mistakes'?`startMistakeQuiz390('${quiz.scope}')`:`startSubjectQuiz('${quiz.scope}')`}">再刷一轮</button></div>`}else drawQuiz()}
+function subjectMenu(id){
+  let qs=v390BookQs(id),book=D.books.find(b=>b.id===id),name=id==='__all__'?'全部科目':bookTitleV3(book),mist=v390Mistakes(id);
+  $('studyArea').innerHTML=`<div class="readerTop"><button class="circleBtn" onclick="studyHub()">‹</button><div class="readerName"><b>${esc(name)}</b><span class="small">选择学习方式</span></div></div><div class="grid"><button class="card" onclick="startSubjectQuiz('${id}')"><div class="stat">${qs.filter(q=>q.type==='choice').length}</div><b>随机刷题</b><p class="small">每一轮同时打乱题目顺序和选项顺序</p></button><button class="card" onclick="startMistakeQuiz390('${id}')"><div class="stat">${mist.filter(q=>q.type==='choice').length}</div><b>自动错题</b><p class="small">自动收入做错题 · 连续巩固</p></button><button class="card" onclick="openVariantHub390('${id}')"><div class="stat">✦</div><b>智能变式</b><p class="small">保留正确答案 · 重新生成混淆项</p></button><button class="card" onclick="openMemoryHub('${id}')"><div class="stat">${qs.filter(q=>q.type!=='choice').length}</div><b>记背</b><p class="small">词炼 / 填空 / 衔接 / 完整复述</p></button><button class="card" onclick="startSubjectMemory('${id}')"><div class="stat">${qs.filter(q=>q.type!=='choice').length}</div><b>背诵复习</b><p class="small">答案默认隐藏</p></button></div>`
+}
+
+/* 3. 首页“+”直接批量追加，取消扫描入口 */
+function addMenu(){modal(`<h2>添加题目</h2><div class="grid"><button class="card" onclick="closeM();$('appendImp').click()">⇩<br><b>批量追加导入</b><p class="small">JSON · 自动识别科目 · 不覆盖旧题</p></button><button class="card" onclick="editQ('choice')">✎<br><b>手动录入</b><p class="small">选择 / 简答 / 论述 / 填空</p></button></div><div class="v390Warn" style="margin-top:12px">“恢复完整备份”仍只保留在设置页；这里的导入只执行追加，不会替换当前题库。</div>`)}
+function v390FindBookBySubject(raw){const s=String(raw?.subject||raw?.bookName||raw?.title||'').replace(/_.*$/,'').trim();return D.books.find(b=>{const n=String(b.name||b.title||b.sub||'');return s&&(n.includes(s)||s.includes(n))})}
+function openAppendTargetPicker(file){
+  const r=new FileReader();r.onload=()=>{try{const raw=JSON.parse(r.result),qs=normalizeAppendQuestions(raw);__appendPayload={questions:qs,fileName:file.name};if(!D.books.length){alert('请先创建至少一本错题本');return}
+  const auto=v390FindBookBySubject(raw);if(auto){__appendPayload.autoTarget=auto.id;modal(`<div class="sheetBar"><button class="sheetBack" onclick="closeM()">‹ 返回</button><b>批量追加题目</b><button class="sheetClose" onclick="closeM()">×</button></div><div class="note">检测到 <b>${qs.length}</b> 道题，已识别科目并准备追加到 <b>${esc(bookTitleV3(auto))}</b>。不会覆盖原题。</div><div class="row" style="margin-top:16px"><button class="secondary" onclick="closeM()">取消</button><button class="primary" style="flex:1" onclick="confirmAppendImport390('${auto.id}')">追加 ${qs.length} 道题</button></div>`)}else{modal(`<div class="sheetBar"><button class="sheetBack" onclick="closeM()">‹ 返回</button><b>批量追加题目</b><button class="sheetClose" onclick="closeM()">×</button></div><div class="note">未能自动判断科目。请选择目标错题本。本操作只追加，不覆盖。</div><label>目标错题本</label><select id="appendTarget">${D.books.map(b=>`<option value="${b.id}">${esc(bookTitleV3(b))}</option>`).join('')}</select><button class="primary" style="width:100%;margin-top:16px" onclick="confirmAppendImport390($('appendTarget').value)">追加 ${qs.length} 道题</button>`)} }catch(e){alert('无法读取题目包：'+(e?.message||'文件格式错误'))}};r.readAsText(file)
+}
+function confirmAppendImport390(target){if(!__appendPayload)return;const book=D.books.find(b=>b.id===target);if(!book)return alert('没有找到目标错题本');const existing=new Set(D.qs.filter(q=>bookIdOf(q)===target).map(q=>String(q.text||'').trim()));let added=0,skipped=0;for(const q of __appendPayload.questions){const key=String(q.text||'').trim();if(key&&existing.has(key)){skipped++;continue}q.book=q.bookId=target;D.qs.push(q);if(key)existing.add(key);added++}if(save()){closeM();__appendPayload=null;renderV3Books();showImportSuccess(target,added,skipped)}}
+
+/* 5. 智能变式：本地从同册正确答案/选项池生成新的混淆项，保留正确答案；生成独立临时题库，不改原题 */
+function v390Variants(){return v390Read(V390_VARIANT_KEY,{})}
+function v390SaveVariants(x){v390Write(V390_VARIANT_KEY,x)}
+function v390DistractorPool(bookId,sourceQ,strength){
+  const all=v390BookQs(bookId).filter(q=>q.type==='choice'&&q.id!==sourceQ.id),correct=v390CorrectText(sourceQ),tag=String(sourceQ.tag||'');let pool=[];
+  for(const q of all){const ct=v390CorrectText(q);if(ct&&ct!==correct)pool.push({t:ct,score:(tag&&q.tag===tag?4:0)-Math.abs(ct.length-correct.length)*0.15});for(const o of (q.opts||q.options||[])){const t=v390CleanOpt(o);if(t&&t!==correct)pool.push({t,score:(tag&&q.tag===tag?2:0)-Math.abs(t.length-correct.length)*0.12})}}
+  const uniq=[...new Map(pool.map(x=>[x.t,x])).values()];if(strength==='basic')return v390Shuffle(uniq).map(x=>x.t);return uniq.sort((a,b)=>b.score-a.score+((Math.random()-.5)*(strength==='high'?1.2:2.2))).map(x=>x.t)
+}
+function v390MakeVariant(q,bookId,strength){const correct=v390CorrectText(q);if(!correct)return null;let dis=v390DistractorPool(bookId,q,strength).filter(x=>x!==correct).slice(0,3);const originals=(q.opts||q.options||[]).map(v390CleanOpt).filter(x=>x&&x!==correct);for(const x of originals)if(dis.length<3&&!dis.includes(x))dis.push(x);if(dis.length<3)return null;let texts=v390Shuffle([correct,...dis.slice(0,3)]),ans='ABCD'[texts.indexOf(correct)];return {...q,id:q.id+'__v390_'+Math.random().toString(36).slice(2,7),originId:q.id,v390VariantOptions:texts,v390VariantAnswer:ans,opts:texts,options:texts,ans:ans,answer:ans,mistakeCount:0,consecutiveCorrect:0}}
+function openVariantHub390(bookId){
+  page('study');const qs=v390BookQs(bookId).filter(q=>q.type==='choice'),mist=v390Mistakes(bookId).filter(q=>q.type==='choice'),sets=(v390Variants()[bookId]||[]).slice().reverse();
+  $('studyArea').innerHTML=`<div class="readerTop"><button class="circleBtn" onclick="subjectMenu('${bookId}')">‹</button><div class="readerName"><b>智能变式</b><span class="small">保留正确答案 · 重组混淆项</span></div></div><div class="v390Card"><label>题目范围</label><select id="v390Range"><option value="all">全部选择题（${qs.length}）</option><option value="mist">自动错题（${mist.length}）</option></select><label>生成数量</label><select id="v390Count"><option value="10">10题</option><option value="20">20题</option><option value="50">50题</option><option value="all">全部</option></select><label>混淆强度</label><select id="v390Strength"><option value="basic">基础</option><option value="similar" selected>相近</option><option value="high">高干扰</option></select><button class="primary" style="width:100%;margin-top:16px" onclick="generateVariant390('${bookId}')">生成新题库</button><div class="v390Warn" style="margin-top:10px">当前版本为纯本地网页，不调用外部 AI。混淆项会优先从同一本错题本、相近知识点和相近长度的真实答案中重新组合，因此每轮都会变化，同时不会改动原题。</div></div>${sets.length?`<div class="section">最近生成</div>${sets.map((s,i)=>`<div class="v390VariantSet"><div><b>${esc(s.name)}</b><div class="small">${s.items.length}题 · ${new Date(s.at).toLocaleString()}</div></div><button class="secondary" onclick="startVariantSet390('${bookId}','${s.id}')">开始</button></div>`).join('')}`:''}`
+}
+function generateVariant390(bookId){const range=$('v390Range').value,count=$('v390Count').value,strength=$('v390Strength').value;let pool=(range==='mist'?v390Mistakes(bookId):v390BookQs(bookId)).filter(q=>q.type==='choice');pool=v390Shuffle(pool);if(count!=='all')pool=pool.slice(0,Number(count));const items=pool.map(q=>v390MakeVariant(q,bookId,strength)).filter(Boolean);if(!items.length)return alert('当前题库可用于生成的混淆答案不足。');const all=v390Variants(),set={id:'vs_'+Date.now(),name:`${range==='mist'?'错题变式':'全库变式'} · ${strength==='high'?'高干扰':strength==='similar'?'相近':'基础'}`,at:Date.now(),items};all[bookId]=(all[bookId]||[]).concat(set).slice(-8);v390SaveVariants(all);startVariantSet390(bookId,set.id)}
+function startVariantSet390(bookId,setId){const set=(v390Variants()[bookId]||[]).find(x=>x.id===setId);if(!set)return alert('没有找到该变式题库');page('study');quiz={list:v390Shuffle(set.items),i:0,score:0,locked:false,scope:bookId,v390Mode:'variant'};drawQuiz()}
 </script>
 </body></html>
