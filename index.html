@@ -653,7 +653,7 @@ body.scanLock371{overflow:hidden!important;position:fixed!important;width:100%!i
 .ulineWord377{font-size:15px;font-weight:700;line-height:1.6;word-break:break-word}
 
 
-/* ===== V3.9.1 All Questions = expanded list + reliable page scroll ===== */
+/* ===== V3.9.2 All Questions = expanded list + reliable page scroll ===== */
 body.bookIndexOpen382{
   position:static!important;
   top:auto!important;
@@ -719,12 +719,59 @@ body.bookIndexOpen382 #readerArea{
 }
 
 
-/* ===== V3.9.1 题号 / 原位编辑 / 选项清洗 ===== */
+/* ===== V3.9.2 题号 / 原位编辑 / 选项清洗 ===== */
 .qNo391{display:inline-flex;align-items:center;padding:6px 9px;border-radius:9px;background:#efede8;font-size:12px;font-weight:800}
 .bookIndexItem382{scroll-margin-top:110px}
 .modeBar391{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 14px}
 .modeBar391 .modeBtn{width:100%}
 .readerQuestionNo391{display:inline-flex;margin:0 0 10px;padding:5px 9px;border-radius:9px;background:#f0ede8;font-size:11px;font-weight:800;color:#625d58}
+
+
+/* ===== V3.9.2 book editor scroll isolation fix ===== */
+body.bookEditLock392{
+  overflow:hidden!important;
+  position:fixed!important;
+  width:100%!important;
+  left:0!important;
+  right:0!important;
+}
+#modal.bookEditModal392{
+  position:fixed!important;
+  inset:0!important;
+  z-index:2147483640!important;
+  overflow:hidden!important;
+  overscroll-behavior:contain!important;
+  touch-action:none!important;
+}
+#modal.bookEditModal392 .sheet{
+  position:absolute!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  max-height:94dvh!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior-y:contain!important;
+  touch-action:pan-y!important;
+  padding-bottom:calc(24px + env(safe-area-inset-bottom))!important;
+}
+#modal.bookEditModal392 .sheetBar{
+  position:sticky!important;
+  top:0!important;
+  z-index:20!important;
+  background:var(--bg)!important;
+}
+.bookSaveBar392{
+  position:sticky!important;
+  bottom:-1px!important;
+  z-index:20!important;
+  display:flex!important;
+  gap:8px!important;
+  margin:18px -2px -8px!important;
+  padding:12px 2px calc(12px + env(safe-area-inset-bottom))!important;
+  background:linear-gradient(to bottom,rgba(246,243,238,.35),var(--bg) 24%)!important;
+}
 
 </style>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -746,7 +793,7 @@ body.bookIndexOpen382 #readerArea{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.9.1</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.9.2</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -760,7 +807,7 @@ body.bookIndexOpen382 #readerArea{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.4.2 起：主屏幕版会检查线上版本。以后升级只需要替换 GitHub 的 index.html；若检测到新版，会提示刷新，不需要每次重新添加主屏幕。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.9.1 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
+<p class="small">当前版本：V3.9.2 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -1630,7 +1677,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.9.1';
+const APP_VERSION='3.9.2';
 async function checkOnlineVersion(){
   try{
     const r=await fetch('./version.json?t='+Date.now(),{cache:'no-store'});
@@ -3758,13 +3805,13 @@ function closeUnderline377(){
 }
 
 
-/* ===== V3.9.1 cleanup page scroll state when leaving All Questions ===== */
+/* ===== V3.9.2 cleanup page scroll state when leaving All Questions ===== */
 document.querySelectorAll('nav button').forEach(btn=>{
   btn.addEventListener('click',()=>document.body.classList.remove('bookIndexOpen382'));
 });
 
 
-/* ===== V3.9.1 subject-aware backup import routing ===== */
+/* ===== V3.9.2 subject-aware backup import routing ===== */
 function normSubject383(v){
   return String(v||'').trim().replace(/\s+/g,'').toLowerCase();
 }
@@ -3866,7 +3913,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
         }else if(Array.isArray(payload.qs)) payload.qs=rr.routed;
         else payload.questions=rr.routed;
       }
-    }catch(e){ console.warn('V3.9.1 auto route fallback',e); }
+    }catch(e){ console.warn('V3.9.2 auto route fallback',e); }
     return old.apply(this,args);
   };
 });
@@ -3874,7 +3921,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
 </script>
 
 <script id="v390patch">
-/* ===== V3.9.1 智能刷题版 ===== */
+/* ===== V3.9.2 智能刷题版 ===== */
 const V390_PROGRESS_KEY='wrongbook_v390_progress';
 const V390_VARIANT_KEY='wrongbook_v390_variants';
 function v390Read(k,fallback={}){try{return JSON.parse(localStorage.getItem(k)||'null')||fallback}catch(e){return fallback}}
@@ -3975,5 +4022,88 @@ function openVariantHub390(bookId){
 }
 function generateVariant390(bookId){const range=$('v390Range').value,count=$('v390Count').value,strength=$('v390Strength').value;let pool=(range==='mist'?v390Mistakes(bookId):v390BookQs(bookId)).filter(q=>q.type==='choice');pool=v390Shuffle(pool);if(count!=='all')pool=pool.slice(0,Number(count));const items=pool.map(q=>v390MakeVariant(q,bookId,strength)).filter(Boolean);if(!items.length)return alert('当前题库可用于生成的混淆答案不足。');const all=v390Variants(),set={id:'vs_'+Date.now(),name:`${range==='mist'?'错题变式':'全库变式'} · ${strength==='high'?'高干扰':strength==='similar'?'相近':'基础'}`,at:Date.now(),items};all[bookId]=(all[bookId]||[]).concat(set).slice(-8);v390SaveVariants(all);startVariantSet390(bookId,set.id)}
 function startVariantSet390(bookId,setId){const set=(v390Variants()[bookId]||[]).find(x=>x.id===setId);if(!set)return alert('没有找到该变式题库');page('study');quiz={list:v390Shuffle(set.items),i:0,score:0,locked:false,scope:bookId,v390Mode:'variant'};drawQuiz()}
+
+/* ===== V3.9.2 robust book-editor interaction ===== */
+let __bookEditScroll392=0;
+
+function activateBookEditor392(){
+  const m=$('modal'); if(!m) return;
+  __bookEditScroll392=window.scrollY||0;
+  document.body.classList.add('bookEditLock392');
+  document.body.style.top=`-${__bookEditScroll392}px`;
+  m.classList.add('bookEditModal392');
+  const sh=m.querySelector('.sheet');
+  if(sh){
+    ['touchstart','touchmove','touchend','pointerdown','pointermove','pointerup'].forEach(tp=>{
+      sh.addEventListener(tp,e=>e.stopPropagation(),{passive:true});
+    });
+  }
+}
+function closeBookEditor392(){
+  const m=$('modal');
+  m?.classList.remove('bookEditModal392');
+  document.body.classList.remove('bookEditLock392');
+  document.body.style.top='';
+  closeM();
+  window.scrollTo(0,__bookEditScroll392);
+}
+
+/* Wrap book editor so the modal itself scrolls, never the page underneath. */
+if(typeof editBookV3==='function'){
+  const __oldEditBookV3_392=editBookV3;
+  editBookV3=function(id=''){
+    __oldEditBookV3_392(id);
+    setTimeout(()=>{
+      const m=$('modal');
+      if(!m?.classList.contains('on')) return;
+      activateBookEditor392();
+
+      const sheet=m.querySelector('.sheet');
+      if(!sheet) return;
+
+      // Preserve existing cover selection/status/image data and only improve interaction.
+      const back=sheet.querySelector('.sheetBack');
+      const close=sheet.querySelector('.sheetClose');
+      if(back) back.setAttribute('onclick','closeBookEditor392()');
+      if(close) close.setAttribute('onclick','closeBookEditor392()');
+
+      // Make the existing save controls sticky without changing form fields or cover data.
+      const buttons=[...sheet.querySelectorAll('button')];
+      const saveBtn=buttons.find(b=>/保存/.test(b.textContent||'') && !/封面/.test(b.textContent||''));
+      if(saveBtn && !saveBtn.closest('.bookSaveBar392')){
+        const row=saveBtn.parentElement;
+        if(row){
+          row.classList.add('bookSaveBar392');
+          const cancel=[...row.querySelectorAll('button')].find(b=>/取消/.test(b.textContent||''));
+          if(cancel) cancel.setAttribute('onclick','closeBookEditor392()');
+        }
+      }
+
+      // Ensure touch inside inputs/color controls never bubbles to the page beneath.
+      sheet.querySelectorAll('input,select,textarea,button,.sw,.choice').forEach(el=>{
+        ['touchstart','touchmove','pointerdown','pointermove'].forEach(tp=>{
+          el.addEventListener(tp,e=>e.stopPropagation(),{passive:true});
+        });
+      });
+    },0);
+  };
+}
+
+/* after save, release scroll lock but retain saved cover / book settings */
+if(typeof saveBookV3==='function'){
+  const __oldSaveBookV3_392=saveBookV3;
+  saveBookV3=function(id){
+    const r=__oldSaveBookV3_392(id);
+    setTimeout(()=>{
+      const m=$('modal');
+      m?.classList.remove('bookEditModal392');
+      document.body.classList.remove('bookEditLock392');
+      document.body.style.top='';
+      window.scrollTo(0,__bookEditScroll392);
+    },0);
+    return r;
+  };
+}
+
 </script>
 </body></html>
