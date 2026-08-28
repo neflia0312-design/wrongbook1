@@ -1,0 +1,5 @@
+{
+  "version": "3.9.1",
+  "file": "index.html",
+  "features": ["all questions wrong-note shortcut", "option prefix cleanup", "edit keeps position", "explicit question numbers"]
+}
