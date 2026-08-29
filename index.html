@@ -653,7 +653,7 @@ body.scanLock371{overflow:hidden!important;position:fixed!important;width:100%!i
 .ulineWord377{font-size:15px;font-weight:700;line-height:1.6;word-break:break-word}
 
 
-/* ===== V3.9.4 All Questions = expanded list + reliable page scroll ===== */
+/* ===== V3.10.0 All Questions = expanded list + reliable page scroll ===== */
 body.bookIndexOpen382{
   position:static!important;
   top:auto!important;
@@ -719,7 +719,7 @@ body.bookIndexOpen382 #readerArea{
 }
 
 
-/* ===== V3.9.4 题号 / 原位编辑 / 选项清洗 ===== */
+/* ===== V3.10.0 题号 / 原位编辑 / 选项清洗 ===== */
 .qNo391{display:inline-flex;align-items:center;padding:6px 9px;border-radius:9px;background:#efede8;font-size:12px;font-weight:800}
 .bookIndexItem382{scroll-margin-top:110px}
 .modeBar391{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 14px}
@@ -727,7 +727,7 @@ body.bookIndexOpen382 #readerArea{
 .readerQuestionNo391{display:inline-flex;margin:0 0 10px;padding:5px 9px;border-radius:9px;background:#f0ede8;font-size:11px;font-weight:800;color:#625d58}
 
 
-/* ===== V3.9.4 book editor scroll isolation fix ===== */
+/* ===== V3.10.0 book editor scroll isolation fix ===== */
 body.bookEditLock392{
   overflow:hidden!important;
   position:fixed!important;
@@ -774,7 +774,7 @@ body.bookEditLock392{
 }
 
 
-/* ===== V3.9.4 question editor / answer editor isolated scroll ===== */
+/* ===== V3.10.0 question editor / answer editor isolated scroll ===== */
 body.qEditLock393{
   overflow:hidden!important;
   position:fixed!important;
@@ -840,7 +840,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.9.4</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.10.0</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -854,7 +854,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.4.2 起：主屏幕版会检查线上版本。以后升级只需要替换 GitHub 的 index.html；若检测到新版，会提示刷新，不需要每次重新添加主屏幕。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.9.4 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
+<p class="small">当前版本：V3.10.0 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -863,7 +863,7 @@ body.qEditLock393{
 <div id="appearanceRecoveryResults" style="margin-top:8px"></div>
 </div>
 <div class="card"><b>数据管理</b>
-<p class="small">“恢复完整备份”会用备份替换当前题库；“批量追加题目”只把题目加入你选择的现有错题本，不改封面、名称、内页，也不会删除其他错题本。</p>
+<p class="small">V3.10.0 起，题库本体使用 IndexedDB 大容量数据库保存，不再受 localStorage 小容量限制。“恢复完整备份”会用备份替换当前题库；“批量追加题目”只追加题目，不覆盖其他错题本。</p>
 <div class="row"><button class="secondary" onclick="exportData()">导出备份</button><button class="secondary" onclick="$('imp').click()">恢复完整备份</button></div>
 <button class="primary" style="width:100%;margin-top:10px" onclick="$('appendImp').click()">批量追加题目</button>
 </div></section>
@@ -880,7 +880,226 @@ body.qEditLock393{
 <input id="coverInput" type="file" accept="image/*" hidden><input id="camera" type="file" accept="image/*" capture="environment" hidden>
 <input id="album" type="file" accept="image/*" hidden><input id="imp" type="file" accept=".json" hidden><input id="appendImp" type="file" accept=".json" hidden>
 <script>
+
 const K='wrongbook_v3_2_1';
+
+/* ===== V3.10.0 scalable data storage =====
+   Source of truth: IndexedDB.
+   localStorage only keeps tiny flags/UI state.
+*/
+const WB_DB_310='wrongbook_data_v310';
+const WB_DB_VER_310=1;
+const WB_STORE_BOOKS_310='books';
+const WB_STORE_QS_310='questions';
+const WB_STORE_META_310='meta';
+const WB_MARKER_310='wrongbook_idb_v310';
+
+let __persistBusy310=false;
+let __persistAgain310=false;
+let __bookSig310=new Map();
+let __qSig310=new Map();
+let __dataReady310=false;
+
+function wbDb310(){
+  return new Promise((resolve,reject)=>{
+    const req=indexedDB.open(WB_DB_310,WB_DB_VER_310);
+    req.onupgradeneeded=()=>{
+      const db=req.result;
+      if(!db.objectStoreNames.contains(WB_STORE_BOOKS_310)){
+        db.createObjectStore(WB_STORE_BOOKS_310,{keyPath:'id'});
+      }
+      if(!db.objectStoreNames.contains(WB_STORE_QS_310)){
+        db.createObjectStore(WB_STORE_QS_310,{keyPath:'id'});
+      }
+      if(!db.objectStoreNames.contains(WB_STORE_META_310)){
+        db.createObjectStore(WB_STORE_META_310);
+      }
+    };
+    req.onsuccess=()=>resolve(req.result);
+    req.onerror=()=>reject(req.error||new Error('无法打开本地题库数据库'));
+  });
+}
+
+function wbTxDone310(tx){
+  return new Promise((resolve,reject)=>{
+    tx.oncomplete=()=>resolve(true);
+    tx.onerror=()=>reject(tx.error||new Error('数据库写入失败'));
+    tx.onabort=()=>reject(tx.error||new Error('数据库事务中止'));
+  });
+}
+
+async function wbLoad310(){
+  const db=await wbDb310();
+  const tx=db.transaction([WB_STORE_BOOKS_310,WB_STORE_QS_310,WB_STORE_META_310],'readonly');
+  const getAll=(store)=>new Promise((resolve,reject)=>{
+    const r=tx.objectStore(store).getAll();
+    r.onsuccess=()=>resolve(r.result||[]);
+    r.onerror=()=>reject(r.error);
+  });
+  const getMeta=(key)=>new Promise((resolve,reject)=>{
+    const r=tx.objectStore(WB_STORE_META_310).get(key);
+    r.onsuccess=()=>resolve(r.result);
+    r.onerror=()=>reject(r.error);
+  });
+  const [books,qs,meta]=await Promise.all([
+    getAll(WB_STORE_BOOKS_310),
+    getAll(WB_STORE_QS_310),
+    getMeta('dataset')
+  ]);
+  return {books,qs,meta:meta||{}};
+}
+
+function wbSig310(x){
+  // stable enough for change detection; object field order is stable in this app
+  try{return JSON.stringify(x)}catch(e){return String(Date.now())}
+}
+
+async function wbPersistNow310(){
+  if(__persistBusy310){__persistAgain310=true;return true}
+  __persistBusy310=true;
+  try{
+    const db=await wbDb310();
+    const books=Array.isArray(D?.books)?D.books:[];
+    const qs=Array.isArray(D?.qs)?D.qs:[];
+
+    const nextBookIds=new Set(books.map(x=>x.id));
+    const nextQIds=new Set(qs.map(x=>x.id));
+
+    const tx=db.transaction([WB_STORE_BOOKS_310,WB_STORE_QS_310,WB_STORE_META_310],'readwrite');
+    const bs=tx.objectStore(WB_STORE_BOOKS_310);
+    const qsStore=tx.objectStore(WB_STORE_QS_310);
+    const ms=tx.objectStore(WB_STORE_META_310);
+
+    // Only write records that actually changed.
+    for(const b of books){
+      const sig=wbSig310(b);
+      if(__bookSig310.get(b.id)!==sig){
+        bs.put(b);
+        __bookSig310.set(b.id,sig);
+      }
+    }
+    for(const q of qs){
+      const sig=wbSig310(q);
+      if(__qSig310.get(q.id)!==sig){
+        qsStore.put(q);
+        __qSig310.set(q.id,sig);
+      }
+    }
+
+    // Remove deleted records.
+    for(const id of [...__bookSig310.keys()]){
+      if(!nextBookIds.has(id)){bs.delete(id);__bookSig310.delete(id)}
+    }
+    for(const id of [...__qSig310.keys()]){
+      if(!nextQIds.has(id)){qsStore.delete(id);__qSig310.delete(id)}
+    }
+
+    ms.put({
+      version:'3.10.0',
+      savedAt:Date.now(),
+      bookCount:books.length,
+      questionCount:qs.length
+    },'dataset');
+
+    await wbTxDone310(tx);
+
+    // Keep only a tiny marker in localStorage. Never the full D object.
+    try{
+      localStorage.setItem(WB_MARKER_310,'1');
+      localStorage.setItem(K,JSON.stringify({
+        storage:'indexeddb',
+        version:'3.10.0',
+        books:books.length,
+        qs:qs.length
+      }));
+    }catch(e){}
+    return true;
+  }finally{
+    __persistBusy310=false;
+    if(__persistAgain310){
+      __persistAgain310=false;
+      queueMicrotask(()=>wbPersistNow310());
+    }
+  }
+}
+
+function persistCompat310(){
+  wbPersistNow310().catch(err=>{
+    console.error('IndexedDB persist failed',err);
+    alert('题库保存失败：'+(err?.message||'数据库异常'));
+  });
+  return true;
+}
+
+function wbPrimeSignatures310(){
+  __bookSig310=new Map((D.books||[]).map(x=>[x.id,wbSig310(x)]));
+  __qSig310=new Map((D.qs||[]).map(x=>[x.id,wbSig310(x)]));
+}
+
+async function wbClearLegacyLargeKeys310(){
+  // Once migration succeeds, remove old full copies to permanently free localStorage quota.
+  for(const key of SOURCE_KEYS){
+    if(key===K)continue;
+    try{localStorage.removeItem(key)}catch(e){}
+  }
+}
+
+async function wbBoot310(){
+  try{
+    const stored=await wbLoad310();
+    const hasIndexed=(stored.books?.length||0)+(stored.qs?.length||0)>0;
+
+    if(hasIndexed){
+      D={books:stored.books||[],qs:stored.qs||[]};
+      MIGRATION_SOURCE='IndexedDB V3.10.0';
+    }else{
+      // First launch after upgrade: D already contains the best legacy localStorage data.
+      // Persist it once into IndexedDB, then release the old localStorage payload.
+      await wbPersistNow310();
+      MIGRATION_SOURCE=MIGRATION_SOURCE==='new'?'V3.10.0 新题库':`${MIGRATION_SOURCE} → IndexedDB`;
+    }
+
+    if(!Array.isArray(D.books))D.books=[];
+    if(!Array.isArray(D.qs))D.qs=[];
+
+    wbPrimeSignatures310();
+    await wbClearLegacyLargeKeys310();
+
+    // rewrite K as tiny metadata only
+    try{
+      localStorage.setItem(K,JSON.stringify({
+        storage:'indexeddb',
+        version:'3.10.0',
+        books:D.books.length,
+        qs:D.qs.length
+      }));
+    }catch(e){}
+
+    __dataReady310=true;
+    render();
+    if(typeof renderV3Books==='function')renderV3Books();
+    if(typeof updateDataStatus==='function')updateDataStatus();
+    if(typeof hydrateCoverImages395==='function')hydrateCoverImages395();
+  }catch(err){
+    console.error(err);
+    __dataReady310=true;
+    // Fall back to already-loaded legacy in-memory D so the app stays usable.
+    render();
+    if(typeof renderV3Books==='function')renderV3Books();
+    alert('大题库数据库初始化失败，已暂时使用兼容模式：'+(err?.message||err));
+  }
+}
+
+/* Best-effort final flush when leaving the page. */
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='hidden' && __dataReady310){
+    wbPersistNow310().catch(()=>{});
+  }
+});
+window.addEventListener('pagehide',()=>{
+  if(__dataReady310)wbPersistNow310().catch(()=>{});
+});
+
 const SOURCE_KEYS=['wrongbook_v3_2_1','wrongbook_v3_2','wrongbook_v3_1','wrongbook_v3','wrongbook_v2_fixed','wrongbook_v2','wrongbook_v1'];
 let MIGRATION_SOURCE='new';
 function safeParseKey(k){try{return JSON.parse(localStorage.getItem(k)||'null')}catch(e){return null}}
@@ -920,11 +1139,11 @@ D.qs=D.qs.map((q,i)=>({
   right:Number(q.right||0),
   wrong:Number(q.wrong||0)
 }));
-localStorage.setItem(K,JSON.stringify(D)); let mem={list:[],i:0}, quiz={list:[],i:0,score:0,locked:false};
+let mem={list:[],i:0}, quiz={list:[],i:0,score:0,locked:false};
 const $=x=>document.getElementById(x), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7), day=()=>Math.floor(Date.now()/86400000);
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,9)}
-function save(){try{localStorage.setItem(K,JSON.stringify(D));render();if(typeof renderV3Books==='function')renderV3Books();return true}catch(e){alert('保存失败：'+(e?.message||'浏览器存储异常'));return false}}
+function save(){try{persistCompat310();render();if(typeof renderV3Books==='function')renderV3Books();return true}catch(e){alert('保存失败：'+(e?.message||'数据库异常'));return false}}
 function page(x,b){document.querySelectorAll('.page').forEach(e=>e.classList.remove('on'));$(x).classList.add('on');document.querySelectorAll('nav button').forEach(e=>e.classList.remove('on'));if(b)b.classList.add('on');if(x==='bank')renderBank()}
 function modal(h){$('sheet').innerHTML=h;$('modal').classList.add('on')} function closeM(){$('modal').classList.remove('on')} $('modal').onclick=e=>{if(e.target.id==='modal')closeM()}
 function newBook(){modal(`<h2>新建错题本</h2><label>名称</label><input id="bn" placeholder="例如：艺术概论"><label>科目说明</label><input id="bs" placeholder="例如：专升本"><div class="row" style="margin-top:17px"><button class="secondary" onclick="closeM()">取消</button><button class="primary" style="flex:1" onclick="saveBook()">创建</button></div>`)}
@@ -1414,7 +1633,7 @@ function importBackupFile(file){
       const converted=normalizeImportedData(raw);
       if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份：${converted.books.length} 本 / ${converted.qs.length} 道题\n继续将替换当前题库。确定吗？`))return;
       D=converted;
-      localStorage.setItem(K,JSON.stringify(D));
+      persistCompat310();
       render();
       if(typeof renderV3Books==='function')renderV3Books();
       if(typeof updateDataStatus==='function')updateDataStatus();
@@ -1428,7 +1647,7 @@ function importBackupFile(file){
 $('appendImp').onchange=e=>{let f=e.target.files[0];if(!f)return;openAppendTargetPicker(f);e.target.value=''};
 
 $('imp').onchange=e=>{let f=e.target.files[0];if(!f)return;importBackupFile(f)}
-$('today').textContent=new Date().toLocaleDateString('zh-CN',{month:'long',day:'numeric',weekday:'long'});render();
+$('today').textContent=new Date().toLocaleDateString('zh-CN',{month:'long',day:'numeric',weekday:'long'});wbBoot310();
 
 function updateDataStatus(){
   const el=$('dataStatus');
@@ -1442,10 +1661,10 @@ function updateDataStatus(){
     wrongbook_v1:'V1',
     new:'新题库'
   };
-  el.innerHTML=`已读取：<b>${sourceNames[MIGRATION_SOURCE]||MIGRATION_SOURCE}</b><br>错题本：${D.books.length} 本 · 题目：${D.qs.length} 道<br>当前保存目标：V3.2 本地题库`;
+  el.innerHTML=`已读取：<b>${sourceNames[MIGRATION_SOURCE]||MIGRATION_SOURCE}</b><br>错题本：${D.books.length} 本 · 题目：${D.qs.length} 道<br>当前保存目标：V3.10.0 IndexedDB 大题库`;
 }
 
-updateDataStatus();
+// V3.10.0: status updates after IndexedDB boot completes.
 </script>
 <script>
 /* ===== V3 behavior; keeps the V2 localStorage key and all existing questions ===== */
@@ -1724,7 +1943,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.9.4';
+const APP_VERSION='3.10.0';
 async function checkOnlineVersion(){
   try{
     const r=await fetch('./version.json?t='+Date.now(),{cache:'no-store'});
@@ -3852,13 +4071,13 @@ function closeUnderline377(){
 }
 
 
-/* ===== V3.9.4 cleanup page scroll state when leaving All Questions ===== */
+/* ===== V3.10.0 cleanup page scroll state when leaving All Questions ===== */
 document.querySelectorAll('nav button').forEach(btn=>{
   btn.addEventListener('click',()=>document.body.classList.remove('bookIndexOpen382'));
 });
 
 
-/* ===== V3.9.4 subject-aware backup import routing ===== */
+/* ===== V3.10.0 subject-aware backup import routing ===== */
 function normSubject383(v){
   return String(v||'').trim().replace(/\s+/g,'').toLowerCase();
 }
@@ -3960,7 +4179,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
         }else if(Array.isArray(payload.qs)) payload.qs=rr.routed;
         else payload.questions=rr.routed;
       }
-    }catch(e){ console.warn('V3.9.4 auto route fallback',e); }
+    }catch(e){ console.warn('V3.10.0 auto route fallback',e); }
     return old.apply(this,args);
   };
 });
@@ -3968,7 +4187,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
 </script>
 
 <script id="v390patch">
-/* ===== V3.9.4 智能刷题版 ===== */
+/* ===== V3.10.0 智能刷题版 ===== */
 const V390_PROGRESS_KEY='wrongbook_v390_progress';
 const V390_VARIANT_KEY='wrongbook_v390_variants';
 function v390Read(k,fallback={}){try{return JSON.parse(localStorage.getItem(k)||'null')||fallback}catch(e){return fallback}}
@@ -4070,7 +4289,7 @@ function openVariantHub390(bookId){
 function generateVariant390(bookId){const range=$('v390Range').value,count=$('v390Count').value,strength=$('v390Strength').value;let pool=(range==='mist'?v390Mistakes(bookId):v390BookQs(bookId)).filter(q=>q.type==='choice');pool=v390Shuffle(pool);if(count!=='all')pool=pool.slice(0,Number(count));const items=pool.map(q=>v390MakeVariant(q,bookId,strength)).filter(Boolean);if(!items.length)return alert('当前题库可用于生成的混淆答案不足。');const all=v390Variants(),set={id:'vs_'+Date.now(),name:`${range==='mist'?'错题变式':'全库变式'} · ${strength==='high'?'高干扰':strength==='similar'?'相近':'基础'}`,at:Date.now(),items};all[bookId]=(all[bookId]||[]).concat(set).slice(-8);v390SaveVariants(all);startVariantSet390(bookId,set.id)}
 function startVariantSet390(bookId,setId){const set=(v390Variants()[bookId]||[]).find(x=>x.id===setId);if(!set)return alert('没有找到该变式题库');page('study');quiz={list:v390Shuffle(set.items),i:0,score:0,locked:false,scope:bookId,v390Mode:'variant'};drawQuiz()}
 
-/* ===== V3.9.4 robust book-editor interaction ===== */
+/* ===== V3.10.0 robust book-editor interaction ===== */
 let __bookEditScroll392=0;
 
 function activateBookEditor392(){
@@ -4154,7 +4373,7 @@ if(typeof saveBookV3==='function'){
 
 
 
-/* ===== V3.9.4 question editor scroll + canonical duplicate protection ===== */
+/* ===== V3.10.0 question editor scroll + canonical duplicate protection ===== */
 let __qEditScroll393=0;
 
 function v393CanonText(s){
@@ -4246,7 +4465,7 @@ function v393DedupeAll(showToast=false){
   }
   if(removed){
     D.qs=out;
-    try{localStorage.setItem(K,JSON.stringify(D));}catch(e){}
+    try{persistCompat310();}catch(e){}
     if(showToast) alert(`已自动合并 ${removed} 道重复题目，同一本错题本内仅保留一题。`);
   }
   return removed;
@@ -4462,12 +4681,12 @@ setTimeout(()=>{
   const removed=v393DedupeAll(false);
   if(removed){
     try{render();renderV3Books?.();}catch(e){}
-    console.log(`V3.9.4 merged ${removed} duplicate questions`);
+    console.log(`V3.10.0 merged ${removed} duplicate questions`);
   }
 },120);
 
 
-/* ===== V3.9.4 auto-create books from backup/question metadata ===== */
+/* ===== V3.10.0 auto-create books from backup/question metadata ===== */
 function v394CleanBookName(v){
   return String(v||'').trim().replace(/\s+/g,' ');
 }
@@ -4741,10 +4960,10 @@ importBackupFile = function(file){
     try{
       const raw=JSON.parse(r.result);
       const converted=normalizeImportedData(raw);
-      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份将恢复：${converted.books.length} 本 / ${converted.qs.length} 道题\n若备份没有 books 信息，V3.9.4 会按科目自动创建错题本。\n继续将替换当前题库。确定吗？`))return;
+      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份将恢复：${converted.books.length} 本 / ${converted.qs.length} 道题\n若备份没有 books 信息，V3.10.0 会按科目自动创建错题本。\n继续将替换当前题库。确定吗？`))return;
       D=converted;
       if(typeof v393DedupeAll==='function')v393DedupeAll(false);
-      localStorage.setItem(K,JSON.stringify(D));
+      persistCompat310();
       render();
       renderV3Books?.();
       updateDataStatus?.();
@@ -4755,6 +4974,238 @@ importBackupFile = function(file){
   };
   r.readAsText(file);
 };
+
+
+/* ===== V3.10.0 cover storage: IndexedDB + compression, avoid localStorage quota ===== */
+const COVER_DB_395='wrongbook_covers_v395';
+const COVER_STORE_395='covers';
+
+function coverDb395(){
+  return new Promise((resolve,reject)=>{
+    const req=indexedDB.open(COVER_DB_395,1);
+    req.onupgradeneeded=()=>{
+      const db=req.result;
+      if(!db.objectStoreNames.contains(COVER_STORE_395)){
+        db.createObjectStore(COVER_STORE_395);
+      }
+    };
+    req.onsuccess=()=>resolve(req.result);
+    req.onerror=()=>reject(req.error||new Error('IndexedDB unavailable'));
+  });
+}
+async function coverPut395(bookId, blob){
+  const db=await coverDb395();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(COVER_STORE_395,'readwrite');
+    tx.objectStore(COVER_STORE_395).put(blob,bookId);
+    tx.oncomplete=()=>resolve(true);
+    tx.onerror=()=>reject(tx.error||new Error('cover save failed'));
+  });
+}
+async function coverGet395(bookId){
+  const db=await coverDb395();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(COVER_STORE_395,'readonly');
+    const req=tx.objectStore(COVER_STORE_395).get(bookId);
+    req.onsuccess=()=>resolve(req.result||null);
+    req.onerror=()=>reject(req.error||new Error('cover read failed'));
+  });
+}
+async function coverDelete395(bookId){
+  const db=await coverDb395();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(COVER_STORE_395,'readwrite');
+    tx.objectStore(COVER_STORE_395).delete(bookId);
+    tx.oncomplete=()=>resolve(true);
+    tx.onerror=()=>reject(tx.error||new Error('cover delete failed'));
+  });
+}
+async function compressCover395(file){
+  const bmp=await createImageBitmap(file);
+  const maxW=900,maxH=1200;
+  let w=bmp.width,h=bmp.height;
+  const scale=Math.min(1,maxW/w,maxH/h);
+  w=Math.round(w*scale); h=Math.round(h*scale);
+  const c=document.createElement('canvas');
+  c.width=w;c.height=h;
+  const ctx=c.getContext('2d');
+  ctx.drawImage(bmp,0,0,w,h);
+  bmp.close?.();
+  let blob=await new Promise(res=>c.toBlob(res,'image/jpeg',0.78));
+  if(blob && blob.size>700*1024){
+    blob=await new Promise(res=>c.toBlob(res,'image/jpeg',0.62));
+  }
+  return blob;
+}
+async function coverUrl395(book){
+  if(!book)return '';
+  if(book.coverKey){
+    try{
+      const blob=await coverGet395(book.coverKey);
+      if(blob)return URL.createObjectURL(blob);
+    }catch(e){}
+  }
+  return book.coverImage||'';
+}
+async function hydrateCoverImages395(){
+  const cards=[...document.querySelectorAll('[data-book-id]')];
+  for(const el of cards){
+    const id=el.getAttribute('data-book-id');
+    const b=(D.books||[]).find(x=>x.id===id);
+    if(!b?.coverKey)continue;
+    const url=await coverUrl395(b);
+    const img=el.querySelector('img');
+    if(img && url)img.src=url;
+  }
+}
+
+/* move any existing base64 cover images out of localStorage automatically */
+async function migrateLegacyCovers395(){
+  let changed=false;
+  for(const b of (D.books||[])){
+    if(b.coverImage && /^data:image\//.test(b.coverImage)){
+      try{
+        const blob=await (await fetch(b.coverImage)).blob();
+        const key='cover_'+b.id;
+        await coverPut395(key,blob);
+        b.coverKey=key;
+        b.coverImage='';
+        changed=true;
+      }catch(e){}
+    }
+  }
+  if(changed){
+    try{persistCompat310();}catch(e){}
+  }
+}
+
+/* hook cover file input inside book editor */
+function bindCoverInput395(){
+  const m=$('modal'); if(!m)return;
+  const input=[...m.querySelectorAll('input[type="file"]')].find(x=>{
+    const a=(x.accept||'').toLowerCase();
+    return a.includes('image');
+  });
+  if(!input || input.dataset.v395bound)return;
+  input.dataset.v395bound='1';
+  input.addEventListener('change',async e=>{
+    const file=e.target.files?.[0];
+    if(!file)return;
+    try{
+      const blob=await compressCover395(file);
+      const editBookId =
+        m.querySelector('[data-book-id]')?.getAttribute('data-book-id') ||
+        window.__editingBookId ||
+        window.currentEditingBookId ||
+        '';
+      if(!editBookId){
+        // new book: temporarily keep blob in memory until save
+        window.__pendingCoverBlob395=blob;
+        const preview=m.querySelector('img');
+        if(preview)preview.src=URL.createObjectURL(blob);
+        return;
+      }
+      const key='cover_'+editBookId;
+      await coverPut395(key,blob);
+      const b=(D.books||[]).find(x=>x.id===editBookId);
+      if(b){
+        b.coverKey=key;
+        b.coverImage='';
+      }
+      try{persistCompat310();}catch(err){
+        throw new Error('题库数据仍超出本地存储上限，请先导出完整备份后再继续。');
+      }
+      const preview=m.querySelector('img');
+      if(preview)preview.src=URL.createObjectURL(blob);
+    }catch(err){
+      alert('封面保存失败：'+(err?.message||err));
+    }
+  });
+}
+
+/* wrap edit book dialog so cover picker gets new storage behavior */
+if(typeof editBookV3==='function'){
+  const __oldEditBookV3_395=editBookV3;
+  editBookV3=function(id=''){
+    window.__editingBookId=id||'';
+    const r=__oldEditBookV3_395(id);
+    setTimeout(bindCoverInput395,0);
+    return r;
+  };
+}
+
+/* wrap book save:
+   - if creating new book, store pending cover after ID exists
+   - ensure base64 cover is stripped before localStorage save
+*/
+if(typeof saveBookV3==='function'){
+  const __oldSaveBookV3_395=saveBookV3;
+  saveBookV3=async function(id,...rest){
+    // strip legacy base64 before normal save to avoid quota
+    for(const b of (D.books||[])){
+      if(b.coverImage && /^data:image\//.test(b.coverImage) && b.coverKey){
+        b.coverImage='';
+      }
+    }
+    let beforeIds=new Set((D.books||[]).map(b=>b.id));
+    let ret;
+    try{
+      ret=__oldSaveBookV3_395.call(this,id,...rest);
+    }catch(err){
+      if(String(err?.message||err).includes('quota')){
+        alert('保存失败：本地题库空间已满。V3.10.0 已把封面移出 localStorage，但你的题库文本数据本身也已接近上限。建议先导出完整备份。');
+        return;
+      }
+      throw err;
+    }
+    // attach pending cover for newly created book
+    if(window.__pendingCoverBlob395){
+      const nb=(D.books||[]).find(b=>!beforeIds.has(b.id)) || (id?(D.books||[]).find(b=>b.id===id):null);
+      if(nb){
+        try{
+          const key='cover_'+nb.id;
+          await coverPut395(key,window.__pendingCoverBlob395);
+          nb.coverKey=key;
+          nb.coverImage='';
+          persistCompat310();
+        }catch(e){
+          alert('错题本已保存，但封面单独保存失败：'+(e?.message||e));
+        }
+      }
+      window.__pendingCoverBlob395=null;
+    }
+    window.__editingBookId='';
+    setTimeout(()=>{hydrateCoverImages395();},50);
+    return ret;
+  };
+}
+
+/* render helpers: use coverKey first */
+if(typeof renderV3Books==='function'){
+  const __oldRenderV3Books395=renderV3Books;
+  renderV3Books=function(...args){
+    const r=__oldRenderV3Books395.apply(this,args);
+    setTimeout(hydrateCoverImages395,0);
+    return r;
+  };
+}
+
+/* export backup: keep metadata; cover binary lives outside JSON, so include warning */
+if(typeof exportBackup==='function'){
+  const __oldExportBackup395=exportBackup;
+  exportBackup=function(...args){
+    for(const b of (D.books||[])){
+      if(b.coverKey && b.coverImage && /^data:image\//.test(b.coverImage)) b.coverImage='';
+    }
+    return __oldExportBackup395.apply(this,args);
+  };
+}
+
+/* run migration once */
+setTimeout(async()=>{
+  await migrateLegacyCovers395();
+  try{renderV3Books?.(); hydrateCoverImages395();}catch(e){}
+},180);
 
 </script>
 </body></html>
