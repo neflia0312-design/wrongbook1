@@ -653,7 +653,7 @@ body.scanLock371{overflow:hidden!important;position:fixed!important;width:100%!i
 .ulineWord377{font-size:15px;font-weight:700;line-height:1.6;word-break:break-word}
 
 
-/* ===== V3.9.3 All Questions = expanded list + reliable page scroll ===== */
+/* ===== V3.9.4 All Questions = expanded list + reliable page scroll ===== */
 body.bookIndexOpen382{
   position:static!important;
   top:auto!important;
@@ -719,7 +719,7 @@ body.bookIndexOpen382 #readerArea{
 }
 
 
-/* ===== V3.9.3 题号 / 原位编辑 / 选项清洗 ===== */
+/* ===== V3.9.4 题号 / 原位编辑 / 选项清洗 ===== */
 .qNo391{display:inline-flex;align-items:center;padding:6px 9px;border-radius:9px;background:#efede8;font-size:12px;font-weight:800}
 .bookIndexItem382{scroll-margin-top:110px}
 .modeBar391{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 14px}
@@ -727,7 +727,7 @@ body.bookIndexOpen382 #readerArea{
 .readerQuestionNo391{display:inline-flex;margin:0 0 10px;padding:5px 9px;border-radius:9px;background:#f0ede8;font-size:11px;font-weight:800;color:#625d58}
 
 
-/* ===== V3.9.3 book editor scroll isolation fix ===== */
+/* ===== V3.9.4 book editor scroll isolation fix ===== */
 body.bookEditLock392{
   overflow:hidden!important;
   position:fixed!important;
@@ -774,7 +774,7 @@ body.bookEditLock392{
 }
 
 
-/* ===== V3.9.3 question editor / answer editor isolated scroll ===== */
+/* ===== V3.9.4 question editor / answer editor isolated scroll ===== */
 body.qEditLock393{
   overflow:hidden!important;
   position:fixed!important;
@@ -840,7 +840,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.9.3</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.9.4</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -854,7 +854,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.4.2 起：主屏幕版会检查线上版本。以后升级只需要替换 GitHub 的 index.html；若检测到新版，会提示刷新，不需要每次重新添加主屏幕。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.9.3 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
+<p class="small">当前版本：V3.9.4 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -1724,7 +1724,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.9.3';
+const APP_VERSION='3.9.4';
 async function checkOnlineVersion(){
   try{
     const r=await fetch('./version.json?t='+Date.now(),{cache:'no-store'});
@@ -3852,13 +3852,13 @@ function closeUnderline377(){
 }
 
 
-/* ===== V3.9.3 cleanup page scroll state when leaving All Questions ===== */
+/* ===== V3.9.4 cleanup page scroll state when leaving All Questions ===== */
 document.querySelectorAll('nav button').forEach(btn=>{
   btn.addEventListener('click',()=>document.body.classList.remove('bookIndexOpen382'));
 });
 
 
-/* ===== V3.9.3 subject-aware backup import routing ===== */
+/* ===== V3.9.4 subject-aware backup import routing ===== */
 function normSubject383(v){
   return String(v||'').trim().replace(/\s+/g,'').toLowerCase();
 }
@@ -3960,7 +3960,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
         }else if(Array.isArray(payload.qs)) payload.qs=rr.routed;
         else payload.questions=rr.routed;
       }
-    }catch(e){ console.warn('V3.9.3 auto route fallback',e); }
+    }catch(e){ console.warn('V3.9.4 auto route fallback',e); }
     return old.apply(this,args);
   };
 });
@@ -3968,7 +3968,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
 </script>
 
 <script id="v390patch">
-/* ===== V3.9.3 智能刷题版 ===== */
+/* ===== V3.9.4 智能刷题版 ===== */
 const V390_PROGRESS_KEY='wrongbook_v390_progress';
 const V390_VARIANT_KEY='wrongbook_v390_variants';
 function v390Read(k,fallback={}){try{return JSON.parse(localStorage.getItem(k)||'null')||fallback}catch(e){return fallback}}
@@ -4070,7 +4070,7 @@ function openVariantHub390(bookId){
 function generateVariant390(bookId){const range=$('v390Range').value,count=$('v390Count').value,strength=$('v390Strength').value;let pool=(range==='mist'?v390Mistakes(bookId):v390BookQs(bookId)).filter(q=>q.type==='choice');pool=v390Shuffle(pool);if(count!=='all')pool=pool.slice(0,Number(count));const items=pool.map(q=>v390MakeVariant(q,bookId,strength)).filter(Boolean);if(!items.length)return alert('当前题库可用于生成的混淆答案不足。');const all=v390Variants(),set={id:'vs_'+Date.now(),name:`${range==='mist'?'错题变式':'全库变式'} · ${strength==='high'?'高干扰':strength==='similar'?'相近':'基础'}`,at:Date.now(),items};all[bookId]=(all[bookId]||[]).concat(set).slice(-8);v390SaveVariants(all);startVariantSet390(bookId,set.id)}
 function startVariantSet390(bookId,setId){const set=(v390Variants()[bookId]||[]).find(x=>x.id===setId);if(!set)return alert('没有找到该变式题库');page('study');quiz={list:v390Shuffle(set.items),i:0,score:0,locked:false,scope:bookId,v390Mode:'variant'};drawQuiz()}
 
-/* ===== V3.9.3 robust book-editor interaction ===== */
+/* ===== V3.9.4 robust book-editor interaction ===== */
 let __bookEditScroll392=0;
 
 function activateBookEditor392(){
@@ -4154,7 +4154,7 @@ if(typeof saveBookV3==='function'){
 
 
 
-/* ===== V3.9.3 question editor scroll + canonical duplicate protection ===== */
+/* ===== V3.9.4 question editor scroll + canonical duplicate protection ===== */
 let __qEditScroll393=0;
 
 function v393CanonText(s){
@@ -4462,9 +4462,299 @@ setTimeout(()=>{
   const removed=v393DedupeAll(false);
   if(removed){
     try{render();renderV3Books?.();}catch(e){}
-    console.log(`V3.9.3 merged ${removed} duplicate questions`);
+    console.log(`V3.9.4 merged ${removed} duplicate questions`);
   }
 },120);
+
+
+/* ===== V3.9.4 auto-create books from backup/question metadata ===== */
+function v394CleanBookName(v){
+  return String(v||'').trim().replace(/\s+/g,' ');
+}
+function v394BookNameFromQuestion(q, raw){
+  return v394CleanBookName(
+    q?.bookName || q?.subject || q?.subjectName || q?.bookTitle ||
+    raw?.bookName || raw?.subject || raw?.subjectName || raw?.title || ''
+  );
+}
+function v394MakeBook(name, idx=0){
+  const colors=['#8f9a88','#7e8998','#b78f92','#d8b9bf','#b6a88e','#9b897c','#aaa0b7'];
+  const papers=['ruled','dot','clean','floral','grid'];
+  const id='auto_book_'+Date.now()+'_'+idx+'_'+Math.random().toString(36).slice(2,7);
+  return {
+    id,
+    name:name||`错题本 ${idx+1}`,
+    title:name||`错题本 ${idx+1}`,
+    sub:name||'',
+    subject:name||'',
+    coverColor:colors[idx%colors.length],
+    coverImage:'',
+    font:'sans',
+    paper:papers[idx%papers.length],
+    titleColor:'#ffffff',
+    strokeColor:'#000000',
+    strokeWidth:0
+  };
+}
+function v394FindExistingBookByName(name){
+  const n=v394CleanBookName(name).toLowerCase();
+  if(!n)return null;
+  return (D.books||[]).find(b=>{
+    const arr=[b.name,b.title,b.sub,b.subject].map(v=>v394CleanBookName(v).toLowerCase()).filter(Boolean);
+    return arr.includes(n);
+  })||null;
+}
+function v394EnsureBooksForQuestions(raw, items, useCurrentData=true){
+  const pool = useCurrentData ? (D.books||[]) : [];
+  const created=[];
+  const nameToId=new Map();
+
+  for(const b of pool){
+    for(const n of [b.name,b.title,b.sub,b.subject]){
+      const k=v394CleanBookName(n).toLowerCase();
+      if(k&&!nameToId.has(k))nameToId.set(k,b.id);
+    }
+  }
+
+  const declaredBooks=Array.isArray(raw?.books)?raw.books:[];
+  for(const rb of declaredBooks){
+    const name=v394CleanBookName(rb.name||rb.title||rb.subject||rb.sub||'');
+    if(!name)continue;
+    const k=name.toLowerCase();
+    if(nameToId.has(k))continue;
+    const nb={...v394MakeBook(name,pool.length+created.length),...rb};
+    nb.id=rb.id||nb.id;
+    nb.name=rb.name||rb.title||rb.subject||name;
+    nb.title=rb.title||rb.name||rb.subject||name;
+    nb.sub=rb.sub||rb.subject||name;
+    nb.subject=rb.subject||rb.sub||name;
+    created.push(nb);nameToId.set(k,nb.id);
+  }
+
+  for(const q of items){
+    const name=v394BookNameFromQuestion(q,raw);
+    if(!name)continue;
+    const k=name.toLowerCase();
+    if(!nameToId.has(k)){
+      const nb=v394MakeBook(name,pool.length+created.length);
+      created.push(nb);nameToId.set(k,nb.id);
+    }
+  }
+
+  // If there are questions but absolutely no subject metadata, create one generic book
+  if(items.length && !pool.length && !created.length){
+    const name=v394CleanBookName(raw?.bookName||raw?.subject||raw?.title||'导入题库');
+    const nb=v394MakeBook(name||'导入题库',0);
+    created.push(nb);
+    nameToId.set((name||'导入题库').toLowerCase(),nb.id);
+  }
+  return {created,nameToId};
+}
+function v394RouteQuestionToBook(q, raw, nameToId, fallbackId=''){
+  // honor exact existing id if it exists
+  const explicit=q.book||q.bookId||'';
+  if(explicit && (D.books||[]).some(b=>b.id===explicit)) return explicit;
+
+  const name=v394BookNameFromQuestion(q,raw);
+  if(name){
+    const id=nameToId.get(name.toLowerCase());
+    if(id)return id;
+  }
+  return fallbackId;
+}
+
+/* Full backup restore: infer missing books from question subject/bookName fields. */
+normalizeImportedData = function(raw){
+  if(!raw || typeof raw!=='object') throw new Error('备份文件格式无效');
+  const qsRaw=Array.isArray(raw.qs)?raw.qs:(Array.isArray(raw.questions)?raw.questions:[]);
+  const booksRaw=Array.isArray(raw.books)?raw.books:[];
+
+  if(!booksRaw.length && !qsRaw.length) throw new Error('备份中没有找到错题本或题目');
+
+  // Build book list from explicit books + inferred subject names.
+  const tempD={books:[]};
+  const oldD=D;
+  D=tempD;
+  const ensure=v394EnsureBooksForQuestions(raw,qsRaw,true);
+  let books=[];
+
+  // First normalize explicitly declared books
+  for(let i=0;i<booksRaw.length;i++){
+    const b=booksRaw[i];
+    const name=b.name||b.title||b.subject||b.sub||('错题本 '+(i+1));
+    books.push({
+      ...v394MakeBook(name,i),
+      ...b,
+      id:b.id||('import_book_'+i+'_'+Date.now()),
+      name:b.name||b.title||b.subject||name,
+      title:b.title||b.name||b.subject||name,
+      sub:b.sub||b.subject||name,
+      subject:b.subject||b.sub||name,
+      coverColor:b.coverColor||['#8f9a88','#7e8998','#b78f92','#d8b9bf','#b6a88e'][i%5],
+      coverImage:b.coverImage||'',
+      font:b.font||'sans',
+      paper:b.paper||['ruled','dot','clean','floral','grid'][i%5],
+      titleColor:b.titleColor||'#ffffff',
+      strokeColor:b.strokeColor||'#000000',
+      strokeWidth:Number(b.strokeWidth||0)
+    });
+  }
+
+  // Add inferred books not already represented
+  const names=new Set(books.flatMap(b=>[b.name,b.title,b.sub,b.subject]).map(v=>v394CleanBookName(v).toLowerCase()).filter(Boolean));
+  for(const b of ensure.created){
+    const k=v394CleanBookName(b.name||b.title).toLowerCase();
+    if(k&&!names.has(k)){books.push(b);names.add(k)}
+  }
+
+  D=oldD;
+
+  // Build name -> id map for normalized book list
+  const map=new Map();
+  books.forEach(b=>{
+    [b.name,b.title,b.sub,b.subject].forEach(v=>{
+      const k=v394CleanBookName(v).toLowerCase();
+      if(k&&!map.has(k))map.set(k,b.id);
+    });
+  });
+
+  const fallbackBook=books[0]?.id||'';
+  const qs=qsRaw.map((q,i)=>{
+    const options=Array.isArray(q.opts)?q.opts:(Array.isArray(q.options)?q.options:[]);
+    const isChoice=options.length>0 || /^[A-D]$/i.test(String(q.ans||q.answer||''));
+    const legacyAnswer=String(q.ans||q.answer||'').trim();
+
+    let target='';
+    const explicit=q.book||q.bookId||'';
+    if(explicit && books.some(b=>b.id===explicit)) target=explicit;
+    if(!target){
+      const nm=v394BookNameFromQuestion(q,raw);
+      if(nm) target=map.get(nm.toLowerCase())||'';
+    }
+    if(!target)target=fallbackBook;
+
+    return {
+      ...q,
+      id:q.id||('import_q_'+i+'_'+Date.now()),
+      book:target,
+      bookId:target,
+      type:q.type||(isChoice?'choice':'short'),
+      text:q.text||q.question||'',
+      opts:options.map(x=>typeof v393CanonOpt==='function'?v393CanonOpt(x):x),
+      options:options.map(x=>typeof v393CanonOpt==='function'?v393CanonOpt(x):x),
+      ans:isChoice?legacyAnswer.toUpperCase():(q.ans||''),
+      answer:isChoice?legacyAnswer.toUpperCase():(q.answerText||q.answer||''),
+      tag:q.tag||'',
+      note:q.note||'',
+      level:Number(q.level||0),
+      next:q.next??q.nextReviewDay??0,
+      right:Number(q.right||0),
+      wrong:Number(q.wrong||0),
+      created:q.created||Date.now()
+    };
+  });
+
+  return {books,qs};
+};
+
+/* Batch append: if no existing books, create them automatically from file metadata. */
+if(typeof openAppendTargetPicker==='function'){
+  openAppendTargetPicker=function(file){
+    const r=new FileReader();
+    r.onload=()=>{
+      try{
+        const raw=JSON.parse(r.result);
+        const qs=normalizeAppendQuestions(raw);
+        if(!qs.length)throw new Error('文件里没有找到题目');
+
+        __appendPayload={questions:qs,fileName:file.name,raw};
+
+        // Auto-create missing subject books before asking user anything.
+        const ensure=v394EnsureBooksForQuestions(raw,qs,true);
+        if(ensure.created.length){
+          D.books.push(...ensure.created);
+          save();
+          renderV3Books?.();
+        }
+
+        // If all questions clearly map to one subject/book, append directly there.
+        const subjects=[...new Set(qs.map(q=>v394BookNameFromQuestion(q,raw)).filter(Boolean))];
+        if(subjects.length===1){
+          let book=v394FindExistingBookByName(subjects[0]);
+          if(book){
+            __appendPayload.autoTarget=book.id;
+            modal(`<div class="sheetBar"><button class="sheetBack" onclick="closeM()">‹ 返回</button><b>批量追加题目</b><button class="sheetClose" onclick="closeM()">×</button></div>
+            <div class="note">检测到 <b>${qs.length}</b> 道题，已自动识别为 <b>${esc(bookTitleV3(book))}</b>${ensure.created.length?'，并已自动创建该错题本':''}。不会覆盖原题。</div>
+            <div class="row" style="margin-top:16px"><button class="secondary" onclick="closeM()">取消</button><button class="primary" style="flex:1" onclick="confirmAppendImport390('${book.id}')">追加 ${qs.length} 道题</button></div>`);
+            return;
+          }
+        }
+
+        // Multiple subjects: route automatically question-by-question.
+        if(subjects.length>1){
+          let added=0,skipped=0;
+          const existingByBook=new Map();
+          for(const q of qs){
+            const name=v394BookNameFromQuestion(q,raw)||subjects[0];
+            let book=v394FindExistingBookByName(name);
+            if(!book){
+              book=v394MakeBook(name,D.books.length);
+              D.books.push(book);
+            }
+            if(!existingByBook.has(book.id)){
+              existingByBook.set(book.id,new Set(D.qs.filter(x=>(x.book||x.bookId)===book.id).map(x=>v393CanonText(x.text||x.question||''))));
+            }
+            const key=v393CanonText(q.text||q.question||'');
+            if(key && existingByBook.get(book.id).has(key)){skipped++;continue}
+            q.book=q.bookId=book.id;
+            if(q.type==='choice'){
+              const o=(q.opts||q.options||[]).map(v393CanonOpt);
+              q.opts=o;q.options=o;
+            }
+            D.qs.push(q); if(key)existingByBook.get(book.id).add(key); added++;
+          }
+          v393DedupeAll(false); save(); renderV3Books?.();
+          alert(`已自动按科目导入：新增 ${added} 道，跳过重复 ${skipped} 道，共涉及 ${subjects.length} 本错题本。`);
+          return;
+        }
+
+        // No usable subject metadata: if exactly one book, use it; otherwise let user choose.
+        if(D.books.length===1){
+          confirmAppendImport390(D.books[0].id);return;
+        }
+        modal(`<div class="sheetBar"><button class="sheetBack" onclick="closeM()">‹ 返回</button><b>批量追加题目</b><button class="sheetClose" onclick="closeM()">×</button></div>
+        <div class="note">文件中没有明确科目信息。请选择目标错题本。本操作只追加，不覆盖。</div>
+        <label>目标错题本</label><select id="appendTarget">${D.books.map(b=>`<option value="${b.id}">${esc(bookTitleV3(b))}</option>`).join('')}</select>
+        <button class="primary" style="width:100%;margin-top:16px" onclick="confirmAppendImport390($('appendTarget').value)">追加 ${qs.length} 道题</button>`);
+      }catch(e){
+        alert('无法读取题目包：'+(e?.message||'文件格式错误'));
+      }
+    };
+    r.readAsText(file);
+  };
+}
+
+/* Make full-backup restore report inferred books clearly and de-dupe after restore. */
+importBackupFile = function(file){
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const raw=JSON.parse(r.result);
+      const converted=normalizeImportedData(raw);
+      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份将恢复：${converted.books.length} 本 / ${converted.qs.length} 道题\n若备份没有 books 信息，V3.9.4 会按科目自动创建错题本。\n继续将替换当前题库。确定吗？`))return;
+      D=converted;
+      if(typeof v393DedupeAll==='function')v393DedupeAll(false);
+      localStorage.setItem(K,JSON.stringify(D));
+      render();
+      renderV3Books?.();
+      updateDataStatus?.();
+      alert(`恢复成功：${D.books.length} 本错题本，${D.qs.length} 道题。`);
+    }catch(err){
+      alert('恢复失败：'+(err?.message||'无法识别备份文件'));
+    }
+  };
+  r.readAsText(file);
+};
 
 </script>
 </body></html>
