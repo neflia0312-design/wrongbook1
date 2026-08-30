@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="3.11.0">
+<meta name="wrongbook-version" content="3.11.1">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -952,7 +952,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.11</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.11.1</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -2059,7 +2059,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.11.0';
+const APP_VERSION='3.11.1';
 const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
 
 function versionParts311(v){
@@ -6150,5 +6150,146 @@ document.addEventListener('click',e=>{
   }
 },true);
 
+</script>
+
+
+<!-- ===== V3.11.1 targeted reliability patch ===== -->
+<style>
+/* Fast scrollbar belongs ONLY to the expanded All Questions view. */
+body:not(.bookIndexOpen382) #fastBankNav103{display:none!important}
+</style>
+<script>
+/* 1) Quick scrollbar: remove immediately whenever user leaves All Questions. */
+(function(){
+  const _page3111=window.page;
+  if(typeof _page3111==='function'){
+    window.page=function(x,b){
+      const r=_page3111.apply(this,arguments);
+      if(!(x==='reader' && document.body.classList.contains('bookIndexOpen382'))){
+        try{removeFastBankNav103()}catch(e){}
+      }
+      return r;
+    };
+  }
+  document.addEventListener('click',()=>{
+    if(!document.body.classList.contains('bookIndexOpen382')){
+      try{removeFastBankNav103()}catch(e){}
+    }
+  },true);
+})();
+
+/* 2) Mind-map recovery: newer imports often store long answers in answerText.
+      Old V3.11 only looked at answer/ans, so the selector could become “无选项”
+      although the questions and their memoryMap/memoryTree36 still existed. */
+function mindAnswer3111(q){
+  return String(q?.answerText ?? q?.answer ?? q?.ans ?? q?.standardAnswer ?? '').trim();
+}
+window.ans343=function(q){return mindAnswer3111(q)};
+window.subjQs343=function(bookId){
+  return (D.qs||[]).filter(q=>bookIdOf(q)===bookId && q.type!=='choice' &&
+    (mindAnswer3111(q) || q.memoryTree36?.id || (Array.isArray(q.memoryMap)&&q.memoryMap.length)));
+};
+window.bookQs36=function(bookId){
+  return (D.qs||[]).filter(q=>bookIdOf(q)===bookId && (
+    (q.type!=='choice' && mindAnswer3111(q)) ||
+    q.memoryTree36?.id || (Array.isArray(q.memoryMap)&&q.memoryMap.length)
+  ));
+};
+
+/* Keep generated mind-map roots readable for imports that use question instead of text. */
+if(typeof ensureTree36==='function'){
+  const _ensureTree36_3111=ensureTree36;
+  window.ensureTree36=function(q){
+    if(q && !q.text && q.question)q.text=q.question;
+    return _ensureTree36_3111(q);
+  };
+}
+
+/* 3) Cover reliability inside ONE storage container.
+      Keep the full blob in cover IndexedDB, plus a small compressed fallback inside
+      the book record. This prevents a missing/evicted cover blob from producing a
+      blank cover after future app upgrades and makes exported backups self-contained. */
+window.__pendingCoverFallback3111='';
+function blobDataUrl3111(blob){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();r.onload=()=>resolve(String(r.result||''));r.onerror=()=>reject(r.error);r.readAsDataURL(blob);
+  });
+}
+async function makeCoverFallback3111(blob){
+  try{
+    const src=await blobDataUrl3111(blob);
+    return await new Promise(resolve=>{
+      const im=new Image();
+      im.onload=()=>{
+        const maxW=420,maxH=560,scale=Math.min(1,maxW/im.width,maxH/im.height);
+        const c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*scale));c.height=Math.max(1,Math.round(im.height*scale));
+        c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+        resolve(c.toDataURL('image/jpeg',.68));
+      };
+      im.onerror=()=>resolve(src);im.src=src;
+    });
+  }catch(e){return ''}
+}
+
+if(typeof pickCover3101==='function'){
+  const _pickCover3101_3111=pickCover3101;
+  window.pickCover3101=async function(input){
+    await _pickCover3101_3111(input);
+    if(window.__pendingCoverBlob3101){
+      window.__pendingCoverFallback3111=await makeCoverFallback3111(window.__pendingCoverBlob3101);
+    }
+  };
+}
+
+if(typeof saveBookV3==='function'){
+  const _saveBookV3_3111=saveBookV3;
+  window.saveBookV3=async function(id){
+    const before=new Set((D.books||[]).map(b=>b.id));
+    const fallback=window.__pendingCoverFallback3111||'';
+    const ret=await _saveBookV3_3111.apply(this,arguments);
+    if(fallback){
+      const b=id?(D.books||[]).find(x=>x.id===id):(D.books||[]).find(x=>!before.has(x.id));
+      if(b){
+        b.coverFallback=fallback;
+        b.coverMode='photo';
+        try{await wbPersistNow310()}catch(e){}
+      }
+      window.__pendingCoverFallback3111='';
+      try{renderV3Books()}catch(e){}
+    }
+    return ret;
+  };
+}
+
+if(typeof hydrateBookMedia3101==='function'){
+  const _hydrateBookMedia3101_3111=hydrateBookMedia3101;
+  window.hydrateBookMedia3101=async function(){
+    await _hydrateBookMedia3101_3111.apply(this,arguments);
+    for(const el of document.querySelectorAll('[data-cover-book]')){
+      const b=(D.books||[]).find(x=>x.id===el.getAttribute('data-cover-book'));
+      if(!b || (b.coverMode||'solid')!=='photo' || !b.coverFallback)continue;
+      const bg=String(el.style.backgroundImage||'');
+      if(!bg || bg==='none'){
+        el.style.backgroundImage=`url("${String(b.coverFallback).replace(/"/g,'%22')}")`;
+        el.style.backgroundSize='100% 100%';el.style.backgroundPosition='center';el.style.backgroundRepeat='no-repeat';el.style.backgroundColor='transparent';
+      }
+    }
+  };
+}
+
+/* Backfill fallback thumbnails for covers that still exist in this SAME browser/PWA container. */
+async function backfillCoverFallback3111(){
+  let changed=false;
+  for(const b of (D.books||[])){
+    if(b.coverFallback || !b.coverKey)continue;
+    try{
+      const blob=await coverGet395(b.coverKey);
+      if(blob){b.coverFallback=await makeCoverFallback3111(blob);changed=changed||!!b.coverFallback;}
+    }catch(e){}
+  }
+  if(changed){try{await wbPersistNow310()}catch(e){}}
+  try{await hydrateBookMedia3101()}catch(e){}
+}
+setTimeout(backfillCoverFallback3111,900);
 </script>
 </body></html>

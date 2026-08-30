@@ -1,14 +1,3 @@
 {
-  "version": "3.11.0",
-  "display": "V3.11",
-  "file": "index.html",
-  "name": "主屏幕自动更新版",
-  "database": "wrongbook_data_v310",
-  "update_mode": "automatic",
-  "notes": [
-    "主屏幕只安装一次；以后直接打开原主屏幕 App 自动检查 GitHub 最新版",
-    "数据库 identity 不随网页版本更改",
-    "导航与更新文件使用 network-first，在线时优先拿 GitHub 最新文件",
-    "保留 V3.10.4 的所有刷题、去重、定位和大容量存储功能"
-  ]
+  "version": "3.4.2"
 }
