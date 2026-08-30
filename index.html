@@ -653,7 +653,7 @@ body.scanLock371{overflow:hidden!important;position:fixed!important;width:100%!i
 .ulineWord377{font-size:15px;font-weight:700;line-height:1.6;word-break:break-word}
 
 
-/* ===== V3.10.3 All Questions = expanded list + reliable page scroll ===== */
+/* ===== V3.10.4 All Questions = expanded list + reliable page scroll ===== */
 body.bookIndexOpen382{
   position:static!important;
   top:auto!important;
@@ -719,7 +719,7 @@ body.bookIndexOpen382 #readerArea{
 }
 
 
-/* ===== V3.10.3 题号 / 原位编辑 / 选项清洗 ===== */
+/* ===== V3.10.4 题号 / 原位编辑 / 选项清洗 ===== */
 .qNo391{display:inline-flex;align-items:center;padding:6px 9px;border-radius:9px;background:#efede8;font-size:12px;font-weight:800}
 .bookIndexItem382{scroll-margin-top:110px}
 .modeBar391{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 14px}
@@ -727,7 +727,7 @@ body.bookIndexOpen382 #readerArea{
 .readerQuestionNo391{display:inline-flex;margin:0 0 10px;padding:5px 9px;border-radius:9px;background:#f0ede8;font-size:11px;font-weight:800;color:#625d58}
 
 
-/* ===== V3.10.3 book editor scroll isolation fix ===== */
+/* ===== V3.10.4 book editor scroll isolation fix ===== */
 body.bookEditLock392{
   overflow:hidden!important;
   position:fixed!important;
@@ -774,7 +774,7 @@ body.bookEditLock392{
 }
 
 
-/* ===== V3.10.3 question editor / answer editor isolated scroll ===== */
+/* ===== V3.10.4 question editor / answer editor isolated scroll ===== */
 body.qEditLock393{
   overflow:hidden!important;
   position:fixed!important;
@@ -821,7 +821,7 @@ body.qEditLock393{
 }
 
 
-/* ===== V3.10.3 cover & inner-page media editor ===== */
+/* ===== V3.10.4 cover & inner-page media editor ===== */
 .mediaMode3101{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:7px 0 10px}
 .mediaMode3101 button{border:1px solid var(--line);background:#fff;border-radius:13px;padding:11px 8px;font-weight:650}
 .mediaMode3101 button.on{background:#20201e;color:#fff}
@@ -853,7 +853,7 @@ body.qEditLock393{
 }
 
 
-/* ===== V3.10.3 full-cover image fit ===== */
+/* ===== V3.10.4 full-cover image fit ===== */
 /* Photo covers show the complete source image. No center-cropping. */
 .coverBg[data-cover-book]{
   background-size:100% 100%!important;
@@ -867,7 +867,7 @@ body.qEditLock393{
 }
 
 
-/* ===== V3.10.3 long-bank workflow ===== */
+/* ===== V3.10.4 long-bank workflow ===== */
 .fastBankNav103{
   position:fixed;right:7px;top:50%;transform:translateY(-50%);
   z-index:2147482000;width:34px;padding:5px 3px;
@@ -903,6 +903,31 @@ body.qEditLock393{
   text-align:left;line-height:1.6
 }
 
+
+/* ===== V3.10.4 random quiz flow ===== */
+.quizPrev104{
+  position:fixed;
+  left:18px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:2147481000;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  border:1px solid rgba(120,112,104,.18);
+  background:rgba(250,248,244,.94);
+  box-shadow:0 4px 18px #00000012;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  font-size:26px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#2c2926;
+}
+.quizPrev104:active{transform:translateY(-50%) scale(.96)}
+
 </style>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -923,7 +948,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.10.3</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.10.4</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -937,7 +962,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.4.2 起：主屏幕版会检查线上版本。以后升级只需要替换 GitHub 的 index.html；若检测到新版，会提示刷新，不需要每次重新添加主屏幕。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.10.3 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
+<p class="small">当前版本：V3.10.4 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -946,7 +971,7 @@ body.qEditLock393{
 <div id="appearanceRecoveryResults" style="margin-top:8px"></div>
 </div>
 <div class="card"><b>数据管理</b>
-<p class="small">V3.10.3 起，题库本体使用 IndexedDB 大容量数据库保存，不再受 localStorage 小容量限制。“恢复完整备份”会用备份替换当前题库；“批量追加题目”只追加题目，不覆盖其他错题本。</p>
+<p class="small">V3.10.4 起，题库本体使用 IndexedDB 大容量数据库保存，不再受 localStorage 小容量限制。“恢复完整备份”会用备份替换当前题库；“批量追加题目”只追加题目，不覆盖其他错题本。</p>
 <div class="row"><button class="secondary" onclick="exportData()">导出备份</button><button class="secondary" onclick="$('imp').click()">恢复完整备份</button></div>
 <button class="primary" style="width:100%;margin-top:10px" onclick="$('appendImp').click()">批量追加题目</button>
 </div></section>
@@ -966,7 +991,7 @@ body.qEditLock393{
 
 const K='wrongbook_v3_2_1';
 
-/* ===== V3.10.3 scalable data storage =====
+/* ===== V3.10.4 scalable data storage =====
    Source of truth: IndexedDB.
    localStorage only keeps tiny flags/UI state.
 */
@@ -1078,7 +1103,7 @@ async function wbPersistNow310(){
     }
 
     ms.put({
-      version:'3.10.3',
+      version:'3.10.4',
       savedAt:Date.now(),
       bookCount:books.length,
       questionCount:qs.length
@@ -1091,7 +1116,7 @@ async function wbPersistNow310(){
       localStorage.setItem(WB_MARKER_310,'1');
       localStorage.setItem(K,JSON.stringify({
         storage:'indexeddb',
-        version:'3.10.3',
+        version:'3.10.4',
         books:books.length,
         qs:qs.length
       }));
@@ -1134,12 +1159,12 @@ async function wbBoot310(){
 
     if(hasIndexed){
       D={books:stored.books||[],qs:stored.qs||[]};
-      MIGRATION_SOURCE='IndexedDB V3.10.3';
+      MIGRATION_SOURCE='IndexedDB V3.10.4';
     }else{
       // First launch after upgrade: D already contains the best legacy localStorage data.
       // Persist it once into IndexedDB, then release the old localStorage payload.
       await wbPersistNow310();
-      MIGRATION_SOURCE=MIGRATION_SOURCE==='new'?'V3.10.3 新题库':`${MIGRATION_SOURCE} → IndexedDB`;
+      MIGRATION_SOURCE=MIGRATION_SOURCE==='new'?'V3.10.4 新题库':`${MIGRATION_SOURCE} → IndexedDB`;
     }
 
     if(!Array.isArray(D.books))D.books=[];
@@ -1152,7 +1177,7 @@ async function wbBoot310(){
     try{
       localStorage.setItem(K,JSON.stringify({
         storage:'indexeddb',
-        version:'3.10.3',
+        version:'3.10.4',
         books:D.books.length,
         qs:D.qs.length
       }));
@@ -1744,10 +1769,10 @@ function updateDataStatus(){
     wrongbook_v1:'V1',
     new:'新题库'
   };
-  el.innerHTML=`已读取：<b>${sourceNames[MIGRATION_SOURCE]||MIGRATION_SOURCE}</b><br>错题本：${D.books.length} 本 · 题目：${D.qs.length} 道<br>当前保存目标：V3.10.3 IndexedDB 大题库`;
+  el.innerHTML=`已读取：<b>${sourceNames[MIGRATION_SOURCE]||MIGRATION_SOURCE}</b><br>错题本：${D.books.length} 本 · 题目：${D.qs.length} 道<br>当前保存目标：V3.10.4 IndexedDB 大题库`;
 }
 
-// V3.10.3: status updates after IndexedDB boot completes.
+// V3.10.4: status updates after IndexedDB boot completes.
 </script>
 <script>
 /* ===== V3 behavior; keeps the V2 localStorage key and all existing questions ===== */
@@ -2026,7 +2051,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.10.3';
+const APP_VERSION='3.10.4';
 async function checkOnlineVersion(){
   try{
     const r=await fetch('./version.json?t='+Date.now(),{cache:'no-store'});
@@ -4154,13 +4179,13 @@ function closeUnderline377(){
 }
 
 
-/* ===== V3.10.3 cleanup page scroll state when leaving All Questions ===== */
+/* ===== V3.10.4 cleanup page scroll state when leaving All Questions ===== */
 document.querySelectorAll('nav button').forEach(btn=>{
   btn.addEventListener('click',()=>document.body.classList.remove('bookIndexOpen382'));
 });
 
 
-/* ===== V3.10.3 subject-aware backup import routing ===== */
+/* ===== V3.10.4 subject-aware backup import routing ===== */
 function normSubject383(v){
   return String(v||'').trim().replace(/\s+/g,'').toLowerCase();
 }
@@ -4262,7 +4287,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
         }else if(Array.isArray(payload.qs)) payload.qs=rr.routed;
         else payload.questions=rr.routed;
       }
-    }catch(e){ console.warn('V3.10.3 auto route fallback',e); }
+    }catch(e){ console.warn('V3.10.4 auto route fallback',e); }
     return old.apply(this,args);
   };
 });
@@ -4270,7 +4295,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
 </script>
 
 <script id="v390patch">
-/* ===== V3.10.3 智能刷题版 ===== */
+/* ===== V3.10.4 智能刷题版 ===== */
 const V390_PROGRESS_KEY='wrongbook_v390_progress';
 const V390_VARIANT_KEY='wrongbook_v390_variants';
 function v390Read(k,fallback={}){try{return JSON.parse(localStorage.getItem(k)||'null')||fallback}catch(e){return fallback}}
@@ -4372,7 +4397,7 @@ function openVariantHub390(bookId){
 function generateVariant390(bookId){const range=$('v390Range').value,count=$('v390Count').value,strength=$('v390Strength').value;let pool=(range==='mist'?v390Mistakes(bookId):v390BookQs(bookId)).filter(q=>q.type==='choice');pool=v390Shuffle(pool);if(count!=='all')pool=pool.slice(0,Number(count));const items=pool.map(q=>v390MakeVariant(q,bookId,strength)).filter(Boolean);if(!items.length)return alert('当前题库可用于生成的混淆答案不足。');const all=v390Variants(),set={id:'vs_'+Date.now(),name:`${range==='mist'?'错题变式':'全库变式'} · ${strength==='high'?'高干扰':strength==='similar'?'相近':'基础'}`,at:Date.now(),items};all[bookId]=(all[bookId]||[]).concat(set).slice(-8);v390SaveVariants(all);startVariantSet390(bookId,set.id)}
 function startVariantSet390(bookId,setId){const set=(v390Variants()[bookId]||[]).find(x=>x.id===setId);if(!set)return alert('没有找到该变式题库');page('study');quiz={list:v390Shuffle(set.items),i:0,score:0,locked:false,scope:bookId,v390Mode:'variant'};drawQuiz()}
 
-/* ===== V3.10.3 robust book-editor interaction ===== */
+/* ===== V3.10.4 robust book-editor interaction ===== */
 let __bookEditScroll392=0;
 
 function activateBookEditor392(){
@@ -4456,7 +4481,7 @@ if(typeof saveBookV3==='function'){
 
 
 
-/* ===== V3.10.3 question editor scroll + canonical duplicate protection ===== */
+/* ===== V3.10.4 question editor scroll + canonical duplicate protection ===== */
 let __qEditScroll393=0;
 
 function v393CanonText(s){
@@ -4764,12 +4789,12 @@ setTimeout(()=>{
   const removed=v393DedupeAll(false);
   if(removed){
     try{render();renderV3Books?.();}catch(e){}
-    console.log(`V3.10.3 merged ${removed} duplicate questions`);
+    console.log(`V3.10.4 merged ${removed} duplicate questions`);
   }
 },120);
 
 
-/* ===== V3.10.3 auto-create books from backup/question metadata ===== */
+/* ===== V3.10.4 auto-create books from backup/question metadata ===== */
 function v394CleanBookName(v){
   return String(v||'').trim().replace(/\s+/g,' ');
 }
@@ -5043,7 +5068,7 @@ importBackupFile = function(file){
     try{
       const raw=JSON.parse(r.result);
       const converted=normalizeImportedData(raw);
-      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份将恢复：${converted.books.length} 本 / ${converted.qs.length} 道题\n若备份没有 books 信息，V3.10.3 会按科目自动创建错题本。\n继续将替换当前题库。确定吗？`))return;
+      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份将恢复：${converted.books.length} 本 / ${converted.qs.length} 道题\n若备份没有 books 信息，V3.10.4 会按科目自动创建错题本。\n继续将替换当前题库。确定吗？`))return;
       D=converted;
       if(typeof v393DedupeAll==='function')v393DedupeAll(false);
       persistCompat310();
@@ -5059,7 +5084,7 @@ importBackupFile = function(file){
 };
 
 
-/* ===== V3.10.3 cover storage: IndexedDB + compression, avoid localStorage quota ===== */
+/* ===== V3.10.4 cover storage: IndexedDB + compression, avoid localStorage quota ===== */
 const COVER_DB_395='wrongbook_covers_v395';
 const COVER_STORE_395='covers';
 
@@ -5236,7 +5261,7 @@ if(typeof saveBookV3==='function'){
       ret=__oldSaveBookV3_395.call(this,id,...rest);
     }catch(err){
       if(String(err?.message||err).includes('quota')){
-        alert('保存失败：本地题库空间已满。V3.10.3 已把封面移出 localStorage，但你的题库文本数据本身也已接近上限。建议先导出完整备份。');
+        alert('保存失败：本地题库空间已满。V3.10.4 已把封面移出 localStorage，但你的题库文本数据本身也已接近上限。建议先导出完整备份。');
         return;
       }
       throw err;
@@ -5292,7 +5317,7 @@ setTimeout(async()=>{
 
 
 
-/* ===== V3.10.3 stable cover restore + explicit cover mode + photo inner pages ===== */
+/* ===== V3.10.4 stable cover restore + explicit cover mode + photo inner pages ===== */
 let __pendingCoverBlob3101=null;
 let __pendingPaperBlob3101=null;
 let __coverMode3101='solid';
@@ -5620,7 +5645,7 @@ setTimeout(()=>{
 
 
 
-/* ===== V3.10.3 persistent random quiz + global dedupe + long list positioning ===== */
+/* ===== V3.10.4 persistent random quiz + global dedupe + long list positioning ===== */
 const V3103_QUIZ_KEY='wrongbook_v3103_quiz_progress';
 let __bankNavScrollHandler103=null;
 let __bankAnchor103=null;
@@ -5924,6 +5949,111 @@ document.addEventListener('click',e=>{
   const back=e.target.closest?.('.readerTop .circleBtn,.modeBar391 .modeBtn');
   if(back && !String(back.textContent||'').includes('全部题目')){
     setTimeout(()=>{if(!document.body.classList.contains('bookIndexOpen382'))removeFastBankNav103()},50);
+  }
+},true);
+
+
+
+/* ===== V3.10.4 correct-auto-next / wrong-can-go-back ===== */
+let __v3104AutoTimer=null;
+
+function v3104RemovePrev(){
+  document.getElementById('quizPrev104')?.remove();
+}
+function v3104ShowPrev(){
+  v3104RemovePrev();
+  if(!quiz || quiz.v390Mode!=='random' || !quiz.locked || Number(quiz.i||0)<=0)return;
+  const btn=document.createElement('button');
+  btn.id='quizPrev104';
+  btn.className='quizPrev104';
+  btn.type='button';
+  btn.setAttribute('aria-label','上一题');
+  btn.textContent='‹';
+  btn.onclick=v3104PrevQuestion;
+  document.body.appendChild(btn);
+}
+function v3104PrevQuestion(){
+  if(__v3104AutoTimer){
+    clearTimeout(__v3104AutoTimer);
+    __v3104AutoTimer=null;
+  }
+  if(!quiz || quiz.v390Mode!=='random' || quiz.i<=0)return;
+  quiz.i--;
+  quiz.locked=false;
+  v3103SaveQuizState?.();
+  v3104RemovePrev();
+  drawQuiz();
+  window.scrollTo({top:0,behavior:'auto'});
+}
+
+/* keep the existing renderer, but control the random-mode navigation */
+const __drawQuiz104=drawQuiz;
+drawQuiz=function(){
+  v3104RemovePrev();
+  __drawQuiz104();
+  if(quiz?.v390Mode==='random' && quiz?.locked){
+    v3104ShowPrev();
+  }
+};
+
+/* Wrap the final V3.10.3 pick implementation.
+   Correct answer: show feedback briefly, then automatically move on.
+   Wrong answer: stay on the question; left-side previous button is available.
+*/
+const __pick104=pick;
+pick=function(qid,i){
+  if(__v3104AutoTimer){
+    clearTimeout(__v3104AutoTimer);
+    __v3104AutoTimer=null;
+  }
+
+  const q=(quiz?.list||[])[quiz?.i||0];
+  const correctIndex=q ? "ABCD".indexOf(q.ans || q.answer || "A") : -1;
+  const isCorrect=(i===correctIndex);
+
+  const beforeI=quiz?.i||0;
+  const r=__pick104(qid,i);
+
+  if(quiz?.v390Mode==='random'){
+    v3103SaveQuizState?.();
+
+    if(isCorrect){
+      v3104RemovePrev();
+      // Give enough time to see the green correct state, then advance.
+      __v3104AutoTimer=setTimeout(()=>{
+        __v3104AutoTimer=null;
+        // Only advance if the user is still on the same answered question.
+        if(quiz?.v390Mode==='random' && quiz?.locked && quiz.i===beforeI){
+          nextQuiz();
+          window.scrollTo({top:0,behavior:'auto'});
+        }
+      },650);
+    }else{
+      // Wrong answer stays on current question and offers previous-question navigation.
+      setTimeout(v3104ShowPrev,0);
+    }
+  }
+  return r;
+};
+
+/* When the user manually advances, remove floating previous control. */
+const __nextQuiz104=nextQuiz;
+nextQuiz=function(){
+  if(__v3104AutoTimer){
+    clearTimeout(__v3104AutoTimer);
+    __v3104AutoTimer=null;
+  }
+  v3104RemovePrev();
+  return __nextQuiz104();
+};
+
+/* Clean up floating navigation when leaving study pages. */
+document.addEventListener('click',e=>{
+  const txt=String(e.target?.textContent||'');
+  if(txt.includes('返回') || txt.includes('首页') || txt.includes('题库')){
+    setTimeout(()=>{
+      if(!quiz || quiz.v390Mode!=='random')v3104RemovePrev();
+    },30);
   }
 },true);
 
