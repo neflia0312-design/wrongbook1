@@ -1,0 +1,26 @@
+{
+  "id": "./",
+  "name": "错题本",
+  "short_name": "错题本",
+  "description": "错题、记背与复习工具",
+  "lang": "zh-CN",
+  "start_url": "./?pwa=1",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f6f2",
+  "theme_color": "#f7f6f2",
+  "icons": [
+    {
+      "src": "./icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

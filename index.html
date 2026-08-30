@@ -8,6 +8,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
+<meta name="wrongbook-version" content="3.11.0">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="./manifest.webmanifest">
+
 
 
 <title>错题本</title>
@@ -653,7 +657,7 @@ body.scanLock371{overflow:hidden!important;position:fixed!important;width:100%!i
 .ulineWord377{font-size:15px;font-weight:700;line-height:1.6;word-break:break-word}
 
 
-/* ===== V3.10.4 All Questions = expanded list + reliable page scroll ===== */
+/* ===== V3.11.0 All Questions = expanded list + reliable page scroll ===== */
 body.bookIndexOpen382{
   position:static!important;
   top:auto!important;
@@ -719,7 +723,7 @@ body.bookIndexOpen382 #readerArea{
 }
 
 
-/* ===== V3.10.4 题号 / 原位编辑 / 选项清洗 ===== */
+/* ===== V3.11.0 题号 / 原位编辑 / 选项清洗 ===== */
 .qNo391{display:inline-flex;align-items:center;padding:6px 9px;border-radius:9px;background:#efede8;font-size:12px;font-weight:800}
 .bookIndexItem382{scroll-margin-top:110px}
 .modeBar391{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 14px}
@@ -727,7 +731,7 @@ body.bookIndexOpen382 #readerArea{
 .readerQuestionNo391{display:inline-flex;margin:0 0 10px;padding:5px 9px;border-radius:9px;background:#f0ede8;font-size:11px;font-weight:800;color:#625d58}
 
 
-/* ===== V3.10.4 book editor scroll isolation fix ===== */
+/* ===== V3.11.0 book editor scroll isolation fix ===== */
 body.bookEditLock392{
   overflow:hidden!important;
   position:fixed!important;
@@ -774,7 +778,7 @@ body.bookEditLock392{
 }
 
 
-/* ===== V3.10.4 question editor / answer editor isolated scroll ===== */
+/* ===== V3.11.0 question editor / answer editor isolated scroll ===== */
 body.qEditLock393{
   overflow:hidden!important;
   position:fixed!important;
@@ -821,7 +825,7 @@ body.qEditLock393{
 }
 
 
-/* ===== V3.10.4 cover & inner-page media editor ===== */
+/* ===== V3.11.0 cover & inner-page media editor ===== */
 .mediaMode3101{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:7px 0 10px}
 .mediaMode3101 button{border:1px solid var(--line);background:#fff;border-radius:13px;padding:11px 8px;font-weight:650}
 .mediaMode3101 button.on{background:#20201e;color:#fff}
@@ -853,7 +857,7 @@ body.qEditLock393{
 }
 
 
-/* ===== V3.10.4 full-cover image fit ===== */
+/* ===== V3.11.0 full-cover image fit ===== */
 /* Photo covers show the complete source image. No center-cropping. */
 .coverBg[data-cover-book]{
   background-size:100% 100%!important;
@@ -867,7 +871,7 @@ body.qEditLock393{
 }
 
 
-/* ===== V3.10.4 long-bank workflow ===== */
+/* ===== V3.11.0 long-bank workflow ===== */
 .fastBankNav103{
   position:fixed;right:7px;top:50%;transform:translateY(-50%);
   z-index:2147482000;width:34px;padding:5px 3px;
@@ -904,7 +908,7 @@ body.qEditLock393{
 }
 
 
-/* ===== V3.10.4 random quiz flow ===== */
+/* ===== V3.11.0 random quiz flow ===== */
 .quizPrev104{
   position:fixed;
   left:18px;
@@ -948,7 +952,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.10.4</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.11</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -960,9 +964,9 @@ body.qEditLock393{
 </div>
 <div class="section">题库</div><input class="search" id="search" placeholder="搜索题目 / 知识点" oninput="renderBank()"><div id="bankList"></div></section>
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
-<section id="set" class="page"><div class="note updateNote">V3.4.2 起：主屏幕版会检查线上版本。以后升级只需要替换 GitHub 的 index.html；若检测到新版，会提示刷新，不需要每次重新添加主屏幕。</div><div class="section">设置</div>
+<section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.10.4 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
+<p class="small">当前版本：V3.11 自动更新主屏幕版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -971,7 +975,7 @@ body.qEditLock393{
 <div id="appearanceRecoveryResults" style="margin-top:8px"></div>
 </div>
 <div class="card"><b>数据管理</b>
-<p class="small">V3.10.4 起，题库本体使用 IndexedDB 大容量数据库保存，不再受 localStorage 小容量限制。“恢复完整备份”会用备份替换当前题库；“批量追加题目”只追加题目，不覆盖其他错题本。</p>
+<p class="small">V3.11.0 起，题库本体使用 IndexedDB 大容量数据库保存，不再受 localStorage 小容量限制。“恢复完整备份”会用备份替换当前题库；“批量追加题目”只追加题目，不覆盖其他错题本。</p>
 <div class="row"><button class="secondary" onclick="exportData()">导出备份</button><button class="secondary" onclick="$('imp').click()">恢复完整备份</button></div>
 <button class="primary" style="width:100%;margin-top:10px" onclick="$('appendImp').click()">批量追加题目</button>
 </div></section>
@@ -991,9 +995,13 @@ body.qEditLock393{
 
 const K='wrongbook_v3_2_1';
 
-/* ===== V3.10.4 scalable data storage =====
+/* ===== V3.11.0 scalable data storage =====
    Source of truth: IndexedDB.
    localStorage only keeps tiny flags/UI state.
+*/
+/* V3.11 IMPORTANT:
+   The database identity below is permanent across UI/app versions.
+   Do not rename it just because APP_VERSION changes.
 */
 const WB_DB_310='wrongbook_data_v310';
 const WB_DB_VER_310=1;
@@ -1103,7 +1111,7 @@ async function wbPersistNow310(){
     }
 
     ms.put({
-      version:'3.10.4',
+      version:'3.11.0',
       savedAt:Date.now(),
       bookCount:books.length,
       questionCount:qs.length
@@ -1116,7 +1124,7 @@ async function wbPersistNow310(){
       localStorage.setItem(WB_MARKER_310,'1');
       localStorage.setItem(K,JSON.stringify({
         storage:'indexeddb',
-        version:'3.10.4',
+        version:'3.11.0',
         books:books.length,
         qs:qs.length
       }));
@@ -1159,12 +1167,12 @@ async function wbBoot310(){
 
     if(hasIndexed){
       D={books:stored.books||[],qs:stored.qs||[]};
-      MIGRATION_SOURCE='IndexedDB V3.10.4';
+      MIGRATION_SOURCE='IndexedDB V3.11.0';
     }else{
       // First launch after upgrade: D already contains the best legacy localStorage data.
       // Persist it once into IndexedDB, then release the old localStorage payload.
       await wbPersistNow310();
-      MIGRATION_SOURCE=MIGRATION_SOURCE==='new'?'V3.10.4 新题库':`${MIGRATION_SOURCE} → IndexedDB`;
+      MIGRATION_SOURCE=MIGRATION_SOURCE==='new'?'V3.11.0 新题库':`${MIGRATION_SOURCE} → IndexedDB`;
     }
 
     if(!Array.isArray(D.books))D.books=[];
@@ -1177,7 +1185,7 @@ async function wbBoot310(){
     try{
       localStorage.setItem(K,JSON.stringify({
         storage:'indexeddb',
-        version:'3.10.4',
+        version:'3.11.0',
         books:D.books.length,
         qs:D.qs.length
       }));
@@ -1769,10 +1777,10 @@ function updateDataStatus(){
     wrongbook_v1:'V1',
     new:'新题库'
   };
-  el.innerHTML=`已读取：<b>${sourceNames[MIGRATION_SOURCE]||MIGRATION_SOURCE}</b><br>错题本：${D.books.length} 本 · 题目：${D.qs.length} 道<br>当前保存目标：V3.10.4 IndexedDB 大题库`;
+  el.innerHTML=`已读取：<b>${sourceNames[MIGRATION_SOURCE]||MIGRATION_SOURCE}</b><br>错题本：${D.books.length} 本 · 题目：${D.qs.length} 道<br>当前保存目标：V3.11.0 IndexedDB 大题库`;
 }
 
-// V3.10.4: status updates after IndexedDB boot completes.
+// V3.11.0: status updates after IndexedDB boot completes.
 </script>
 <script>
 /* ===== V3 behavior; keeps the V2 localStorage key and all existing questions ===== */
@@ -2051,20 +2059,105 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.10.4';
-async function checkOnlineVersion(){
+const APP_VERSION='3.11.0';
+const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
+
+function versionParts311(v){
+  return String(v||'0').replace(/^V/i,'').split('.').map(x=>parseInt(x,10)||0);
+}
+function versionNewer311(a,b){
+  const A=versionParts311(a),B=versionParts311(b);
+  for(let i=0;i<Math.max(A.length,B.length);i++){
+    const x=A[i]||0,y=B[i]||0;
+    if(x!==y)return x>y;
+  }
+  return false;
+}
+function updateToast311(msg){
+  let el=document.getElementById('updateToast311');
+  if(!el){
+    el=document.createElement('div');
+    el.id='updateToast311';
+    el.style.cssText='position:fixed;left:50%;top:max(18px,env(safe-area-inset-top));transform:translateX(-50%);z-index:2147483000;background:#22201d;color:white;padding:9px 13px;border-radius:999px;font-size:12px;font-weight:700;box-shadow:0 5px 20px #0003;max-width:82vw;text-align:center';
+    document.body.appendChild(el);
+  }
+  el.textContent=msg;
+  clearTimeout(el.__tm);
+  el.__tm=setTimeout(()=>el.remove(),2600);
+}
+async function registerWrongbookSW311(){
+  if(!('serviceWorker' in navigator))return null;
   try{
-    const r=await fetch('./version.json?t='+Date.now(),{cache:'no-store'});
-    if(!r.ok)return;
-    const v=await r.json();
-    if(v.version && v.version!==APP_VERSION){
-      if(confirm(`发现新版 V${v.version}，现在更新吗？\n你的本地题目和封面不会被删除。`)){
-        location.replace('./?updated='+encodeURIComponent(v.version)+'&t='+Date.now());
-      }
+    const reg=await navigator.serviceWorker.register('./sw.js',{scope:'./',updateViaCache:'none'});
+    reg.update().catch(()=>{});
+    if(reg.waiting)reg.waiting.postMessage({type:'SKIP_WAITING'});
+    return reg;
+  }catch(e){
+    console.warn('SW register failed',e);
+    return null;
+  }
+}
+async function probeOnlineBuild311(){
+  try{
+    const r=await fetch('./index.html?wb_probe='+Date.now(),{
+      cache:'no-store',
+      headers:{'Cache-Control':'no-cache'}
+    });
+    if(!r.ok)return null;
+    const html=await r.text();
+    const m=html.match(/<meta\s+name=["']wrongbook-version["']\s+content=["']([^"']+)["']/i)
+      || html.match(/const\s+APP_VERSION\s*=\s*["']([^"']+)["']/);
+    return m?m[1]:null;
+  }catch(e){return null}
+}
+async function forceLatestBuild311(v){
+  let a={};
+  try{a=JSON.parse(sessionStorage.getItem(WB_UPDATE_ATTEMPT_KEY)||'{}')}catch(e){}
+  if(a.version===v && (a.count||0)>=3){
+    updateToast311(`V${v} 正在发布中，稍后再次打开会继续更新`);
+    return;
+  }
+  a={version:v,count:(a.version===v?(a.count||0):0)+1,at:Date.now()};
+  sessionStorage.setItem(WB_UPDATE_ATTEMPT_KEY,JSON.stringify(a));
+
+  updateToast311(`发现 V${v}，正在自动更新…`);
+  try{
+    const reg=await registerWrongbookSW311();
+    if(reg){
+      await reg.update().catch(()=>{});
+      if(reg.waiting)reg.waiting.postMessage({type:'SKIP_WAITING'});
     }
   }catch(e){}
+
+  setTimeout(()=>{
+    const u=new URL('./',location.href);
+    u.searchParams.set('wb_version',v);
+    u.searchParams.set('wb_refresh',Date.now());
+    location.replace(u.href);
+  },500);
 }
-setTimeout(checkOnlineVersion,1800);
+async function checkOnlineVersion(){
+  const online=await probeOnlineBuild311();
+  if(online && versionNewer311(online,APP_VERSION)){
+    await forceLatestBuild311(online);
+  }
+}
+async function initAutoUpdate311(){
+  await registerWrongbookSW311();
+  try{
+    const p=new URL(location.href).searchParams;
+    if(p.get('wb_version')===APP_VERSION){
+      sessionStorage.removeItem(WB_UPDATE_ATTEMPT_KEY);
+      setTimeout(()=>updateToast311(`已更新至 V${APP_VERSION}`),700);
+    }
+  }catch(e){}
+  setTimeout(checkOnlineVersion,900);
+}
+initAutoUpdate311();
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible')setTimeout(checkOnlineVersion,500);
+});
+window.addEventListener('pageshow',()=>setTimeout(checkOnlineVersion,700));
 
 
 /* V3.6 mind-map, page-turn and exam export */
@@ -4179,13 +4272,13 @@ function closeUnderline377(){
 }
 
 
-/* ===== V3.10.4 cleanup page scroll state when leaving All Questions ===== */
+/* ===== V3.11.0 cleanup page scroll state when leaving All Questions ===== */
 document.querySelectorAll('nav button').forEach(btn=>{
   btn.addEventListener('click',()=>document.body.classList.remove('bookIndexOpen382'));
 });
 
 
-/* ===== V3.10.4 subject-aware backup import routing ===== */
+/* ===== V3.11.0 subject-aware backup import routing ===== */
 function normSubject383(v){
   return String(v||'').trim().replace(/\s+/g,'').toLowerCase();
 }
@@ -4287,7 +4380,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
         }else if(Array.isArray(payload.qs)) payload.qs=rr.routed;
         else payload.questions=rr.routed;
       }
-    }catch(e){ console.warn('V3.10.4 auto route fallback',e); }
+    }catch(e){ console.warn('V3.11.0 auto route fallback',e); }
     return old.apply(this,args);
   };
 });
@@ -4295,7 +4388,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
 </script>
 
 <script id="v390patch">
-/* ===== V3.10.4 智能刷题版 ===== */
+/* ===== V3.11.0 智能刷题版 ===== */
 const V390_PROGRESS_KEY='wrongbook_v390_progress';
 const V390_VARIANT_KEY='wrongbook_v390_variants';
 function v390Read(k,fallback={}){try{return JSON.parse(localStorage.getItem(k)||'null')||fallback}catch(e){return fallback}}
@@ -4397,7 +4490,7 @@ function openVariantHub390(bookId){
 function generateVariant390(bookId){const range=$('v390Range').value,count=$('v390Count').value,strength=$('v390Strength').value;let pool=(range==='mist'?v390Mistakes(bookId):v390BookQs(bookId)).filter(q=>q.type==='choice');pool=v390Shuffle(pool);if(count!=='all')pool=pool.slice(0,Number(count));const items=pool.map(q=>v390MakeVariant(q,bookId,strength)).filter(Boolean);if(!items.length)return alert('当前题库可用于生成的混淆答案不足。');const all=v390Variants(),set={id:'vs_'+Date.now(),name:`${range==='mist'?'错题变式':'全库变式'} · ${strength==='high'?'高干扰':strength==='similar'?'相近':'基础'}`,at:Date.now(),items};all[bookId]=(all[bookId]||[]).concat(set).slice(-8);v390SaveVariants(all);startVariantSet390(bookId,set.id)}
 function startVariantSet390(bookId,setId){const set=(v390Variants()[bookId]||[]).find(x=>x.id===setId);if(!set)return alert('没有找到该变式题库');page('study');quiz={list:v390Shuffle(set.items),i:0,score:0,locked:false,scope:bookId,v390Mode:'variant'};drawQuiz()}
 
-/* ===== V3.10.4 robust book-editor interaction ===== */
+/* ===== V3.11.0 robust book-editor interaction ===== */
 let __bookEditScroll392=0;
 
 function activateBookEditor392(){
@@ -4481,7 +4574,7 @@ if(typeof saveBookV3==='function'){
 
 
 
-/* ===== V3.10.4 question editor scroll + canonical duplicate protection ===== */
+/* ===== V3.11.0 question editor scroll + canonical duplicate protection ===== */
 let __qEditScroll393=0;
 
 function v393CanonText(s){
@@ -4789,12 +4882,12 @@ setTimeout(()=>{
   const removed=v393DedupeAll(false);
   if(removed){
     try{render();renderV3Books?.();}catch(e){}
-    console.log(`V3.10.4 merged ${removed} duplicate questions`);
+    console.log(`V3.11.0 merged ${removed} duplicate questions`);
   }
 },120);
 
 
-/* ===== V3.10.4 auto-create books from backup/question metadata ===== */
+/* ===== V3.11.0 auto-create books from backup/question metadata ===== */
 function v394CleanBookName(v){
   return String(v||'').trim().replace(/\s+/g,' ');
 }
@@ -5068,7 +5161,7 @@ importBackupFile = function(file){
     try{
       const raw=JSON.parse(r.result);
       const converted=normalizeImportedData(raw);
-      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份将恢复：${converted.books.length} 本 / ${converted.qs.length} 道题\n若备份没有 books 信息，V3.10.4 会按科目自动创建错题本。\n继续将替换当前题库。确定吗？`))return;
+      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份将恢复：${converted.books.length} 本 / ${converted.qs.length} 道题\n若备份没有 books 信息，V3.11.0 会按科目自动创建错题本。\n继续将替换当前题库。确定吗？`))return;
       D=converted;
       if(typeof v393DedupeAll==='function')v393DedupeAll(false);
       persistCompat310();
@@ -5084,7 +5177,7 @@ importBackupFile = function(file){
 };
 
 
-/* ===== V3.10.4 cover storage: IndexedDB + compression, avoid localStorage quota ===== */
+/* ===== V3.11.0 cover storage: IndexedDB + compression, avoid localStorage quota ===== */
 const COVER_DB_395='wrongbook_covers_v395';
 const COVER_STORE_395='covers';
 
@@ -5261,7 +5354,7 @@ if(typeof saveBookV3==='function'){
       ret=__oldSaveBookV3_395.call(this,id,...rest);
     }catch(err){
       if(String(err?.message||err).includes('quota')){
-        alert('保存失败：本地题库空间已满。V3.10.4 已把封面移出 localStorage，但你的题库文本数据本身也已接近上限。建议先导出完整备份。');
+        alert('保存失败：本地题库空间已满。V3.11.0 已把封面移出 localStorage，但你的题库文本数据本身也已接近上限。建议先导出完整备份。');
         return;
       }
       throw err;
@@ -5317,7 +5410,7 @@ setTimeout(async()=>{
 
 
 
-/* ===== V3.10.4 stable cover restore + explicit cover mode + photo inner pages ===== */
+/* ===== V3.11.0 stable cover restore + explicit cover mode + photo inner pages ===== */
 let __pendingCoverBlob3101=null;
 let __pendingPaperBlob3101=null;
 let __coverMode3101='solid';
@@ -5645,7 +5738,7 @@ setTimeout(()=>{
 
 
 
-/* ===== V3.10.4 persistent random quiz + global dedupe + long list positioning ===== */
+/* ===== V3.11.0 persistent random quiz + global dedupe + long list positioning ===== */
 const V3103_QUIZ_KEY='wrongbook_v3103_quiz_progress';
 let __bankNavScrollHandler103=null;
 let __bankAnchor103=null;
@@ -5954,7 +6047,7 @@ document.addEventListener('click',e=>{
 
 
 
-/* ===== V3.10.4 correct-auto-next / wrong-can-go-back ===== */
+/* ===== V3.11.0 correct-auto-next / wrong-can-go-back ===== */
 let __v3104AutoTimer=null;
 
 function v3104RemovePrev(){
