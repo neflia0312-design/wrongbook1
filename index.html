@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="3.11.1">
+<meta name="wrongbook-version" content="3.11.2">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -932,6 +932,17 @@ body.qEditLock393{
 }
 .quizPrev104:active{transform:translateY(-50%) scale(.96)}
 
+
+/* ===== V3.11.2 bank-edit / wrongbook-readonly ===== */
+.bankHit3112{position:relative;padding-right:112px!important}
+.bankActions3112{position:absolute;right:14px;top:50%;transform:translateY(-50%);display:flex;gap:7px}
+.bankActions3112 button{border:0;border-radius:11px;padding:9px 12px;font-weight:800;background:#f1efeb;color:#222}
+.bankActions3112 .edit{background:#1f1f1d;color:#fff}
+.bookIndexSearch3112{margin:10px 0 12px}
+.bookIndexReadOnly3112{font-size:11px;color:#8d8882;margin:4px 0 10px}
+.saveToast3112{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;background:#1f1f1d;color:#fff;padding:11px 18px;border-radius:999px;font-weight:800;box-shadow:0 8px 28px #0002;animation:toast3112 .2s ease}
+@keyframes toast3112{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-width:560px){.bankHit3112{padding-right:96px!important}.bankActions3112 button{padding:8px 10px}}
 </style>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -952,7 +963,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.11.1</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.11.2</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -966,7 +977,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.11 自动更新主屏幕版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V3.11.2 题库集中编辑版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -2059,7 +2070,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.11.1';
+const APP_VERSION='3.11.2';
 const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
 
 function versionParts311(v){
@@ -3489,7 +3500,8 @@ function showQuestion368(qid){
   <div><div class="row" style="flex-wrap:wrap"><span class="tag">${typeN(q.type)}</span><span class="tag">${esc(bookTitleV3(b)||'未分类')}</span></div>
   <div class="qText" style="margin-top:12px">${esc(q.text)}</div>
   ${q.type==='choice'?`<div style="margin-top:10px">${opts.map((o,i)=>`<div class="optLine">${'ABCD'[i]}. ${renderStoredOption377(q,i)}</div>`).join('')}</div>`:''}
-  <div class="qDetail368"><b>参考答案</b><br>${esc(answer368(q))}</div></div>`);
+  <div class="qDetail368"><b>参考答案</b><br>${esc(answer368(q))}</div>
+  <div class="row" style="margin-top:14px"><button class="primary" style="width:100%" onclick="editQuestion3611(null,'${q.id}','bank')">修改题目</button></div></div>`);
 }
 let bookIndexType3610='all';
 function indexStem382(q){
@@ -3576,8 +3588,10 @@ function openBookIndex368(bookId,type='all'){
   </div>
 
   <div class="note" style="margin-bottom:10px">
-    这里直接显示完整题目、选项和标准答案；不需要再点进“题目详情”。页面可直接上下滑动查看全部题目。
+    这里仅用于查阅与搜索。题目内容的修改统一前往底部“题库”页面完成。
   </div>
+  <input class="search bookIndexSearch3112" id="bookIndexSearch3112" placeholder="搜索本错题本题目 / 选项 / 答案" oninput="filterBookIndex3112(this.value)">
+  <div class="bookIndexReadOnly3112">只读模式 · 不在错题本内修改或删除题目</div>
 
   <div class="bookIndex382">${filtered.length?filtered.map(q=>{
     const originalIndex=qs.findIndex(x=>x.id===q.id)+1;
@@ -3602,10 +3616,6 @@ function openBookIndex368(bookId,type='all'){
       <div class="qAnswer382"><b>标准答案</b>${esc(indexAnswer382(q))}</div>
       ${q.note?`<div class="qMeta382">${esc(q.note)}</div>`:''}
 
-      <div class="qManageRow382">
-        <button class="qEdit382" onclick="editQuestion3611(event,'${q.id}')">修改</button>
-        <button class="qDelete382" onclick="deleteQuestion3611(event,'${q.id}','${bookId}')">删除</button>
-      </div>
     </div>`;
   }).join(''):'<div class="card">该分类暂无题目</div>'}</div>`;
 
@@ -3646,8 +3656,9 @@ requestAnimationFrame(enhanceBank368);
 
 
 /* ===== V3.6.11 edit/delete existing questions ===== */
-function editQuestion3611(e,qid){
+function editQuestion3611(e,qid,source='bank'){
   e?.stopPropagation?.();
+  window.__editSource3112=source||'bank';
   const q=D.qs.find(x=>x.id===qid);if(!q)return;
   const opts=q.opts||q.options||[];
   modal(`<div class="sheetBar">
@@ -3727,14 +3738,13 @@ function saveEditedQuestion3611(qid){
   // Keep q.id, q.book/bookId, level/right/wrong/next and all study history.
   if(save()){
     const keepQid=q.id;
+    const src=window.__editSource3112||'bank';
     closeEditQuestion3612();
-    if(document.getElementById('reader')?.classList.contains('on')){
-      const bookId=bookIdOf(q);
-      openBookIndex368(bookId, typeof bookIndexType3610!=='undefined'?bookIndexType3610:'all');
-      requestAnimationFrame(()=>requestAnimationFrame(()=>{
-        const el=document.getElementById('qcard391_'+keepQid);
-        if(el)el.scrollIntoView({block:'center',behavior:'auto'});
-      }));
+    if(src==='bank'){
+      try{renderBank();requestAnimationFrame(enhanceBank368)}catch(e){}
+      showSaveSuccess3112('保存成功 · 已同步更新全部题目位置');
+    }else{
+      showSaveSuccess3112('保存成功');
     }
   }
 }
@@ -6291,5 +6301,39 @@ async function backfillCoverFallback3111(){
   try{await hydrateBookMedia3101()}catch(e){}
 }
 setTimeout(backfillCoverFallback3111,900);
+</script>
+
+<script id="v3112patch">
+/* ===== V3.11.2：题库集中修改；错题本只读搜索 ===== */
+function showSaveSuccess3112(text){
+  document.querySelectorAll('.saveToast3112').forEach(x=>x.remove());
+  const d=document.createElement('div');d.className='saveToast3112';d.textContent=text||'保存成功';
+  document.body.appendChild(d);setTimeout(()=>d.remove(),1800);
+}
+function filterBookIndex3112(v){
+  const key=String(v||'').trim().toLowerCase();
+  document.querySelectorAll('#readerArea .bookIndexItem382').forEach(el=>{
+    el.style.display=!key||el.textContent.toLowerCase().includes(key)?'':'none';
+  });
+}
+/* 题库搜索结果：直接给每题“查看 / 修改”，修改是唯一编辑入口。 */
+function enhanceBank368(){
+  const list=$('bankList');if(!list)return;
+  [...list.children].forEach(el=>{
+    if(el.dataset.q368)return;
+    const title=el.querySelector('b')?.textContent?.trim();if(!title)return;
+    const candidates=D.qs.filter(q=>String(q.text||'').trim()===title);if(candidates.length!==1)return;
+    const q=candidates[0];el.dataset.q368=q.id;el.classList.add('qSearchHit368','bankHit3112');
+    el.setAttribute('role','button');el.setAttribute('tabindex','0');
+    const a=document.createElement('div');a.className='bankActions3112';
+    a.innerHTML=`<button type="button" onclick="event.stopPropagation();showQuestion368('${q.id}')">查看</button><button type="button" class="edit" onclick="event.stopPropagation();editQuestion3611(event,'${q.id}','bank')">修改</button>`;
+    el.appendChild(a);
+  });
+}
+/* 防止点击按钮后又触发整行查看。 */
+document.addEventListener('click',e=>{
+  if(e.target.closest?.('.bankActions3112'))e.stopPropagation();
+},true);
+requestAnimationFrame(enhanceBank368);
 </script>
 </body></html>
