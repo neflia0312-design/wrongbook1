@@ -653,7 +653,7 @@ body.scanLock371{overflow:hidden!important;position:fixed!important;width:100%!i
 .ulineWord377{font-size:15px;font-weight:700;line-height:1.6;word-break:break-word}
 
 
-/* ===== V3.10.2 All Questions = expanded list + reliable page scroll ===== */
+/* ===== V3.10.3 All Questions = expanded list + reliable page scroll ===== */
 body.bookIndexOpen382{
   position:static!important;
   top:auto!important;
@@ -719,7 +719,7 @@ body.bookIndexOpen382 #readerArea{
 }
 
 
-/* ===== V3.10.2 题号 / 原位编辑 / 选项清洗 ===== */
+/* ===== V3.10.3 题号 / 原位编辑 / 选项清洗 ===== */
 .qNo391{display:inline-flex;align-items:center;padding:6px 9px;border-radius:9px;background:#efede8;font-size:12px;font-weight:800}
 .bookIndexItem382{scroll-margin-top:110px}
 .modeBar391{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 14px}
@@ -727,7 +727,7 @@ body.bookIndexOpen382 #readerArea{
 .readerQuestionNo391{display:inline-flex;margin:0 0 10px;padding:5px 9px;border-radius:9px;background:#f0ede8;font-size:11px;font-weight:800;color:#625d58}
 
 
-/* ===== V3.10.2 book editor scroll isolation fix ===== */
+/* ===== V3.10.3 book editor scroll isolation fix ===== */
 body.bookEditLock392{
   overflow:hidden!important;
   position:fixed!important;
@@ -774,7 +774,7 @@ body.bookEditLock392{
 }
 
 
-/* ===== V3.10.2 question editor / answer editor isolated scroll ===== */
+/* ===== V3.10.3 question editor / answer editor isolated scroll ===== */
 body.qEditLock393{
   overflow:hidden!important;
   position:fixed!important;
@@ -821,7 +821,7 @@ body.qEditLock393{
 }
 
 
-/* ===== V3.10.2 cover & inner-page media editor ===== */
+/* ===== V3.10.3 cover & inner-page media editor ===== */
 .mediaMode3101{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:7px 0 10px}
 .mediaMode3101 button{border:1px solid var(--line);background:#fff;border-radius:13px;padding:11px 8px;font-weight:650}
 .mediaMode3101 button.on{background:#20201e;color:#fff}
@@ -853,7 +853,7 @@ body.qEditLock393{
 }
 
 
-/* ===== V3.10.2 full-cover image fit ===== */
+/* ===== V3.10.3 full-cover image fit ===== */
 /* Photo covers show the complete source image. No center-cropping. */
 .coverBg[data-cover-book]{
   background-size:100% 100%!important;
@@ -864,6 +864,43 @@ body.qEditLock393{
   background-size:100% 100%!important;
   background-position:center!important;
   background-repeat:no-repeat!important;
+}
+
+
+/* ===== V3.10.3 long-bank workflow ===== */
+.fastBankNav103{
+  position:fixed;right:7px;top:50%;transform:translateY(-50%);
+  z-index:2147482000;width:34px;padding:5px 3px;
+  border:1px solid rgba(120,112,104,.22);border-radius:18px;
+  background:rgba(250,248,244,.88);backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);box-shadow:0 4px 18px #00000012;
+  display:flex;flex-direction:column;align-items:center;gap:4px
+}
+.fastBankNav103 button{
+  width:28px;height:28px;border:0;border-radius:50%;
+  background:#fff;font-size:14px;font-weight:800;color:#4b4743;padding:0
+}
+.fastRange103{
+  appearance:none;-webkit-appearance:none;
+  writing-mode:vertical-lr;direction:rtl;
+  width:24px;height:176px;background:transparent;margin:2px 0;
+}
+.fastRange103::-webkit-slider-runnable-track{
+  width:5px;background:#ddd7d0;border-radius:99px
+}
+.fastRange103::-webkit-slider-thumb{
+  -webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+  background:#242321;border:3px solid #faf8f4;margin-left:-7.5px;
+  box-shadow:0 1px 5px #0002
+}
+.fastBankNav103 .fastPct103{font-size:9px;color:#8a837d;line-height:1}
+.quizResume103{
+  margin:10px 0 12px;padding:11px 12px;border-radius:14px;
+  background:#f2eee8;display:flex;align-items:center;justify-content:space-between;gap:8px
+}
+.quizResume103 b{font-size:14px}
+.dupBox103{
+  text-align:left;line-height:1.6
 }
 
 </style>
@@ -886,7 +923,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.10.2</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.10.3</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -900,7 +937,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.4.2 起：主屏幕版会检查线上版本。以后升级只需要替换 GitHub 的 index.html；若检测到新版，会提示刷新，不需要每次重新添加主屏幕。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.10.2 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
+<p class="small">当前版本：V3.10.3 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -909,7 +946,7 @@ body.qEditLock393{
 <div id="appearanceRecoveryResults" style="margin-top:8px"></div>
 </div>
 <div class="card"><b>数据管理</b>
-<p class="small">V3.10.2 起，题库本体使用 IndexedDB 大容量数据库保存，不再受 localStorage 小容量限制。“恢复完整备份”会用备份替换当前题库；“批量追加题目”只追加题目，不覆盖其他错题本。</p>
+<p class="small">V3.10.3 起，题库本体使用 IndexedDB 大容量数据库保存，不再受 localStorage 小容量限制。“恢复完整备份”会用备份替换当前题库；“批量追加题目”只追加题目，不覆盖其他错题本。</p>
 <div class="row"><button class="secondary" onclick="exportData()">导出备份</button><button class="secondary" onclick="$('imp').click()">恢复完整备份</button></div>
 <button class="primary" style="width:100%;margin-top:10px" onclick="$('appendImp').click()">批量追加题目</button>
 </div></section>
@@ -929,7 +966,7 @@ body.qEditLock393{
 
 const K='wrongbook_v3_2_1';
 
-/* ===== V3.10.2 scalable data storage =====
+/* ===== V3.10.3 scalable data storage =====
    Source of truth: IndexedDB.
    localStorage only keeps tiny flags/UI state.
 */
@@ -1041,7 +1078,7 @@ async function wbPersistNow310(){
     }
 
     ms.put({
-      version:'3.10.2',
+      version:'3.10.3',
       savedAt:Date.now(),
       bookCount:books.length,
       questionCount:qs.length
@@ -1054,7 +1091,7 @@ async function wbPersistNow310(){
       localStorage.setItem(WB_MARKER_310,'1');
       localStorage.setItem(K,JSON.stringify({
         storage:'indexeddb',
-        version:'3.10.2',
+        version:'3.10.3',
         books:books.length,
         qs:qs.length
       }));
@@ -1097,12 +1134,12 @@ async function wbBoot310(){
 
     if(hasIndexed){
       D={books:stored.books||[],qs:stored.qs||[]};
-      MIGRATION_SOURCE='IndexedDB V3.10.2';
+      MIGRATION_SOURCE='IndexedDB V3.10.3';
     }else{
       // First launch after upgrade: D already contains the best legacy localStorage data.
       // Persist it once into IndexedDB, then release the old localStorage payload.
       await wbPersistNow310();
-      MIGRATION_SOURCE=MIGRATION_SOURCE==='new'?'V3.10.2 新题库':`${MIGRATION_SOURCE} → IndexedDB`;
+      MIGRATION_SOURCE=MIGRATION_SOURCE==='new'?'V3.10.3 新题库':`${MIGRATION_SOURCE} → IndexedDB`;
     }
 
     if(!Array.isArray(D.books))D.books=[];
@@ -1115,7 +1152,7 @@ async function wbBoot310(){
     try{
       localStorage.setItem(K,JSON.stringify({
         storage:'indexeddb',
-        version:'3.10.2',
+        version:'3.10.3',
         books:D.books.length,
         qs:D.qs.length
       }));
@@ -1707,10 +1744,10 @@ function updateDataStatus(){
     wrongbook_v1:'V1',
     new:'新题库'
   };
-  el.innerHTML=`已读取：<b>${sourceNames[MIGRATION_SOURCE]||MIGRATION_SOURCE}</b><br>错题本：${D.books.length} 本 · 题目：${D.qs.length} 道<br>当前保存目标：V3.10.2 IndexedDB 大题库`;
+  el.innerHTML=`已读取：<b>${sourceNames[MIGRATION_SOURCE]||MIGRATION_SOURCE}</b><br>错题本：${D.books.length} 本 · 题目：${D.qs.length} 道<br>当前保存目标：V3.10.3 IndexedDB 大题库`;
 }
 
-// V3.10.2: status updates after IndexedDB boot completes.
+// V3.10.3: status updates after IndexedDB boot completes.
 </script>
 <script>
 /* ===== V3 behavior; keeps the V2 localStorage key and all existing questions ===== */
@@ -1989,7 +2026,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.10.2';
+const APP_VERSION='3.10.3';
 async function checkOnlineVersion(){
   try{
     const r=await fetch('./version.json?t='+Date.now(),{cache:'no-store'});
@@ -4117,13 +4154,13 @@ function closeUnderline377(){
 }
 
 
-/* ===== V3.10.2 cleanup page scroll state when leaving All Questions ===== */
+/* ===== V3.10.3 cleanup page scroll state when leaving All Questions ===== */
 document.querySelectorAll('nav button').forEach(btn=>{
   btn.addEventListener('click',()=>document.body.classList.remove('bookIndexOpen382'));
 });
 
 
-/* ===== V3.10.2 subject-aware backup import routing ===== */
+/* ===== V3.10.3 subject-aware backup import routing ===== */
 function normSubject383(v){
   return String(v||'').trim().replace(/\s+/g,'').toLowerCase();
 }
@@ -4225,7 +4262,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
         }else if(Array.isArray(payload.qs)) payload.qs=rr.routed;
         else payload.questions=rr.routed;
       }
-    }catch(e){ console.warn('V3.10.2 auto route fallback',e); }
+    }catch(e){ console.warn('V3.10.3 auto route fallback',e); }
     return old.apply(this,args);
   };
 });
@@ -4233,7 +4270,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
 </script>
 
 <script id="v390patch">
-/* ===== V3.10.2 智能刷题版 ===== */
+/* ===== V3.10.3 智能刷题版 ===== */
 const V390_PROGRESS_KEY='wrongbook_v390_progress';
 const V390_VARIANT_KEY='wrongbook_v390_variants';
 function v390Read(k,fallback={}){try{return JSON.parse(localStorage.getItem(k)||'null')||fallback}catch(e){return fallback}}
@@ -4335,7 +4372,7 @@ function openVariantHub390(bookId){
 function generateVariant390(bookId){const range=$('v390Range').value,count=$('v390Count').value,strength=$('v390Strength').value;let pool=(range==='mist'?v390Mistakes(bookId):v390BookQs(bookId)).filter(q=>q.type==='choice');pool=v390Shuffle(pool);if(count!=='all')pool=pool.slice(0,Number(count));const items=pool.map(q=>v390MakeVariant(q,bookId,strength)).filter(Boolean);if(!items.length)return alert('当前题库可用于生成的混淆答案不足。');const all=v390Variants(),set={id:'vs_'+Date.now(),name:`${range==='mist'?'错题变式':'全库变式'} · ${strength==='high'?'高干扰':strength==='similar'?'相近':'基础'}`,at:Date.now(),items};all[bookId]=(all[bookId]||[]).concat(set).slice(-8);v390SaveVariants(all);startVariantSet390(bookId,set.id)}
 function startVariantSet390(bookId,setId){const set=(v390Variants()[bookId]||[]).find(x=>x.id===setId);if(!set)return alert('没有找到该变式题库');page('study');quiz={list:v390Shuffle(set.items),i:0,score:0,locked:false,scope:bookId,v390Mode:'variant'};drawQuiz()}
 
-/* ===== V3.10.2 robust book-editor interaction ===== */
+/* ===== V3.10.3 robust book-editor interaction ===== */
 let __bookEditScroll392=0;
 
 function activateBookEditor392(){
@@ -4419,7 +4456,7 @@ if(typeof saveBookV3==='function'){
 
 
 
-/* ===== V3.10.2 question editor scroll + canonical duplicate protection ===== */
+/* ===== V3.10.3 question editor scroll + canonical duplicate protection ===== */
 let __qEditScroll393=0;
 
 function v393CanonText(s){
@@ -4727,12 +4764,12 @@ setTimeout(()=>{
   const removed=v393DedupeAll(false);
   if(removed){
     try{render();renderV3Books?.();}catch(e){}
-    console.log(`V3.10.2 merged ${removed} duplicate questions`);
+    console.log(`V3.10.3 merged ${removed} duplicate questions`);
   }
 },120);
 
 
-/* ===== V3.10.2 auto-create books from backup/question metadata ===== */
+/* ===== V3.10.3 auto-create books from backup/question metadata ===== */
 function v394CleanBookName(v){
   return String(v||'').trim().replace(/\s+/g,' ');
 }
@@ -5006,7 +5043,7 @@ importBackupFile = function(file){
     try{
       const raw=JSON.parse(r.result);
       const converted=normalizeImportedData(raw);
-      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份将恢复：${converted.books.length} 本 / ${converted.qs.length} 道题\n若备份没有 books 信息，V3.10.2 会按科目自动创建错题本。\n继续将替换当前题库。确定吗？`))return;
+      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份将恢复：${converted.books.length} 本 / ${converted.qs.length} 道题\n若备份没有 books 信息，V3.10.3 会按科目自动创建错题本。\n继续将替换当前题库。确定吗？`))return;
       D=converted;
       if(typeof v393DedupeAll==='function')v393DedupeAll(false);
       persistCompat310();
@@ -5022,7 +5059,7 @@ importBackupFile = function(file){
 };
 
 
-/* ===== V3.10.2 cover storage: IndexedDB + compression, avoid localStorage quota ===== */
+/* ===== V3.10.3 cover storage: IndexedDB + compression, avoid localStorage quota ===== */
 const COVER_DB_395='wrongbook_covers_v395';
 const COVER_STORE_395='covers';
 
@@ -5199,7 +5236,7 @@ if(typeof saveBookV3==='function'){
       ret=__oldSaveBookV3_395.call(this,id,...rest);
     }catch(err){
       if(String(err?.message||err).includes('quota')){
-        alert('保存失败：本地题库空间已满。V3.10.2 已把封面移出 localStorage，但你的题库文本数据本身也已接近上限。建议先导出完整备份。');
+        alert('保存失败：本地题库空间已满。V3.10.3 已把封面移出 localStorage，但你的题库文本数据本身也已接近上限。建议先导出完整备份。');
         return;
       }
       throw err;
@@ -5255,7 +5292,7 @@ setTimeout(async()=>{
 
 
 
-/* ===== V3.10.2 stable cover restore + explicit cover mode + photo inner pages ===== */
+/* ===== V3.10.3 stable cover restore + explicit cover mode + photo inner pages ===== */
 let __pendingCoverBlob3101=null;
 let __pendingPaperBlob3101=null;
 let __coverMode3101='solid';
@@ -5580,6 +5617,315 @@ setTimeout(()=>{
   renderV3Books();
   hydrateBookMedia3101();
 },260);
+
+
+
+/* ===== V3.10.3 persistent random quiz + global dedupe + long list positioning ===== */
+const V3103_QUIZ_KEY='wrongbook_v3103_quiz_progress';
+let __bankNavScrollHandler103=null;
+let __bankAnchor103=null;
+
+function v3103Read(k,d){
+  try{const x=JSON.parse(localStorage.getItem(k)||'null');return x??d}catch(e){return d}
+}
+function v3103Write(k,v){
+  try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}
+}
+function v3103QuizMap(){return v3103Read(V3103_QUIZ_KEY,{})}
+function v3103QuizKey(scope,mode='random'){return `${mode}::${scope}`}
+function v3103SaveQuizState(){
+  if(!quiz?.scope || !Array.isArray(quiz.list) || quiz.v390Mode!=='random')return;
+  const map=v3103QuizMap();
+  map[v3103QuizKey(quiz.scope,'random')]={
+    ids:quiz.list.map(q=>q.originId||q.id).filter(Boolean),
+    i:Math.max(0,Number(quiz.i||0)),
+    score:Number(quiz.score||0),
+    at:Date.now()
+  };
+  v3103Write(V3103_QUIZ_KEY,map);
+}
+function v3103ClearQuizState(scope){
+  const map=v3103QuizMap();
+  delete map[v3103QuizKey(scope,'random')];
+  v3103Write(V3103_QUIZ_KEY,map);
+}
+function v3103RestoreQuiz(scope){
+  const st=v3103QuizMap()[v3103QuizKey(scope,'random')];
+  if(!st?.ids?.length)return null;
+  const pool=v390BookQs(scope).filter(q=>q.type==='choice');
+  const byId=new Map(pool.map(q=>[q.id,q]));
+  const list=st.ids.map(id=>byId.get(id)).filter(Boolean);
+  // Questions added later are appended in randomized order without changing the saved part.
+  const used=new Set(list.map(q=>q.id));
+  const extra=v390Shuffle(pool.filter(q=>!used.has(q.id)));
+  list.push(...extra);
+  if(!list.length)return null;
+  let i=Math.min(Math.max(0,Number(st.i||0)),list.length-1);
+  return {list,i,score:Number(st.score||0)};
+}
+function startSubjectQuiz(id,forceNew=false){
+  page('study');
+  const pool=v390BookQs(id).filter(q=>q.type==='choice');
+  let restored=!forceNew?v3103RestoreQuiz(id):null;
+  if(restored){
+    quiz={list:restored.list,i:restored.i,score:restored.score,locked:false,scope:id,v390Mode:'random',v3103Resumed:true};
+  }else{
+    quiz={list:v390Shuffle(pool),i:0,score:0,locked:false,scope:id,v390Mode:'random',v3103Resumed:false};
+    v3103SaveQuizState();
+  }
+  drawQuiz();
+}
+const __drawQuizBefore103=drawQuiz;
+drawQuiz=function(){
+  __drawQuizBefore103();
+  if(quiz?.v390Mode==='random' && quiz?.list?.length){
+    v3103SaveQuizState();
+    const host=$('studyArea')?.querySelector('.quiz');
+    if(host && !host.querySelector('.quizResume103')){
+      const box=document.createElement('div');
+      box.className='quizResume103';
+      box.innerHTML=`<span>本轮进度已记忆：<b>${quiz.i+1} / ${quiz.list.length}</b></span>
+        <button class="secondary" onclick="v3103ClearQuizState('${quiz.scope}');startSubjectQuiz('${quiz.scope}',true)">重新洗牌</button>`;
+      const q=host.querySelector('.q');
+      if(q)host.insertBefore(box,q);
+    }
+  }
+}
+const __pick103=pick;
+pick=function(qid,i){
+  const r=__pick103(qid,i);
+  if(quiz?.v390Mode==='random')v3103SaveQuizState();
+  return r;
+}
+function nextQuiz(){
+  quiz.i++;
+  quiz.locked=false;
+  if(quiz.v390Mode==='random')v3103SaveQuizState();
+  if(quiz.i>=quiz.list.length){
+    if(quiz.v390Mode==='random')v3103ClearQuizState(quiz.scope);
+    $('studyArea').innerHTML=`<div class="quiz" style="text-align:center"><h2>完成</h2>
+      <div class="stat">${quiz.score}/${quiz.list.length}</div>
+      <button class="primary" onclick="${quiz.v390Mode==='mistakes'?`startMistakeQuiz390('${quiz.scope}')`:`startSubjectQuiz('${quiz.scope}',true)`}">再刷一轮</button>
+      <button class="secondary" style="width:100%;margin-top:8px" onclick="subjectMenu('${quiz.scope}')">返回学习方式</button></div>`;
+  }else drawQuiz();
+}
+
+/* Global duplicate detection: compare against the whole current question bank, not only the chosen book. */
+function v3103GlobalDuplicate(text,excludeId=''){
+  const canon=v393CanonText(text);
+  if(!canon)return null;
+  return (D.qs||[]).find(q=>q.id!==excludeId && v393CanonText(q.text||q.question||'')===canon)||null;
+}
+function v3103DupMessage(dup){
+  if(!dup)return '';
+  const bid=dup.book||dup.bookId||'';
+  const b=(D.books||[]).find(x=>x.id===bid);
+  const sameBook=(D.qs||[]).filter(q=>(q.book||q.bookId)===bid);
+  const no=Math.max(1,sameBook.findIndex(q=>q.id===dup.id)+1);
+  return `检测到已有题目，已取消本次录入。\n\n所在错题本：${b?bookTitleV3(b):'未知错题本'}\n题号：${no}\n题目：${dup.text||dup.question||''}`;
+}
+saveQ=function(t){
+  const text=$('qt')?.value.trim();
+  if(!text)return alert('请输入题目');
+
+  const dup=v3103GlobalDuplicate(text);
+  if(dup){alert(v3103DupMessage(dup));return}
+
+  const bookId=$('qb')?.value||'';
+  let q={
+    id:id(),type:t,book:bookId,bookId:bookId,text,
+    tag:$('tag')?.value.trim()||'',note:$('note')?.value.trim()||'',
+    level:0,next:day(),right:0,wrong:0
+  };
+  if(t==='choice'){
+    q.opts=[0,1,2,3].map(i=>v393CanonOpt($('o'+i)?.value||''));
+    q.options=q.opts.slice();
+    if(q.opts.some(x=>!x))return alert('请填写完整四个选项');
+    q.ans=$('qa')?.value||'A';q.answer=q.ans;
+  }else{
+    q.answer=$('qat')?.value.trim()||'';
+    if(!q.answer)return alert('请填写标准答案');
+    q.answerText=q.answer;q.kw=$('kw')?.value.trim()||'';
+  }
+  // Final duplicate check immediately before commit.
+  const dup2=v3103GlobalDuplicate(q.text);
+  if(dup2){alert(v3103DupMessage(dup2));return}
+  D.qs.push(q);
+  releaseQuestionEditor393(false);
+  closeM();
+  save();
+};
+
+/* Imported/append questions also use the same full-bank duplicate rule. */
+function v3103AppendQuestions(target,payload){
+  if(!payload)return {added:0,skipped:0};
+  let added=0,skipped=0;
+  const inBatch=new Set();
+  for(const raw of payload.questions||[]){
+    const q={...raw};
+    const key=v393CanonText(q.text||q.question||'');
+    if(!key){continue}
+    if(v3103GlobalDuplicate(q.text||q.question) || inBatch.has(key)){skipped++;continue}
+    if(q.type==='choice'){
+      const o=(q.opts||q.options||[]).map(v393CanonOpt);
+      q.opts=o;q.options=o;
+    }
+    q.book=q.bookId=target;
+    D.qs.push(q);inBatch.add(key);added++;
+  }
+  return {added,skipped};
+}
+confirmAppendImport390=function(target){
+  if(!__appendPayload)return;
+  const book=D.books.find(b=>b.id===target);
+  if(!book)return alert('没有找到目标错题本');
+  const {added,skipped}=v3103AppendQuestions(target,__appendPayload);
+  if(save()){
+    releaseQuestionEditor393(false);closeM();__appendPayload=null;renderV3Books();
+    showImportSuccess(target,added,skipped);
+  }
+};
+confirmAppendImport=function(){
+  if(!__appendPayload)return;
+  const target=$('appendTarget')?.value;
+  const book=D.books.find(b=>b.id===target);
+  if(!book)return alert('没有找到目标错题本');
+  const {added,skipped}=v3103AppendQuestions(target,__appendPayload);
+  if(save()){
+    releaseQuestionEditor393(false);closeM();__appendPayload=null;renderV3Books();
+    showImportSuccess(target,added,skipped);
+  }
+};
+
+/* Quick scrollbar for large "All Questions" pages. */
+function removeFastBankNav103(){
+  document.getElementById('fastBankNav103')?.remove();
+  if(__bankNavScrollHandler103){
+    window.removeEventListener('scroll',__bankNavScrollHandler103);
+    __bankNavScrollHandler103=null;
+  }
+}
+function bankMaxScroll103(){
+  return Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+}
+function bankRangeToScroll103(v){
+  window.scrollTo({top:(Number(v)/1000)*bankMaxScroll103(),behavior:'auto'});
+}
+function updateFastBankNav103(){
+  const r=$('fastBankRange103'),pct=$('fastBankPct103');
+  if(!r)return;
+  const max=bankMaxScroll103();
+  const val=Math.max(0,Math.min(1000,(window.scrollY/max)*1000));
+  r.value=String(val);
+  if(pct)pct.textContent=`${Math.round(val/10)}%`;
+}
+function installFastBankNav103(){
+  removeFastBankNav103();
+  if(!document.body.classList.contains('bookIndexOpen382'))return;
+  const el=document.createElement('div');
+  el.id='fastBankNav103';el.className='fastBankNav103';
+  el.innerHTML=`<button onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <input id="fastBankRange103" class="fastRange103" type="range" min="0" max="1000" value="0"
+      oninput="bankRangeToScroll103(this.value)">
+    <span id="fastBankPct103" class="fastPct103">0%</span>
+    <button onclick="window.scrollTo({top:bankMaxScroll103(),behavior:'smooth'})">↓</button>`;
+  document.body.appendChild(el);
+  __bankNavScrollHandler103=()=>updateFastBankNav103();
+  window.addEventListener('scroll',__bankNavScrollHandler103,{passive:true});
+  updateFastBankNav103();
+}
+const __openBookIndex103=openBookIndex368;
+openBookIndex368=function(bookId,type='all'){
+  const r=__openBookIndex103(bookId,type);
+  setTimeout(installFastBankNav103,80);
+  return r;
+};
+
+/* Maintain exact list position when editing or deleting. */
+function v3103RestoreCard(qid,mode='center'){
+  if(!qid)return;
+  const tryScroll=()=>{
+    const el=document.getElementById('qcard391_'+qid);
+    if(el){el.scrollIntoView({block:mode,behavior:'auto'});updateFastBankNav103();return true}
+    return false;
+  };
+  requestAnimationFrame(()=>requestAnimationFrame(tryScroll));
+  setTimeout(tryScroll,120);
+  setTimeout(tryScroll,320);
+}
+const __editQuestion103=editQuestion3611;
+editQuestion3611=function(e,qid){
+  __bankAnchor103={qid,scrollY:window.scrollY||0};
+  return __editQuestion103(e,qid);
+};
+
+saveEditedQuestion3611=function(qid){
+  const q=D.qs.find(x=>x.id===qid);if(!q)return;
+  const type=$('eType3611')?.value||q.type;
+  const text=$('eText3611')?.value.trim()||'';
+  if(!text)return alert('题目不能为空');
+
+  const dup=v3103GlobalDuplicate(text,qid);
+  if(dup){alert(v3103DupMessage(dup));return}
+
+  q.type=type;q.text=text;
+  q.tag=$('eTag3611')?.value.trim()||'';
+  q.note=$('eNote3611')?.value.trim()||'';
+
+  if(type==='choice'){
+    const opts=[0,1,2,3].map(i=>cleanOption391($(`eO${i}3611`)?.value.trim()||'',i));
+    if(opts.some(x=>!x))return alert('请填写完整四个选项');
+    const ans=$('eAns3611')?.value||'A';
+    q.opts=opts;q.options=opts;q.ans=ans;q.answer=ans;delete q.kw;
+  }else{
+    const answer=$('eAnswer3611')?.value.trim()||'';
+    if(!answer)return alert('请填写标准答案');
+    q.answer=answer;q.answerText=answer;q.ans='';
+    q.kw=$('eKw3611')?.value.trim()||'';q.opts=[];q.options=[];
+  }
+
+  const bookId=bookIdOf(q);
+  const typeNow=typeof bookIndexType3610!=='undefined'?bookIndexType3610:'all';
+  if(save()){
+    releaseQuestionEditor393(false);
+    try{__oldCloseM393?.()}catch(e){try{closeM()}catch(_){}}
+    openBookIndex368(bookId,typeNow);
+    v3103RestoreCard(qid,'center');
+  }
+};
+
+deleteQuestion3611=function(e,qid,bookId){
+  e?.stopPropagation?.();
+  const q=D.qs.find(x=>x.id===qid);if(!q)return;
+  if(!confirm(`确定删除整道题目吗？\n\n${q.text}\n\n删除后会从错题笔记、刷题、记背、思维导图和试卷中同时移除。`))return;
+
+  const typeNow=typeof bookIndexType3610!=='undefined'?bookIndexType3610:'all';
+  const visible=(typeNow==='all'
+    ?D.qs.filter(x=>bookIdOf(x)===bookId)
+    :D.qs.filter(x=>bookIdOf(x)===bookId&&x.type===typeNow));
+  const idx=visible.findIndex(x=>x.id===qid);
+  const nextId=visible[idx+1]?.id||visible[idx-1]?.id||'';
+
+  D.qs=D.qs.filter(x=>x.id!==qid);
+  try{
+    if(Array.isArray(mem?.list))mem.list=mem.list.filter(x=>x.id!==qid);
+    if(Array.isArray(quiz?.list))quiz.list=quiz.list.filter(x=>x.id!==qid);
+  }catch(err){}
+
+  if(save()){
+    openBookIndex368(bookId,typeNow);
+    if(nextId)v3103RestoreCard(nextId,'center');
+    else setTimeout(()=>window.scrollTo({top:Math.min(window.scrollY,bankMaxScroll103()),behavior:'auto'}),120);
+  }
+};
+
+/* Hide fast navigation outside the index page. */
+document.addEventListener('click',e=>{
+  const back=e.target.closest?.('.readerTop .circleBtn,.modeBar391 .modeBtn');
+  if(back && !String(back.textContent||'').includes('全部题目')){
+    setTimeout(()=>{if(!document.body.classList.contains('bookIndexOpen382'))removeFastBankNav103()},50);
+  }
+},true);
 
 </script>
 </body></html>
