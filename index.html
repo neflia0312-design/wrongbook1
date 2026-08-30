@@ -653,7 +653,7 @@ body.scanLock371{overflow:hidden!important;position:fixed!important;width:100%!i
 .ulineWord377{font-size:15px;font-weight:700;line-height:1.6;word-break:break-word}
 
 
-/* ===== V3.10.0 All Questions = expanded list + reliable page scroll ===== */
+/* ===== V3.10.1 All Questions = expanded list + reliable page scroll ===== */
 body.bookIndexOpen382{
   position:static!important;
   top:auto!important;
@@ -719,7 +719,7 @@ body.bookIndexOpen382 #readerArea{
 }
 
 
-/* ===== V3.10.0 题号 / 原位编辑 / 选项清洗 ===== */
+/* ===== V3.10.1 题号 / 原位编辑 / 选项清洗 ===== */
 .qNo391{display:inline-flex;align-items:center;padding:6px 9px;border-radius:9px;background:#efede8;font-size:12px;font-weight:800}
 .bookIndexItem382{scroll-margin-top:110px}
 .modeBar391{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 14px}
@@ -727,7 +727,7 @@ body.bookIndexOpen382 #readerArea{
 .readerQuestionNo391{display:inline-flex;margin:0 0 10px;padding:5px 9px;border-radius:9px;background:#f0ede8;font-size:11px;font-weight:800;color:#625d58}
 
 
-/* ===== V3.10.0 book editor scroll isolation fix ===== */
+/* ===== V3.10.1 book editor scroll isolation fix ===== */
 body.bookEditLock392{
   overflow:hidden!important;
   position:fixed!important;
@@ -774,7 +774,7 @@ body.bookEditLock392{
 }
 
 
-/* ===== V3.10.0 question editor / answer editor isolated scroll ===== */
+/* ===== V3.10.1 question editor / answer editor isolated scroll ===== */
 body.qEditLock393{
   overflow:hidden!important;
   position:fixed!important;
@@ -820,6 +820,38 @@ body.qEditLock393{
   background:linear-gradient(to bottom,rgba(246,243,238,.25),var(--bg) 26%)!important;
 }
 
+
+/* ===== V3.10.1 cover & inner-page media editor ===== */
+.mediaMode3101{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:7px 0 10px}
+.mediaMode3101 button{border:1px solid var(--line);background:#fff;border-radius:13px;padding:11px 8px;font-weight:650}
+.mediaMode3101 button.on{background:#20201e;color:#fff}
+.mediaPanel3101{padding:10px 0 2px}
+.coverPreview3101,.paperPreview3101{
+  width:100%;height:150px;border-radius:15px;border:1px solid var(--line);
+  background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;
+  color:#817b72;margin:8px 0 10px;overflow:hidden;position:relative
+}
+.coverPreview3101:after,.paperPreview3101:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,#00000016);pointer-events:none}
+.colorCustom3101{display:flex;align-items:center;gap:10px;margin-top:9px}
+.colorCustom3101 input[type=color]{width:64px;height:44px;border:0;padding:0;background:transparent}
+.mediaActions3101{display:flex;gap:8px}
+.mediaActions3101 button{flex:1}
+.paper.photo3101{
+  background-color:#f8f5ef!important;
+  background-image:var(--paper-photo)!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-attachment:local!important;
+}
+.paper.photo3101:before{display:none!important}
+.paper.photo3101 .paperInner{
+  background:rgba(255,255,255,.86)!important;
+  backdrop-filter:blur(1.5px);
+  -webkit-backdrop-filter:blur(1.5px);
+  border-radius:12px;
+  padding:16px;
+}
+
 </style>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -840,7 +872,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.10.0</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.10.1</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -854,7 +886,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.4.2 起：主屏幕版会检查线上版本。以后升级只需要替换 GitHub 的 index.html；若检测到新版，会提示刷新，不需要每次重新添加主屏幕。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.10.0 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
+<p class="small">当前版本：V3.10.1 思维导图记背版。主屏幕名称固定为「错题本」，图标使用部署文件 icon.png，不再在 App 内动态修改，避免 iPhone 缓存导致主屏幕和 Safari 显示不同版本。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -863,7 +895,7 @@ body.qEditLock393{
 <div id="appearanceRecoveryResults" style="margin-top:8px"></div>
 </div>
 <div class="card"><b>数据管理</b>
-<p class="small">V3.10.0 起，题库本体使用 IndexedDB 大容量数据库保存，不再受 localStorage 小容量限制。“恢复完整备份”会用备份替换当前题库；“批量追加题目”只追加题目，不覆盖其他错题本。</p>
+<p class="small">V3.10.1 起，题库本体使用 IndexedDB 大容量数据库保存，不再受 localStorage 小容量限制。“恢复完整备份”会用备份替换当前题库；“批量追加题目”只追加题目，不覆盖其他错题本。</p>
 <div class="row"><button class="secondary" onclick="exportData()">导出备份</button><button class="secondary" onclick="$('imp').click()">恢复完整备份</button></div>
 <button class="primary" style="width:100%;margin-top:10px" onclick="$('appendImp').click()">批量追加题目</button>
 </div></section>
@@ -883,7 +915,7 @@ body.qEditLock393{
 
 const K='wrongbook_v3_2_1';
 
-/* ===== V3.10.0 scalable data storage =====
+/* ===== V3.10.1 scalable data storage =====
    Source of truth: IndexedDB.
    localStorage only keeps tiny flags/UI state.
 */
@@ -995,7 +1027,7 @@ async function wbPersistNow310(){
     }
 
     ms.put({
-      version:'3.10.0',
+      version:'3.10.1',
       savedAt:Date.now(),
       bookCount:books.length,
       questionCount:qs.length
@@ -1008,7 +1040,7 @@ async function wbPersistNow310(){
       localStorage.setItem(WB_MARKER_310,'1');
       localStorage.setItem(K,JSON.stringify({
         storage:'indexeddb',
-        version:'3.10.0',
+        version:'3.10.1',
         books:books.length,
         qs:qs.length
       }));
@@ -1051,12 +1083,12 @@ async function wbBoot310(){
 
     if(hasIndexed){
       D={books:stored.books||[],qs:stored.qs||[]};
-      MIGRATION_SOURCE='IndexedDB V3.10.0';
+      MIGRATION_SOURCE='IndexedDB V3.10.1';
     }else{
       // First launch after upgrade: D already contains the best legacy localStorage data.
       // Persist it once into IndexedDB, then release the old localStorage payload.
       await wbPersistNow310();
-      MIGRATION_SOURCE=MIGRATION_SOURCE==='new'?'V3.10.0 新题库':`${MIGRATION_SOURCE} → IndexedDB`;
+      MIGRATION_SOURCE=MIGRATION_SOURCE==='new'?'V3.10.1 新题库':`${MIGRATION_SOURCE} → IndexedDB`;
     }
 
     if(!Array.isArray(D.books))D.books=[];
@@ -1069,7 +1101,7 @@ async function wbBoot310(){
     try{
       localStorage.setItem(K,JSON.stringify({
         storage:'indexeddb',
-        version:'3.10.0',
+        version:'3.10.1',
         books:D.books.length,
         qs:D.qs.length
       }));
@@ -1661,10 +1693,10 @@ function updateDataStatus(){
     wrongbook_v1:'V1',
     new:'新题库'
   };
-  el.innerHTML=`已读取：<b>${sourceNames[MIGRATION_SOURCE]||MIGRATION_SOURCE}</b><br>错题本：${D.books.length} 本 · 题目：${D.qs.length} 道<br>当前保存目标：V3.10.0 IndexedDB 大题库`;
+  el.innerHTML=`已读取：<b>${sourceNames[MIGRATION_SOURCE]||MIGRATION_SOURCE}</b><br>错题本：${D.books.length} 本 · 题目：${D.qs.length} 道<br>当前保存目标：V3.10.1 IndexedDB 大题库`;
 }
 
-// V3.10.0: status updates after IndexedDB boot completes.
+// V3.10.1: status updates after IndexedDB boot completes.
 </script>
 <script>
 /* ===== V3 behavior; keeps the V2 localStorage key and all existing questions ===== */
@@ -1943,7 +1975,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.10.0';
+const APP_VERSION='3.10.1';
 async function checkOnlineVersion(){
   try{
     const r=await fetch('./version.json?t='+Date.now(),{cache:'no-store'});
@@ -4071,13 +4103,13 @@ function closeUnderline377(){
 }
 
 
-/* ===== V3.10.0 cleanup page scroll state when leaving All Questions ===== */
+/* ===== V3.10.1 cleanup page scroll state when leaving All Questions ===== */
 document.querySelectorAll('nav button').forEach(btn=>{
   btn.addEventListener('click',()=>document.body.classList.remove('bookIndexOpen382'));
 });
 
 
-/* ===== V3.10.0 subject-aware backup import routing ===== */
+/* ===== V3.10.1 subject-aware backup import routing ===== */
 function normSubject383(v){
   return String(v||'').trim().replace(/\s+/g,'').toLowerCase();
 }
@@ -4179,7 +4211,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
         }else if(Array.isArray(payload.qs)) payload.qs=rr.routed;
         else payload.questions=rr.routed;
       }
-    }catch(e){ console.warn('V3.10.0 auto route fallback',e); }
+    }catch(e){ console.warn('V3.10.1 auto route fallback',e); }
     return old.apply(this,args);
   };
 });
@@ -4187,7 +4219,7 @@ function routeImportedQuestions383(items, backup, fallbackBookId){
 </script>
 
 <script id="v390patch">
-/* ===== V3.10.0 智能刷题版 ===== */
+/* ===== V3.10.1 智能刷题版 ===== */
 const V390_PROGRESS_KEY='wrongbook_v390_progress';
 const V390_VARIANT_KEY='wrongbook_v390_variants';
 function v390Read(k,fallback={}){try{return JSON.parse(localStorage.getItem(k)||'null')||fallback}catch(e){return fallback}}
@@ -4289,7 +4321,7 @@ function openVariantHub390(bookId){
 function generateVariant390(bookId){const range=$('v390Range').value,count=$('v390Count').value,strength=$('v390Strength').value;let pool=(range==='mist'?v390Mistakes(bookId):v390BookQs(bookId)).filter(q=>q.type==='choice');pool=v390Shuffle(pool);if(count!=='all')pool=pool.slice(0,Number(count));const items=pool.map(q=>v390MakeVariant(q,bookId,strength)).filter(Boolean);if(!items.length)return alert('当前题库可用于生成的混淆答案不足。');const all=v390Variants(),set={id:'vs_'+Date.now(),name:`${range==='mist'?'错题变式':'全库变式'} · ${strength==='high'?'高干扰':strength==='similar'?'相近':'基础'}`,at:Date.now(),items};all[bookId]=(all[bookId]||[]).concat(set).slice(-8);v390SaveVariants(all);startVariantSet390(bookId,set.id)}
 function startVariantSet390(bookId,setId){const set=(v390Variants()[bookId]||[]).find(x=>x.id===setId);if(!set)return alert('没有找到该变式题库');page('study');quiz={list:v390Shuffle(set.items),i:0,score:0,locked:false,scope:bookId,v390Mode:'variant'};drawQuiz()}
 
-/* ===== V3.10.0 robust book-editor interaction ===== */
+/* ===== V3.10.1 robust book-editor interaction ===== */
 let __bookEditScroll392=0;
 
 function activateBookEditor392(){
@@ -4373,7 +4405,7 @@ if(typeof saveBookV3==='function'){
 
 
 
-/* ===== V3.10.0 question editor scroll + canonical duplicate protection ===== */
+/* ===== V3.10.1 question editor scroll + canonical duplicate protection ===== */
 let __qEditScroll393=0;
 
 function v393CanonText(s){
@@ -4681,12 +4713,12 @@ setTimeout(()=>{
   const removed=v393DedupeAll(false);
   if(removed){
     try{render();renderV3Books?.();}catch(e){}
-    console.log(`V3.10.0 merged ${removed} duplicate questions`);
+    console.log(`V3.10.1 merged ${removed} duplicate questions`);
   }
 },120);
 
 
-/* ===== V3.10.0 auto-create books from backup/question metadata ===== */
+/* ===== V3.10.1 auto-create books from backup/question metadata ===== */
 function v394CleanBookName(v){
   return String(v||'').trim().replace(/\s+/g,' ');
 }
@@ -4960,7 +4992,7 @@ importBackupFile = function(file){
     try{
       const raw=JSON.parse(r.result);
       const converted=normalizeImportedData(raw);
-      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份将恢复：${converted.books.length} 本 / ${converted.qs.length} 道题\n若备份没有 books 信息，V3.10.0 会按科目自动创建错题本。\n继续将替换当前题库。确定吗？`))return;
+      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份将恢复：${converted.books.length} 本 / ${converted.qs.length} 道题\n若备份没有 books 信息，V3.10.1 会按科目自动创建错题本。\n继续将替换当前题库。确定吗？`))return;
       D=converted;
       if(typeof v393DedupeAll==='function')v393DedupeAll(false);
       persistCompat310();
@@ -4976,7 +5008,7 @@ importBackupFile = function(file){
 };
 
 
-/* ===== V3.10.0 cover storage: IndexedDB + compression, avoid localStorage quota ===== */
+/* ===== V3.10.1 cover storage: IndexedDB + compression, avoid localStorage quota ===== */
 const COVER_DB_395='wrongbook_covers_v395';
 const COVER_STORE_395='covers';
 
@@ -5153,7 +5185,7 @@ if(typeof saveBookV3==='function'){
       ret=__oldSaveBookV3_395.call(this,id,...rest);
     }catch(err){
       if(String(err?.message||err).includes('quota')){
-        alert('保存失败：本地题库空间已满。V3.10.0 已把封面移出 localStorage，但你的题库文本数据本身也已接近上限。建议先导出完整备份。');
+        alert('保存失败：本地题库空间已满。V3.10.1 已把封面移出 localStorage，但你的题库文本数据本身也已接近上限。建议先导出完整备份。');
         return;
       }
       throw err;
@@ -5206,6 +5238,325 @@ setTimeout(async()=>{
   await migrateLegacyCovers395();
   try{renderV3Books?.(); hydrateCoverImages395();}catch(e){}
 },180);
+
+
+
+/* ===== V3.10.1 stable cover restore + explicit cover mode + photo inner pages ===== */
+let __pendingCoverBlob3101=null;
+let __pendingPaperBlob3101=null;
+let __coverMode3101='solid';
+let __paperMode3101='preset';
+let __objectUrls3101=[];
+
+function revokeUrls3101(){
+  for(const u of __objectUrls3101){try{URL.revokeObjectURL(u)}catch(e){}}
+  __objectUrls3101=[];
+}
+async function mediaUrl3101(key){
+  if(!key)return '';
+  try{
+    const blob=await coverGet395(key);
+    if(!blob)return '';
+    const url=URL.createObjectURL(blob);
+    __objectUrls3101.push(url);
+    return url;
+  }catch(e){return ''}
+}
+async function hydrateBookMedia3101(){
+  // Covers on home cards.
+  const coverEls=[...document.querySelectorAll('[data-cover-book]')];
+  for(const el of coverEls){
+    const id=el.getAttribute('data-cover-book');
+    const b=(D.books||[]).find(x=>x.id===id);
+    if(!b)continue;
+    const mode=b.coverMode || (b.coverKey||b.coverImage?'photo':'solid');
+    if(mode==='photo'){
+      let url='';
+      if(b.coverKey)url=await mediaUrl3101(b.coverKey);
+      if(!url && b.coverImage)url=b.coverImage;
+      if(url){
+        el.style.backgroundImage=`url("${url.replace(/"/g,'%22')}")`;
+        el.style.backgroundColor='transparent';
+      }else{
+        // Broken/missing binary: gracefully show the saved solid color, not a blank card.
+        el.style.backgroundImage='none';
+        el.style.backgroundColor=b.coverColor||V3COLORS[0];
+      }
+    }else{
+      el.style.backgroundImage='none';
+      el.style.backgroundColor=b.coverColor||V3COLORS[0];
+    }
+  }
+
+  // Inner-page photo if reader is open.
+  const paper=document.querySelector('#readerArea .paper[data-paper-book]');
+  if(paper){
+    const id=paper.getAttribute('data-paper-book');
+    const b=(D.books||[]).find(x=>x.id===id);
+    if(b && (b.pageMode==='photo' || b.pageImageKey)){
+      const url=await mediaUrl3101(b.pageImageKey);
+      if(url){
+        paper.classList.add('photo3101');
+        paper.style.setProperty('--paper-photo',`url("${url.replace(/"/g,'%22')}")`);
+      }
+    }
+  }
+}
+
+function renderV3Books(){
+  let host=$('books');if(!host)return;
+  host.className='bookshelf';
+  host.innerHTML=D.books.map((b,i)=>{
+    ensureBookV3(b,i);
+    if(!b.coverMode)b.coverMode=(b.coverKey||b.coverImage)?'photo':'solid';
+    if(!b.pageMode)b.pageMode=b.pageImageKey?'photo':'preset';
+    let n=D.qs.filter(q=>bookIdOf(q)===b.id).length;
+    const base=b.coverMode==='solid'
+      ?`background:${b.coverColor||V3COLORS[0]}`
+      :`background:${b.coverColor||V3COLORS[0]}`;
+    return `<div class="bookWrap"><button class="bookCard" onclick="openBookV3('${b.id}')">
+      <div class="coverBg" data-cover-book="${b.id}" style="${base}"></div>
+      <div class="coverShade"></div>
+      <div class="bookTitle ${fontClassV3(b.font)}" style="color:${b.titleColor||'#fff'};-webkit-text-stroke:${Number(b.strokeWidth||0)}px ${b.strokeColor||'#000'};text-shadow:${Number(b.strokeWidth||0)>0?'none':'0 1px 5px #0005'}">${esc(bookTitleV3(b))}</div>
+      <div class="bookSub">${esc(b.sub||`${n} 道题`)}</div></button>
+      <button class="bookEdit" onclick="event.stopPropagation();editBookV3('${b.id}')">✎</button></div>`;
+  }).join('')+`<button class="addBook" onclick="editBookV3()"><b>＋</b><span>添加错题本</span></button>`;
+  setTimeout(hydrateBookMedia3101,0);
+}
+
+async function setEditorPreview3101(kind, book){
+  if(kind==='cover'){
+    const p=$('coverPreview3101'); if(!p)return;
+    p.style.backgroundImage='none';
+    p.style.backgroundColor=book?.coverColor||V3COLORS[0];
+    if(__coverMode3101==='photo'){
+      let url='';
+      if(__pendingCoverBlob3101){
+        url=URL.createObjectURL(__pendingCoverBlob3101);__objectUrls3101.push(url);
+      }else if(book?.coverKey)url=await mediaUrl3101(book.coverKey);
+      else if(book?.coverImage)url=book.coverImage;
+      if(url){p.style.backgroundImage=`url("${url.replace(/"/g,'%22')}")`;p.style.backgroundColor='transparent'}
+      p.textContent=url?'':'照片暂不可用，可重新选择';
+    }else p.textContent='纯色封面';
+  }else{
+    const p=$('paperPreview3101'); if(!p)return;
+    p.style.backgroundImage='none';
+    p.style.backgroundColor='#f6e8e8';
+    if(__paperMode3101==='photo'){
+      let url='';
+      if(__pendingPaperBlob3101){
+        url=URL.createObjectURL(__pendingPaperBlob3101);__objectUrls3101.push(url);
+      }else if(book?.pageImageKey)url=await mediaUrl3101(book.pageImageKey);
+      if(url){p.style.backgroundImage=`url("${url.replace(/"/g,'%22')}")`}
+      p.textContent=url?'':'尚未选择内页图片';
+    }else{
+      p.textContent=`当前预设：${paperNameV3($('v3paper')?.value||book?.paper||'ruled')}`;
+    }
+  }
+}
+
+function setCoverMode3101(mode){
+  __coverMode3101=mode;
+  document.querySelectorAll('[data-cover-mode3101]').forEach(x=>x.classList.toggle('on',x.dataset.coverMode3101===mode));
+  $('solidPanel3101').style.display=mode==='solid'?'block':'none';
+  $('photoPanel3101').style.display=mode==='photo'?'block':'none';
+  const b=D.books.find(x=>x.id===window.__editingBookId);
+  setEditorPreview3101('cover',b);
+}
+function setPaperMode3101(mode){
+  __paperMode3101=mode;
+  document.querySelectorAll('[data-paper-mode3101]').forEach(x=>x.classList.toggle('on',x.dataset.paperMode3101===mode));
+  $('presetPanel3101').style.display=mode==='preset'?'block':'none';
+  $('paperPhotoPanel3101').style.display=mode==='photo'?'block':'none';
+  const b=D.books.find(x=>x.id===window.__editingBookId);
+  setEditorPreview3101('paper',b);
+}
+function chooseColor3101(c,el){
+  $('v3color').value=c;
+  document.querySelectorAll('#solidPanel3101 .sw').forEach(x=>x.classList.remove('on'));
+  el?.classList.add('on');
+  __coverMode3101='solid';
+  setEditorPreview3101('cover',D.books.find(x=>x.id===window.__editingBookId));
+}
+function customColor3101(v){
+  $('v3color').value=v;
+  document.querySelectorAll('#solidPanel3101 .sw').forEach(x=>x.classList.remove('on'));
+  __coverMode3101='solid';
+  setEditorPreview3101('cover',D.books.find(x=>x.id===window.__editingBookId));
+}
+async function pickCover3101(input){
+  const f=input.files?.[0]; if(!f)return;
+  try{
+    __pendingCoverBlob3101=await compressCover395(f);
+    __coverMode3101='photo';
+    setCoverMode3101('photo');
+  }catch(e){alert('无法处理封面图片：'+(e?.message||e))}
+}
+async function pickPaper3101(input){
+  const f=input.files?.[0]; if(!f)return;
+  try{
+    __pendingPaperBlob3101=await compressCover395(f);
+    __paperMode3101='photo';
+    setPaperMode3101('photo');
+  }catch(e){alert('无法处理内页图片：'+(e?.message||e))}
+}
+function choosePaperPreset3101(val,el){
+  $('v3paper').value=val;
+  document.querySelectorAll('#presetPanel3101 .choice').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');
+  __paperMode3101='preset';
+  setEditorPreview3101('paper',D.books.find(x=>x.id===window.__editingBookId));
+}
+
+function editBookV3(id=''){
+  revokeUrls3101();
+  window.__editingBookId=id||'';
+  __pendingCoverBlob3101=null;
+  __pendingPaperBlob3101=null;
+
+  let b=D.books.find(x=>x.id===id)||{
+    title:'',sub:'',coverColor:V3COLORS[0],coverImage:'',coverKey:'',
+    coverMode:'solid',font:'sans',paper:'ruled',pageMode:'preset',pageImageKey:'',
+    titleColor:'#ffffff',strokeWidth:0,strokeColor:'#000000'
+  };
+  ensureBookV3(b,0);
+  __coverMode3101=b.coverMode||(b.coverKey||b.coverImage?'photo':'solid');
+  __paperMode3101=b.pageMode||(b.pageImageKey?'photo':'preset');
+
+  modal(`<div class="sheetBar"><button class="sheetBack" onclick="closeM()">‹ 返回</button><b>${id?'编辑错题本':'新建错题本'}</b><button class="sheetClose" onclick="closeM()">×</button></div>
+  <label>错题本名称</label><input id="v3bn" value="${esc(bookTitleV3(b))}" placeholder="例如：艺术概论">
+  <label>副标题 / 科目</label><input id="v3bs" value="${esc(b.sub||'')}" placeholder="例如：专升本 · 艺术概论">
+
+  <label>封面模式</label>
+  <div class="mediaMode3101">
+    <button data-cover-mode3101="solid" class="${__coverMode3101==='solid'?'on':''}" onclick="setCoverMode3101('solid')">纯色封面</button>
+    <button data-cover-mode3101="photo" class="${__coverMode3101==='photo'?'on':''}" onclick="setCoverMode3101('photo')">相册封面</button>
+  </div>
+  <div id="coverPreview3101" class="coverPreview3101"></div>
+  <div id="solidPanel3101" class="mediaPanel3101" style="display:${__coverMode3101==='solid'?'block':'none'}">
+    <div class="swatches">${V3COLORS.map(c=>`<button class="sw ${b.coverColor===c?'on':''}" style="background:${c}" onclick="chooseColor3101('${c}',this)"></button>`).join('')}</div>
+    <div class="colorCustom3101"><span class="small">自定义纯色</span><input type="color" value="${b.coverColor||V3COLORS[0]}" oninput="customColor3101(this.value)"></div>
+  </div>
+  <div id="photoPanel3101" class="mediaPanel3101" style="display:${__coverMode3101==='photo'?'block':'none'}">
+    <input id="coverFile3101" type="file" accept="image/*" hidden onchange="pickCover3101(this)">
+    <div class="mediaActions3101"><button class="secondary" onclick="$('coverFile3101').click()">从相册更换封面</button><button class="secondary" onclick="setCoverMode3101('solid')">暂用纯色</button></div>
+    <div class="small" style="margin-top:7px">切换为纯色不会删除已保存的照片，以后可以再切回来。</div>
+  </div>
+
+  <label>封面标题字体</label>
+  <div class="choices"><button class="choice ${b.font==='sans'?'on':''}" onclick="chooseV3('font','sans',this)">极简黑体</button><button class="choice ${b.font==='serif'?'on':''}" onclick="chooseV3('font','serif',this)" style="font-family:Georgia,serif">衬线体</button><button class="choice ${b.font==='hand'?'on':''}" onclick="chooseV3('font','hand',this)" style="font-family:KaiTi,serif">手写感</button></div>
+  <label>字体颜色 / 描边颜色</label>
+  <div class="colorRow"><div class="colorCtl"><span>字体颜色</span><input id="v3titleColor" type="color" value="${b.titleColor||'#ffffff'}"></div><div class="colorCtl"><span>描边颜色</span><input id="v3strokeColor" type="color" value="${b.strokeColor||'#000000'}"></div></div>
+  <label>字体描边</label><select id="v3strokeWidth"><option value="0" ${Number(b.strokeWidth||0)===0?'selected':''}>关闭描边</option><option value="1" ${Number(b.strokeWidth||0)===1?'selected':''}>细描边</option><option value="2" ${Number(b.strokeWidth||0)===2?'selected':''}>中描边</option><option value="3" ${Number(b.strokeWidth||0)===3?'selected':''}>粗描边</option></select>
+
+  <label>错题本内页</label>
+  <div class="mediaMode3101">
+    <button data-paper-mode3101="preset" class="${__paperMode3101==='preset'?'on':''}" onclick="setPaperMode3101('preset')">预设内页</button>
+    <button data-paper-mode3101="photo" class="${__paperMode3101==='photo'?'on':''}" onclick="setPaperMode3101('photo')">相册图片</button>
+  </div>
+  <div id="paperPreview3101" class="paperPreview3101"></div>
+  <div id="presetPanel3101" style="display:${__paperMode3101==='preset'?'block':'none'}">
+    <div class="choices">
+      <button class="choice ${b.paper==='ruled'?'on':''}" onclick="choosePaperPreset3101('ruled',this)">浅粉横线</button>
+      <button class="choice ${b.paper==='dot'?'on':''}" onclick="choosePaperPreset3101('dot',this)">灰粉点阵</button>
+      <button class="choice ${b.paper==='clean'?'on':''}" onclick="choosePaperPreset3101('clean',this)">奶油空白</button>
+      <button class="choice ${b.paper==='floral'?'on':''}" onclick="choosePaperPreset3101('floral',this)">复古花边</button>
+      <button class="choice ${b.paper==='grid'?'on':''}" onclick="choosePaperPreset3101('grid',this)">淡粉方格</button>
+    </div>
+  </div>
+  <div id="paperPhotoPanel3101" style="display:${__paperMode3101==='photo'?'block':'none'}">
+    <input id="paperFile3101" type="file" accept="image/*" hidden onchange="pickPaper3101(this)">
+    <div class="mediaActions3101"><button class="secondary" onclick="$('paperFile3101').click()">从相册选择内页图片</button><button class="secondary" onclick="setPaperMode3101('preset')">暂用预设</button></div>
+    <div class="small" style="margin-top:7px">相册内页会作为整张纸张背景，题目卡片自动使用半透明白底保证文字可读。</div>
+  </div>
+
+  <input id="v3color" type="hidden" value="${b.coverColor||V3COLORS[0]}">
+  <input id="v3font" type="hidden" value="${b.font||'sans'}">
+  <input id="v3paper" type="hidden" value="${b.paper||'ruled'}">
+  <div class="row bookSaveBar392" style="margin-top:16px"><button class="secondary" onclick="closeM()">取消</button><button class="primary" style="flex:1" onclick="saveBookV3('${id}')">保存</button></div>
+  ${id?`<button class="secondary danger" style="width:100%;margin-top:9px" onclick="deleteBookV3('${id}')">删除错题本</button>`:''}`);
+
+  setTimeout(()=>{
+    if(typeof activateBookEditor392==='function')activateBookEditor392();
+    setEditorPreview3101('cover',b);
+    setEditorPreview3101('paper',b);
+  },0);
+}
+
+async function saveBookV3(id){
+  const title=$('v3bn')?.value.trim();
+  if(!title)return alert('请输入错题本名称');
+
+  let b=D.books.find(x=>x.id===id);
+  if(!b){
+    b={id:uid()};
+    D.books.push(b);
+    id=b.id;
+  }
+
+  Object.assign(b,{
+    title,name:title,sub:$('v3bs')?.value.trim()||'',
+    coverColor:$('v3color')?.value||V3COLORS[0],
+    coverMode:__coverMode3101,
+    font:$('v3font')?.value||'sans',
+    paper:$('v3paper')?.value||'ruled',
+    pageMode:__paperMode3101,
+    titleColor:$('v3titleColor')?.value||'#ffffff',
+    strokeColor:$('v3strokeColor')?.value||'#000000',
+    strokeWidth:Number($('v3strokeWidth')?.value||0)
+  });
+
+  try{
+    // Cover media. Existing photo remains stored even when solid mode is selected.
+    if(__pendingCoverBlob3101){
+      const key='cover_'+b.id;
+      await coverPut395(key,__pendingCoverBlob3101);
+      b.coverKey=key;
+      b.coverImage='';
+    }
+    // Inner-page media.
+    if(__pendingPaperBlob3101){
+      const key='paper_'+b.id;
+      await coverPut395(key,__pendingPaperBlob3101);
+      b.pageImageKey=key;
+    }
+
+    await wbPersistNow310();
+    revokeUrls3101();
+    if(typeof releaseQuestionEditor393==='function')releaseQuestionEditor393(false);
+    if(typeof closeM==='function')closeM();
+    renderV3Books();
+    if(readerV3?.book===b.id && $('readerArea'))drawReaderV3();
+  }catch(e){
+    alert('保存失败：'+(e?.message||e));
+  }finally{
+    __pendingCoverBlob3101=null;
+    __pendingPaperBlob3101=null;
+    window.__editingBookId='';
+  }
+}
+
+/* Reader renderer patched to support photo inner pages. */
+const __oldDrawReaderV3_3101=drawReaderV3;
+drawReaderV3=function(){
+  __oldDrawReaderV3_3101();
+  const b=D.books.find(x=>x.id===readerV3.book);
+  const paper=document.querySelector('#readerArea .paper');
+  if(paper && b){
+    paper.setAttribute('data-paper-book',b.id);
+    if(b.pageMode==='photo' || b.pageImageKey){
+      setTimeout(hydrateBookMedia3101,0);
+    }
+    const subtitle=document.querySelector('#readerArea .readerName .small');
+    if(subtitle && b.pageMode==='photo') subtitle.textContent=`${D.qs.filter(q=>bookIdOf(q)===b.id).length} 道题 · 相册内页`;
+  }
+};
+
+/* Existing saved covers from V3.9.5 are recovered on every launch. */
+setTimeout(()=>{
+  renderV3Books();
+  hydrateBookMedia3101();
+},260);
 
 </script>
 </body></html>
