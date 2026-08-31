@@ -943,6 +943,10 @@ body.qEditLock393{
 .saveToast3112{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99999;background:#1f1f1d;color:#fff;padding:11px 18px;border-radius:999px;font-weight:800;box-shadow:0 8px 28px #0002;animation:toast3112 .2s ease}
 @keyframes toast3112{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
 @media(max-width:560px){.bankHit3112{padding-right:96px!important}.bankActions3112 button{padding:8px 10px}}
+
+/* ===== V3.12.1 framework ordered library + search ===== */
+.fwSelectors312{display:grid;grid-template-columns:1fr;gap:10px;margin:4px 0 10px}.fwSubjectRow312{display:grid;grid-template-columns:1fr auto;gap:10px}.fwSearchWrap312{position:relative}.fwSearch312{width:100%;padding-right:42px}.fwClearSearch312{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;font-size:20px;color:#8b847d;padding:6px 8px}.fwFilterRow312{display:flex;gap:7px;overflow:auto;padding-bottom:2px}.fwFilterRow312 button{white-space:nowrap;min-height:38px}.fwFilterRow312 .on{background:#292725;color:#fff}.fwJumpList312{background:#fff;border:1px solid #e7e2dc;border-radius:18px;padding:6px;margin-top:2px;max-height:300px;overflow:auto;box-shadow:0 12px 34px rgba(50,45,40,.12)}.fwJump312{width:100%;display:flex;align-items:flex-start;gap:10px;text-align:left;border:0;background:#fff;padding:12px;border-radius:12px}.fwJump312:active{background:#f5f1ed}.fwJump312 .n{min-width:34px;height:28px;border-radius:9px;background:#f0ece8;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px}.fwJump312 .t{font-size:14px;line-height:1.45;font-weight:700}.fwJump312 .meta{display:block;font-size:11px;color:#918a83;margin-top:3px}.fwOrderBar312{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px 0 10px}.fwOrderBar312 .small{font-size:12px}.fwSaveRow312{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.fwDanger312{color:#ad4e55!important;background:#f9e9eb!important}.fwToast312{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(14px);background:#292725;color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;font-weight:750;z-index:9999;opacity:0;pointer-events:none;transition:.2s;box-shadow:0 8px 30px rgba(0,0,0,.18)}.fwToast312.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:430px){.fwSubjectRow312{grid-template-columns:1fr}.fwSaveRow312{grid-template-columns:1fr}.fwJumpList312{max-height:250px}}
 </style>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -969,7 +973,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.12</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.12.1</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -983,7 +987,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.12 题库集中编辑版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V3.12.1 框架背诵顺序题库版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -6344,15 +6348,17 @@ requestAnimationFrame(enhanceBank368);
 </script>
 
 <script id="v312patch">
-/* ===== V3.12：思维导图替换为 L1/L2 框架背诵 ===== */
-let fw312={book:'',qid:'',showL2:false,showAnswer:false,edit:false,fast:false};
-function fwQs312(bookId){return D.qs.filter(q=>bookIdOf(q)===bookId && q.type!=='choice' && String(q.answer||q.answerText||q.ans||'').trim())}
+/* ===== V3.12.1：L1/L2 框架背诵 + 顺序题库 + 搜索定位 ===== */
+let fw312={book:'',qid:'',showL2:false,showAnswer:false,edit:false,fast:false,filter:'all',search:''};
+function fwQs312(bookId){
+  return D.qs.filter(q=>bookIdOf(q)===bookId && q.type!=='choice' && String(q.answer||q.answerText||q.ans||'').trim());
+}
 function fwAnswer312(q){return String(q.answerText||q.answer||q.ans||'').trim()}
 function fwLines312(v){return Array.isArray(v)?v.map(String).map(x=>x.trim()).filter(Boolean):String(v||'').split(/\n+/).map(x=>x.trim()).filter(Boolean)}
 function fwMigrate312(q){
   if(q.frameworkL1||q.frameworkL2)return;
   let l1=[],l2=[];
-  if(q.memoryTree36?.children?.length){q.memoryTree36.children.forEach(n=>{if(n.text)l1.push(n.text);(n.children||[]).forEach(c=>c.text&&l2.push((n.text? n.text+'｜':'')+c.text))})}
+  if(q.memoryTree36?.children?.length){q.memoryTree36.children.forEach(n=>{if(n.text)l1.push(n.text);(n.children||[]).forEach(c=>c.text&&l2.push((n.text?n.text+'｜':'')+c.text))})}
   else if(Array.isArray(q.memoryMap)){q.memoryMap.forEach(n=>{if(n.head)l1.push(n.head);(n.children||[]).forEach(c=>l2.push((n.head?n.head+'｜':'')+c))})}
   q.frameworkL1=l1;q.frameworkL2=l2;q.frameworkL1Color=q.frameworkL1Color||'#f3c9cf';q.frameworkL2Color=q.frameworkL2Color||'#f4e7a9';
 }
@@ -6367,22 +6373,59 @@ function fwHighlight312(q){
   while((m=re.exec(ans))){out+=esc(ans.slice(last,m.index));out+=`<mark class="${map.get(m[0])}">${esc(m[0])}</mark>`;last=m.index+m[0].length}out+=esc(ans.slice(last));return out.replace(/\n/g,'<br>')
 }
 function fwL2Groups312(q){let groups={};fwLines312(q.frameworkL2).forEach(line=>{let a=line.split('｜'),h=a.length>1?a.shift():'提示',body=a.join('｜');(groups[h]||(groups[h]=[])).push(body||line)});return groups}
+function fwHasFramework312(q){return fwLines312(q.frameworkL1).length>0 || fwLines312(q.frameworkL2).length>0}
+function fwFilteredQs312(){
+  let a=fwQs312(fw312.book);
+  if(fw312.filter==='todo')a=a.filter(q=>!fwHasFramework312(q));
+  if(fw312.filter==='done')a=a.filter(q=>fwHasFramework312(q));
+  return a;
+}
+function fwTypeName312(q){return q.type==='essay'?'论述题':(q.type==='short'?'简答题':(q.type==='analysis'?'作品赏析':'文字题'))}
+function fwToast312(msg){
+  let el=document.getElementById('fwToast312');
+  if(!el){el=document.createElement('div');el.id='fwToast312';el.className='fwToast312';document.body.appendChild(el)}
+  el.textContent=msg;el.classList.remove('show');requestAnimationFrame(()=>el.classList.add('show'));clearTimeout(fwToast312.t);fwToast312.t=setTimeout(()=>el.classList.remove('show'),1300);
+}
 function openMindTab362(btn){page('mind',btn);openFramework312()}
 function openMindHub36(bookId='',qid=''){openFramework312(bookId,qid)}
 function openFramework312(bookId='',qid=''){
-  const books=D.books||[];fw312.book=bookId||fw312.book||books[0]?.id||'';let qs=fwQs312(fw312.book);fw312.qid=qid||fw312.qid||qs[0]?.id||'';if(!qs.some(q=>q.id===fw312.qid))fw312.qid=qs[0]?.id||'';
+  const books=D.books||[];fw312.book=bookId||fw312.book||books[0]?.id||'';
+  let all=fwQs312(fw312.book);fw312.qid=qid||fw312.qid||all[0]?.id||'';if(!all.some(q=>q.id===fw312.qid))fw312.qid=all[0]?.id||'';
   const host=$('mindArea36');if(!host)return;
-  host.innerHTML=`<div class="fw312"><div class="fwTop312"><button class="circleBtn" onclick="page('home');renderV3Books()">‹</button><div class="fwTitle312"><b>框架背诵</b><span class="small">L1 骨架 → L2 提示 → 完整答案</span></div></div>
-  <div class="fwSelectors312"><select onchange="fwChangeBook312(this.value)">${books.map(b=>`<option value="${b.id}" ${b.id===fw312.book?'selected':''}>${esc(bookTitleV3(b))}</option>`).join('')}</select><select onchange="fwChangeQ312(this.value)">${qs.map(q=>`<option value="${q.id}" ${q.id===fw312.qid?'selected':''}>${esc(q.text.slice(0,22))}${q.text.length>22?'…':''}</option>`).join('')}</select></div>
-  <div class="fwMode312"><button class="secondary ${!fw312.fast?'on':''}" onclick="fw312.fast=false;renderFramework312()">单题背诵</button><button class="secondary ${fw312.fast?'on':''}" onclick="fw312.fast=true;fw312.showL2=false;fw312.showAnswer=false;renderFramework312()">框架速刷</button></div><div id="fwBody312"></div></div>`;renderFramework312();
+  host.innerHTML=`<div class="fw312"><div class="fwTop312"><button class="circleBtn" onclick="page('home');renderV3Books()">‹</button><div class="fwTitle312"><b>框架背诵</b><span class="small">顺序题库 · L1 骨架 → L2 提示 → 完整答案</span></div></div>
+  <div class="fwSelectors312">
+    <div class="fwSubjectRow312"><select id="fwBook312" onchange="fwChangeBook312(this.value)">${books.map(b=>`<option value="${b.id}" ${b.id===fw312.book?'selected':''}>${esc(bookTitleV3(b))}</option>`).join('')}</select><button class="secondary" onclick="fwFocusSearch312()">⌕ 搜索题目</button></div>
+    <div class="fwSearchWrap312"><input id="fwSearch312" class="search fwSearch312" placeholder="输入题号 / 题目关键词快速定位" value="${esc(fw312.search)}" oninput="fwSearchInput312(this.value)" onfocus="fwRenderSearch312()"><button class="fwClearSearch312" onclick="fwClearSearch312()" aria-label="清除">×</button></div>
+    <div id="fwSearchResults312"></div>
+    <div class="fwFilterRow312"><button class="secondary ${fw312.filter==='all'?'on':''}" onclick="fwSetFilter312('all')">全部 ${all.length}</button><button class="secondary ${fw312.filter==='todo'?'on':''}" onclick="fwSetFilter312('todo')">未录 ${all.filter(q=>!fwHasFramework312(q)).length}</button><button class="secondary ${fw312.filter==='done'?'on':''}" onclick="fwSetFilter312('done')">已录 ${all.filter(fwHasFramework312).length}</button></div>
+  </div>
+  <div class="fwMode312"><button class="secondary ${!fw312.fast?'on':''}" onclick="fw312.fast=false;renderFramework312()">单题背诵</button><button class="secondary ${fw312.fast?'on':''}" onclick="fw312.fast=true;fw312.showL2=false;fw312.showAnswer=false;renderFramework312()">框架速刷</button></div><div id="fwBody312"></div></div>`;
+  renderFramework312();fwRenderSearch312();
 }
-function fwChangeBook312(v){fw312.book=v;fw312.qid=fwQs312(v)[0]?.id||'';fw312.showL2=false;fw312.showAnswer=false;fw312.edit=false;openFramework312(v,fw312.qid)}
-function fwChangeQ312(v){fw312.qid=v;fw312.showL2=false;fw312.showAnswer=false;fw312.edit=false;renderFramework312()}
+function fwChangeBook312(v){fw312.book=v;fw312.filter='all';fw312.search='';fw312.qid=fwQs312(v)[0]?.id||'';fw312.showL2=false;fw312.showAnswer=false;fw312.edit=false;openFramework312(v,fw312.qid)}
+function fwSetFilter312(v){
+  fw312.filter=v;let a=fwFilteredQs312();if(!a.some(q=>q.id===fw312.qid))fw312.qid=a[0]?.id||fwQs312(fw312.book)[0]?.id||'';fw312.edit=false;fw312.showL2=false;fw312.showAnswer=false;openFramework312(fw312.book,fw312.qid);
+}
+function fwFocusSearch312(){setTimeout(()=>document.getElementById('fwSearch312')?.focus(),0)}
+function fwSearchInput312(v){fw312.search=v;fwRenderSearch312()}
+function fwClearSearch312(){fw312.search='';let el=$('fwSearch312');if(el)el.value='';fwRenderSearch312()}
+function fwRenderSearch312(){
+  const box=$('fwSearchResults312');if(!box)return;let key=String(fw312.search||'').trim().toLowerCase();if(!key){box.innerHTML='';return}
+  let all=fwQs312(fw312.book), hits=[];
+  all.forEach((q,i)=>{let no=String(i+1),text=String(q.text||'');if(no===key || no.startsWith(key) || text.toLowerCase().includes(key))hits.push({q,i})});
+  hits=hits.slice(0,30);
+  box.innerHTML=hits.length?`<div class="fwJumpList312">${hits.map(({q,i})=>`<button class="fwJump312" onclick="fwJump312('${q.id}')"><span class="n">${i+1}</span><span class="t">${esc(q.text)}<span class="meta">${fwTypeName312(q)} · ${fwHasFramework312(q)?'已录框架':'未录框架'}</span></span></button>`).join('')}</div>`:`<div class="fwJumpList312"><div class="small" style="padding:12px">没有找到匹配题目</div></div>`;
+}
+function fwJump312(id){
+  let all=fwQs312(fw312.book),i=all.findIndex(q=>q.id===id);if(i<0)return;fw312.qid=id;fw312.filter='all';fw312.search='';fw312.showL2=false;fw312.showAnswer=false;fw312.edit=false;openFramework312(fw312.book,id);fwToast312(`已定位到第 ${i+1} 题`);window.scrollTo({top:0,behavior:'smooth'});
+}
 function renderFramework312(){
-  const q=D.qs.find(x=>x.id===fw312.qid),body=$('fwBody312');if(!body)return;if(!q){body.innerHTML='<div class="fwEmpty312">这个错题本暂时没有简答/论述题。</div>';return}fwMigrate312(q);
-  let l1=fwLines312(q.frameworkL1), groups=fwL2Groups312(q), qs=fwQs312(fw312.book),idx=qs.findIndex(x=>x.id===q.id),c1=q.frameworkL1Color||'#f3c9cf',c2=q.frameworkL2Color||'#f4e7a9';
+  const q=D.qs.find(x=>x.id===fw312.qid),body=$('fwBody312');if(!body)return;
+  if(!q){body.innerHTML='<div class="fwEmpty312">当前筛选下暂时没有可背诵题目。</div>';return}fwMigrate312(q);
+  let l1=fwLines312(q.frameworkL1), groups=fwL2Groups312(q), all=fwQs312(fw312.book), view=fwFilteredQs312(), globalIdx=all.findIndex(x=>x.id===q.id), viewIdx=view.findIndex(x=>x.id===q.id),c1=q.frameworkL1Color||'#f3c9cf',c2=q.frameworkL2Color||'#f4e7a9';
   let l2html=Object.entries(groups).map(([h,a])=>`<div class="fwL2Group312"><div class="fwL2Head312">${esc(h)}</div>${a.map(x=>`<span class="fwL2Item312">${esc(x)}</span>`).join('')}</div>`).join('');
-  body.innerHTML=`<div class="fwCard312" style="--l1:${c1};--l2:${c2}"><div class="fwProgress312">${idx+1} / ${qs.length} · ${q.type==='essay'?'论述题':'简答题'}</div><div class="fwQ312">${esc(q.text)}</div>
+  body.innerHTML=`<div class="fwOrderBar312"><span class="small">原始顺序：第 ${globalIdx+1} / ${all.length} 题</span><span class="small">${fw312.filter==='all'?'全部':fw312.filter==='todo'?'未录':'已录'} ${viewIdx>=0?viewIdx+1:0} / ${view.length}</span></div>
+  <div class="fwCard312" style="--l1:${c1};--l2:${c2}"><div class="fwProgress312">${globalIdx+1} / ${all.length} · ${fwTypeName312(q)}</div><div class="fwQ312">${esc(q.text)}</div>
   <div class="fwLabel312"><span>L1 骨架</span><span class="fwTag312">先靠它唤起答案</span></div><div class="fwChips312">${l1.length?l1.map(x=>`<span class="fwChip312">${esc(x)}</span>`).join(''):'<span class="small">尚未录入 L1</span>'}</div>
   <div class="${fw312.showL2?'':'fwCollapsed312'}"><div class="fwLabel312"><span>L2 提示</span><span class="fwTag312">卡住时再看</span></div>${l2html||'<div class="small">尚未录入 L2</div>'}</div>
   <div class="${fw312.showAnswer?'':'fwCollapsed312'}"><div class="fwLabel312"><span>完整答案</span><span class="fwTag312">框架词自动高亮</span></div><div class="fwAnswer312">${fwHighlight312(q)}</div></div>
@@ -6390,10 +6433,21 @@ function renderFramework312(){
   ${!fw312.fast?`<button class="secondary" style="width:100%;margin-top:9px" onclick="fwEditOpen312()">✎ 编辑我的 L1 / L2 框架</button>`:''}
   <div class="fwNav312"><button class="secondary" onclick="fwMove312(-1)">‹ 上一题</button><button class="secondary" onclick="fwMove312(1)">下一题 ›</button></div></div>${fw312.edit?fwEditor312(q):''}`;
 }
-function fwEditor312(q){let c1=q.frameworkL1Color||'#f3c9cf',c2=q.frameworkL2Color||'#f4e7a9';return `<div class="fwCard312 fwEdit312"><div class="fwLabel312"><span>编辑我的背诵框架</span><span class="fwTag312">自动保存到本题</span></div><label><b>L1 骨架</b></label><textarea id="fwL1312" placeholder="每行一个大框架\n例如：社会作用\n人生作用">${esc(fwLines312(q.frameworkL1).join('\n'))}</textarea><div class="fwHint312">每行一个 L1。只写看到后能最快唤起答案的大骨架。</div><label style="display:block;margin-top:12px"><b>L2 提示</b></label><textarea id="fwL2312" placeholder="推荐：L1｜关键词1 → 关键词2\n例如：社会作用｜认识世界 → 改造世界 → 解放武器">${esc(fwLines312(q.frameworkL2).join('\n'))}</textarea><div class="fwHint312">推荐格式“L1｜关键词 → 关键词”。也可以每行直接写一个提示词。</div><div class="fwColors312"><b>L1 荧光</b><input id="fwC1312" type="color" value="${c1}"><b>L2 荧光</b><input id="fwC2312" type="color" value="${c2}"></div><button class="primary" style="width:100%" onclick="fwSave312()">保存框架</button><button class="secondary" style="width:100%;margin-top:8px" onclick="fw312.edit=false;renderFramework312()">取消</button></div>`}
+function fwEditor312(q){let c1=q.frameworkL1Color||'#f3c9cf',c2=q.frameworkL2Color||'#f4e7a9';return `<div class="fwCard312 fwEdit312"><div class="fwLabel312"><span>编辑我的背诵框架</span><span class="fwTag312">保存后停留本题</span></div><label><b>L1 骨架</b></label><textarea id="fwL1312" placeholder="每行一个大框架\n例如：社会作用\n人生作用">${esc(fwLines312(q.frameworkL1).join('\n'))}</textarea><div class="fwHint312">每行一个 L1。只写看到后能最快唤起答案的大骨架。</div><label style="display:block;margin-top:12px"><b>L2 提示</b></label><textarea id="fwL2312" placeholder="推荐：L1｜关键词1 → 关键词2\n例如：社会作用｜认识世界 → 改造世界 → 解放武器">${esc(fwLines312(q.frameworkL2).join('\n'))}</textarea><div class="fwHint312">推荐格式“L1｜关键词 → 关键词”。也可以每行直接写一个提示词。</div><div class="fwColors312"><b>L1 荧光</b><input id="fwC1312" type="color" value="${c1}"><b>L2 荧光</b><input id="fwC2312" type="color" value="${c2}"></div><div class="fwSaveRow312"><button class="primary" onclick="fwSave312(false)">保存</button><button class="primary" onclick="fwSave312(true)">保存并下一题</button></div><button class="secondary fwDanger312" style="width:100%;margin-top:8px" onclick="fwDelete312()">删除本题 L1 / L2</button><button class="secondary" style="width:100%;margin-top:8px" onclick="fw312.edit=false;renderFramework312()">取消</button></div>`}
 function fwEditOpen312(){fw312.edit=true;renderFramework312();setTimeout(()=>$('fwL1312')?.focus(),0)}
-function fwSave312(){let q=D.qs.find(x=>x.id===fw312.qid);if(!q)return;q.frameworkL1=fwLines312($('fwL1312')?.value);q.frameworkL2=fwLines312($('fwL2312')?.value);q.frameworkL1Color=$('fwC1312')?.value||'#f3c9cf';q.frameworkL2Color=$('fwC2312')?.value||'#f4e7a9';save();fw312.edit=false;renderFramework312()}
-function fwMove312(d){let a=fwQs312(fw312.book),i=a.findIndex(x=>x.id===fw312.qid);if(i<0)return;i=(i+d+a.length)%a.length;fw312.qid=a[i].id;fw312.showL2=false;fw312.showAnswer=false;fw312.edit=false;renderFramework312();let sel=document.querySelector('#mindArea36 .fwSelectors312 select:nth-child(2)');if(sel)sel.value=fw312.qid;window.scrollTo({top:0,behavior:'smooth'})}
+function fwSave312(next){
+  let q=D.qs.find(x=>x.id===fw312.qid);if(!q)return;
+  q.frameworkL1=fwLines312($('fwL1312')?.value);q.frameworkL2=fwLines312($('fwL2312')?.value);q.frameworkL1Color=$('fwC1312')?.value||'#f3c9cf';q.frameworkL2Color=$('fwC2312')?.value||'#f4e7a9';
+  if(!save()){fwToast312('保存失败');return}fw312.edit=false;fwToast312('✓ 保存成功');
+  if(next)setTimeout(()=>fwMove312(1,true),180);else renderFramework312();
+}
+function fwDelete312(){
+  let q=D.qs.find(x=>x.id===fw312.qid);if(!q)return;if(!confirm('只删除本题的 L1 / L2 框架，不会删除原题和完整答案。继续吗？'))return;
+  q.frameworkL1=[];q.frameworkL2=[];if(!save()){fwToast312('删除失败');return}fw312.edit=false;renderFramework312();fwToast312('✓ L1 / L2 已删除');
+}
+function fwMove312(d,fromSave=false){
+  let a=fwFilteredQs312();if(!a.length)a=fwQs312(fw312.book);let i=a.findIndex(x=>x.id===fw312.qid);if(i<0)i=0;let ni=i+d;if(ni<0)ni=a.length-1;if(ni>=a.length)ni=0;fw312.qid=a[ni]?.id||fw312.qid;fw312.showL2=false;fw312.showAnswer=false;fw312.edit=false;renderFramework312();window.scrollTo({top:0,behavior:'smooth'});if(fromSave)fwToast312('✓ 已保存，进入下一题');
+}
 /* JSON 可直接携带 frameworkL1/frameworkL2/frameworkL1Color/frameworkL2Color；normalizeImportedData 的 ...q 会原样保留。 */
 </script>
 </body></html>
