@@ -933,7 +933,7 @@ body.qEditLock393{
 .quizPrev104:active{transform:translateY(-50%) scale(.96)}
 
 
-/* ===== V3.11.2 bank-edit / wrongbook-readonly ===== */
+/* ===== V3.12 bank-edit / wrongbook-readonly ===== */
 .bankHit3112{position:relative;padding-right:112px!important}
 .bankActions3112{position:absolute;right:14px;top:50%;transform:translateY(-50%);display:flex;gap:7px}
 .bankActions3112 button{border:0;border-radius:11px;padding:9px 12px;font-weight:800;background:#f1efeb;color:#222}
@@ -961,9 +961,15 @@ body.qEditLock393{
 .v390Continue{margin:10px 0;padding:10px 12px;border-radius:12px;background:#f2eeea;font-size:12px;color:#666;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .v390Continue b{color:#222}.v390Mini{font-size:10px;color:#888}.v390WrongBadge{display:inline-flex;align-items:center;gap:4px;padding:5px 8px;border-radius:999px;background:#f7e8e8;color:#a3585b;font-size:10px;margin-left:6px}.v390Card{border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px}.v390Grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.v390VariantSet{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-top:9px}.v390VariantSet button{white-space:nowrap}.v390Pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#efebe7;font-size:10px;color:#666}.v390Warn{padding:10px 12px;border-radius:12px;background:#f7f2ee;color:#756e68;font-size:11px;line-height:1.55}
 </style>
+
+<style id="v312style">
+/* ===== V3.12 框架背诵 ===== */
+.fw312{padding:0 14px 110px;max-width:760px;margin:auto}.fwTop312{display:flex;align-items:center;gap:12px;padding:10px 0 12px}.fwTop312 .fwTitle312{flex:1}.fwTop312 .fwTitle312 b{font-size:22px;display:block}.fwSelectors312{display:grid;grid-template-columns:1fr 1.25fr;gap:10px;margin:4px 0 14px}.fwSelectors312 select{width:100%;min-width:0}.fwCard312{background:#fff;border:1px solid #e8e4df;border-radius:24px;padding:18px;margin-bottom:14px;box-shadow:0 3px 14px rgba(50,45,40,.035)}.fwQ312{font-size:20px;line-height:1.5;font-weight:800;margin-bottom:14px}.fwLabel312{display:flex;align-items:center;justify-content:space-between;margin:12px 0 8px;font-weight:800}.fwTag312{font-size:12px;border-radius:999px;padding:4px 8px;background:#f0ece8;color:#6f6861}.fwChips312{display:flex;flex-wrap:wrap;gap:8px}.fwChip312{padding:8px 11px;border-radius:12px;background:var(--l1,#f3c9cf);font-weight:750;line-height:1.3}.fwL2Group312{padding:11px 12px;border-radius:14px;background:#faf8f5;margin:8px 0;line-height:1.55}.fwL2Head312{font-weight:800;margin-bottom:5px}.fwL2Item312{display:inline-block;margin:3px 5px 3px 0;padding:5px 8px;border-radius:9px;background:var(--l2,#f4e7a9)}.fwActions312{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.fwActions312 button{min-height:48px}.fwAnswer312{font-size:16px;line-height:1.85;white-space:pre-wrap;margin-top:10px}.fwAnswer312 mark{color:inherit;padding:1px 2px;border-radius:4px}.fwAnswer312 mark.l1{background:var(--l1,#f3c9cf);font-weight:750}.fwAnswer312 mark.l2{background:var(--l2,#f4e7a9)}.fwEdit312 textarea{width:100%;min-height:104px;resize:vertical}.fwHint312{font-size:12px;color:#8a837c;line-height:1.5;margin-top:5px}.fwColors312{display:flex;align-items:center;gap:10px;margin:10px 0}.fwColors312 input[type=color]{width:42px;height:36px;border:0;background:none;padding:0}.fwNav312{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.fwEmpty312{text-align:center;padding:55px 20px;color:#8b847d}.fwMode312{display:flex;gap:7px;overflow:auto;margin-bottom:12px}.fwMode312 button{white-space:nowrap}.fwMode312 .on{background:#292725;color:#fff}.fwCollapsed312{display:none}.fwProgress312{font-size:12px;color:#8b847d;margin-top:3px}
+@media(max-width:430px){.fw312{padding-left:12px;padding-right:12px}.fwCard312{padding:16px;border-radius:20px}.fwQ312{font-size:18px}.fwSelectors312{grid-template-columns:1fr 1fr}.fwActions312{grid-template-columns:1fr}.fwAnswer312{font-size:16px}}
+</style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.11.2</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.12</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -977,7 +983,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.11.2 题库集中编辑版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V3.12 题库集中编辑版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -996,7 +1002,7 @@ body.qEditLock393{
 <button class="on" onclick="page('home',this)"><b>⌂</b>首页</button>
 <button onclick="page('bank',this)"><b>▤</b>题库</button>
 <button onclick="page('study',this);studyHub()"><b>◉</b>刷题/背诵</button>
-<button onclick="openMindTab362(this)"><b>⌘</b>思维导图</button>
+<button onclick="openMindTab362(this)"><b>⌘</b>框架背诵</button>
 <button onclick="page('set',this)"><b>⚙</b>设置</button>
 </nav></div>
 <div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
@@ -6304,7 +6310,7 @@ setTimeout(backfillCoverFallback3111,900);
 </script>
 
 <script id="v3112patch">
-/* ===== V3.11.2：题库集中修改；错题本只读搜索 ===== */
+/* ===== V3.12：题库集中修改；错题本只读搜索 ===== */
 function showSaveSuccess3112(text){
   document.querySelectorAll('.saveToast3112').forEach(x=>x.remove());
   const d=document.createElement('div');d.className='saveToast3112';d.textContent=text||'保存成功';
@@ -6335,5 +6341,59 @@ document.addEventListener('click',e=>{
   if(e.target.closest?.('.bankActions3112'))e.stopPropagation();
 },true);
 requestAnimationFrame(enhanceBank368);
+</script>
+
+<script id="v312patch">
+/* ===== V3.12：思维导图替换为 L1/L2 框架背诵 ===== */
+let fw312={book:'',qid:'',showL2:false,showAnswer:false,edit:false,fast:false};
+function fwQs312(bookId){return D.qs.filter(q=>bookIdOf(q)===bookId && q.type!=='choice' && String(q.answer||q.answerText||q.ans||'').trim())}
+function fwAnswer312(q){return String(q.answerText||q.answer||q.ans||'').trim()}
+function fwLines312(v){return Array.isArray(v)?v.map(String).map(x=>x.trim()).filter(Boolean):String(v||'').split(/\n+/).map(x=>x.trim()).filter(Boolean)}
+function fwMigrate312(q){
+  if(q.frameworkL1||q.frameworkL2)return;
+  let l1=[],l2=[];
+  if(q.memoryTree36?.children?.length){q.memoryTree36.children.forEach(n=>{if(n.text)l1.push(n.text);(n.children||[]).forEach(c=>c.text&&l2.push((n.text? n.text+'｜':'')+c.text))})}
+  else if(Array.isArray(q.memoryMap)){q.memoryMap.forEach(n=>{if(n.head)l1.push(n.head);(n.children||[]).forEach(c=>l2.push((n.head?n.head+'｜':'')+c))})}
+  q.frameworkL1=l1;q.frameworkL2=l2;q.frameworkL1Color=q.frameworkL1Color||'#f3c9cf';q.frameworkL2Color=q.frameworkL2Color||'#f4e7a9';
+}
+function fwEscRe312(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+function fwHighlight312(q){
+  let ans=fwAnswer312(q), l1=fwLines312(q.frameworkL1), raw2=fwLines312(q.frameworkL2), l2=[];
+  raw2.forEach(x=>{let p=x.includes('｜')?x.split('｜').slice(1).join('｜'):x;p.split(/[→、，,；;]/).map(z=>z.trim()).filter(Boolean).forEach(z=>l2.push(z))});
+  let toks=[...l1.map(t=>({t,c:'l1'})),...l2.map(t=>({t,c:'l2'}))].filter(x=>x.t.length>=2).sort((a,b)=>b.t.length-a.t.length);
+  if(!toks.length)return esc(ans).replace(/\n/g,'<br>');
+  let map=new Map();toks.forEach(x=>{if(!map.has(x.t))map.set(x.t,x.c)});let keys=[...map.keys()];
+  let re=new RegExp(keys.map(fwEscRe312).join('|'),'g'), out='',last=0,m;
+  while((m=re.exec(ans))){out+=esc(ans.slice(last,m.index));out+=`<mark class="${map.get(m[0])}">${esc(m[0])}</mark>`;last=m.index+m[0].length}out+=esc(ans.slice(last));return out.replace(/\n/g,'<br>')
+}
+function fwL2Groups312(q){let groups={};fwLines312(q.frameworkL2).forEach(line=>{let a=line.split('｜'),h=a.length>1?a.shift():'提示',body=a.join('｜');(groups[h]||(groups[h]=[])).push(body||line)});return groups}
+function openMindTab362(btn){page('mind',btn);openFramework312()}
+function openMindHub36(bookId='',qid=''){openFramework312(bookId,qid)}
+function openFramework312(bookId='',qid=''){
+  const books=D.books||[];fw312.book=bookId||fw312.book||books[0]?.id||'';let qs=fwQs312(fw312.book);fw312.qid=qid||fw312.qid||qs[0]?.id||'';if(!qs.some(q=>q.id===fw312.qid))fw312.qid=qs[0]?.id||'';
+  const host=$('mindArea36');if(!host)return;
+  host.innerHTML=`<div class="fw312"><div class="fwTop312"><button class="circleBtn" onclick="page('home');renderV3Books()">‹</button><div class="fwTitle312"><b>框架背诵</b><span class="small">L1 骨架 → L2 提示 → 完整答案</span></div></div>
+  <div class="fwSelectors312"><select onchange="fwChangeBook312(this.value)">${books.map(b=>`<option value="${b.id}" ${b.id===fw312.book?'selected':''}>${esc(bookTitleV3(b))}</option>`).join('')}</select><select onchange="fwChangeQ312(this.value)">${qs.map(q=>`<option value="${q.id}" ${q.id===fw312.qid?'selected':''}>${esc(q.text.slice(0,22))}${q.text.length>22?'…':''}</option>`).join('')}</select></div>
+  <div class="fwMode312"><button class="secondary ${!fw312.fast?'on':''}" onclick="fw312.fast=false;renderFramework312()">单题背诵</button><button class="secondary ${fw312.fast?'on':''}" onclick="fw312.fast=true;fw312.showL2=false;fw312.showAnswer=false;renderFramework312()">框架速刷</button></div><div id="fwBody312"></div></div>`;renderFramework312();
+}
+function fwChangeBook312(v){fw312.book=v;fw312.qid=fwQs312(v)[0]?.id||'';fw312.showL2=false;fw312.showAnswer=false;fw312.edit=false;openFramework312(v,fw312.qid)}
+function fwChangeQ312(v){fw312.qid=v;fw312.showL2=false;fw312.showAnswer=false;fw312.edit=false;renderFramework312()}
+function renderFramework312(){
+  const q=D.qs.find(x=>x.id===fw312.qid),body=$('fwBody312');if(!body)return;if(!q){body.innerHTML='<div class="fwEmpty312">这个错题本暂时没有简答/论述题。</div>';return}fwMigrate312(q);
+  let l1=fwLines312(q.frameworkL1), groups=fwL2Groups312(q), qs=fwQs312(fw312.book),idx=qs.findIndex(x=>x.id===q.id),c1=q.frameworkL1Color||'#f3c9cf',c2=q.frameworkL2Color||'#f4e7a9';
+  let l2html=Object.entries(groups).map(([h,a])=>`<div class="fwL2Group312"><div class="fwL2Head312">${esc(h)}</div>${a.map(x=>`<span class="fwL2Item312">${esc(x)}</span>`).join('')}</div>`).join('');
+  body.innerHTML=`<div class="fwCard312" style="--l1:${c1};--l2:${c2}"><div class="fwProgress312">${idx+1} / ${qs.length} · ${q.type==='essay'?'论述题':'简答题'}</div><div class="fwQ312">${esc(q.text)}</div>
+  <div class="fwLabel312"><span>L1 骨架</span><span class="fwTag312">先靠它唤起答案</span></div><div class="fwChips312">${l1.length?l1.map(x=>`<span class="fwChip312">${esc(x)}</span>`).join(''):'<span class="small">尚未录入 L1</span>'}</div>
+  <div class="${fw312.showL2?'':'fwCollapsed312'}"><div class="fwLabel312"><span>L2 提示</span><span class="fwTag312">卡住时再看</span></div>${l2html||'<div class="small">尚未录入 L2</div>'}</div>
+  <div class="${fw312.showAnswer?'':'fwCollapsed312'}"><div class="fwLabel312"><span>完整答案</span><span class="fwTag312">框架词自动高亮</span></div><div class="fwAnswer312">${fwHighlight312(q)}</div></div>
+  <div class="fwActions312"><button class="secondary" onclick="fw312.showL2=!fw312.showL2;renderFramework312()">${fw312.showL2?'收起 L2':'提示 L2'}</button><button class="primary" onclick="fw312.showAnswer=!fw312.showAnswer;renderFramework312()">${fw312.showAnswer?'隐藏完整答案':'查看完整答案'}</button></div>
+  ${!fw312.fast?`<button class="secondary" style="width:100%;margin-top:9px" onclick="fwEditOpen312()">✎ 编辑我的 L1 / L2 框架</button>`:''}
+  <div class="fwNav312"><button class="secondary" onclick="fwMove312(-1)">‹ 上一题</button><button class="secondary" onclick="fwMove312(1)">下一题 ›</button></div></div>${fw312.edit?fwEditor312(q):''}`;
+}
+function fwEditor312(q){let c1=q.frameworkL1Color||'#f3c9cf',c2=q.frameworkL2Color||'#f4e7a9';return `<div class="fwCard312 fwEdit312"><div class="fwLabel312"><span>编辑我的背诵框架</span><span class="fwTag312">自动保存到本题</span></div><label><b>L1 骨架</b></label><textarea id="fwL1312" placeholder="每行一个大框架\n例如：社会作用\n人生作用">${esc(fwLines312(q.frameworkL1).join('\n'))}</textarea><div class="fwHint312">每行一个 L1。只写看到后能最快唤起答案的大骨架。</div><label style="display:block;margin-top:12px"><b>L2 提示</b></label><textarea id="fwL2312" placeholder="推荐：L1｜关键词1 → 关键词2\n例如：社会作用｜认识世界 → 改造世界 → 解放武器">${esc(fwLines312(q.frameworkL2).join('\n'))}</textarea><div class="fwHint312">推荐格式“L1｜关键词 → 关键词”。也可以每行直接写一个提示词。</div><div class="fwColors312"><b>L1 荧光</b><input id="fwC1312" type="color" value="${c1}"><b>L2 荧光</b><input id="fwC2312" type="color" value="${c2}"></div><button class="primary" style="width:100%" onclick="fwSave312()">保存框架</button><button class="secondary" style="width:100%;margin-top:8px" onclick="fw312.edit=false;renderFramework312()">取消</button></div>`}
+function fwEditOpen312(){fw312.edit=true;renderFramework312();setTimeout(()=>$('fwL1312')?.focus(),0)}
+function fwSave312(){let q=D.qs.find(x=>x.id===fw312.qid);if(!q)return;q.frameworkL1=fwLines312($('fwL1312')?.value);q.frameworkL2=fwLines312($('fwL2312')?.value);q.frameworkL1Color=$('fwC1312')?.value||'#f3c9cf';q.frameworkL2Color=$('fwC2312')?.value||'#f4e7a9';save();fw312.edit=false;renderFramework312()}
+function fwMove312(d){let a=fwQs312(fw312.book),i=a.findIndex(x=>x.id===fw312.qid);if(i<0)return;i=(i+d+a.length)%a.length;fw312.qid=a[i].id;fw312.showL2=false;fw312.showAnswer=false;fw312.edit=false;renderFramework312();let sel=document.querySelector('#mindArea36 .fwSelectors312 select:nth-child(2)');if(sel)sel.value=fw312.qid;window.scrollTo({top:0,behavior:'smooth'})}
+/* JSON 可直接携带 frameworkL1/frameworkL2/frameworkL1Color/frameworkL2Color；normalizeImportedData 的 ...q 会原样保留。 */
 </script>
 </body></html>
