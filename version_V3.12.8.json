@@ -1,0 +1,12 @@
+{
+  "version": "3.12.8",
+  "file": "index.html",
+  "name": "框架专用导入导出版",
+  "features": [
+    "框架背诵页新增导入 L1/L2 与导出框架入口",
+    "框架导入仅更新 frameworkL1/frameworkL2 和荧光颜色，不覆盖原题、完整答案或解析",
+    "支持按科目、题目文本、原题号、题型自动匹配已有题目",
+    "兼容 frameworks/items/questions/updates/data 数组格式及旧追加包中的 framework 字段",
+    "导入结束显示成功更新与未匹配数量"
+  ]
+}
