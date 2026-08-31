@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="3.13">
+<meta name="wrongbook-version" content="3.13.1">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -1120,7 +1120,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.1</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -1134,7 +1134,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.13 框架背诵题库浏览版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V3.13.1 框架背诵题型与编号修正版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -2227,7 +2227,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.13';
+const APP_VERSION='3.13.1';
 const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
 
 function versionParts311(v){
@@ -6498,7 +6498,11 @@ requestAnimationFrame(enhanceBank368);
 /* ===== V3.12.8：L1/L2 框架背诵 + 顺序题库 + 题号搜索 + 左右滑题 + 框架速刷 ===== */
 let fw312={book:'',qid:'',showL2:false,showAnswer:false,edit:false,fast:false,filter:'all',search:'',searchOpen:false,subjectOpen:false};
 function fwQs312(bookId){
-  return D.qs.filter(q=>bookIdOf(q)===bookId && q.type!=='choice' && String(q.answer||q.answerText||q.ans||'').trim());
+  return D.qs.filter(q=>
+    bookIdOf(q)===bookId &&
+    (q.type==='short' || q.type==='essay') &&
+    String(q.answer||q.answerText||q.ans||'').trim()
+  );
 }
 function fwAnswer312(q){return String(q.answerText||q.answer||q.ans||'').trim()}
 function fwLines312(v){return Array.isArray(v)?v.map(String).map(x=>x.trim()).filter(Boolean):String(v||'').split(/\n+/).map(x=>x.trim()).filter(Boolean)}
@@ -6901,7 +6905,7 @@ body.fwFrameworkMode3129 .fab{display:none!important}
     const all=fwQs312(fw312.book),rec=recorded313();
     wrap.style.display='block';
     if(!rec.length){wrap.innerHTML='<div class="fwRecordedRailHead3129"><b>题库浏览</b><span>已录 0 题</span></div><div class="fwRecordedEmpty3129">还没有录入 L1 / L2。</div>';return}
-    wrap.innerHTML='<div class="fwRecordedRailHead3129"><b>题库浏览</b><span>已录 '+rec.length+' 题 · 上下滑动</span></div><div class="fwRecordedRail3129">'+rec.map(q=>{const i=all.findIndex(x=>x.id===q.id)+1;return `<button class="fwRecordedItem3129 ${q.id===fw312.qid?'on':''}" data-qid="${q.id}" onclick="fwPickRecorded313('${q.id}')"><span class="no">题号 ${i}</span><span class="title">${esc(q.text)}</span></button>`}).join('')+'</div>';
+    wrap.innerHTML='<div class="fwRecordedRailHead3129"><b>题库浏览</b><span>已录 '+rec.length+' 题 · 上下滑动</span></div><div class="fwRecordedRail3129">'+rec.map((q,idx)=>{const localNo=idx+1;return `<button class="fwRecordedItem3129 ${q.id===fw312.qid?'on':''}" data-qid="${q.id}" onclick="fwPickRecorded313('${q.id}')"><span class="no">题号 ${localNo}</span><span class="title">${esc(q.text)}</span></button>`}).join('')+'</div>';
   }
   window.fwPickRecorded313=function(id){
     if(!recorded313().some(q=>q.id===id))return;
@@ -6916,6 +6920,16 @@ body.fwFrameworkMode3129 .fab{display:none!important}
   window.openFramework312=function(){const r=oldOpen313.apply(this,arguments);requestAnimationFrame(renderRecorded313);return r};
   document.addEventListener('DOMContentLoaded',()=>requestAnimationFrame(renderRecorded313));
 })();
+</script>
+
+
+<script id="v3131fix">
+/* ===== V3.13.1 =====
+   1) 框架背诵仅收录简答题/论述题；
+   2) 全部/未录/已录统计均基于上述文字题；
+   3) 题库浏览的显示题号按“已录框架”的当前顺序重新连续编号 1..N，
+      不再显示错题本原题号；原题号仍仅保留用于后台匹配/搜索。
+*/
 </script>
 
 </body></html>
