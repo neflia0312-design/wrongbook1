@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="3.12.8">
+<meta name="wrongbook-version" content="3.12.10">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -1120,7 +1120,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.12.8</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.12.10</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -1134,7 +1134,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.12.8 框架背诵流畅编辑版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V3.12.10 框架顺序滑题版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -2227,7 +2227,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.12.8';
+const APP_VERSION='3.12.10';
 const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
 
 function versionParts311(v){
@@ -6788,4 +6788,94 @@ window.openMindHub36=function(bookId='',qid=''){
   /* hard-route 里引用的是全局 openFramework312，覆盖后仍会进入新版。 */
 })();
 </script>
+
+<style id="v3129style">
+/* ===== V3.12.10：已录框架改为适配手机屏幕的竖向顺序列表 + 框架页移除通用加号 ===== */
+body.fwFrameworkMode3129 .fab{display:none!important}
+.fwRecordedRailWrap3129{margin:2px 0 14px;overflow:visible}
+.fwRecordedRailHead3129{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 9px;color:#948b83;font-size:11px}
+.fwRecordedRailHead3129 b{color:#4d4742;font-size:12px}
+.fwRecordedRail3129{display:flex;flex-direction:column;gap:8px;overflow:visible;padding:1px 0 2px}
+.fwRecordedItem3129{width:100%;border:1px solid #e6e0da;background:#f7f4f0;color:#3a3632;border-radius:16px;padding:11px 13px;text-align:left;box-shadow:none;outline:none!important;-webkit-tap-highlight-color:transparent;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:10px}
+.fwRecordedItem3129 .no{display:inline-flex;align-items:center;justify-content:center;min-width:58px;font-size:11px;color:#938a82;font-weight:760;background:#ece7e1;border-radius:999px;padding:6px 9px;line-height:1}
+.fwRecordedItem3129 .title{display:block;white-space:normal;overflow:visible;text-overflow:clip;font-size:13px;font-weight:780;line-height:1.45;max-width:none}
+.fwRecordedItem3129.on{background:#292725;color:#fff;border-color:#292725}.fwRecordedItem3129.on .no{color:#292725;background:#f0ece7}
+.fwRecordedEmpty3129{padding:10px 12px;border-radius:14px;background:#f7f4f0;color:#9a9189;font-size:12px}
+#fwIOTools3128{grid-template-columns:1fr!important}.fwIOBtn3128:not(.dark),#fwIOTools3128 .fwIOHint3128{display:none!important}
+#fwIOTools3128 .fwIOBtn3128.dark{width:100%!important}
+@media(max-width:430px){.fwRecordedItem3129{padding:10px 11px}.fwRecordedItem3129 .no{min-width:54px}.fwRecordedItem3129 .title{font-size:12.8px}}
+</style>
+<script id="v3129patch">
+/* ===== V3.12.10：全部页按已录题号竖向滑动；点题后下一题沿已录顺序；框架页只保留 L1/L2 导入 ===== */
+(function(){
+  const prevOpen=window.openFramework312;
+  const prevRender=window.renderFramework312;
+  const prevPage=window.page;
+
+  function fwRecorded3129(){
+    return fwQs312(fw312.book).filter(fwHasFramework312);
+  }
+  function fwEnsureRail3129(){
+    const root=document.querySelector('.fw312'); if(!root)return;
+    document.body.classList.add('fwFrameworkMode3129');
+    const filter=root.querySelector('.fwFilterRow312'); if(!filter)return;
+    let wrap=document.getElementById('fwRecordedRailWrap3129');
+    if(!wrap){
+      wrap=document.createElement('div'); wrap.id='fwRecordedRailWrap3129'; wrap.className='fwRecordedRailWrap3129';
+      filter.insertAdjacentElement('afterend',wrap);
+    }
+    fwRenderRail3129();
+    const io=document.getElementById('fwIOTools3128');
+    if(io){
+      io.innerHTML='<button class="fwIOBtn3128 dark" onclick="fwImportFramework3128()">导入 L1 / L2</button>';
+    }
+  }
+  function fwRenderRail3129(){
+    const wrap=document.getElementById('fwRecordedRailWrap3129'); if(!wrap)return;
+    if(fw312.filter!=='all'){wrap.style.display='none';return}
+    wrap.style.display='block';
+    const all=fwQs312(fw312.book), rec=fwRecorded3129();
+    if(!rec.length){wrap.innerHTML='<div class="fwRecordedRailHead3129"><b>已录框架</b><span>0 题</span></div><div class="fwRecordedEmpty3129">还没有录入 L1 / L2，先用上方「导入 L1 / L2」或手动编辑。</div>';return}
+    wrap.innerHTML='<div class="fwRecordedRailHead3129"><b>已录框架 · 按题号</b><span>上下滑动浏览</span></div><div class="fwRecordedRail3129">'+rec.map(q=>{const i=all.findIndex(x=>x.id===q.id)+1;return `<button class="fwRecordedItem3129 ${q.id===fw312.qid?'on':''}" data-qid="${q.id}" onclick="fwPickRecorded3129('${q.id}')"><span class="no">题号 ${i}</span><span class="title">${esc(q.text)}</span></button>`}).join('')+'</div>';
+    requestAnimationFrame(()=>wrap.querySelector('.fwRecordedItem3129.on')?.scrollIntoView({behavior:'smooth',block:'nearest'}));
+  }
+  window.fwPickRecorded3129=function(id){
+    const rec=fwRecorded3129(); if(!rec.some(q=>q.id===id))return;
+    fw312.qid=id;fw312.filter='all';fw312.fast=false;fw312.showL2=false;fw312.showAnswer=false;fw312.edit=false;
+    prevRender(); fwRenderRail3129();
+    requestAnimationFrame(()=>document.getElementById('fwSwipeCard312')?.scrollIntoView({behavior:'smooth',block:'start'}));
+  };
+  window.openFramework312=function(){
+    const r=prevOpen.apply(this,arguments);
+    requestAnimationFrame(fwEnsureRail3129);
+    return r;
+  };
+  window.renderFramework312=function(){
+    const r=prevRender.apply(this,arguments);
+    requestAnimationFrame(fwRenderRail3129);
+    return r;
+  };
+  window.fwMove312=function(d,fromSave=false){
+    let a;
+    if(fw312.filter==='all'){
+      const rec=fwRecorded3129();
+      a=rec.length?rec:fwQs312(fw312.book);
+    }else{
+      a=fwFilteredQs312(); if(!a.length)a=fwQs312(fw312.book);
+    }
+    if(!a.length)return;
+    let i=a.findIndex(x=>x.id===fw312.qid);if(i<0)i=0;
+    let ni=i+d;if(ni<0)ni=a.length-1;if(ni>=a.length)ni=0;
+    fw312.qid=a[ni]?.id||fw312.qid;fw312.showL2=false;fw312.showAnswer=false;fw312.edit=false;
+    prevRender();fwRenderRail3129();
+    requestAnimationFrame(()=>document.getElementById('fwSwipeCard312')?.scrollIntoView({behavior:'smooth',block:'start'}));
+    if(fromSave)fwToast312('✓ 已保存，进入下一题');
+  };
+  if(typeof prevPage==='function'){
+    window.page=function(id){if(id!=='mind')document.body.classList.remove('fwFrameworkMode3129');return prevPage.apply(this,arguments)};
+  }
+  document.addEventListener('DOMContentLoaded',()=>{if(document.querySelector('.fw312'))fwEnsureRail3129()});
+})();
+</script>
+
 </body></html>
