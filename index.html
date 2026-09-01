@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="3.13.1">
+<meta name="wrongbook-version" content="3.13.2">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -1120,7 +1120,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.1</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.2</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -1134,7 +1134,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.13.1 框架背诵题型与编号修正版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V3.13.2 框架背诵题型与编号修正版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -2227,7 +2227,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.13.1';
+const APP_VERSION='3.13.2';
 const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
 
 function versionParts311(v){
@@ -6924,12 +6924,159 @@ body.fwFrameworkMode3129 .fab{display:none!important}
 
 
 <script id="v3131fix">
-/* ===== V3.13.1 =====
+/* ===== V3.13.2 =====
    1) 框架背诵仅收录简答题/论述题；
    2) 全部/未录/已录统计均基于上述文字题；
    3) 题库浏览的显示题号按“已录框架”的当前顺序重新连续编号 1..N，
       不再显示错题本原题号；原题号仍仅保留用于后台匹配/搜索。
 */
+</script>
+
+
+<script id="v3132-type-compat-fix">
+/* ===== V3.13.2 =====
+   修复框架背诵题型兼容：
+   - 兼容 short / essay 与“简答题 / 简答 / 论述题 / 论述”等中文题型；
+   - “选择题 / choice”永远不进入框架背诵；
+   - 框架导入时只处理简答/论述题，不再把选择题计入“成功更新”；
+   - 已经导入到本机、但 type 为中文的题目无需重新录入，刷新后即可显示。
+*/
+(function(){
+  function fwNormType3132(v){
+    const s=String(v??'').trim().toLowerCase();
+    if(!s)return '';
+    if(s==='short' || /简答/.test(s)) return 'short';
+    if(s==='essay' || /论述/.test(s)) return 'essay';
+    if(s==='choice' || /选择/.test(s)) return 'choice';
+    if(s==='analysis' || /赏析/.test(s)) return 'analysis';
+    if(s==='cloze' || /填空|背诵填词/.test(s)) return 'cloze';
+    return s;
+  }
+  window.fwNormType3132=fwNormType3132;
+
+  // 核心题库：只纳入简答/论述，并兼容中文 type。
+  window.fwQs312=function(bookId){
+    return (D.qs||[]).filter(q=>{
+      const t=fwNormType3132(q.type);
+      return bookIdOf(q)===bookId &&
+        (t==='short' || t==='essay') &&
+        String(q.answer||q.answerText||q.ans||'').trim();
+    });
+  };
+
+  window.fwTypeName312=function(q){
+    const t=fwNormType3132(q?.type);
+    return t==='essay'?'论述题':(t==='short'?'简答题':(t==='analysis'?'作品赏析':'文字题'));
+  };
+
+  // 导入框架专用：覆盖旧实现，选择题不参与更新统计。
+  window.fwImportFramework3128=function(){
+    function normText(v){return String(v||'').toLowerCase().replace(/[\s\u3000，。！？、；：,.!?;:（）()【】\[\]《》<>“”‘’'"·—_\-]/g,'')}
+    function bookName(b){try{return bookTitleV3(b)}catch(e){return String(b?.title||b?.name||'')}}
+    function itemQuestion(x){return String(x?.question||x?.text||x?.title||x?.prompt||'').trim()}
+    function itemSourceNo(x){let v=x?.sourceQuestionNo??x?.sourceNo??x?.questionNo??x?.no??x?.originalNo??'';return String(v??'').trim()}
+    function arr(v){return Array.isArray(v)?v.map(String).map(s=>s.trim()).filter(Boolean):String(v||'').split(/\n+/).map(s=>s.trim()).filter(Boolean)}
+    function items(raw){if(Array.isArray(raw))return raw;for(const k of ['frameworks','items','questions','updates','data'])if(Array.isArray(raw?.[k]))return raw[k];return []}
+    function pkgSubject(raw){return String(raw?.subject||raw?.bookName||raw?.book||raw?.category||'').trim()}
+    function resolveBook(subject){
+      const books=D.books||[];if(!subject)return books.find(b=>b.id===fw312.book)||null;
+      const n=normText(subject);
+      return books.find(b=>normText(bookName(b))===n) ||
+             books.find(b=>normText(bookName(b)).includes(n)||n.includes(normText(bookName(b)))) || null;
+    }
+    function match(item,book){
+      const typ=fwNormType3132(item?.type||item?.questionType||'');
+      if(typ!=='short' && typ!=='essay') return null;
+      const qs=(D.qs||[]).filter(q=>{
+        const qt=fwNormType3132(q.type);
+        return bookIdOf(q)===book.id && (qt==='short'||qt==='essay');
+      });
+      const txt=itemQuestion(item), nt=normText(txt), src=itemSourceNo(item);
+      if(item?.id){const q=qs.find(q=>String(q.id)===String(item.id));if(q)return q}
+      if(nt){
+        let exact=qs.filter(q=>normText(q.text)===nt && fwNormType3132(q.type)===typ);
+        if(exact.length===1)return exact[0];
+        if(exact.length>1 && src){
+          const z=exact.filter(q=>String(fwSourceNo312(q))===src);
+          if(z.length===1)return z[0];
+        }
+      }
+      if(src){
+        const z=qs.filter(q=>String(fwSourceNo312(q))===src && fwNormType3132(q.type)===typ);
+        if(z.length===1)return z[0];
+      }
+      if(nt){
+        const z=qs.filter(q=>{
+          const nq=normText(q.text);
+          return fwNormType3132(q.type)===typ && nq && (nq.includes(nt)||nt.includes(nq)) && Math.min(nq.length,nt.length)>=8;
+        });
+        if(z.length===1)return z[0];
+      }
+      return null;
+    }
+    function report(ok,fail,ignored,bad){
+      document.getElementById('fwIOReport3128')?.remove();
+      const m=document.createElement('div');m.id='fwIOReport3128';m.className='fwIOReport3128';
+      m.innerHTML=`<div class="ttl">✓ 框架导入完成</div>
+        <div class="sub">成功更新 <b>${ok}</b> 道简答/论述题 · 未匹配 <b>${fail}</b> 道题${ignored?` · 已忽略 <b>${ignored}</b> 道非框架题`:''}<br>
+        只更新 L1 / L2 与荧光颜色，原题、完整答案和解析均未改动。</div>
+        ${bad.length?`<div class="bad">未匹配：${bad.map(x=>esc(x)).join('<br>')}</div>`:''}
+        <button onclick="document.getElementById('fwIOReport3128')?.remove()">知道了</button>`;
+      document.body.appendChild(m);
+    }
+
+    let input=document.getElementById('fwImportFile3128');
+    if(!input){
+      input=document.createElement('input');input.id='fwImportFile3128';
+      input.type='file';input.accept='.json,application/json';input.hidden=true;
+      document.body.appendChild(input);
+    }
+    input.value='';
+    input.onchange=()=>{
+      const f=input.files?.[0];if(!f)return;
+      const r=new FileReader();
+      r.onload=()=>{
+        try{
+          const raw=JSON.parse(String(r.result||'')), packSub=pkgSubject(raw), list=items(raw);
+          if(!list.length)throw new Error('文件中没有可识别的框架数据');
+          let ok=0,fail=0,ignored=0,bad=[];
+          for(const item of list){
+            const typ=fwNormType3132(item?.type||item?.questionType||'');
+            if(typ!=='short' && typ!=='essay'){ignored++;continue}
+            const subject=String(item?.subject||item?.bookName||item?.book||packSub||'').trim();
+            const book=resolveBook(subject);
+            if(!book){fail++;bad.push(`${itemQuestion(item)||'未命名题目'}（找不到科目）`);continue}
+            const q=match(item,book);
+            if(!q){fail++;bad.push(itemQuestion(item)||`原题号 ${itemSourceNo(item)||'?'}`);continue}
+            const l1=item.frameworkL1??item.l1??item.L1;
+            const l2=item.frameworkL2??item.l2??item.L2;
+            if(l1!==undefined)q.frameworkL1=arr(l1);
+            if(l2!==undefined)q.frameworkL2=arr(l2);
+            if(item.frameworkL1Color||item.l1Color)q.frameworkL1Color=item.frameworkL1Color||item.l1Color;
+            if(item.frameworkL2Color||item.l2Color)q.frameworkL2Color=item.frameworkL2Color||item.l2Color;
+            q.frameworkL1Color=q.frameworkL1Color||'#f3c9cf';
+            q.frameworkL2Color=q.frameworkL2Color||'#f4e7a9';
+            ok++;
+          }
+          if(ok){
+            try{persistCompat310()}catch(e){console.error(e);throw new Error('保存到本机题库失败')}
+            renderFramework312();
+          }
+          report(ok,fail,ignored,bad.slice(0,20));
+        }catch(e){alert('框架导入失败：'+(e?.message||e))}
+      };
+      r.readAsText(f,'utf-8');
+    };
+    input.click();
+  };
+
+  // 当前页已打开时立即按新规则重算。
+  try{
+    if(typeof fw312==='object' && fw312.book){
+      requestAnimationFrame(()=>renderFramework312());
+    }
+  }catch(e){console.warn('V3.13.2 refresh framework failed',e)}
+})();
 </script>
 
 </body></html>
