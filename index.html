@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="3.13.2">
+<meta name="wrongbook-version" content="3.13.3">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -1120,7 +1120,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.2</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.3</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -1134,7 +1134,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.13.2 框架背诵题型与编号修正版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V3.13.3 选择题导入兼容与旧数据自愈版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -2227,7 +2227,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.13.2';
+const APP_VERSION='3.13.3';
 const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
 
 function versionParts311(v){
@@ -7079,4 +7079,164 @@ body.fwFrameworkMode3129 .fab{display:none!important}
 })();
 </script>
 
+
+
+<script id="v3133-choice-import-heal">
+/* ===== V3.13.3 =====
+   选择题导入兼容 + 旧数据自愈：
+   1) 兼容 type=choice / 选择题，以及 opts/options 数组或 {A,B,C,D} 对象；
+   2) 只要存在 >=2 个有效选项，或答案为 A-D 且存在选项，就强制归一为 choice；
+   3) 同题再次导入时不再简单跳过：若新文件带完整选项/答案，则补全旧题；
+   4) 启动时扫描现有题库，自动修正可识别的旧 choice 数据；
+   5) reader / 全部题目 / 随机刷题统一使用归一后的 type，避免显示 undefined。
+*/
+(function(){
+  function normType3133(v){
+    const s=String(v??'').trim().toLowerCase();
+    if(s==='choice'||/选择/.test(s))return 'choice';
+    if(s==='short'||/简答/.test(s))return 'short';
+    if(s==='essay'||/论述/.test(s))return 'essay';
+    if(s==='analysis'||/赏析/.test(s))return 'analysis';
+    if(s==='cloze'||/填空|背诵填词/.test(s))return 'cloze';
+    return s;
+  }
+  function optionArray3133(q){
+    let o=q?.opts ?? q?.options ?? [];
+    if(Array.isArray(o)) return o.map(x=>String(x??'').trim()).filter((x,i,a)=>i<4);
+    if(o && typeof o==='object') return ['A','B','C','D'].map(k=>String(o[k]??o[k.toLowerCase()]??'').trim());
+    return [];
+  }
+  function cleanOptions3133(q){
+    let o=optionArray3133(q).map((x,i)=>{
+      try{return typeof v393CanonOpt==='function'?v393CanonOpt(x):String(x||'').replace(/^\s*[A-D][\.．、:：]\s*/i,'').trim()}
+      catch(e){return String(x||'').trim()}
+    });
+    while(o.length<4)o.push('');
+    return o.slice(0,4);
+  }
+  function answerLetter3133(q){
+    const raw=String(q?.ans??q?.answer??q?.correctAnswer??q?.correct??'').trim().toUpperCase();
+    const m=raw.match(/\b([A-D])\b/);return m?m[1]:'';
+  }
+  function normalizeQuestion3133(raw){
+    const q=raw||{}; const o=cleanOptions3133(q), valid=o.filter(Boolean).length, a=answerLetter3133(q);
+    const t=normType3133(q.type||q.questionType||'');
+    const isChoice=t==='choice'||valid>=2||(a&&valid>0);
+    if(isChoice){
+      q.type='choice';q.opts=o;q.options=o;
+      if(a){q.ans=a;q.answer=a}
+      else if(!q.ans)q.ans='';
+    }else if(t){ q.type=t; }
+    return q;
+  }
+  function richness3133(q){
+    const o=cleanOptions3133(q), a=answerLetter3133(q);
+    return o.filter(Boolean).length*20+(a?20:0)+(q?.answerText?4:0)+(q?.frameworkL1?2:0)+(q?.frameworkL2?2:0);
+  }
+  function mergeInto3133(dst,src){
+    normalizeQuestion3133(dst); normalizeQuestion3133(src);
+    const so=cleanOptions3133(src), do_=cleanOptions3133(dst);
+    if(so.filter(Boolean).length>do_.filter(Boolean).length){dst.opts=so;dst.options=so;}
+    const sa=answerLetter3133(src); if(sa){dst.ans=sa;dst.answer=sa;}
+    if(src.type && (dst.type!=='choice'||src.type==='choice'))dst.type=src.type;
+    for(const k of ['answerText','tag','note','sourceNo','sourceQuestionNo','frameworkL1','frameworkL2','frameworkL1Color','frameworkL2Color']){
+      if((dst[k]===undefined||dst[k]===null||dst[k]===''||(Array.isArray(dst[k])&&!dst[k].length)) && src[k]!==undefined && src[k]!==null && src[k]!=='') dst[k]=src[k];
+    }
+    normalizeQuestion3133(dst); return dst;
+  }
+  window.normType3133=normType3133;
+  window.normalizeQuestion3133=normalizeQuestion3133;
+
+  const oldTypeN=window.typeN;
+  window.typeN=function(t){
+    const n=normType3133(t);
+    return ({choice:'选择题',short:'简答题',essay:'论述题',analysis:'作品赏析',cloze:'背诵填词'})[n] || (typeof oldTypeN==='function'?oldTypeN(n):'文字题') || '文字题';
+  };
+
+  const oldNorm=window.normalizeAppendQuestions;
+  window.normalizeAppendQuestions=function(raw){
+    if(!raw||typeof raw!=='object')throw new Error('文件格式无效');
+    const arr=Array.isArray(raw.questions)?raw.questions:(Array.isArray(raw.qs)?raw.qs:[]);
+    if(!arr.length)throw new Error('文件中没有找到题目');
+    return arr.map((src,i)=>{
+      const q={...src,id:(typeof uid==='function'?uid():('q_'+Date.now()+'_'+i)),text:src.text||src.question||'',created:Date.now()+i};
+      const t=normType3133(src.type||src.questionType||'');
+      q.type=t||'';
+      q.opts=optionArray3133(src);q.options=q.opts.slice();
+      q.ans=src.ans??src.answer??src.correctAnswer??'';
+      q.answer=src.answerText??src.answer??src.ans??'';
+      q.tag=src.tag||'';q.note=src.note||'';
+      q.wrong=Number(src.wrong||0);q.right=Number(src.right||0);q.level=Number(src.level||0);q.next=src.next??src.nextReviewDay??0;
+      return normalizeQuestion3133(q);
+    });
+  };
+
+  function globalKey3133(q){
+    const txt=q?.text||q?.question||'';
+    try{return typeof v393CanonText==='function'?v393CanonText(txt):String(txt).replace(/\s+/g,'').trim().toLowerCase()}
+    catch(e){return String(txt).replace(/\s+/g,'').trim().toLowerCase()}
+  }
+  window.v3103AppendQuestions=function(target,payload){
+    if(!payload)return {added:0,skipped:0,updated:0};
+    let added=0,skipped=0,updated=0;
+    const batch=new Set();
+    for(const raw of payload.questions||[]){
+      const q=normalizeQuestion3133({...raw});
+      const key=globalKey3133(q); if(!key)continue;
+      const existing=(D.qs||[]).find(x=>globalKey3133(x)===key);
+      if(existing){
+        const before=JSON.stringify({t:existing.type,o:existing.opts||existing.options,a:existing.ans||existing.answer});
+        mergeInto3133(existing,q);
+        const after=JSON.stringify({t:existing.type,o:existing.opts||existing.options,a:existing.ans||existing.answer});
+        if(before!==after)updated++; else skipped++;
+        continue;
+      }
+      if(batch.has(key)){skipped++;continue}
+      q.book=q.bookId=target;D.qs.push(q);batch.add(key);added++;
+    }
+    return {added,skipped,updated};
+  };
+
+  window.confirmAppendImport390=function(target){
+    if(!__appendPayload)return; const book=D.books.find(b=>b.id===target); if(!book)return alert('没有找到目标错题本');
+    const r=v3103AppendQuestions(target,__appendPayload);
+    if(save()){
+      try{releaseQuestionEditor393(false)}catch(e){}; closeM(); __appendPayload=null; renderV3Books();
+      page('study'); const total=D.qs.filter(q=>bookIdOf(q)===target).length;
+      $('studyArea').innerHTML=`<div class="importResult"><div class="bigCheck">✓</div><h2>导入完成</h2><div class="statLine">新增 ${r.added} 道题</div><div class="statLine">修复 / 更新 ${r.updated} 道已有题</div><div class="subLine">跳过重复 ${r.skipped} 道 · 当前共 ${total} 道题</div><div class="importActions"><button class="secondary" onclick="page('home');renderV3Books()">返回首页</button><button class="primary" onclick="openBookV3('${target}')">进入错题本</button></div></div>`;
+    }
+  };
+  window.confirmAppendImport=function(){
+    if(!__appendPayload)return; const target=$('appendTarget')?.value; if(!target)return alert('请选择目标错题本'); return confirmAppendImport390(target);
+  };
+
+  function heal3133(){
+    if(!window.D||!Array.isArray(D.qs))return 0; let n=0;
+    for(const q of D.qs){
+      const before=JSON.stringify({t:q.type,o:q.opts||q.options,a:q.ans||q.answer});
+      normalizeQuestion3133(q);
+      const after=JSON.stringify({t:q.type,o:q.opts||q.options,a:q.ans||q.answer});
+      if(before!==after)n++;
+    }
+    if(n){try{save()}catch(e){try{persistCompat310()}catch(_){}}}
+    return n;
+  }
+  window.healChoiceData3133=heal3133;
+  heal3133();
+  document.addEventListener('DOMContentLoaded',()=>{heal3133()});
+
+  // Reader safety net: normalize just before rendering.
+  if(typeof window.drawReaderV3==='function'){
+    const oldDraw=window.drawReaderV3;
+    window.drawReaderV3=function(){
+      try{const q=(D.qs||[]).filter(x=>bookIdOf(x)===readerV3.book)[readerV3.i]; if(q)normalizeQuestion3133(q)}catch(e){}
+      return oldDraw.apply(this,arguments);
+    };
+  }
+  if(typeof window.openBookV3==='function'){
+    const oldOpen=window.openBookV3;
+    window.openBookV3=function(id){heal3133();return oldOpen.apply(this,arguments)};
+  }
+})();
+</script>
 </body></html>
