@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="4.0.2">
+<meta name="wrongbook-version" content="4.0.3">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -1120,7 +1120,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V4.0.2</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V4.0.3</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -2227,7 +2227,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='4.0.2';
+const APP_VERSION='4.0.3';
 const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
 
 function versionParts311(v){
@@ -2321,11 +2321,12 @@ async function initAutoUpdate311(){
   }catch(e){}
   setTimeout(checkOnlineVersion,900);
 }
-initAutoUpdate311();
-document.addEventListener('visibilitychange',()=>{
-  if(document.visibilityState==='visible')setTimeout(checkOnlineVersion,500);
-});
-window.addEventListener('pageshow',()=>setTimeout(checkOnlineVersion,700));
+/* V4.0.3: automatic update checking disabled. GitHub Pages version is shown directly. */
+try{sessionStorage.removeItem(WB_UPDATE_ATTEMPT_KEY)}catch(e){}
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister().catch(()=>{}))).catch(()=>{});
+}
+if(window.caches&&caches.keys){caches.keys().then(ks=>Promise.all(ks.map(k=>caches.delete(k)))).catch(()=>{});} 
 
 
 /* V3.6 mind-map, page-turn and exam export */
@@ -8142,7 +8143,7 @@ input,textarea,select{font-size:16px!important;-webkit-text-size-adjust:100%!imp
   // 确保首页/设置页展示的版本号同步。
   function syncVersion401(){
     document.querySelectorAll('.versionBadge,[data-version],.ver').forEach(el=>{
-      if(/^V?3\.|^V?4\.0$/.test((el.textContent||'').trim())) el.textContent='V4.0.1';
+      if(/^V?3\.|^V?4\.0$/.test((el.textContent||'').trim())) el.textContent='V4.0.3';
     });
   }
   setTimeout(syncVersion401,0);
@@ -8150,6 +8151,31 @@ input,textarea,select{font-size:16px!important;-webkit-text-size-adjust:100%!imp
 </script>
 
 
+
+<script id="v403-root-fix">
+/* V4.0.3 root fix: the final V4.0 builder referenced ensureBuilder318 from an older private IIFE.
+   That identifier was out of scope, so openExamBuilderV35 failed before the page could be shown. */
+window.ensureBuilder318=function(){
+  let el=document.getElementById('examBuilderPage318');
+  if(el)return el;
+  el=document.createElement('div');
+  el.id='examBuilderPage318';
+  el.innerHTML='<div class="eb318Shell"><div class="eb318Head"><button type="button" id="eb318Back">‹ 返回</button><b>生成随机试卷</b><button type="button" class="eb318Close" id="eb318Close">×</button></div><div class="eb318Scroll" id="eb318Scroll"></div><div class="eb318Foot"><button type="button" id="eb318Generate">生成新试卷</button><div class="eb318Status" id="eb318Status"></div></div></div>';
+  document.body.appendChild(el);
+  el.querySelector('#eb318Back').addEventListener('click',()=>window.closeExamBuilder318?.());
+  el.querySelector('#eb318Close').addEventListener('click',()=>window.closeExamBuilder318?.());
+  el.querySelector('#eb318Generate').addEventListener('click',()=>window.generateExam318?.());
+  return el;
+};
+/* Keep the displayed badge in lockstep with the actual build, without network update toasts. */
+window.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.versionBadge,[data-version],.ver').forEach(el=>{
+    const t=(el.textContent||'').trim();
+    if(/^V?\d+\.\d+/.test(t))el.textContent='V4.0.3';
+  });
+  const toast=document.getElementById('updateToast311');if(toast)toast.remove();
+});
+</script>
 <style id="v402-exam-entry-fix">
 #examBankTop402{margin-bottom:12px;position:relative;z-index:2;overflow:hidden}
 #examBankTop402 .row,#examBankTop402 .row>div{min-width:0}
@@ -8170,12 +8196,12 @@ window.openExamBuilder402=function(ev){
     setTimeout(()=>{
       const page=document.getElementById('examBuilderPage318');
       if(!page||!page.classList.contains('on')){
-        console.error('V4.0.2 builder did not open');
+        console.error('V4.0.3 builder did not open');
         alert('组卷页面没有成功打开，请刷新一次页面后重试。');
       }
     },80);
   }catch(err){
-    console.error('V4.0.2 open exam failed',err);
+    console.error('V4.0.3 open exam failed',err);
     alert('组卷页面打开失败：'+(err?.message||err));
   }
 };
