@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="4.0.1">
+<meta name="wrongbook-version" content="4.0.2">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -1120,21 +1120,21 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V4.0.1</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V4.0.2</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
-<div class="card noPrint" id="examBankTop362">
+<div class="card noPrint" id="examBankTop402">
   <div class="row between">
     <div><b>生成试卷</b><div class="small">随机题序 · 随机选项 · PDF / JPEG / 打印</div></div>
-    <button class="primary" onclick="openExamBuilderV35()">开始组卷</button>
+    <button class="primary" id="examOpen402" type="button" onclick="openExamBuilder402(event)">开始组卷</button>
   </div>
 </div>
 <div class="section">题库</div><input class="search" id="search" placeholder="搜索题目 / 知识点" oninput="renderBank()"><div id="bankList"></div></section>
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V4.0.1 模拟考试·分批作答版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V4.0.2 模拟考试·分批作答版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -2227,7 +2227,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.13.9';
+const APP_VERSION='4.0.2';
 const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
 
 function versionParts311(v){
@@ -8147,6 +8147,40 @@ input,textarea,select{font-size:16px!important;-webkit-text-size-adjust:100%!imp
   }
   setTimeout(syncVersion401,0);
 })();
+</script>
+
+
+<style id="v402-exam-entry-fix">
+#examBankTop402{margin-bottom:12px;position:relative;z-index:2;overflow:hidden}
+#examBankTop402 .row,#examBankTop402 .row>div{min-width:0}
+#examBankTop402 button{position:relative;z-index:4;pointer-events:auto!important;touch-action:manipulation!important;-webkit-tap-highlight-color:transparent}
+</style>
+<script id="v402-exam-entry-fix">
+/* V4.0.2: isolate the exam-entry button from legacy capture listeners. */
+window.openExamBuilder402=function(ev){
+  try{
+    if(ev){ev.preventDefault?.();ev.stopPropagation?.();}
+    document.activeElement?.blur?.();
+    document.body.classList.remove('examBuilderLock317','editing3612');
+    document.body.style.top='';
+    const old=document.getElementById('modal');
+    if(old&&!old.classList.contains('on')) old.style.pointerEvents='none';
+    if(typeof window.openExamBuilderV35!=='function') throw new Error('组卷模块未加载');
+    window.openExamBuilderV35();
+    setTimeout(()=>{
+      const page=document.getElementById('examBuilderPage318');
+      if(!page||!page.classList.contains('on')){
+        console.error('V4.0.2 builder did not open');
+        alert('组卷页面没有成功打开，请刷新一次页面后重试。');
+      }
+    },80);
+  }catch(err){
+    console.error('V4.0.2 open exam failed',err);
+    alert('组卷页面打开失败：'+(err?.message||err));
+  }
+};
+/* If the page came from an older update URL, clear stale publishing-attempt state. */
+try{sessionStorage.removeItem('wrongbook_update_attempt_v311')}catch(e){}
 </script>
 
 </body></html>
