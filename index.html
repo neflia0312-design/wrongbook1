@@ -1120,7 +1120,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.9</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.10</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -1134,7 +1134,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.13.9 模拟考试与试卷排版优化版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V3.13.10 模拟考试与试卷排版优化版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -7434,7 +7434,7 @@ async function downloadJPEG352(ev){
 
 
 <style id="exam315Style">
-/* ===== V3.13.9 模拟考试 + 真试卷导出 ===== */
+/* ===== V3.13.10 模拟考试 + 真试卷导出 ===== */
 body.examMode315{background:#f5f3ef!important;overflow:auto!important}
 body.examMode315>header,body.examMode315 nav,body.examMode315 .fab{display:none!important}
 body.examMode315 #study{padding:0!important;margin:0!important;min-height:100vh!important}
@@ -7478,7 +7478,7 @@ body.examMode315 #studyArea{padding:0!important;margin:0!important;width:100%!im
 .examPaper315 .write315.essay315{height:220px}.examPaper315 .pageNo315{text-align:center;font-size:12px;margin-top:8px;position:absolute;bottom:22px;left:0;right:0}.examPaper315{position:relative}
 </style>
 <script>
-/* ===== V3.13.9 exam workflow ===== */
+/* ===== V3.13.10 exam workflow ===== */
 const EXAM315_KEY='wrongbook_active_exam_v315';
 function persistExam315(){try{if(examState314)localStorage.setItem(EXAM315_KEY,JSON.stringify(examState314));else localStorage.removeItem(EXAM315_KEY)}catch(e){}}
 function loadExam315(){try{const x=JSON.parse(localStorage.getItem(EXAM315_KEY)||'null');return x&&x.version===315?x:null}catch(e){return null}}
@@ -7548,7 +7548,7 @@ window.addEventListener('pagehide',persistExam315);document.addEventListener('vi
 @media(max-width:560px){.exam316BookRow{grid-template-columns:1fr 132px;padding:12px}.exam316Counts{grid-template-columns:1fr}.exam316BookRow select{font-size:13px}}
 </style>
 <script>
-/* ===== V3.13.9 组卷修复：按钮可用 + 每本错题本独立选择题型 ===== */
+/* ===== V3.13.10 组卷修复：按钮可用 + 每本错题本独立选择题型 ===== */
 const EXAM316_KEY='wrongbook_active_exam_v316';
 function examCat316(q){
   const t=String(q?.type||'').toLowerCase();
@@ -7625,7 +7625,7 @@ function buildPaperPages315(){
 </script>
 
 <style>
-/* ===== V3.13.9 组卷面板：独立滚动层，禁止下层页面跟随 ===== */
+/* ===== V3.13.10 组卷面板：独立滚动层，禁止下层页面跟随 ===== */
 #modal.examBuilder317{
   position:fixed!important;inset:0!important;z-index:2147483646!important;
   display:flex!important;align-items:flex-end!important;overflow:hidden!important;
@@ -7647,7 +7647,7 @@ body.examBuilderLock317{position:fixed!important;left:0!important;right:0!import
 body.examBuilderLock317 #modal.examBuilder317{touch-action:none!important}
 </style>
 <script>
-/* ===== V3.13.9 组卷交互与生成修复 ===== */
+/* ===== V3.13.10 组卷交互与生成修复 ===== */
 let examBuilderScroll317=0;
 function lockExamBuilder317(){
   examBuilderScroll317=window.scrollY||document.documentElement.scrollTop||0;
@@ -7723,7 +7723,7 @@ function buildExam35(){
 </script>
 
 <style id="v3139-exam-touch-fix">
-/* ===== V3.13.9 iPhone 组卷按钮触控修复 =====
+/* ===== V3.13.10 iPhone 组卷按钮触控修复 =====
    V3.13.8 的根因：组卷遮罩和 body 使用 touch-action:none，
    iOS WebKit 下会让原生 select 还能工作，但普通 button 的 tap/click 被吞掉。 */
 body.examBuilderLock317{
@@ -7750,7 +7750,7 @@ body.examBuilderLock317{
 }
 </style>
 <script>
-/* ===== V3.13.9 iPhone 组卷按钮事件修复：不再依赖 iOS 合成 click ===== */
+/* ===== V3.13.10 iPhone 组卷按钮事件修复：不再依赖 iOS 合成 click ===== */
 (function(){
   let lastTouchAction3139=0;
 
@@ -7823,4 +7823,104 @@ body.examBuilderLock317{
   };
 })();
 </script>
+<style id="v31310-exam-builder">
+/* ===== V3.13.10 独立全屏组卷页：彻底脱离旧 modal / body 锁定逻辑 ===== */
+#examBuilderPage318{position:fixed;inset:0;z-index:2147483000;background:var(--bg,#f7f6f2);display:none;overflow:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+#examBuilderPage318.on{display:block}
+#examBuilderPage318 .eb318Shell{height:100dvh;max-width:720px;margin:0 auto;display:flex;flex-direction:column;background:var(--bg,#f7f6f2)}
+#examBuilderPage318 .eb318Head{flex:0 0 auto;display:grid;grid-template-columns:88px 1fr 54px;align-items:center;gap:8px;padding:calc(14px + env(safe-area-inset-top)) 18px 12px;border-bottom:1px solid var(--line,#e2dfd8);background:rgba(247,246,242,.98);z-index:3}
+#examBuilderPage318 .eb318Head b{text-align:center;font-size:20px}
+#examBuilderPage318 .eb318Head button{min-height:48px;border-radius:16px;background:#eeede8;font-weight:750;font-size:16px;padding:0 12px}
+#examBuilderPage318 .eb318Close{font-size:26px!important;padding:0!important}
+#examBuilderPage318 .eb318Scroll{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:18px 18px calc(120px + env(safe-area-inset-bottom))}
+#examBuilderPage318 .eb318Title{font-size:14px;color:var(--mut,#8b877e);font-weight:700;margin:2px 0 12px}
+#examBuilderPage318 .eb318Book{background:#fff;border:1px solid var(--line,#dfdcd5);border-radius:20px;padding:16px;margin-bottom:12px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px}
+#examBuilderPage318 .eb318Book b{display:block;font-size:18px;margin-bottom:5px}.eb318Meta{font-size:13px;color:var(--mut,#8b877e);line-height:1.45}
+#examBuilderPage318 .eb318Mode{width:auto;min-width:128px;max-width:155px;padding:10px 30px 10px 12px;border-radius:14px;background:#f1efea;font-weight:700;border:0}
+#examBuilderPage318 .eb318Counts{display:grid;grid-template-columns:1fr;gap:10px;margin:10px 0 14px}
+#examBuilderPage318 .eb318Counts label{margin:0;font-size:13px;color:var(--mut,#8b877e)}
+#examBuilderPage318 .eb318Counts input{margin-top:6px;min-height:54px;background:#fff}
+#examBuilderPage318 .eb318Resume{background:#fff;border:1px solid var(--line,#dfdcd5);border-radius:18px;padding:14px;margin-bottom:16px}
+#examBuilderPage318 .eb318Resume button{width:100%;margin-top:10px;min-height:50px}
+#examBuilderPage318 .eb318Foot{position:absolute;left:0;right:0;bottom:0;max-width:720px;margin:0 auto;padding:12px 18px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(to bottom,rgba(247,246,242,.15),#f7f6f2 18%);z-index:4;pointer-events:none}
+#examBuilderPage318 .eb318Foot button{pointer-events:auto;width:100%;min-height:58px;border-radius:18px;background:#20201e;color:#fff;font-weight:800;font-size:18px}
+#examBuilderPage318 .eb318Status{min-height:20px;text-align:center;font-size:12px;color:var(--mut,#8b877e);padding-top:5px}
+body.eb318Open{overflow:hidden!important}
+</style>
+<script>
+/* ===== V3.13.10 独立组卷页 ===== */
+(function(){
+  function ensureBuilder318(){
+    let el=document.getElementById('examBuilderPage318');
+    if(el)return el;
+    el=document.createElement('div');el.id='examBuilderPage318';
+    el.innerHTML='<div class="eb318Shell"><div class="eb318Head"><button type="button" id="eb318Back">‹ 返回</button><b>生成随机试卷</b><button type="button" class="eb318Close" id="eb318Close">×</button></div><div class="eb318Scroll" id="eb318Scroll"></div><div class="eb318Foot"><button type="button" id="eb318Generate">生成新试卷</button><div class="eb318Status" id="eb318Status"></div></div></div>';
+    document.body.appendChild(el);
+    const close=()=>closeExamBuilder318();
+    el.querySelector('#eb318Back').addEventListener('click',close);
+    el.querySelector('#eb318Close').addEventListener('click',close);
+    el.querySelector('#eb318Generate').addEventListener('click',generateExam318);
+    return el;
+  }
+  function hardReleaseOldBuilder318(){
+    try{document.body.classList.remove('examBuilderLock317');document.body.style.top='';}catch(e){}
+    try{const m=document.getElementById('modal');if(m){m.classList.remove('on','examBuilder317');}}catch(e){}
+  }
+  window.closeExamBuilder318=function(){
+    const el=document.getElementById('examBuilderPage318');if(el)el.classList.remove('on');
+    document.body.classList.remove('eb318Open','examBuilderLock317');
+    document.body.style.top='';
+  };
+  function stats318(bid){
+    const qs=(D.qs||[]).filter(q=>String(bookIdOf(q)??'')===String(bid??''));
+    const out={all:qs.length,choice:0,text:0,other:0};
+    qs.forEach(q=>{const c=examCat316(q);if(c==='choice')out.choice++;else if(c==='short'||c==='essay')out.text++;else out.other++});return out;
+  }
+  window.openExamBuilderV35=function(){
+    hardReleaseOldBuilder318();
+    const el=ensureBuilder318(),sc=el.querySelector('#eb318Scroll');
+    let resume='';
+    try{const old=loadExam315(),p=examProgress315(old);if(old&&!old.submitted&&p.total){resume=`<div class="eb318Resume"><b>上次试卷还没做完</b><div class="small" style="margin-top:4px">${esc(old.title||'随机试卷')} · 已完成 ${p.done}/${p.total}</div><button class="primary" type="button" id="eb318Resume">继续上次试卷</button></div>`}}catch(e){}
+    const rows=(D.books||[]).map((b,i)=>{const st=stats318(b.id);return `<div class="eb318Book"><div><b>${esc(b.name||b.title||('错题本 '+(i+1)))}</b><div class="eb318Meta">${st.all}题 · 选择${st.choice} · 简答/论述${st.text}${st.other?' · 其他'+st.other:''}</div></div><select class="eb318Mode" data-book="${esc(String(b.id))}"><option value="all">全部题型</option><option value="choice">仅选择题</option><option value="text">仅简答/论述</option>${st.other?'<option value="other">仅其他题型</option>':''}<option value="none">不加入</option></select></div>`}).join('');
+    sc.innerHTML=`${resume}<div class="eb318Title">按错题本选择本次组卷内容</div>${rows||'<div class="note">目前没有错题本或题目。</div>'}<div class="eb318Title" style="margin-top:20px">本次抽题数量（0 = 使用已选范围内全部）</div><div class="eb318Counts"><label>选择题<input id="eb318ChoiceN" type="number" value="0" min="0" inputmode="numeric"></label><label>简答 / 论述<input id="eb318TextN" type="number" value="0" min="0" inputmode="numeric"></label><label>其他题型<input id="eb318OtherN" type="number" value="0" min="0" inputmode="numeric"></label></div><div class="note">每一本错题本都可独立选择题型。0 表示把该类型已选范围内全部题目放入试卷。生成后题序与选择题选项都会重新打乱，未交卷自动保存。</div>`;
+    const rb=sc.querySelector('#eb318Resume');if(rb)rb.addEventListener('click',()=>{closeExamBuilder318();resumeExam315()});
+    el.classList.add('on');document.body.classList.add('eb318Open');
+    requestAnimationFrame(()=>{sc.scrollTop=0});
+  };
+  function pools318(){
+    let choices=[],texts=[],others=[],pickedBooks=[];
+    document.querySelectorAll('#examBuilderPage318 .eb318Mode').forEach(sel=>{
+      const bid=String(sel.dataset.book||''),mode=sel.value;if(mode==='none')return;
+      const book=(D.books||[]).find(b=>String(b.id)===bid);pickedBooks.push(book?.name||book?.title||'错题本');
+      (D.qs||[]).filter(q=>String(bookIdOf(q)??'')===bid).forEach(q=>{
+        const c=examCat316(q);
+        if(mode==='choice'&&c!=='choice')return;
+        if(mode==='text'&&!(c==='short'||c==='essay'))return;
+        if(mode==='other'&&c!=='other')return;
+        if(c==='choice')choices.push(q);else if(c==='short'||c==='essay')texts.push(q);else others.push(q);
+      });
+    });return {choices,texts,others,pickedBooks};
+  }
+  function state318(){
+    const pool=pools318();let ch=shuffle35(pool.choices),tx=shuffle35(pool.texts),ot=shuffle35(pool.others);
+    const cn=+(document.getElementById('eb318ChoiceN')?.value||0),en=+(document.getElementById('eb318TextN')?.value||0),on=+(document.getElementById('eb318OtherN')?.value||0);
+    if(cn>0)ch=ch.slice(0,cn);if(en>0)tx=tx.slice(0,en);if(on>0)ot=ot.slice(0,on);
+    if(!ch.length&&!tx.length&&!ot.length)throw new Error('当前选择范围内没有可组卷题目，请至少选择一本错题本和一种有题目的题型。');
+    const stamp=Date.now();
+    const choiceItems=ch.map((q,i)=>{let o=opts35(q)||[],ci=ci35(q,o),m=shuffle35(o),ni=m.findIndex(x=>x.orig===ci);return {id:String(q.id||('c'+stamp+'_'+i)),bookId:bookIdOf(q),text:q.text||q.question||'',options:m.map(x=>x.text),correctLetter:ni>=0?'ABCD'[ni]:'',answer:ans343(q)||''}});
+    const textItems=tx.map((q,i)=>({id:String(q.id||('t'+stamp+'_'+i)),bookId:bookIdOf(q),text:q.text||q.question||'',type:examCat316(q),answer:ans343(q)||''}));
+    const otherItems=ot.map((q,i)=>({id:String(q.id||('o'+stamp+'_'+i)),bookId:bookIdOf(q),text:q.text||q.question||'',type:'other',answer:ans343(q)||''}));
+    return {version:316,bid:'custom',title:pool.pickedBooks.length===1?`${pool.pickedBooks[0]}随机复习卷`:'综合错题随机复习卷',choiceItems,textItems,otherItems,userAnswers:{},createdAt:stamp,updatedAt:stamp,submitted:false};
+  }
+  window.generateExam318=function(){
+    const btn=document.getElementById('eb318Generate'),status=document.getElementById('eb318Status');
+    try{
+      if(btn){btn.disabled=true;btn.textContent='正在生成…'}if(status)status.textContent='正在随机整理题目';
+      examState314=state318();persistExam315();closeExamBuilder318();
+      setTimeout(()=>{renderExam315();window.scrollTo(0,0)},0);
+    }catch(e){if(btn){btn.disabled=false;btn.textContent='生成新试卷'}if(status)status.textContent=String(e?.message||e);alert('无法生成试卷：'+(e?.message||e));console.error(e)}
+  };
+})();
+</script>
+
 </body></html>
