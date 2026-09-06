@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="3.13.3">
+<meta name="wrongbook-version" content="3.13.4">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -1120,7 +1120,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.3</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.4</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -1134,7 +1134,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.13.3 选择题导入兼容与旧数据自愈版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V3.13.4 组卷导出与可填写试卷优化版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -2227,7 +2227,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.13.3';
+const APP_VERSION='3.13.4';
 const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
 
 function versionParts311(v){
@@ -7239,4 +7239,206 @@ body.fwFrameworkMode3129 .fab{display:none!important}
   }
 })();
 </script>
+
+<style id="exam314Style">
+/* ===== V3.13.4 组卷 / iPhone / 导出 / 可填写试卷 ===== */
+.printSheet.exam314{
+  width:min(100%,760px);max-width:760px;margin:0 auto 110px;padding:22px 18px 42px;
+  box-sizing:border-box;background:#fff;color:#201f1c;border-radius:24px;
+  font-size:16px;line-height:1.58;overflow:visible;
+}
+.printSheet.exam314 h1{font-size:30px;line-height:1.15;margin:4px 0 20px;text-align:left}
+.printSheet.exam314 h2{font-size:24px;margin:28px 0 14px}
+.exam314Meta{display:flex;flex-wrap:wrap;gap:14px 22px;margin-bottom:16px;color:#5e5a54}
+.exam314Meta span{white-space:nowrap}
+.exam314Q{padding:16px 0;border-bottom:1px solid #ece9e3;break-inside:avoid}
+.exam314Q:last-child{border-bottom:0}
+.exam314QTitle{font-weight:800;font-size:18px;line-height:1.55;margin-bottom:10px;word-break:break-word}
+.exam314Option{display:block;padding:5px 0;line-height:1.45;word-break:break-word}
+.exam314ChoiceAnswer{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.exam314ChoiceAnswer .lab{font-size:14px;color:#8c867e;margin-right:2px}
+.exam314ChoiceBtn{width:40px;height:40px;border:1px solid #ded9d1!important;border-radius:12px!important;background:#f5f3ef!important;color:#25231f!important;padding:0!important;font-weight:800!important;box-shadow:none!important}
+.exam314ChoiceBtn.on{background:#24231f!important;color:#fff!important;border-color:#24231f!important}
+.exam314TextAnswer{width:100%;min-height:150px;resize:vertical;border:1px solid #ddd8cf;border-radius:16px;background:#faf9f6;color:#23211e;padding:14px 15px;box-sizing:border-box;font:inherit;line-height:1.65;outline:none;-webkit-appearance:none}
+.exam314TextAnswer.essay{min-height:260px}
+.exam314TextAnswer:focus{border-color:#b6afa5;box-shadow:0 0 0 3px rgba(167,157,144,.12)}
+.exam314Hint{font-size:13px;color:#9c968e;margin-top:8px}
+.exam314AnswerKey{margin-top:42px;padding-top:26px;border-top:2px solid #ded9d1}
+.exam314AnswerKey .printQ{margin:0 0 16px;line-height:1.6}
+.exportBar352.exam314Bar{position:sticky;top:0;z-index:40;display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:10px 0 14px;background:linear-gradient(to bottom,#f7f6f2 82%,rgba(247,246,242,0));}
+.exportBar352.exam314Bar button{min-width:0;width:100%;min-height:48px;font-size:15px}
+.exportBar352.exam314Bar .wide{grid-column:1/-1}
+.exam314Subbar{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:2px 0 10px;font-size:13px;color:#8f8981}
+#examExportOverlay314{position:fixed;inset:0;background:rgba(247,246,242,.96);z-index:2147483647;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;color:#24231f;font-weight:800}
+#examExportOverlay314 .spin{width:28px;height:28px;border:3px solid #d9d4cc;border-top-color:#24231f;border-radius:50%;animation:spin314 .8s linear infinite}
+@keyframes spin314{to{transform:rotate(360deg)}}
+#examCaptureHost314{position:fixed;left:0;top:0;width:794px;height:1123px;z-index:2147483646;background:#fff;overflow:hidden;pointer-events:none}
+.examCapturePage314{width:794px;height:1123px;padding:58px 62px;box-sizing:border-box;background:#fff;color:#111;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Arial,sans-serif;font-size:16px;line-height:1.5;overflow:hidden}
+.examCapturePage314 h1{font-size:28px;line-height:1.2;margin:0 0 16px;text-align:left}
+.examCapturePage314 h2{font-size:22px;margin:18px 0 12px}
+.examCapturePage314 .capMeta{font-size:14px;margin-bottom:14px}
+.examCapturePage314 .capQ{font-size:16px;line-height:1.48;margin:0 0 13px;break-inside:avoid}
+.examCapturePage314 .capQTitle{font-weight:700;margin-bottom:5px}
+.examCapturePage314 .capOpt{margin:1px 0}
+.examCapturePage314 .capChoiceAns{font-size:14px;margin-top:6px;color:#555}
+.examCapturePage314 .capWrite{margin-top:8px;border:1px solid #ddd;border-radius:6px;padding:7px 8px;white-space:pre-wrap;word-break:break-word;overflow:hidden;background:repeating-linear-gradient(to bottom,#fff 0,#fff 27px,#e9e9e9 28px,#fff 29px)}
+.examCapturePage314 .capWrite.blank{color:transparent}
+@media(max-width:640px){
+  .printSheet.exam314{border-radius:18px;padding:18px 14px 34px;font-size:15px}
+  .printSheet.exam314 h1{font-size:27px}.printSheet.exam314 h2{font-size:22px}
+  .exam314QTitle{font-size:17px}
+  .exportBar352.exam314Bar{grid-template-columns:1fr 1fr}
+}
+@media print{
+  .exam314TextAnswer{border:1px solid #bbb!important;background:repeating-linear-gradient(to bottom,#fff 0,#fff 8mm,#ddd 8.2mm,#fff 8.4mm)!important;min-height:34mm!important}
+  .exam314TextAnswer.essay{min-height:62mm!important}
+  .exam314ChoiceAnswer{display:none!important}
+  .printSheet.exam314{width:190mm;max-width:none;margin:0 auto;padding:0;border-radius:0;font-size:11pt;box-shadow:none}
+  .exam314QTitle{font-size:12pt}.printSheet.exam314 h1{font-size:22pt}.printSheet.exam314 h2{font-size:16pt}
+}
+</style>
+<script>
+/* ===== V3.13.4 reliable exam export + fillable paper ===== */
+let examState314=null;
+function examType314(q){
+  const t=String(q?.type||'').toLowerCase();
+  if(/essay|论述/.test(t)) return 'essay';
+  if(/choice|选择/.test(t)||opts35(q).length>1) return 'choice';
+  return 'short';
+}
+function examAnswerSpace314(q){return examType314(q)==='essay'?260:150}
+function setChoice314(id,letter){
+  if(!examState314)return;
+  examState314.userAnswers[id]=letter;
+  const box=document.querySelector(`[data-qid="${CSS.escape(id)}"] .exam314ChoiceAnswer`);
+  if(box)box.querySelectorAll('.exam314ChoiceBtn').forEach(b=>b.classList.toggle('on',b.dataset.letter===letter));
+}
+function syncTextAnswer314(id,el){if(examState314)examState314.userAnswers[id]=el.value}
+function examReturn314(){
+  try{history.replaceState(history.state||{},'',location.pathname+location.search+location.hash)}catch(e){}
+  examState314=null;
+  try{home()}catch(e){page('home')}
+  setTimeout(()=>{const a=$('studyArea');if(a)a.innerHTML=''},0);
+}
+function buildExam35(){
+  let bid=$('eb35').value,all=D.qs.filter(q=>bid==='all'||bookIdOf(q)===bid),ch=all.filter(q=>q.type==='choice'||opts35(q).length>1),es=all.filter(q=>!ch.includes(q));
+  ch=shuffle35(ch);es=shuffle35(es);let cn=+$('ec35').value,en=+$('ee35').value;if(cn)ch=ch.slice(0,cn);if(en)es=es.slice(0,en);
+  let key=[],choiceRows=ch.map((q,i)=>{
+    let o=opts35(q),ci=ci35(q,o),m=shuffle35(o),ni=m.findIndex(x=>x.orig===ci),id=String(q.id||('c'+i));key.push(`${i+1}.${ni>=0?'ABCD'[ni]:'—'}`);
+    return `<div class="exam314Q" data-qid="${esc(id)}"><div class="exam314QTitle">${i+1}. ${esc(q.text)}</div>${m.map((x,j)=>`<div class="exam314Option">${'ABCD'[j]}. ${esc(x.text)}</div>`).join('')}<div class="exam314ChoiceAnswer"><span class="lab">我的答案</span>${'ABCD'.split('').map(l=>`<button type="button" class="exam314ChoiceBtn" data-letter="${l}" onclick="setChoice314('${esc(id)}','${l}')">${l}</button>`).join('')}</div></div>`;
+  }).join('');
+  let textRows=es.map((q,i)=>{let id=String(q.id||('e'+i)),isEssay=examType314(q)==='essay';return `<div class="exam314Q" data-qid="${esc(id)}"><div class="exam314QTitle">${i+1}. ${esc(q.text)}</div><textarea class="exam314TextAnswer ${isEssay?'essay':''}" placeholder="在这里填写答案…" oninput="syncTextAnswer314('${esc(id)}',this)"></textarea><div class="exam314Hint">${isEssay?'论述题：已预留较大作答空间':'简答题：已预留作答空间'}</div></div>`}).join('');
+  let ans=es.map((q,i)=>`<div class="printQ"><b>${i+1}. ${esc(q.text)}</b><br>${esc(ans343(q))}</div>`).join(''),title=bid==='all'?'错题随机复习卷':esc(D.books.find(b=>b.id===bid)?.name||'错题复习卷'),withA=$('ea35').checked;
+  examState314={bid,ch,es,key,title,withA,userAnswers:{},createdAt:Date.now()};
+  closeM();page('study');
+  $('studyArea').innerHTML=`<div class="noPrint exportBar352 exam314Bar"><button class="secondary" onclick="examReturn314()">‹ 返回错题本</button><button class="primary" onclick="downloadPDF352(event)">下载 PDF</button><button class="secondary" onclick="downloadJPEG352(event)">导出 JPEG</button><button class="secondary" onclick="downloadFillableHTML314(event)">可填写 HTML</button><button class="secondary wide" onclick="systemPrint352()">系统打印 / 保存 PDF</button></div><div class="exam314Subbar noPrint"><span>可直接在本页作答，导出时会保留已填写内容</span><span>上下滑动浏览</span></div><div class="printSheet exam314"><h1>${title}</h1><div class="exam314Meta"><span>姓名：________</span><span>日期：________</span><span>得分：________</span></div>${ch.length?'<h2>一、选择题</h2>'+choiceRows:''}${es.length?'<h2>二、简答 / 论述题</h2>'+textRows:''}${withA?`<div class="answerKey exam314AnswerKey"><h1>参考答案</h1>${key.length?'<p>'+key.join('　')+'</p>':''}${ans}</div>`:''}</div>`;
+  try{history.replaceState({...history.state,wbExam314:true},'',location.href)}catch(e){}
+}
+function exportOverlay314(text='正在生成试卷…'){
+  let o=document.createElement('div');o.id='examExportOverlay314';o.innerHTML=`<div class="spin"></div><div>${text}</div><div id="examExportProgress314" style="font-weight:500;color:#8a847c;font-size:14px"></div>`;document.body.appendChild(o);return o;
+}
+function capQuestionHTML314(q,i,kind){
+  const id=String(q.id||((kind==='choice'?'c':'e')+i)),ua=examState314?.userAnswers?.[id]||'';
+  if(kind==='choice'){
+    const o=opts35(q),ci=ci35(q,o); /* onscreen shuffled order is not recoverable here; use current DOM instead below */
+    return '';
+  }
+  const h=examType314(q)==='essay'?250:145;
+  return `<div class="capQ"><div class="capQTitle">${i+1}. ${esc(q.text)}</div><div class="capWrite ${ua?'':'blank'}" style="height:${h}px">${ua?esc(ua):' '}</div></div>`;
+}
+function collectExportBlocks314(){
+  const sheet=document.querySelector('.printSheet.exam314');if(!sheet)throw new Error('请先生成试卷。');
+  const blocks=[];
+  const h1=sheet.querySelector(':scope>h1')?.textContent||'错题随机复习卷';
+  blocks.push({kind:'head',html:`<h1>${esc(h1)}</h1><div class="capMeta">姓名：________　　日期：________　　得分：________</div>`});
+  let section='';
+  [...sheet.children].forEach(el=>{
+    if(el.matches('h2')){section=el.textContent;blocks.push({kind:'section',html:`<h2>${esc(section)}</h2>`});return}
+    if(!el.classList.contains('exam314Q'))return;
+    const title=el.querySelector('.exam314QTitle')?.textContent||'';
+    const opts=[...el.querySelectorAll('.exam314Option')].map(x=>x.textContent||'');
+    if(opts.length){
+      const sel=[...el.querySelectorAll('.exam314ChoiceBtn.on')].map(x=>x.dataset.letter).join('');
+      blocks.push({kind:'q',html:`<div class="capQ"><div class="capQTitle">${esc(title)}</div>${opts.map(x=>`<div class="capOpt">${esc(x)}</div>`).join('')}<div class="capChoiceAns">作答：${sel?esc(sel):'____'}</div></div>`});
+    }else{
+      const ta=el.querySelector('.exam314TextAnswer'),val=ta?.value||'',isEssay=ta?.classList.contains('essay'),h=isEssay?250:145;
+      blocks.push({kind:'q',html:`<div class="capQ"><div class="capQTitle">${esc(title)}</div><div class="capWrite ${val?'':'blank'}" style="height:${h}px">${val?esc(val):' '}</div></div>`});
+    }
+  });
+  if(examState314?.withA){
+    blocks.push({kind:'section',forceNew:true,html:'<h1>参考答案</h1>'});
+    if(examState314.key?.length)blocks.push({kind:'q',html:`<div class="capQ">${esc(examState314.key.join('　'))}</div>`});
+    examState314.es.forEach((q,i)=>blocks.push({kind:'q',html:`<div class="capQ"><div class="capQTitle">${i+1}. ${esc(q.text)}</div><div>${esc(ans343(q))}</div></div>`}));
+  }
+  return blocks;
+}
+function createCapturePage314(){const p=document.createElement('div');p.className='examCapturePage314';return p}
+async function paginateExam314(){
+  const host=document.createElement('div');host.id='examCaptureHost314';document.body.appendChild(host);
+  const blocks=collectExportBlocks314(),pages=[];let page=createCapturePage314();host.appendChild(page);
+  for(const b of blocks){
+    if(b.forceNew && page.children.length){pages.push(page.cloneNode(true));page.innerHTML=''}
+    const wrap=document.createElement('div');wrap.innerHTML=b.html;const node=wrap.firstElementChild;page.appendChild(node);
+    if(page.scrollHeight>page.clientHeight && page.children.length>1){page.removeChild(node);pages.push(page.cloneNode(true));page.innerHTML='';page.appendChild(node)}
+  }
+  if(page.children.length)pages.push(page.cloneNode(true));host.remove();return pages;
+}
+async function capturePages314(onProgress){
+  if(typeof html2canvas!=='function')throw new Error('导出组件尚未加载，请联网刷新页面后重试。');
+  const pages=await paginateExam314(),host=document.createElement('div');host.id='examCaptureHost314';document.body.appendChild(host);let out=[];
+  try{
+    for(let i=0;i<pages.length;i++){
+      host.innerHTML='';host.appendChild(pages[i]);await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+      onProgress?.(i+1,pages.length);
+      const c=await html2canvas(pages[i],{scale:1.45,useCORS:true,backgroundColor:'#ffffff',logging:false,width:794,height:1123,windowWidth:794,windowHeight:1123,scrollX:0,scrollY:0});out.push(c);
+    }
+  }finally{host.remove()}
+  return out;
+}
+function isIOS314(){return /iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)}
+async function saveBlob314(blob,name,mime){
+  try{
+    const file=new File([blob],name,{type:mime||blob.type});
+    if(isIOS314()&&navigator.share&&navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:name});return 'share'}
+  }catch(e){if(e?.name==='AbortError')return 'cancel'}
+  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.rel='noopener';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);return 'download';
+}
+async function downloadPDF352(ev){
+  const btn=ev?.currentTarget,overlay=exportOverlay314('正在生成 PDF…');
+  try{
+    if(btn){btn.disabled=true;btn.textContent='生成中…'}
+    if(!window.jspdf?.jsPDF)throw new Error('PDF组件尚未加载，请联网刷新后重试。');
+    const cvs=await capturePages314((n,t)=>{const p=$('examExportProgress314');if(p)p.textContent=`第 ${n} / ${t} 页`});
+    const {jsPDF}=window.jspdf,pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true});
+    cvs.forEach((c,i)=>{if(i)pdf.addPage();pdf.addImage(c.toDataURL('image/jpeg',.92),'JPEG',0,0,210,297,undefined,'FAST')});
+    const blob=pdf.output('blob');await saveBlob314(blob,`${examTitle352()}_${filenameDate352()}.pdf`,'application/pdf');
+  }catch(e){alert('PDF生成失败：'+(e?.message||e))}
+  finally{overlay.remove();if(btn){btn.disabled=false;btn.textContent='下载 PDF'}}
+}
+async function downloadJPEG352(ev){
+  const btn=ev?.currentTarget,overlay=exportOverlay314('正在生成 JPEG…');
+  try{
+    if(btn){btn.disabled=true;btn.textContent='生成中…'}
+    const cvs=await capturePages314((n,t)=>{const p=$('examExportProgress314');if(p)p.textContent=`第 ${n} / ${t} 页`});
+    if(cvs.length===1){const blob=await new Promise(r=>cvs[0].toBlob(r,'image/jpeg',.94));await saveBlob314(blob,`${examTitle352()}_${filenameDate352()}.jpg`,'image/jpeg');return}
+    /* iPhone 多文件下载不稳定：生成图片预览页，可逐张长按保存；同时首张可直接分享 */
+    const urls=cvs.map(c=>c.toDataURL('image/jpeg',.92));
+    const w=window.open('','_blank');
+    if(w){w.document.write(`<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(examTitle352())} JPEG</title><style>body{margin:0;background:#efefef;font-family:-apple-system}header{position:sticky;top:0;background:#fff;padding:12px 16px;font-weight:700;z-index:2}img{display:block;width:100%;max-width:794px;margin:12px auto;background:#fff;box-shadow:0 1px 8px #bbb}</style><header>共 ${urls.length} 页 · 长按图片可保存到照片</header>${urls.map((u,i)=>`<img src="${u}" alt="第${i+1}页">`).join('')}`);w.document.close()}
+    else{const blob=await new Promise(r=>cvs[0].toBlob(r,'image/jpeg',.94));await saveBlob314(blob,`${examTitle352()}_${filenameDate352()}_第1页.jpg`,'image/jpeg')}
+  }catch(e){alert('JPEG生成失败：'+(e?.message||e))}
+  finally{overlay.remove();if(btn){btn.disabled=false;btn.textContent='导出 JPEG'}}
+}
+function fillableHTMLString314(){
+  const title=examTitle352(),sheet=document.querySelector('.printSheet.exam314');if(!sheet)throw new Error('请先生成试卷。');
+  const clone=sheet.cloneNode(true);clone.querySelectorAll('.exam314Hint').forEach(x=>x.remove());
+  clone.querySelectorAll('.exam314ChoiceBtn').forEach(b=>{b.setAttribute('onclick','this.parentElement.querySelectorAll(\'.exam314ChoiceBtn\').forEach(x=>x.classList.remove(\'on\'));this.classList.add(\'on\');save()')});
+  clone.querySelectorAll('textarea').forEach(t=>t.setAttribute('oninput','save()'));
+  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${esc(title)}</title><style>body{margin:0;background:#f5f3ef;color:#222;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}.wrap{max-width:760px;margin:auto;background:#fff;min-height:100vh;padding:22px 16px 60px;box-sizing:border-box}h1{font-size:28px}h2{font-size:22px;margin-top:28px}.exam314Q{padding:16px 0;border-bottom:1px solid #eee}.exam314QTitle{font-size:18px;font-weight:800;line-height:1.5}.exam314Option{padding:4px 0}.exam314ChoiceAnswer{display:flex;gap:8px;align-items:center;margin-top:10px}.exam314ChoiceBtn{width:42px;height:42px;border:1px solid #ddd;border-radius:12px;background:#f5f3ef;font-weight:800}.exam314ChoiceBtn.on{background:#222;color:#fff}.exam314TextAnswer{width:100%;min-height:150px;border:1px solid #ddd;border-radius:14px;padding:12px;box-sizing:border-box;font:inherit}.exam314TextAnswer.essay{min-height:260px}.answerKey{margin-top:40px}</style></head><body><div class="wrap">${clone.innerHTML}</div><script>const K='wrongbook_exam_${Date.now()}';function save(){const d={t:[...document.querySelectorAll('textarea')].map(x=>x.value),c:[...document.querySelectorAll('.exam314ChoiceAnswer')].map(g=>[...g.querySelectorAll('.on')].map(x=>x.textContent.trim())[0]||'')};localStorage.setItem(K,JSON.stringify(d))}window.addEventListener('beforeunload',save);<\/script></body></html>`;
+}
+async function downloadFillableHTML314(ev){
+  const btn=ev?.currentTarget;try{if(btn){btn.disabled=true;btn.textContent='生成中…'}const html=fillableHTMLString314(),blob=new Blob([html],{type:'text/html;charset=utf-8'});await saveBlob314(blob,`${examTitle352()}_${filenameDate352()}_可填写.html`,'text/html')}catch(e){alert('可填写试卷生成失败：'+(e?.message||e))}finally{if(btn){btn.disabled=false;btn.textContent='可填写 HTML'}}
+}
+</script>
+
 </body></html>
