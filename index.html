@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="3.13.8">
+<meta name="wrongbook-version" content="3.13.9">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -1120,7 +1120,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.8</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.9</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -1134,7 +1134,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.13.8 模拟考试与试卷排版优化版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V3.13.9 模拟考试与试卷排版优化版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -2227,7 +2227,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.13.8';
+const APP_VERSION='3.13.9';
 const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
 
 function versionParts311(v){
@@ -7434,7 +7434,7 @@ async function downloadJPEG352(ev){
 
 
 <style id="exam315Style">
-/* ===== V3.13.8 模拟考试 + 真试卷导出 ===== */
+/* ===== V3.13.9 模拟考试 + 真试卷导出 ===== */
 body.examMode315{background:#f5f3ef!important;overflow:auto!important}
 body.examMode315>header,body.examMode315 nav,body.examMode315 .fab{display:none!important}
 body.examMode315 #study{padding:0!important;margin:0!important;min-height:100vh!important}
@@ -7478,7 +7478,7 @@ body.examMode315 #studyArea{padding:0!important;margin:0!important;width:100%!im
 .examPaper315 .write315.essay315{height:220px}.examPaper315 .pageNo315{text-align:center;font-size:12px;margin-top:8px;position:absolute;bottom:22px;left:0;right:0}.examPaper315{position:relative}
 </style>
 <script>
-/* ===== V3.13.8 exam workflow ===== */
+/* ===== V3.13.9 exam workflow ===== */
 const EXAM315_KEY='wrongbook_active_exam_v315';
 function persistExam315(){try{if(examState314)localStorage.setItem(EXAM315_KEY,JSON.stringify(examState314));else localStorage.removeItem(EXAM315_KEY)}catch(e){}}
 function loadExam315(){try{const x=JSON.parse(localStorage.getItem(EXAM315_KEY)||'null');return x&&x.version===315?x:null}catch(e){return null}}
@@ -7548,7 +7548,7 @@ window.addEventListener('pagehide',persistExam315);document.addEventListener('vi
 @media(max-width:560px){.exam316BookRow{grid-template-columns:1fr 132px;padding:12px}.exam316Counts{grid-template-columns:1fr}.exam316BookRow select{font-size:13px}}
 </style>
 <script>
-/* ===== V3.13.8 组卷修复：按钮可用 + 每本错题本独立选择题型 ===== */
+/* ===== V3.13.9 组卷修复：按钮可用 + 每本错题本独立选择题型 ===== */
 const EXAM316_KEY='wrongbook_active_exam_v316';
 function examCat316(q){
   const t=String(q?.type||'').toLowerCase();
@@ -7625,7 +7625,7 @@ function buildPaperPages315(){
 </script>
 
 <style>
-/* ===== V3.13.8 组卷面板：独立滚动层，禁止下层页面跟随 ===== */
+/* ===== V3.13.9 组卷面板：独立滚动层，禁止下层页面跟随 ===== */
 #modal.examBuilder317{
   position:fixed!important;inset:0!important;z-index:2147483646!important;
   display:flex!important;align-items:flex-end!important;overflow:hidden!important;
@@ -7647,7 +7647,7 @@ body.examBuilderLock317{position:fixed!important;left:0!important;right:0!import
 body.examBuilderLock317 #modal.examBuilder317{touch-action:none!important}
 </style>
 <script>
-/* ===== V3.13.8 组卷交互与生成修复 ===== */
+/* ===== V3.13.9 组卷交互与生成修复 ===== */
 let examBuilderScroll317=0;
 function lockExamBuilder317(){
   examBuilderScroll317=window.scrollY||document.documentElement.scrollTop||0;
@@ -7720,5 +7720,107 @@ function buildExam35(){
     alert('无法生成试卷：'+(e?.message||e));console.error(e);
   }
 }
+</script>
+
+<style id="v3139-exam-touch-fix">
+/* ===== V3.13.9 iPhone 组卷按钮触控修复 =====
+   V3.13.8 的根因：组卷遮罩和 body 使用 touch-action:none，
+   iOS WebKit 下会让原生 select 还能工作，但普通 button 的 tap/click 被吞掉。 */
+body.examBuilderLock317{
+  touch-action:auto!important;
+}
+#modal.examBuilder317{
+  touch-action:auto!important;
+  pointer-events:auto!important;
+}
+#modal.examBuilder317 .sheet{
+  touch-action:pan-y!important;
+  pointer-events:auto!important;
+}
+#modal.examBuilder317 button,
+#modal.examBuilder317 select,
+#modal.examBuilder317 input{
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent;
+}
+#modal.examBuilder317 .sheetBar,
+#modal.examBuilder317 .exam317GenerateBar{
+  pointer-events:auto!important;
+}
+</style>
+<script>
+/* ===== V3.13.9 iPhone 组卷按钮事件修复：不再依赖 iOS 合成 click ===== */
+(function(){
+  let lastTouchAction3139=0;
+
+  function examDoAction3139(action){
+    if(action==='close'){
+      try{ closeM(); }catch(err){
+        const m=document.getElementById('modal');
+        if(m){m.classList.remove('on','examBuilder317');}
+        try{unlockExamBuilder317();}catch(_e){}
+      }
+      return;
+    }
+    if(action==='generate'){
+      try{ buildExam35(); }catch(err){
+        alert('无法生成试卷：'+(err?.message||err));
+        console.error(err);
+      }
+      return;
+    }
+    if(action==='resume'){
+      try{ closeM(); resumeExam315(); }catch(err){console.error(err)}
+    }
+  }
+
+  function bindExamBuilderButtons3139(){
+    const modalEl=document.getElementById('modal');
+    if(!modalEl || modalEl.dataset.examTouch3139==='1') return;
+    modalEl.dataset.examTouch3139='1';
+
+    modalEl.addEventListener('touchend',function(e){
+      const b=e.target.closest?.('[data-exam-action3139]');
+      if(!b || !modalEl.classList.contains('examBuilder317')) return;
+      e.preventDefault();
+      e.stopPropagation();
+      lastTouchAction3139=Date.now();
+      examDoAction3139(b.dataset.examAction3139);
+    },{passive:false,capture:true});
+
+    modalEl.addEventListener('click',function(e){
+      const b=e.target.closest?.('[data-exam-action3139]');
+      if(!b || !modalEl.classList.contains('examBuilder317')) return;
+      if(Date.now()-lastTouchAction3139<700){e.preventDefault();e.stopPropagation();return;}
+      e.preventDefault();
+      e.stopPropagation();
+      examDoAction3139(b.dataset.examAction3139);
+    },true);
+  }
+  bindExamBuilderButtons3139();
+
+  /* 覆盖最后一层组卷面板：三个关键按钮全部使用独立触控事件。 */
+  openExamBuilderV35=function(){
+    try{
+      const old=loadExam315(),p=examProgress315(old);let resume='';
+      if(old&&!old.submitted&&p.total){
+        resume=`<div class="exam315Resume"><b>上次试卷还没做完</b><div class="small" style="margin:5px 0 10px">${esc(old.title||'随机试卷')} · 已完成 ${p.done}/${p.total}</div><button class="primary" type="button" data-exam-action3139="resume" style="width:100%">继续上次试卷</button></div>`;
+      }
+      const rows=(D.books||[]).map((b,i)=>{
+        const st=bookExamStats316(b.id);
+        return `<div class="exam316BookRow"><div class="exam316BookMeta"><b>${esc(b.name||b.title||('错题本 '+(i+1)))}</b><span>${st.all}题 · 选择${st.choice} · 简答/论述${st.text}${st.other?' · 其他'+st.other:''}</span></div><select class="exam316Mode" data-book="${esc(String(b.id))}"><option value="all">全部题型</option><option value="choice">仅选择题</option><option value="text">仅简答/论述</option>${st.other?'<option value="other">仅其他题型</option>':''}<option value="none">不加入</option></select></div>`;
+      }).join('');
+
+      lockExamBuilder317();
+      modal(`<div class="sheetBar"><button class="sheetBack" type="button" data-exam-action3139="close">‹ 返回</button><b>生成随机试卷</b><button class="sheetClose" type="button" data-exam-action3139="close">×</button></div>${resume}<div class="exam316GroupTitle">按错题本选择本次组卷内容</div><div class="exam316BookList">${rows||'<div class="note">目前没有错题本或题目。</div>'}</div><div class="exam316GroupTitle">本次抽题数量（0 = 使用已选范围内全部）</div><div class="exam316Counts"><label>选择题<input id="ec35" type="number" value="0" min="0" inputmode="numeric"></label><label>简答/论述<input id="ee35" type="number" value="0" min="0" inputmode="numeric"></label><label>其他题型<input id="eo316" type="number" value="0" min="0" inputmode="numeric"></label></div><div class="note" style="margin-top:12px">每一本错题本都可单独选择题型。0 表示把该类型已选范围内的题全部放入试卷。</div><div class="exam317GenerateBar"><button id="examGenerate317" class="primary" type="button" data-exam-action3139="generate" style="width:100%;min-height:56px">生成新试卷</button><div id="exam317Status"></div></div>`);
+      document.getElementById('modal')?.classList.add('examBuilder317');
+    }catch(e){
+      try{unlockExamBuilder317();}catch(_e){}
+      alert('组卷面板打开失败：'+(e?.message||e));
+      console.error(e);
+    }
+  };
+})();
 </script>
 </body></html>
