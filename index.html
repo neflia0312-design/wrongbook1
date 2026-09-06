@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="3.13.5">
+<meta name="wrongbook-version" content="3.13.6">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -1120,7 +1120,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.5</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V3.13.6</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -1134,7 +1134,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V3.13.5 模拟考试与试卷排版优化版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V3.13.6 模拟考试与试卷排版优化版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -2227,7 +2227,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='3.13.5';
+const APP_VERSION='3.13.6';
 const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
 
 function versionParts311(v){
@@ -7436,7 +7436,7 @@ function fillableHTMLString314(){
   clone.querySelectorAll('textarea').forEach(t=>t.setAttribute('oninput','save()'));
   return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${esc(title)}</title><style>body{margin:0;background:#f5f3ef;color:#222;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}.wrap{max-width:760px;margin:auto;background:#fff;min-height:100vh;padding:22px 16px 60px;box-sizing:border-box}h1{font-size:28px}h2{font-size:22px;margin-top:28px}.exam314Q{padding:16px 0;border-bottom:1px solid #eee}.exam314QTitle{font-size:18px;font-weight:800;line-height:1.5}.exam314Option{padding:4px 0}.exam314ChoiceAnswer{display:flex;gap:8px;align-items:center;margin-top:10px}.exam314ChoiceBtn{width:42px;height:42px;border:1px solid #ddd;border-radius:12px;background:#f5f3ef;font-weight:800}.exam314ChoiceBtn.on{background:#222;color:#fff}.exam314TextAnswer{width:100%;min-height:150px;border:1px solid #ddd;border-radius:14px;padding:12px;box-sizing:border-box;font:inherit}.exam314TextAnswer.essay{min-height:260px}.answerKey{margin-top:40px}</style></head><body><div class="wrap">${clone.innerHTML}</div><script>const K='wrongbook_exam_${Date.now()}';function save(){const d={t:[...document.querySelectorAll('textarea')].map(x=>x.value),c:[...document.querySelectorAll('.exam314ChoiceAnswer')].map(g=>[...g.querySelectorAll('.on')].map(x=>x.textContent.trim())[0]||'')};localStorage.setItem(K,JSON.stringify(d))}window.addEventListener('beforeunload',save);<\/script>
 <style id="exam315Style">
-/* ===== V3.13.5 模拟考试 + 真试卷导出 ===== */
+/* ===== V3.13.6 模拟考试 + 真试卷导出 ===== */
 body.examMode315{background:#f5f3ef!important;overflow:auto!important}
 body.examMode315>header,body.examMode315 nav,body.examMode315 .fab{display:none!important}
 body.examMode315 #study{padding:0!important;margin:0!important;min-height:100vh!important}
@@ -7480,7 +7480,7 @@ body.examMode315 #studyArea{padding:0!important;margin:0!important;width:100%!im
 .examPaper315 .write315.essay315{height:220px}.examPaper315 .pageNo315{text-align:center;font-size:12px;margin-top:8px;position:absolute;bottom:22px;left:0;right:0}.examPaper315{position:relative}
 </style>
 <script>
-/* ===== V3.13.5 exam workflow ===== */
+/* ===== V3.13.6 exam workflow ===== */
 const EXAM315_KEY='wrongbook_active_exam_v315';
 function persistExam315(){try{if(examState314)localStorage.setItem(EXAM315_KEY,JSON.stringify(examState314));else localStorage.removeItem(EXAM315_KEY)}catch(e){}}
 function loadExam315(){try{const x=JSON.parse(localStorage.getItem(EXAM315_KEY)||'null');return x&&x.version===315?x:null}catch(e){return null}}
@@ -7548,7 +7548,7 @@ async function downloadFillableHTML314(ev){
 
 
 <style id="exam315Style">
-/* ===== V3.13.5 模拟考试 + 真试卷导出 ===== */
+/* ===== V3.13.6 模拟考试 + 真试卷导出 ===== */
 body.examMode315{background:#f5f3ef!important;overflow:auto!important}
 body.examMode315>header,body.examMode315 nav,body.examMode315 .fab{display:none!important}
 body.examMode315 #study{padding:0!important;margin:0!important;min-height:100vh!important}
@@ -7592,7 +7592,7 @@ body.examMode315 #studyArea{padding:0!important;margin:0!important;width:100%!im
 .examPaper315 .write315.essay315{height:220px}.examPaper315 .pageNo315{text-align:center;font-size:12px;margin-top:8px;position:absolute;bottom:22px;left:0;right:0}.examPaper315{position:relative}
 </style>
 <script>
-/* ===== V3.13.5 exam workflow ===== */
+/* ===== V3.13.6 exam workflow ===== */
 const EXAM315_KEY='wrongbook_active_exam_v315';
 function persistExam315(){try{if(examState314)localStorage.setItem(EXAM315_KEY,JSON.stringify(examState314));else localStorage.removeItem(EXAM315_KEY)}catch(e){}}
 function loadExam315(){try{const x=JSON.parse(localStorage.getItem(EXAM315_KEY)||'null');return x&&x.version===315?x:null}catch(e){return null}}
@@ -7651,4 +7651,90 @@ async function downloadJPEG352(ev){
 window.addEventListener('pagehide',persistExam315);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')persistExam315()});
 </script>
 
+
+<style id="exam316Style">
+.exam316BookList{display:flex;flex-direction:column;gap:10px;margin:10px 0 16px}
+.exam316BookRow{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:10px;align-items:center;padding:13px 14px;border:1px solid #e2ddd5;border-radius:16px;background:#faf9f6}
+.exam316BookMeta{min-width:0}.exam316BookMeta b{display:block;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.exam316BookMeta span{display:block;margin-top:4px;font-size:12px;color:#8e877e}
+.exam316BookRow select{margin:0!important;min-height:44px;background:#f1eee8;border:0!important;border-radius:12px;padding:0 10px;font-size:14px;font-weight:700;color:#2c2925}
+.exam316GroupTitle{font-size:13px;color:#817a71;margin:14px 0 5px}
+.exam316Counts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.exam316Counts label{margin:0}.exam316Counts input{margin-top:6px!important}
+@media(max-width:560px){.exam316BookRow{grid-template-columns:1fr 132px;padding:12px}.exam316Counts{grid-template-columns:1fr}.exam316BookRow select{font-size:13px}}
+</style>
+<script>
+/* ===== V3.13.6 组卷修复：按钮可用 + 每本错题本独立选择题型 ===== */
+const EXAM316_KEY='wrongbook_active_exam_v316';
+function examCat316(q){
+  const t=String(q?.type||'').toLowerCase();
+  const os=opts35(q)||[];
+  if(/choice|选择/.test(t)||os.length>1)return 'choice';
+  if(/essay|论述/.test(t))return 'essay';
+  if(/short|简答/.test(t))return 'short';
+  return 'other';
+}
+function bookExamStats316(bid){
+  const qs=D.qs.filter(q=>bookIdOf(q)===bid), out={all:qs.length,choice:0,text:0,other:0};
+  qs.forEach(q=>{const c=examCat316(q);if(c==='choice')out.choice++;else if(c==='short'||c==='essay')out.text++;else out.other++});
+  return out;
+}
+function persistExam315(){try{if(examState314){localStorage.setItem(EXAM316_KEY,JSON.stringify(examState314));localStorage.setItem('wrongbook_active_exam_v315',JSON.stringify(examState314))}else{localStorage.removeItem(EXAM316_KEY)}}catch(e){}}
+function loadExam315(){try{let x=JSON.parse(localStorage.getItem(EXAM316_KEY)||'null');if(!x)x=JSON.parse(localStorage.getItem('wrongbook_active_exam_v315')||'null');return x&&[315,316].includes(x.version)?x:null}catch(e){return null}}
+function clearExam315(){try{localStorage.removeItem(EXAM316_KEY);localStorage.removeItem('wrongbook_active_exam_v315')}catch(e){} examState314=null}
+function openExamBuilderV35(){
+  try{
+    const old=loadExam315(),p=examProgress315(old);let resume='';
+    if(old&&!old.submitted&&p.total){resume=`<div class="exam315Resume"><b>上次试卷还没做完</b><div class="small" style="margin:5px 0 10px">${esc(old.title||'随机试卷')} · 已完成 ${p.done}/${p.total}</div><button class="primary" style="width:100%" onclick="closeM();resumeExam315()">继续上次试卷</button></div>`}
+    const rows=D.books.map((b,i)=>{const st=bookExamStats316(b.id);return `<div class="exam316BookRow"><div class="exam316BookMeta"><b>${esc(b.name||b.title||('错题本 '+(i+1)))}</b><span>${st.all}题 · 选择${st.choice} · 简答/论述${st.text}${st.other?' · 其他'+st.other:''}</span></div><select class="exam316Mode" data-book="${esc(b.id)}"><option value="all">全部题型</option><option value="choice">仅选择题</option><option value="text">仅简答/论述</option>${st.other?'<option value="other">仅其他题型</option>':''}<option value="none">不加入</option></select></div>`}).join('');
+    modal(`<div class="sheetBar"><button class="sheetBack" onclick="closeM()">‹ 返回</button><b>生成随机试卷</b><button class="sheetClose" onclick="closeM()">×</button></div>${resume}<div class="exam316GroupTitle">按错题本选择本次组卷内容</div><div class="exam316BookList">${rows||'<div class="note">目前没有错题本或题目。</div>'}</div><div class="exam316GroupTitle">本次抽题数量（0 = 使用已选范围内全部）</div><div class="exam316Counts"><label>选择题<input id="ec35" type="number" value="0" min="0" inputmode="numeric"></label><label>简答/论述<input id="ee35" type="number" value="0" min="0" inputmode="numeric"></label><label>其他题型<input id="eo316" type="number" value="0" min="0" inputmode="numeric"></label></div><div class="note" style="margin-top:12px">每一本错题本都可独立决定：全部题型 / 仅选择题 / 仅简答&论述 / 仅其他题型 / 不加入。题序与选择题选项每次都会重新打乱；未交卷会自动保存。</div><button class="primary" style="width:100%;margin-top:12px" onclick="buildExam35()">生成新试卷</button>`);
+  }catch(e){alert('组卷面板打开失败：'+(e?.message||e));console.error(e)}
+}
+function collectExamPools316(){
+  const picked=[...document.querySelectorAll('.exam316Mode')];
+  let choices=[],texts=[],others=[],pickedBooks=[];
+  picked.forEach(sel=>{
+    const bid=sel.dataset.book,mode=sel.value;if(mode==='none')return;
+    const book=D.books.find(b=>b.id===bid);pickedBooks.push(book?.name||book?.title||'错题本');
+    D.qs.filter(q=>bookIdOf(q)===bid).forEach(q=>{
+      const c=examCat316(q);
+      if(mode==='choice'&&c!=='choice')return;
+      if(mode==='text'&&!(c==='short'||c==='essay'))return;
+      if(mode==='other'&&c!=='other')return;
+      if(c==='choice')choices.push(q);else if(c==='short'||c==='essay')texts.push(q);else others.push(q);
+    });
+  });
+  return {choices,texts,others,pickedBooks};
+}
+function makeExamState315(){
+  const pool=collectExamPools316();
+  let ch=shuffle35(pool.choices),tx=shuffle35(pool.texts),ot=shuffle35(pool.others);
+  const cn=+($('ec35')?.value||0),en=+($('ee35')?.value||0),on=+($('eo316')?.value||0);
+  if(cn)ch=ch.slice(0,cn);if(en)tx=tx.slice(0,en);if(on)ot=ot.slice(0,on);
+  if(!ch.length&&!tx.length&&!ot.length)throw new Error('当前选择范围内没有可组卷题目。请至少选择一本错题本和一种有题目的题型。');
+  const choiceItems=ch.map((q,i)=>{let o=opts35(q)||[],ci=ci35(q,o),m=shuffle35(o),ni=m.findIndex(x=>x.orig===ci);return {id:String(q.id||('c'+Date.now()+'_'+i)),bookId:bookIdOf(q),text:q.text||q.question||'',options:m.map(x=>x.text),correctLetter:ni>=0?'ABCD'[ni]:'',answer:ans343(q)||''}});
+  const textItems=tx.map((q,i)=>({id:String(q.id||('t'+Date.now()+'_'+i)),bookId:bookIdOf(q),text:q.text||q.question||'',type:examCat316(q),answer:ans343(q)||''}));
+  const otherItems=ot.map((q,i)=>({id:String(q.id||('o'+Date.now()+'_'+i)),bookId:bookIdOf(q),text:q.text||q.question||'',type:'other',answer:ans343(q)||''}));
+  const title=pool.pickedBooks.length===1?`${pool.pickedBooks[0]}随机复习卷`:'综合错题随机复习卷';
+  return {version:316,bid:'custom',title,choiceItems,textItems,otherItems,userAnswers:{},createdAt:Date.now(),updatedAt:Date.now(),submitted:false};
+}
+function buildExam35(){
+  try{examState314=makeExamState315();persistExam315();closeM();renderExam315();requestAnimationFrame(()=>window.scrollTo(0,0))}
+  catch(e){alert('无法生成试卷：'+(e?.message||e));console.error(e)}
+}
+function examProgress315(st=examState314){if(!st)return {done:0,total:0};let done=0,total=(st.choiceItems?.length||0)+(st.textItems?.length||0)+(st.otherItems?.length||0);(st.choiceItems||[]).forEach(x=>{if(st.userAnswers?.[x.id])done++});[...(st.textItems||[]),...(st.otherItems||[])].forEach(x=>{if(String(st.userAnswers?.[x.id]||'').trim())done++});return {done,total}}
+function renderExam315(){
+  const st=examState314;if(!st)return;document.body.classList.add('examMode315');page('study');
+  const choices=(st.choiceItems||[]).map((x,i)=>{const ua=st.userAnswers?.[x.id]||'',ok=st.submitted&&ua===x.correctLetter,bad=st.submitted&&ua&&ua!==x.correctLetter;return `<div class="exam314Q exam315Q ${ok?'correct315':''} ${bad?'wrong315':''}" data-qid="${esc(x.id)}"><div class="exam314QTitle">${i+1}. ${esc(x.text)}</div>${(x.options||[]).map((t,j)=>`<div class="exam314Option">${'ABCD'[j]}. ${esc(t)}</div>`).join('')}<div class="exam314ChoiceAnswer"><span class="lab">我的答案</span>${'ABCD'.split('').map(l=>`<button type="button" class="exam314ChoiceBtn ${ua===l?'on':''} ${st.submitted&&l===x.correctLetter?'correct315':''} ${st.submitted&&ua===l&&ua!==x.correctLetter?'wrong315':''}" data-letter="${l}" onclick="setChoice314('${esc(x.id)}','${l}')">${l}</button>`).join('')}</div>${st.submitted?`<div class="exam315Mark ${ua===x.correctLetter?'ok':'bad'}">${ua===x.correctLetter?'✓ 正确':`✕ 错误 · 正确答案 ${esc(x.correctLetter||'—')}`}</div>`:''}</div>`}).join('');
+  const renderText=(arr,startLabel)=>arr.map((x,i)=>{const val=st.userAnswers?.[x.id]||'';return `<div class="exam314Q exam315Q" data-qid="${esc(x.id)}"><div class="exam314QTitle">${i+1}. ${esc(x.text)}</div><textarea class="exam314TextAnswer ${x.type==='essay'?'essay':''}" placeholder="在这里填写答案…" oninput="syncTextAnswer314('${esc(x.id)}',this)" ${st.submitted?'readonly':''}>${esc(val)}</textarea>${st.submitted?`<div class="exam315Std"><b>参考答案</b>\n${esc(x.answer||'暂无标准答案')}</div>`:''}</div>`}).join('');
+  const texts=renderText(st.textItems||[]),others=renderText(st.otherItems||[]),p=examProgress315(st),wrong=(st.choiceItems||[]).filter(x=>st.userAnswers?.[x.id]!==x.correctLetter).length,correct=(st.choiceItems||[]).length-wrong;
+  $('studyArea').innerHTML=`<div class="exam315Top noPrint"><button class="secondary" onclick="examReturn314()">‹ 返回错题本</button><button class="submit315" onclick="submitExam315()">${st.submitted?'查看批改结果':'交卷批改'}</button><button class="secondary" onclick="downloadPDF352(event)">导出 PDF</button><button class="secondary" onclick="downloadJPEG352(event)">导出 JPEG</button></div><div class="exam315Info noPrint"><span id="examProgress315">${st.submitted?`已交卷 · 选择题 ${correct}/${st.choiceItems.length} 正确`:`已完成 ${p.done}/${p.total} · 自动保存`}</span><span>${st.submitted?'可查看错题并重新组卷':'全部做完后统一批改'}</span></div><div class="printSheet exam314 exam315 ${st.submitted?'submitted315':''}"><h1 class="exam315Title">${esc(st.title)}</h1><div class="exam315Meta">模拟试卷 · ${new Date(st.createdAt).toLocaleDateString('zh-CN')}</div>${st.submitted?`<div class="exam315Summary">本次共 ${p.total} 题；选择题答对 ${correct}/${st.choiceItems.length}。非选择题已显示参考答案，请对照复盘。</div>`:''}${choices?`<div class="exam315Section">第一部分　选择题</div>${choices}`:''}${texts?`<div class="exam315Section">第二部分　简答 / 论述题</div>${texts}`:''}${others?`<div class="exam315Section">第三部分　其他题型</div>${others}`:''}</div><div class="exam315Finish noPrint">${st.submitted?`<button class="secondary" onclick="toggleWrongOnly315()">仅看错题</button><button class="primary" onclick="newExam315()">重新生成试卷</button>`:`<button class="primary" onclick="submitExam315()">全部做完后交卷</button>`}</div>`;
+}
+function buildPaperPages315(){
+  const st=examState314;if(!st)throw new Error('请先生成试卷。');const pages=[];let pageNo=1;
+  const head=`<div class="paperTitle315">${esc(st.title)}</div><div class="paperSub315">姓名：________　日期：________　得分：________</div><table class="scoreTable315"><tr><td>题号</td><td>一</td><td>二</td><td>三</td><td>总分</td></tr><tr><td>分数</td><td></td><td></td><td></td><td></td></tr></table>`;
+  const ch=st.choiceItems||[];for(let start=0;start<ch.length;start+=10){const chunk=ch.slice(start,start+10),html=(start===0?head:'')+`<div class="section315">第一部分　选择题</div><div class="sectionNote315">每小题只有一项符合题意，请将答案填入括号内。</div>`+chunk.map((x,k)=>`<div class="pq315"><div class="qt315">${start+k+1}. ${esc(x.text)} <span class="ansBlank315">（　）</span></div><div class="opts315">${(x.options||[]).map((t,j)=>`<div>${'ABCD'[j]}. ${esc(t)}</div>`).join('')}</div></div>`).join('');pages.push(`<div class="examPaper315">${html}<div class="pageNo315">· ${pageNo++} ·</div></div>`)}
+  const addTextPages=(arr,title,essay=false)=>{if(!arr?.length)return;if(essay){arr.forEach((x,i)=>pages.push(`<div class="examPaper315"><div class="section315">${title}</div><div class="pq315"><div class="qt315">${i+1}. ${esc(x.text)}</div><div class="write315 essay315"></div><div class="write315 essay315" style="height:420px"></div></div><div class="pageNo315">· ${pageNo++} ·</div></div>`));return}for(let start=0;start<arr.length;start+=3){const chunk=arr.slice(start,start+3),html=`<div class="section315">${title}</div>`+chunk.map((x,k)=>`<div class="pq315"><div class="qt315">${start+k+1}. ${esc(x.text)}</div><div class="write315"></div></div>`).join('');pages.push(`<div class="examPaper315">${html}<div class="pageNo315">· ${pageNo++} ·</div></div>`)}};
+  const tx=st.textItems||[];addTextPages(tx.filter(x=>x.type!=='essay'),'第二部分　简答题');addTextPages(tx.filter(x=>x.type==='essay'),'第三部分　论述题',true);addTextPages(st.otherItems||[],'其他题型');
+  if(!pages.length)pages.push(`<div class="examPaper315">${head}<div class="pageNo315">· 1 ·</div></div>`);return pages;
+}
+</script>
 </body></html>
