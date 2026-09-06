@@ -3,12 +3,12 @@
 <!-- WRONGBOOK V3.2.2 LEGACY-IMPORT BUILD 2026-08-12 -->
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="theme-color" content="#f7f6f2">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="3.13.9">
+<meta name="wrongbook-version" content="4.0.1">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -1120,7 +1120,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V4.0</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V4.0.1</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
@@ -1134,7 +1134,7 @@ body.qEditLock393{
 <section id="mind" class="page"><div id="mindArea36"></div></section><section id="reader" class="page"><div id="readerArea"></div></section><section id="study" class="page"><div id="studyArea"></div></section>
 <section id="set" class="page"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V4.0 模拟考试·分批作答版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V4.0.1 模拟考试·分批作答版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -8039,6 +8039,113 @@ body.eb318Open{overflow:hidden!important}
     $('studyArea').innerHTML=`<div class="exam315Top noPrint"><button class="secondary" onclick="examReturn314()">返回题库</button><button class="submit315" onclick="submitExam315()">${st.submitted?'看批改':'交卷'}</button><button class="secondary" onclick="downloadPDF352(event)">PDF</button><button class="secondary" onclick="downloadJPEG352(event)">JPEG</button></div><div class="exam315Info noPrint"><span id="examProgress315">${st.submitted?`本次已交 ${answeredCount} 题 · 选择题 ${correct}/${choiceAnswered.length||0}`:`已完成 ${p.done}/${p.total} · 自动保存`}</span><span>${st.submitted?'未作答题会自动保留到后续':'可随时交卷，不要求一次做完全部'}</span></div><div class="printSheet exam314 exam315 ${st.submitted?'submitted315':''}"><h1 class="exam315Title">${esc(st.title)}</h1><div class="exam315Meta">模拟试卷 · ${new Date(st.createdAt).toLocaleDateString('zh-CN')}</div>${st.submitted?`<div class="exam400Notice">本次只批改已经作答的题。空白题不会判错，会继续保留到下一批。</div>`:''}${choices?`<div class="exam315Section">第一部分　选择题</div>${choices}`:''}${texts?`<div class="exam315Section">第二部分　简答 / 论述题</div>${texts}`:''}${others?`<div class="exam315Section">第三部分　其他题型</div>${others}`:''}</div><div class="exam315Finish noPrint">${st.submitted?`<button class="secondary" onclick="toggleWrongOnly315()">仅看错题</button><button class="primary" onclick="nextBatch400()">继续后续题目</button>`:`<button class="primary" onclick="submitExam315()">本次交卷并批改已作答题</button>`}</div>`;
     if(!st.submitted)setTimeout(scrollNext400,120);
   };
+})();
+</script>
+
+
+<style id="v401-ios-stability">
+/* ===== V4.0.1 iPhone：禁止自动放大 + 恢复可靠触控 ===== */
+html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}
+body{touch-action:pan-y!important}
+button,[role="button"],.primary,.secondary{touch-action:manipulation!important;-webkit-tap-highlight-color:transparent!important}
+input,textarea,select{font-size:16px!important;-webkit-text-size-adjust:100%!important}
+#examBuilderPage318{width:100vw!important;max-width:100vw!important;left:0!important;right:0!important;transform:none!important;zoom:1!important}
+#examBuilderPage318 .eb318Shell{width:100%!important;max-width:720px!important;min-width:0!important;overflow:hidden!important}
+#examBuilderPage318 .eb318Scroll{width:100%!important;min-width:0!important}
+#examBuilderPage318 .eb318Book{min-width:0!important}
+#examBuilderPage318 .eb318Book>div{min-width:0!important}
+#examBuilderPage318 .eb400ModeBtn{font-size:16px!important;min-height:46px!important;max-width:158px!important;white-space:nowrap!important}
+#examBankTop362{position:relative!important;z-index:2!important;overflow:hidden!important}
+#examBankTop362 .row{min-width:0!important}
+#examBankTop362 .row>div{min-width:0!important}
+#examBankTop362 button{position:relative!important;z-index:4!important;pointer-events:auto!important;touch-action:manipulation!important}
+/* 任何历史遗留的隐藏遮罩都不能挡住题库按钮 */
+#modal:not(.on){display:none!important;pointer-events:none!important}
+#examBuilderPage318:not(.on){display:none!important;pointer-events:none!important}
+</style>
+<script id="v401-ios-touch-fix">
+(function(){
+  function hardResetZoom401(){
+    try{document.activeElement && document.activeElement.blur && document.activeElement.blur()}catch(e){}
+    document.documentElement.style.zoom='1';
+    document.body.style.zoom='1';
+    document.documentElement.style.transform='none';
+    document.body.style.transform='none';
+    window.scrollTo({left:0,top:window.scrollY||0,behavior:'auto'});
+  }
+  window.addEventListener('pageshow',()=>setTimeout(hardResetZoom401,0));
+  window.addEventListener('orientationchange',()=>setTimeout(hardResetZoom401,120));
+
+  function forceOpenBuilder401(){
+    try{
+      hardResetZoom401();
+      // 先彻底释放旧版 modal/body 锁，避免透明层吞掉点击。
+      document.body.classList.remove('examBuilderLock317','editing3612');
+      document.body.style.top='';
+      const old=document.getElementById('modal');
+      if(old && !old.classList.contains('on')) old.style.pointerEvents='none';
+      if(typeof window.openExamBuilderV35!=='function') throw new Error('组卷函数未加载');
+      window.openExamBuilderV35();
+      const page=document.getElementById('examBuilderPage318');
+      if(page){page.style.pointerEvents='auto';page.classList.add('on')}
+    }catch(err){
+      console.error('V4.0.1 open builder failed',err);
+      alert('组卷页面打开失败：'+(err?.message||err));
+    }
+  }
+
+  // 不再只依赖 inline onclick；在捕获阶段直接处理 iPhone tap。
+  let lastTap401=0;
+  document.addEventListener('touchend',function(e){
+    const btn=e.target.closest?.('#examBankTop362 button');
+    if(!btn)return;
+    e.preventDefault();e.stopPropagation();
+    lastTap401=Date.now();
+    forceOpenBuilder401();
+  },{capture:true,passive:false});
+  document.addEventListener('click',function(e){
+    const btn=e.target.closest?.('#examBankTop362 button');
+    if(!btn)return;
+    if(Date.now()-lastTap401<700){e.preventDefault();e.stopPropagation();return}
+    e.preventDefault();e.stopPropagation();
+    forceOpenBuilder401();
+  },true);
+
+  // 组卷页返回/关闭/生成同样走委托，避免 DOM 重绘后监听丢失。
+  let lastBuilderTap401=0;
+  function builderAction401(el){
+    if(el?.id==='eb318Back'||el?.id==='eb318Close'){
+      try{window.closeExamBuilder318?.()}catch(e){console.error(e)}
+      setTimeout(hardResetZoom401,0);return;
+    }
+    if(el?.id==='eb318Generate'){
+      try{window.generateExam318?.()}catch(e){console.error(e);alert('无法生成试卷：'+(e?.message||e))}
+    }
+  }
+  document.addEventListener('touchend',function(e){
+    const el=e.target.closest?.('#eb318Back,#eb318Close,#eb318Generate');
+    if(!el)return;
+    e.preventDefault();e.stopPropagation();lastBuilderTap401=Date.now();builderAction401(el);
+  },{capture:true,passive:false});
+  document.addEventListener('click',function(e){
+    const el=e.target.closest?.('#eb318Back,#eb318Close,#eb318Generate');
+    if(!el)return;
+    if(Date.now()-lastBuilderTap401<700){e.preventDefault();e.stopPropagation();return}
+    e.preventDefault();e.stopPropagation();builderAction401(el);
+  },true);
+
+  // 输入框结束编辑后立刻恢复 1:1，避免 iOS 键盘收起后页面残留放大。
+  document.addEventListener('focusout',function(e){
+    if(e.target.matches?.('input,textarea,select'))setTimeout(hardResetZoom401,80);
+  },true);
+
+  // 确保首页/设置页展示的版本号同步。
+  function syncVersion401(){
+    document.querySelectorAll('.versionBadge,[data-version],.ver').forEach(el=>{
+      if(/^V?3\.|^V?4\.0$/.test((el.textContent||'').trim())) el.textContent='V4.0.1';
+    });
+  }
+  setTimeout(syncVersion401,0);
 })();
 </script>
 
