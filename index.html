@@ -8264,4 +8264,117 @@ input,textarea,select{font-size:16px!important;-webkit-text-size-adjust:100%!imp
 #examBankTop402 button{position:relative;z-index:4;pointer-events:auto!important;touch-action:manipulation!important;-webkit-tap-highlight-color:transparent}
 </style>
 
+
+<style id="v440-final-stability-css">
+/* V4.4 final stability patch: the builder itself owns vertical scrolling. */
+#examBuilder440{pointer-events:auto!important;touch-action:pan-y!important;overscroll-behavior:none!important}
+#examBuilder440 .eb440Shell{pointer-events:auto!important;touch-action:pan-y!important}
+#examBuilder440 .eb440Main{overflow-y:scroll!important;-webkit-overflow-scrolling:touch!important;touch-action:pan-y!important;overscroll-behavior-y:contain!important}
+#examBuilder440 .eb440Foot,#examBuilder440 .eb440Head{pointer-events:auto!important}
+#examBuilder440 button,#examBuilder440 input{pointer-events:auto!important;touch-action:manipulation!important}
+body.eb440Open{overflow:hidden!important;position:static!important;top:auto!important;touch-action:none!important}
+body.eb440Open #examBuilder440,body.eb440Open #examBuilder440 .eb440Main{touch-action:pan-y!important}
+</style>
+<script id="v440-final-stability-js">
+(function(){
+  'use strict';
+  const CFG='wrongbook_exam_v440_config', DONE='wrongbook_exam_v400_done';
+  const baseOpen=window.openExamBuilder440;
+  let busy=false, openToken=0;
+  const jread=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k)||'null');return v??d}catch(e){return d}};
+  const jwrite=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){console.error(e);return false}};
+  const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+  const cat=q=>window.examCat440?window.examCat440(q):((q?.options||q?.opts||[]).length>1?'choice':'other');
+  const bid=q=>String(typeof bookIdOf==='function'?(bookIdOf(q)??''):(q?.bookId??q?.book??''));
+  const sid=(q,i)=>String(q?.__v440SourceId||q?.id||q?.qid||q?.uuid||('anon_'+bid(q)+'_'+i+'_'+String(q?.text||q?.question||'').slice(0,60)));
+  const answer=q=>{try{return typeof ans343==='function'?(ans343(q)||''):(q?.answer||q?.ans||'')}catch(e){return q?.answer||q?.ans||''}};
+  const opts=q=>{try{return typeof opts35==='function'?(opts35(q)||[]):(q?.options||q?.opts||[]).map((x,i)=>({text:typeof x==='string'?x:(x?.text||x?.label||''),orig:i}))}catch(e){return (q?.options||q?.opts||[]).map((x,i)=>({text:typeof x==='string'?x:(x?.text||x?.label||''),orig:i}))}};
+  const correctIndex=(q,o)=>{try{return typeof ci35==='function'?ci35(q,o):-1}catch(e){return -1}};
+
+  function hardUnlock(){
+    document.body.classList.remove('examBuilderLock317','eb318Open','editing3612','eb440Open');
+    document.body.style.top='';document.body.style.position='';document.body.style.overflow='';
+    const legacy=document.getElementById('examBuilderPage318');if(legacy)legacy.classList.remove('on');
+    const modal=document.getElementById('modal');if(modal&&!modal.classList.contains('on')){modal.style.pointerEvents='none';modal.classList.remove('examBuilder317')}
+  }
+  function saveCfg(){
+    const modes={};document.querySelectorAll('#examBuilder440 .eb440Mode').forEach(b=>modes[String(b.dataset.book||'')]=b.dataset.mode||'none');
+    const val=id=>Math.max(0,Math.floor(Number(document.getElementById(id)?.value||0)||0));
+    const cfg={modes,choiceN:val('eb440ChoiceN'),textN:val('eb440TextN'),otherN:val('eb440OtherN')};jwrite(CFG,cfg);return cfg;
+  }
+  function makeState(){
+    const cfg=saveCfg(), selected=[];
+    document.querySelectorAll('#examBuilder440 .eb440Mode').forEach(b=>{const m=b.dataset.mode||'none';if(m!=='none')selected.push({book:String(b.dataset.book||''),mode:m})});
+    if(!selected.length)throw new Error('请先选择至少一本错题本。');
+    const sm=new Map(selected.map(x=>[x.book,x.mode]));
+    const done=new Set(jread(DONE,[]).map(String));
+    let ch=[],tx=[],ot=[];
+    const names=[];
+    const books=Array.isArray(D?.books)?D.books:[];
+    selected.forEach(x=>{const b=books.find(v=>String(v.id??'')===x.book);names.push(b?.name||b?.title||'错题本')});
+    const all=Array.isArray(D?.qs)?D.qs:[];
+    for(let i=0;i<all.length;i++){
+      const q=all[i], mode=sm.get(bid(q));if(!mode)continue;
+      const source=sid(q,i);if(done.has(source))continue;
+      const c=cat(q);
+      if(mode==='choice'&&c!=='choice')continue;
+      if(mode==='text'&&!(c==='short'||c==='essay'))continue;
+      if(mode==='other'&&c!=='other')continue;
+      if(c==='choice')ch.push([q,source]);else if(c==='short'||c==='essay')tx.push([q,source,c]);else ot.push([q,source]);
+    }
+    ch=shuffle(ch);tx=shuffle(tx);ot=shuffle(ot);
+    if(cfg.choiceN>0)ch=ch.slice(0,cfg.choiceN);else ch=[];
+    if(cfg.textN>0)tx=tx.slice(0,cfg.textN);else tx=[];
+    if(cfg.otherN>0)ot=ot.slice(0,cfg.otherN);else ot=[];
+    if(!ch.length&&!tx.length&&!ot.length)throw new Error('当前选择范围没有可抽取题目。请检查题型、数量，或已完成记录。');
+    const stamp=Date.now();
+    const choiceItems=ch.map(([q,source],i)=>{const o=opts(q),ci=correctIndex(q,o),m=shuffle(o),ni=m.findIndex(x=>x.orig===ci);return {id:'v440s_'+source+'_'+stamp+'_'+i,sourceId:source,bookId:bid(q),text:q?.text||q?.question||'',options:m.map(x=>x.text??x),correctLetter:ni>=0?'ABCD'[ni]:'',answer:answer(q)}});
+    const textItems=tx.map(([q,source,c],i)=>({id:'v440s_'+source+'_t'+stamp+'_'+i,sourceId:source,bookId:bid(q),text:q?.text||q?.question||'',type:c,answer:answer(q)}));
+    const otherItems=ot.map(([q,source],i)=>({id:'v440s_'+source+'_o'+stamp+'_'+i,sourceId:source,bookId:bid(q),text:q?.text||q?.question||'',type:'other',answer:answer(q)}));
+    return {version:400,bid:'custom',title:names.length===1?names[0]+'随机复习卷':'综合错题随机复习卷',choiceItems,textItems,otherItems,userAnswers:{},createdAt:stamp,updatedAt:stamp,submitted:false};
+  }
+  function persist(st){
+    try{localStorage.setItem('wrongbook_active_exam_v316',JSON.stringify(st));localStorage.setItem('wrongbook_active_exam_v315',JSON.stringify(st))}catch(e){console.error('exam persist failed',e)}
+  }
+  function closeBuilder(){
+    const el=document.getElementById('examBuilder440');if(el){el.classList.remove('on');el.setAttribute('aria-hidden','true')}
+    hardUnlock();busy=false;
+  }
+  function stableGenerate(ev){
+    ev?.preventDefault?.();ev?.stopPropagation?.();if(busy)return;busy=true;
+    const btn=document.getElementById('eb440Generate'),st=document.getElementById('eb440Status');
+    if(btn){btn.disabled=true;btn.textContent='正在生成…'}if(st)st.textContent='正在整理题目…';
+    const watchdog=setTimeout(()=>{if(!busy)return;busy=false;if(btn){btn.disabled=false;btn.textContent='生成新试卷'}if(st)st.textContent='生成超时，请再点一次';console.error('V4.4 generation watchdog timeout')},5000);
+    try{
+      const state=makeState();
+      clearTimeout(watchdog);
+      examState314=state;persist(state);closeBuilder();
+      if(typeof window.renderExam315==='function')window.renderExam315();else if(typeof renderExam315==='function')renderExam315();else throw new Error('试卷显示模块未加载');
+      window.scrollTo(0,0);
+    }catch(e){
+      clearTimeout(watchdog);busy=false;if(btn){btn.disabled=false;btn.textContent='生成新试卷'}if(st)st.textContent=String(e?.message||e);console.error('V4.4 stable generate failed',e);alert('无法生成试卷：'+(e?.message||e));
+    }
+  }
+  function replaceGenerateButton(){
+    const old=document.getElementById('eb440Generate');if(!old)return;
+    const fresh=old.cloneNode(true);fresh.disabled=false;fresh.textContent='生成新试卷';old.replaceWith(fresh);fresh.addEventListener('click',stableGenerate,{passive:false});
+    const st=document.getElementById('eb440Status');if(st)st.textContent='';
+  }
+  function stableOpen(ev){
+    hardUnlock();busy=false;openToken++;
+    if(typeof baseOpen==='function')baseOpen(ev);
+    else throw new Error('V4.4组卷面板未加载');
+    replaceGenerateButton();
+    const main=document.getElementById('eb440Main');if(main){main.style.overflowY='scroll';main.style.webkitOverflowScrolling='touch';main.scrollTop=0}
+    document.body.classList.add('eb440Open');
+  }
+  window.openExamBuilder440=stableOpen;
+  window.openExamBuilderV35=stableOpen;
+  window.generateExam440=stableGenerate;
+  window.closeExamBuilder440=closeBuilder;
+  window.nextBatch400=function(){try{localStorage.removeItem('wrongbook_active_exam_v316');localStorage.removeItem('wrongbook_active_exam_v315')}catch(e){}examState314=null;document.body.classList.remove('examMode315','wrongOnly315');try{page('bank')}catch(e){}setTimeout(()=>stableOpen(),20)};
+  document.addEventListener('DOMContentLoaded',()=>{hardUnlock();const b=document.getElementById('examOpen440');if(b)b.onclick=stableOpen},{once:true});
+})();
+</script>
+
 </body></html>
