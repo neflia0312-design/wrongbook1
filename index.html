@@ -1121,9 +1121,9 @@ body.qEditLock393{
 </div>
 <div class="section">题库</div><input class="search" id="search" oninput="renderBank()" placeholder="搜索题目 / 知识点"/><div id="bankList"></div></section>
 <section class="page" id="mind"><div id="mindArea36"></div></section><section class="page" id="reader"><div id="readerArea"></div></section><section class="page" id="study"><div id="studyArea"></div></section>
-<section class="page" id="set"><div class="note updateNote">V3.11 起：主屏幕版固定安装一次即可。以后 GitHub 上传新版后，直接打开原来的主屏幕「错题本」，App 会自动检查并切换到最新版本；题库、封面、学习进度继续使用原来的 IndexedDB，不需要重新添加主屏幕或重新导入备份。</div><div class="section">设置</div>
+<section class="page" id="set"><div class="note updateNote">V4.5：题库、框架和学习进度继续保存在本机 IndexedDB。需要在 iPhone / iPad 间同步时，使用“导出全部备份”生成当前完整快照，再在另一台设备选择“恢复完整备份”。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V4.0.2 模拟考试·分批作答版。主屏幕名称固定为「错题本」。本版本加入 PWA 固定安装、启动自动检查更新和网络优先更新策略；数据库名称保持不变，升级网页代码不会重建题库。</p>
+<p class="small">当前版本：V4.5。题库继续使用原 IndexedDB。V4.5 的“全部备份”会在点击导出时即时读取当前全部错题本、全部题目、L1/L2 框架、学习进度以及独立封面，并生成可直接在另一台设备恢复的完整 JSON。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -1132,8 +1132,8 @@ body.qEditLock393{
 <div id="appearanceRecoveryResults" style="margin-top:8px"></div>
 </div>
 <div class="card"><b>数据管理</b>
-<p class="small">V3.11.0 起，题库本体使用 IndexedDB 大容量数据库保存，不再受 localStorage 小容量限制。“恢复完整备份”会用备份替换当前题库；“批量追加题目”只追加题目，不覆盖其他错题本。</p>
-<div class="row"><button class="secondary" onclick="exportData()">导出备份</button><button class="secondary" onclick="$('imp').click()">恢复完整备份</button></div>
+<p class="small">题库本体使用 IndexedDB 大容量数据库保存。“导出全部备份”每次都会按当前最新数据重新生成；文件名自动按当前版本命名，例如 V4.5全部备份.json。恢复后可一次同步题目、答案、L1/L2 框架、学习进度和封面到 iPad。</p>
+<div class="row"><button class="secondary" onclick="exportData()">导出全部备份</button><button class="secondary" onclick="$('imp').click()">恢复完整备份</button></div>
 <button class="primary" onclick="$('appendImp').click()" style="width:100%;margin-top:10px">批量追加题目</button>
 </div></section>
 </main>
@@ -1695,7 +1695,62 @@ function rate(qid,g){
   q.next=day()+iv[g];g?q.right++:q.wrong++;save();
   drawMem();
 }
-function exportData(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(D,null,2)],{type:'application/json'}));a.download='错题本V3.2.2备份.json';a.click()}
+async function exportData(){
+  const btn=document.querySelector('button[onclick="exportData()"]');
+  const oldText=btn?.textContent||'';
+  try{
+    if(btn){btn.disabled=true;btn.textContent='正在整理全部数据…'}
+    // D 是当前页面最新内存数据；先把最新修改写入 IndexedDB，再以 D 为主快照。
+    try{await wbPersistNow310()}catch(e){console.warn('V4.5 backup persist warning',e)}
+    const snap={
+      books:JSON.parse(JSON.stringify(Array.isArray(D?.books)?D.books:[])),
+      qs:JSON.parse(JSON.stringify(Array.isArray(D?.qs)?D.qs:[]))
+    };
+    // 框架 L1/L2 本来就保存在题目对象里。这里保留完整题目对象，不做裁剪。
+    const covers={};
+    if(typeof coverGet395==='function'){
+      for(const b of snap.books){
+        try{
+          const blob=await coverGet395(b.id);
+          if(blob){covers[String(b.id)]=await blobToDataURL450(blob)}
+        }catch(e){console.warn('cover export failed',b?.id,e)}
+      }
+    }
+    const frameworkCount=snap.qs.filter(q=>
+      (Array.isArray(q.frameworkL1)?q.frameworkL1.length:String(q.frameworkL1||'').trim()) ||
+      (Array.isArray(q.frameworkL2)?q.frameworkL2.length:String(q.frameworkL2||'').trim())
+    ).length;
+    const payload={
+      type:'wrongbook_full_backup',
+      schemaVersion:2,
+      appVersion:typeof APP_VERSION!=='undefined'?String(APP_VERSION):'4.5',
+      exportedAt:new Date().toISOString(),
+      summary:{bookCount:snap.books.length,questionCount:snap.qs.length,frameworkCount,coverCount:Object.keys(covers).length},
+      books:snap.books,
+      qs:snap.qs,
+      covers
+    };
+    const ver='V'+(typeof APP_VERSION!=='undefined'?String(APP_VERSION):'4.5').replace(/^v/i,'');
+    const filename=`${ver}全部备份.json`;
+    const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'}));
+    const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1500);
+    if(btn)btn.textContent=`已导出 ${snap.qs.length} 题`;
+    setTimeout(()=>{if(btn){btn.disabled=false;btn.textContent=oldText||'导出全部备份'}},1200);
+  }catch(e){
+    console.error('V4.5 full backup export failed',e);
+    if(btn){btn.disabled=false;btn.textContent=oldText||'导出全部备份'}
+    alert('导出全部备份失败：'+(e?.message||e));
+  }
+}
+function blobToDataURL450(blob){
+  return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(String(r.result||''));r.onerror=()=>reject(r.error||new Error('封面读取失败'));r.readAsDataURL(blob)});
+}
+function dataURLToBlob450(data){
+  const m=String(data||'').match(/^data:([^;,]+)?(;base64)?,(.*)$/s);if(!m)return null;
+  const mime=m[1]||'application/octet-stream',body=m[3]||'';
+  const bytes=m[2]?atob(body):decodeURIComponent(body);const arr=new Uint8Array(bytes.length);for(let i=0;i<bytes.length;i++)arr[i]=bytes.charCodeAt(i);return new Blob([arr],{type:mime});
+}
 
 
 
@@ -1900,17 +1955,34 @@ function normalizeImportedData(raw){
 }
 function importBackupFile(file){
   const r=new FileReader();
-  r.onload=()=>{
+  r.onload=async()=>{
     try{
       const raw=JSON.parse(r.result);
       const converted=normalizeImportedData(raw);
-      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份：${converted.books.length} 本 / ${converted.qs.length} 道题\n继续将替换当前题库。确定吗？`))return;
+      const fwCount=converted.qs.filter(q=>
+        (Array.isArray(q.frameworkL1)?q.frameworkL1.length:String(q.frameworkL1||'').trim()) ||
+        (Array.isArray(q.frameworkL2)?q.frameworkL2.length:String(q.frameworkL2||'').trim())
+      ).length;
+      const coverCount=raw?.covers&&typeof raw.covers==='object'?Object.keys(raw.covers).length:0;
+      if(!confirm(`这是“完整备份恢复”。\n当前：${D.books.length} 本错题本 / ${D.qs.length} 道题\n备份：${converted.books.length} 本 / ${converted.qs.length} 道题 / ${fwCount} 道框架${coverCount?` / ${coverCount} 张封面`:''}\n继续将替换当前题库。确定吗？`))return;
       D=converted;
-      persistCompat310();
+      await wbPersistNow310();
+      // V4.5 全部备份可携带独立 IndexedDB 封面；旧备份没有 covers 时保持兼容。
+      if(raw?.covers&&typeof raw.covers==='object'&&typeof coverPut395==='function'){
+        try{
+          const db=await coverDb395();
+          await new Promise((resolve,reject)=>{const tx=db.transaction(COVER_STORE_395,'readwrite');tx.objectStore(COVER_STORE_395).clear();tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error)});
+          for(const [bookId,data] of Object.entries(raw.covers)){
+            const blob=dataURLToBlob450(data);if(blob)await coverPut395(bookId,blob);
+          }
+        }catch(e){console.warn('V4.5 cover restore warning',e)}
+      }
+      wbPrimeSignatures310?.();
       render();
       if(typeof renderV3Books==='function')renderV3Books();
+      if(typeof hydrateCoverImages395==='function')await hydrateCoverImages395();
       if(typeof updateDataStatus==='function')updateDataStatus();
-      alert(`恢复成功：${D.books.length} 本错题本，${D.qs.length} 道题。`);
+      alert(`恢复成功：${D.books.length} 本错题本，${D.qs.length} 道题，${fwCount} 道已录框架。`);
     }catch(err){alert('恢复失败：'+(err?.message||'无法识别备份文件'))}
   };
   r.readAsText(file);
