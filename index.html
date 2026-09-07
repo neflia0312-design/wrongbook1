@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="错题本">
-<meta name="wrongbook-version" content="4.0.3">
+<meta name="wrongbook-version" content="4.4">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
 
@@ -957,9 +957,203 @@ body.qEditLock393{
 <link rel="apple-touch-icon" href="./icon.png?v=32">
 <link rel="icon" href="./icon.png?v=32">
 
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<style id="v440-exam-builder-style">
+/* ===== V4.4 stable exam builder: isolated IDs, one scroll container, no legacy modal/touch capture ===== */
+#examBuilder440{position:fixed;inset:0;z-index:2147483600;display:none;background:var(--bg,#f7f6f2);width:100%;height:100dvh;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+#examBuilder440.on{display:block}
+#examBuilder440 *{box-sizing:border-box}
+#examBuilder440 .eb440Shell{height:100dvh;max-width:720px;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;background:var(--bg,#f7f6f2)}
+#examBuilder440 .eb440Head{flex:0 0 auto;display:grid;grid-template-columns:94px 1fr 54px;align-items:center;gap:8px;padding:calc(14px + env(safe-area-inset-top)) 18px 12px;border-bottom:1px solid var(--line,#e2dfd8);background:rgba(247,246,242,.98)}
+#examBuilder440 .eb440Head b{text-align:center;font-size:20px}
+#examBuilder440 .eb440Head button{min-height:48px;border:0;border-radius:16px;background:#eeede8;font-size:16px;font-weight:800;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#examBuilder440 .eb440Close{font-size:27px!important;padding:0!important}
+#examBuilder440 .eb440Main{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;padding:18px 18px 24px}
+#examBuilder440 .eb440Title{font-size:14px;color:var(--mut,#8b877e);font-weight:800;margin:4px 0 12px}
+#examBuilder440 .eb440Book{background:#fff;border:1px solid var(--line,#dfdcd5);border-radius:20px;padding:16px;margin-bottom:12px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px}
+#examBuilder440 .eb440Book>div{min-width:0}
+#examBuilder440 .eb440Book b{display:block;font-size:18px;margin-bottom:5px;overflow-wrap:anywhere}
+#examBuilder440 .eb440Meta{font-size:13px;color:var(--mut,#8b877e);line-height:1.45}
+#examBuilder440 .eb440Mode{border:0;min-width:118px;max-width:158px;min-height:48px;border-radius:15px;padding:10px 12px;background:#efede8;color:#20201e;font-size:15px;font-weight:800;white-space:nowrap;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#examBuilder440 .eb440Counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 14px}
+#examBuilder440 .eb440Counts label{margin:0;font-size:13px;color:var(--mut,#8b877e)}
+#examBuilder440 .eb440Counts input{width:100%;margin-top:6px;min-height:52px;padding:10px;border-radius:14px;background:#fff;font-size:16px!important}
+#examBuilder440 .eb440Note{padding:13px 14px;border-radius:16px;background:#efede8;color:#777268;font-size:12.5px;line-height:1.6;margin-bottom:12px}
+#examBuilder440 .eb440Resume{background:#fff;border:1px solid var(--line,#dfdcd5);border-radius:18px;padding:14px;margin-bottom:16px}
+#examBuilder440 .eb440Resume button{width:100%;min-height:48px;margin-top:9px}
+#examBuilder440 .eb440Foot{flex:0 0 auto;padding:11px 18px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line,#e2dfd8);background:rgba(247,246,242,.98)}
+#examBuilder440 .eb440Generate{width:100%;min-height:58px;border:0;border-radius:18px;background:#20201e;color:white;font-size:18px;font-weight:850;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#examBuilder440 .eb440Generate:disabled{opacity:.55}
+#examBuilder440 .eb440Status{min-height:20px;text-align:center;font-size:12px;color:var(--mut,#8b877e);padding-top:5px}
+body.eb440Open{overflow:hidden!important}
+@media(max-width:480px){#examBuilder440 .eb440Head{grid-template-columns:88px 1fr 52px}#examBuilder440 .eb440Book{padding:14px}#examBuilder440 .eb440Mode{min-width:112px;font-size:14px}.eb440Counts{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+</style>
+<script id="v440-exam-builder">
+(function(){
+  'use strict';
+  const CFG440='wrongbook_exam_v440_config';
+  const DONE440='wrongbook_exam_v400_done'; // retain prior completed-question history
+  const labels440={none:'不加入',all:'全部题型',choice:'仅选择题',text:'仅简答/论述',other:'仅其他题型'};
+  const order440=['none','all','choice','text','other'];
+  let generating440=false;
+  let indexed440=null;
+
+  function read440(k,d){try{const v=JSON.parse(localStorage.getItem(k)||'null');return v??d}catch(e){return d}}
+  function write440(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){console.error('V4.4 localStorage write failed',e);return false}}
+  function cat440(q){
+    const t=String(q?.type||'').toLowerCase();
+    const tag=String(q?.tag||q?.category||'').toLowerCase();
+    let os=[];try{os=typeof opts35==='function'?(opts35(q)||[]):(q?.options||q?.opts||[])}catch(e){os=q?.options||q?.opts||[]}
+    if(/choice|选择/.test(t)||/选择题/.test(tag)||os.length>1)return 'choice';
+    if(/essay|论述/.test(t)||/论述/.test(tag))return 'essay';
+    if(/short|简答/.test(t)||/简答/.test(tag))return 'short';
+    // Historical imports sometimes used type="text" while tag carried the actual question class.
+    if(t==='text' && /论述/.test(tag))return 'essay';
+    if(t==='text' && /简答/.test(tag))return 'short';
+    return 'other';
+  }
+  window.examCat440=cat440;
+  // Improve categorization for the rest of the exam system too, without touching stored data.
+  window.examCat316=cat440;
+
+  function sourceId440(q,i){
+    const id=q?.id ?? q?.qid ?? q?.uuid;
+    if(id!==undefined && id!==null && String(id)!=='')return String(id);
+    const bid=String((typeof bookIdOf==='function'?bookIdOf(q):q?.bookId)??'');
+    return 'anon_'+bid+'_'+i+'_'+String(q?.text||q?.question||'').slice(0,80);
+  }
+  function buildIndex440(){
+    const byBook=new Map(), stats=new Map();
+    const books=Array.isArray(D?.books)?D.books:[];
+    books.forEach(b=>{const k=String(b.id??'');byBook.set(k,[]);stats.set(k,{all:0,choice:0,text:0,other:0})});
+    (Array.isArray(D?.qs)?D.qs:[]).forEach((q,i)=>{
+      const bid=String((typeof bookIdOf==='function'?bookIdOf(q):q?.bookId)??'');
+      if(!byBook.has(bid)){byBook.set(bid,[]);stats.set(bid,{all:0,choice:0,text:0,other:0})}
+      q.__v440SourceId=sourceId440(q,i);
+      byBook.get(bid).push(q);
+      const s=stats.get(bid),c=cat440(q);s.all++;if(c==='choice')s.choice++;else if(c==='short'||c==='essay')s.text++;else s.other++;
+    });
+    indexed440={byBook,stats,books};return indexed440;
+  }
+  function ensure440(){
+    let el=document.getElementById('examBuilder440');
+    if(el)return el;
+    el=document.createElement('section');el.id='examBuilder440';el.setAttribute('aria-hidden','true');
+    el.innerHTML='<div class="eb440Shell"><div class="eb440Head"><button type="button" id="eb440Back">‹ 返回</button><b>生成随机试卷</b><button type="button" class="eb440Close" id="eb440Close">×</button></div><main class="eb440Main" id="eb440Main"></main><footer class="eb440Foot"><button type="button" class="eb440Generate" id="eb440Generate">生成新试卷</button><div class="eb440Status" id="eb440Status"></div></footer></div>';
+    document.body.appendChild(el);
+    el.querySelector('#eb440Back').addEventListener('click',close440,{passive:true});
+    el.querySelector('#eb440Close').addEventListener('click',close440,{passive:true});
+    el.querySelector('#eb440Generate').addEventListener('click',generate440);
+    return el;
+  }
+  function close440(){
+    const el=document.getElementById('examBuilder440');if(el){el.classList.remove('on');el.setAttribute('aria-hidden','true')}
+    document.body.classList.remove('eb440Open');
+    generating440=false;
+  }
+  window.closeExamBuilder440=close440;
+
+  function cfg440(){return read440(CFG440,{modes:{},choiceN:20,textN:3,otherN:0})}
+  function setMode440(btn,mode){
+    const st=btn.dataset.stats?JSON.parse(btn.dataset.stats):{choice:0,text:0,other:0};
+    if(mode==='other'&&!st.other)mode='none';
+    btn.dataset.mode=mode;btn.textContent=labels440[mode]||labels440.none;
+  }
+  function cycle440(btn){
+    const st=JSON.parse(btn.dataset.stats||'{}');let allowed=['none','all'];if(st.choice)allowed.push('choice');if(st.text)allowed.push('text');if(st.other)allowed.push('other');
+    let i=allowed.indexOf(btn.dataset.mode);setMode440(btn,allowed[(i+1+allowed.length)%allowed.length]);
+  }
+  function saveCfg440(){
+    const modes={};document.querySelectorAll('#examBuilder440 .eb440Mode').forEach(b=>modes[String(b.dataset.book||'')]=b.dataset.mode||'none');
+    const val=id=>Math.max(0,Math.floor(Number(document.getElementById(id)?.value||0)||0));
+    const c={modes,choiceN:val('eb440ChoiceN'),textN:val('eb440TextN'),otherN:val('eb440OtherN')};write440(CFG440,c);return c;
+  }
+  function progress440(st){try{return typeof examProgress315==='function'?examProgress315(st):{done:0,total:0}}catch(e){return {done:0,total:0}}}
+  function open440(ev){
+    try{
+      ev?.preventDefault?.();ev?.stopPropagation?.();document.activeElement?.blur?.();
+      // Release all historical exam overlays/locks. They are never reused in V4.4.
+      document.body.classList.remove('examBuilderLock317','eb318Open','editing3612');document.body.style.top='';
+      const old=document.getElementById('examBuilderPage318');if(old)old.classList.remove('on');
+      const modal=document.getElementById('modal');if(modal){modal.classList.remove('examBuilder317');if(!modal.classList.contains('on'))modal.style.pointerEvents='none'}
+      const el=ensure440(),main=el.querySelector('#eb440Main'),cfg=cfg440(),idx=buildIndex440();
+      let resume='';
+      try{const oldExam=typeof loadExam315==='function'?loadExam315():null,p=progress440(oldExam);if(oldExam&&!oldExam.submitted&&p.total){resume='<div class="eb440Resume"><b>上次试卷还没做完</b><div class="small" style="margin-top:4px">'+esc(oldExam.title||'随机试卷')+' · 已完成 '+p.done+'/'+p.total+'</div><button class="primary" type="button" id="eb440Resume">继续上次试卷</button></div>'}}catch(e){}
+      const rows=idx.books.map((b,i)=>{
+        const bid=String(b.id??''),st=idx.stats.get(bid)||{all:0,choice:0,text:0,other:0};let mode=cfg.modes?.[bid];
+        if(!mode)mode=i===1&&idx.books.length>1?'choice':'none';
+        const statsJson=esc(JSON.stringify(st));
+        return '<div class="eb440Book"><div><b>'+esc(b.name||b.title||('错题本 '+(i+1)))+'</b><div class="eb440Meta">'+st.all+'题 · 选择'+st.choice+' · 简答/论述'+st.text+(st.other?' · 其他'+st.other:'')+'</div></div><button type="button" class="eb440Mode" data-book="'+esc(bid)+'" data-mode="'+esc(mode)+'" data-stats="'+statsJson+'"></button></div>';
+      }).join('');
+      main.innerHTML=resume+'<div class="eb440Title">按错题本选择本次组卷内容</div>'+(rows||'<div class="eb440Note">目前没有错题本或题目。</div>')+'<div class="eb440Title" style="margin-top:20px">每次试卷题量</div><div class="eb440Counts"><label>选择题<input id="eb440ChoiceN" type="number" min="0" inputmode="numeric" value="'+(Number.isFinite(+cfg.choiceN)?+cfg.choiceN:20)+'"></label><label>简答/论述<input id="eb440TextN" type="number" min="0" inputmode="numeric" value="'+(Number.isFinite(+cfg.textN)?+cfg.textN:3)+'"></label><label>其他题型<input id="eb440OtherN" type="number" min="0" inputmode="numeric" value="'+(Number.isFinite(+cfg.otherN)?+cfg.otherN:0)+'"></label></div><div class="eb440Note">轻点右侧题型按钮循环切换。0 表示本次不抽取该类题。已交卷且已经作答的题会自动跳过；未作答题仍会保留到后续批次。</div>';
+      main.querySelectorAll('.eb440Mode').forEach(b=>{setMode440(b,b.dataset.mode||'none');b.addEventListener('click',()=>cycle440(b))});
+      const rb=main.querySelector('#eb440Resume');if(rb)rb.addEventListener('click',()=>{close440();try{resumeExam315();setTimeout(()=>window.scrollTo(0,0),0)}catch(e){console.error(e)}});
+      const btn=el.querySelector('#eb440Generate');btn.disabled=false;btn.textContent='生成新试卷';el.querySelector('#eb440Status').textContent='';
+      el.classList.add('on');el.setAttribute('aria-hidden','false');document.body.classList.add('eb440Open');
+      requestAnimationFrame(()=>{main.scrollTop=0});
+    }catch(e){console.error('V4.4 open builder failed',e);alert('组卷页面打开失败：'+(e?.message||e))}
+  }
+  window.openExamBuilder440=open440;
+  window.openExamBuilderV35=open440; // all historical entry points converge on one implementation
+
+  function pick440(){
+    const cfg=saveCfg440(),idx=indexed440||buildIndex440(),done=new Set(read440(DONE440,[]).map(String));let choices=[],texts=[],others=[],names=[];
+    document.querySelectorAll('#examBuilder440 .eb440Mode').forEach(btn=>{
+      const bid=String(btn.dataset.book||''),mode=btn.dataset.mode||'none';if(mode==='none')return;
+      const b=idx.books.find(x=>String(x.id??'')===bid);names.push(b?.name||b?.title||'错题本');
+      (idx.byBook.get(bid)||[]).forEach(q=>{
+        const sid=String(q.__v440SourceId||'');if(sid&&done.has(sid))return;
+        const c=cat440(q);if(mode==='choice'&&c!=='choice')return;if(mode==='text'&&!(c==='short'||c==='essay'))return;if(mode==='other'&&c!=='other')return;
+        if(c==='choice')choices.push(q);else if(c==='short'||c==='essay')texts.push(q);else others.push(q);
+      });
+    });
+    return {cfg,choices,texts,others,names};
+  }
+  function shuffled440(a){try{return typeof shuffle35==='function'?shuffle35(a):a.slice().sort(()=>Math.random()-.5)}catch(e){return a.slice()}}
+  function state440(){
+    const p=pick440();if(!p.names.length)throw new Error('请先选择至少一本错题本。');
+    let ch=shuffled440(p.choices),tx=shuffled440(p.texts),ot=shuffled440(p.others);
+    const cn=p.cfg.choiceN,tn=p.cfg.textN,on=p.cfg.otherN;if(cn>0)ch=ch.slice(0,cn);else ch=[];if(tn>0)tx=tx.slice(0,tn);else tx=[];if(on>0)ot=ot.slice(0,on);else ot=[];
+    if(!ch.length&&!tx.length&&!ot.length)throw new Error('当前选择范围没有可抽取题目。请检查题型选择、题量，或这些题是否已经完成。');
+    const stamp=Date.now();
+    const choiceItems=ch.map((q,i)=>{let o=[];try{o=opts35(q)||[]}catch(e){o=q.options||q.opts||[]}let ci=-1;try{ci=ci35(q,o)}catch(e){}const m=shuffled440(o),ni=m.findIndex(x=>x.orig===ci),sid=String(q.__v440SourceId||sourceId440(q,i));return {id:'v440_'+sid+'_'+stamp+'_'+i,sourceId:sid,bookId:(typeof bookIdOf==='function'?bookIdOf(q):q.bookId),text:q.text||q.question||'',options:m.map(x=>x.text??x),correctLetter:ni>=0?'ABCD'[ni]:'',answer:(typeof ans343==='function'?ans343(q):(q.answer||q.ans||''))||''}});
+    const textItems=tx.map((q,i)=>{const sid=String(q.__v440SourceId||sourceId440(q,i));return {id:'v440_'+sid+'_t'+stamp+'_'+i,sourceId:sid,bookId:(typeof bookIdOf==='function'?bookIdOf(q):q.bookId),text:q.text||q.question||'',type:cat440(q),answer:(typeof ans343==='function'?ans343(q):(q.answer||q.ans||''))||''}});
+    const otherItems=ot.map((q,i)=>{const sid=String(q.__v440SourceId||sourceId440(q,i));return {id:'v440_'+sid+'_o'+stamp+'_'+i,sourceId:sid,bookId:(typeof bookIdOf==='function'?bookIdOf(q):q.bookId),text:q.text||q.question||'',type:'other',answer:(typeof ans343==='function'?ans343(q):(q.answer||q.ans||''))||''}});
+    return {version:400,bid:'custom',title:p.names.length===1?p.names[0]+'随机复习卷':'综合错题随机复习卷',choiceItems,textItems,otherItems,userAnswers:{},createdAt:stamp,updatedAt:stamp,submitted:false};
+  }
+  function generate440(){
+    if(generating440)return;generating440=true;
+    const btn=document.getElementById('eb440Generate'),status=document.getElementById('eb440Status');if(btn){btn.disabled=true;btn.textContent='正在生成…'}if(status)status.textContent='正在整理题目…';
+    // Yield one frame so the disabled state paints before processing; prevents iOS looking frozen.
+    requestAnimationFrame(()=>setTimeout(()=>{
+      try{
+        const st=state440();examState314=st;if(typeof persistExam315==='function')persistExam315();
+        close440();
+        requestAnimationFrame(()=>{try{renderExam315();window.scrollTo({top:0,left:0,behavior:'auto'})}catch(e){console.error(e);alert('试卷生成后显示失败：'+(e?.message||e))}});
+      }catch(e){generating440=false;if(btn){btn.disabled=false;btn.textContent='生成新试卷'}if(status)status.textContent=String(e?.message||e);console.error('V4.4 generate failed',e)}
+    },0));
+  }
+  window.generateExam440=generate440;
+
+  // Version sync and stale-overlay cleanup.
+  function init440(){
+    document.querySelector('meta[name="wrongbook-version"]')?.setAttribute('content','4.4');
+    document.querySelectorAll('.versionBadge,[data-version],.ver').forEach(el=>{if(/^V?\d+\.\d+/.test((el.textContent||'').trim()))el.textContent='V4.4'});
+    const toast=document.getElementById('updateToast311');if(toast)toast.remove();
+    const old=document.getElementById('examBuilderPage318');if(old)old.classList.remove('on');
+    // Any legacy follow-up batch button must return to the V4.4 builder, never to older overlays.
+    window.nextBatch400=function(){
+      try{if(typeof clearExam315==='function')clearExam315()}catch(e){}
+      document.body.classList.remove('examMode315','wrongOnly315','eb318Open','examBuilderLock317');
+      try{if(typeof page==='function')page('bank')}catch(e){}
+      setTimeout(()=>open440(),40);
+    };
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init440,{once:true});else init440();
+})();
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
 <style id="v390style">
 .v390Continue{margin:10px 0;padding:10px 12px;border-radius:12px;background:#f2eeea;font-size:12px;color:#666;display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -1120,14 +1314,14 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V4.0.3</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img id="headerAppIcon" class="appMark" src="./icon.png?v=32" alt="错题本"><div><h1>错题本 <span class="versionBadge">V4.4</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section id="home" class="page on"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section id="bank" class="page">
 <div class="card noPrint" id="examBankTop402">
   <div class="row between">
     <div><b>生成试卷</b><div class="small">随机题序 · 随机选项 · PDF / JPEG / 打印</div></div>
-    <button class="primary" id="examOpen402" type="button" onclick="openExamBuilder402(event)">开始组卷</button>
+    <button class="primary" id="examOpen440" type="button" onclick="openExamBuilder440(event)">开始组卷</button>
   </div>
 </div>
 <div class="section">题库</div><input class="search" id="search" placeholder="搜索题目 / 知识点" oninput="renderBank()"><div id="bankList"></div></section>
@@ -2227,7 +2421,7 @@ async function turnV3(d){
   }
 }
 
-const APP_VERSION='4.0.3';
+const APP_VERSION='4.4';
 const WB_UPDATE_ATTEMPT_KEY='wrongbook_update_attempt_v311';
 
 function versionParts311(v){
@@ -2321,7 +2515,7 @@ async function initAutoUpdate311(){
   }catch(e){}
   setTimeout(checkOnlineVersion,900);
 }
-/* V4.0.3: automatic update checking disabled. GitHub Pages version is shown directly. */
+/* V4.4: automatic update checking disabled. GitHub Pages version is shown directly. */
 try{sessionStorage.removeItem(WB_UPDATE_ATTEMPT_KEY)}catch(e){}
 if('serviceWorker' in navigator){
   navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister().catch(()=>{}))).catch(()=>{});
@@ -8064,149 +8258,10 @@ input,textarea,select{font-size:16px!important;-webkit-text-size-adjust:100%!imp
 #modal:not(.on){display:none!important;pointer-events:none!important}
 #examBuilderPage318:not(.on){display:none!important;pointer-events:none!important}
 </style>
-<script id="v401-ios-touch-fix">
-(function(){
-  function hardResetZoom401(){
-    try{document.activeElement && document.activeElement.blur && document.activeElement.blur()}catch(e){}
-    document.documentElement.style.zoom='1';
-    document.body.style.zoom='1';
-    document.documentElement.style.transform='none';
-    document.body.style.transform='none';
-    window.scrollTo({left:0,top:window.scrollY||0,behavior:'auto'});
-  }
-  window.addEventListener('pageshow',()=>setTimeout(hardResetZoom401,0));
-  window.addEventListener('orientationchange',()=>setTimeout(hardResetZoom401,120));
-
-  function forceOpenBuilder401(){
-    try{
-      hardResetZoom401();
-      // 先彻底释放旧版 modal/body 锁，避免透明层吞掉点击。
-      document.body.classList.remove('examBuilderLock317','editing3612');
-      document.body.style.top='';
-      const old=document.getElementById('modal');
-      if(old && !old.classList.contains('on')) old.style.pointerEvents='none';
-      if(typeof window.openExamBuilderV35!=='function') throw new Error('组卷函数未加载');
-      window.openExamBuilderV35();
-      const page=document.getElementById('examBuilderPage318');
-      if(page){page.style.pointerEvents='auto';page.classList.add('on')}
-    }catch(err){
-      console.error('V4.0.1 open builder failed',err);
-      alert('组卷页面打开失败：'+(err?.message||err));
-    }
-  }
-
-  // 不再只依赖 inline onclick；在捕获阶段直接处理 iPhone tap。
-  let lastTap401=0;
-  document.addEventListener('touchend',function(e){
-    const btn=e.target.closest?.('#examBankTop362 button');
-    if(!btn)return;
-    e.preventDefault();e.stopPropagation();
-    lastTap401=Date.now();
-    forceOpenBuilder401();
-  },{capture:true,passive:false});
-  document.addEventListener('click',function(e){
-    const btn=e.target.closest?.('#examBankTop362 button');
-    if(!btn)return;
-    if(Date.now()-lastTap401<700){e.preventDefault();e.stopPropagation();return}
-    e.preventDefault();e.stopPropagation();
-    forceOpenBuilder401();
-  },true);
-
-  // 组卷页返回/关闭/生成同样走委托，避免 DOM 重绘后监听丢失。
-  let lastBuilderTap401=0;
-  function builderAction401(el){
-    if(el?.id==='eb318Back'||el?.id==='eb318Close'){
-      try{window.closeExamBuilder318?.()}catch(e){console.error(e)}
-      setTimeout(hardResetZoom401,0);return;
-    }
-    if(el?.id==='eb318Generate'){
-      try{window.generateExam318?.()}catch(e){console.error(e);alert('无法生成试卷：'+(e?.message||e))}
-    }
-  }
-  document.addEventListener('touchend',function(e){
-    const el=e.target.closest?.('#eb318Back,#eb318Close,#eb318Generate');
-    if(!el)return;
-    e.preventDefault();e.stopPropagation();lastBuilderTap401=Date.now();builderAction401(el);
-  },{capture:true,passive:false});
-  document.addEventListener('click',function(e){
-    const el=e.target.closest?.('#eb318Back,#eb318Close,#eb318Generate');
-    if(!el)return;
-    if(Date.now()-lastBuilderTap401<700){e.preventDefault();e.stopPropagation();return}
-    e.preventDefault();e.stopPropagation();builderAction401(el);
-  },true);
-
-  // 输入框结束编辑后立刻恢复 1:1，避免 iOS 键盘收起后页面残留放大。
-  document.addEventListener('focusout',function(e){
-    if(e.target.matches?.('input,textarea,select'))setTimeout(hardResetZoom401,80);
-  },true);
-
-  // 确保首页/设置页展示的版本号同步。
-  function syncVersion401(){
-    document.querySelectorAll('.versionBadge,[data-version],.ver').forEach(el=>{
-      if(/^V?3\.|^V?4\.0$/.test((el.textContent||'').trim())) el.textContent='V4.0.3';
-    });
-  }
-  setTimeout(syncVersion401,0);
-})();
-</script>
-
-
-
-<script id="v403-root-fix">
-/* V4.0.3 root fix: the final V4.0 builder referenced ensureBuilder318 from an older private IIFE.
-   That identifier was out of scope, so openExamBuilderV35 failed before the page could be shown. */
-window.ensureBuilder318=function(){
-  let el=document.getElementById('examBuilderPage318');
-  if(el)return el;
-  el=document.createElement('div');
-  el.id='examBuilderPage318';
-  el.innerHTML='<div class="eb318Shell"><div class="eb318Head"><button type="button" id="eb318Back">‹ 返回</button><b>生成随机试卷</b><button type="button" class="eb318Close" id="eb318Close">×</button></div><div class="eb318Scroll" id="eb318Scroll"></div><div class="eb318Foot"><button type="button" id="eb318Generate">生成新试卷</button><div class="eb318Status" id="eb318Status"></div></div></div>';
-  document.body.appendChild(el);
-  el.querySelector('#eb318Back').addEventListener('click',()=>window.closeExamBuilder318?.());
-  el.querySelector('#eb318Close').addEventListener('click',()=>window.closeExamBuilder318?.());
-  el.querySelector('#eb318Generate').addEventListener('click',()=>window.generateExam318?.());
-  return el;
-};
-/* Keep the displayed badge in lockstep with the actual build, without network update toasts. */
-window.addEventListener('DOMContentLoaded',()=>{
-  document.querySelectorAll('.versionBadge,[data-version],.ver').forEach(el=>{
-    const t=(el.textContent||'').trim();
-    if(/^V?\d+\.\d+/.test(t))el.textContent='V4.0.3';
-  });
-  const toast=document.getElementById('updateToast311');if(toast)toast.remove();
-});
-</script>
 <style id="v402-exam-entry-fix">
 #examBankTop402{margin-bottom:12px;position:relative;z-index:2;overflow:hidden}
 #examBankTop402 .row,#examBankTop402 .row>div{min-width:0}
 #examBankTop402 button{position:relative;z-index:4;pointer-events:auto!important;touch-action:manipulation!important;-webkit-tap-highlight-color:transparent}
 </style>
-<script id="v402-exam-entry-fix">
-/* V4.0.2: isolate the exam-entry button from legacy capture listeners. */
-window.openExamBuilder402=function(ev){
-  try{
-    if(ev){ev.preventDefault?.();ev.stopPropagation?.();}
-    document.activeElement?.blur?.();
-    document.body.classList.remove('examBuilderLock317','editing3612');
-    document.body.style.top='';
-    const old=document.getElementById('modal');
-    if(old&&!old.classList.contains('on')) old.style.pointerEvents='none';
-    if(typeof window.openExamBuilderV35!=='function') throw new Error('组卷模块未加载');
-    window.openExamBuilderV35();
-    setTimeout(()=>{
-      const page=document.getElementById('examBuilderPage318');
-      if(!page||!page.classList.contains('on')){
-        console.error('V4.0.3 builder did not open');
-        alert('组卷页面没有成功打开，请刷新一次页面后重试。');
-      }
-    },80);
-  }catch(err){
-    console.error('V4.0.3 open exam failed',err);
-    alert('组卷页面打开失败：'+(err?.message||err));
-  }
-};
-/* If the page came from an older update URL, clear stale publishing-attempt state. */
-try{sessionStorage.removeItem('wrongbook_update_attempt_v311')}catch(e){}
-</script>
 
 </body></html>
