@@ -9,7 +9,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="错题本" name="apple-mobile-web-app-title"/>
-<meta content="5.1" name="wrongbook-version"/>
+<meta content="5.2" name="wrongbook-version"/>
 <meta content="yes" name="mobile-web-app-capable"/>
 <link href="./manifest.webmanifest" rel="manifest"/>
 <title>错题本</title>
@@ -1109,7 +1109,7 @@ body.qEditLock393{
 </style>
 </head>
 <body>
-<div class="app"><header><div class="row"><img alt="错题本" class="appMark" id="headerAppIcon" src="./icon.png?v=32"/><div><h1>错题本 <span class="versionBadge">V5.1</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
+<div class="app"><header><div class="row"><img alt="错题本" class="appMark" id="headerAppIcon" src="./icon.png?v=32"/><div><h1>错题本 <span class="versionBadge">V5.2</span></h1><div class="mut" id="today"></div></div></div><button class="secondary" onclick="newBook()">＋ 科目</button></header>
 <main><div class="updateBanner" id="updateBanner"></div>
 <section class="page on" id="home"><div class="card row between"><div><div class="small">今日待背</div><div class="stat" id="due">0</div></div><button class="primary" onclick="startMemory()">开始复习</button></div><div class="section">错题本</div><div class="grid" id="books"></div><div class="section">学习概览</div><div class="grid"><div class="card"><div class="small">总题目</div><div class="stat" id="total">0</div></div><div class="card"><div class="small">已掌握</div><div class="stat" id="master">0</div></div></div></section>
 <section class="page" id="bank">
@@ -1121,9 +1121,9 @@ body.qEditLock393{
 </div>
 <div class="section">题库</div><input class="search" id="search" oninput="renderBank()" placeholder="搜索题目 / 知识点"/><div id="bankList"></div></section>
 <section class="page" id="mind"><div id="mindArea36"></div></section><section class="page" id="reader"><div id="readerArea"></div></section><section class="page" id="study"><div id="studyArea"></div></section>
-<section class="page" id="set"><div class="note updateNote">V5.1：新增“设备双向同步包”。iPhone / iPad 的 IndexedDB 本身互不共享；任一设备新增题目后，导出同步包并在另一台设备“合并同步包”，会合并新增题目和框架，不再用旧备份覆盖。</div><div class="section">设置</div>
+<section class="page" id="set"><div class="note updateNote">V5.2：新增“设备双向同步包”。iPhone / iPad 的 IndexedDB 本身互不共享；任一设备新增题目后，导出同步包并在另一台设备“合并同步包”，会合并新增题目和框架，不再用旧备份覆盖。</div><div class="section">设置</div>
 <div class="card"><b>版本与主屏幕</b>
-<p class="small">当前版本：V5.1。题库继续使用原 IndexedDB。完整备份用于整机恢复；设备同步包用于 iPhone / iPad 双向合并新增题目、答案、L1/L2 框架和学习记录。</p>
+<p class="small">当前版本：V5.2。题库继续使用原 IndexedDB。完整备份用于整机恢复；设备同步包用于 iPhone / iPad 双向合并新增题目、答案、L1/L2 框架和学习记录。</p>
 <div class="statusBox" id="dataStatus">正在检查本地题库…</div>
 </div>
 <div class="card"><b>恢复旧封面 / 内页设置</b>
@@ -7823,7 +7823,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 <style id="v460-style">
-/* ===== V5.1 reader / listening / sync ===== */
+/* ===== V5.2 reader / listening / sync ===== */
 #search{outline:none!important;box-shadow:none!important;border-color:var(--line,#dedbd5)!important;-webkit-appearance:none!important}
 #search:focus{outline:none!important;box-shadow:none!important;border-color:#cfcac2!important}
 .readerTypeBar460{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:9px 0 10px}
@@ -7918,7 +7918,7 @@ function richer(a,b){if(Array.isArray(a)||Array.isArray(b)){let A=Array.isArray(
 function mergeQ(local,inc){const keep=['answer','ans','answerText','tag','note','source','sourceQuestionNo','frameworkL1','frameworkL2','memoryMap','memoryTree36','frameworkL1Color','frameworkL2Color','options','opts'];for(const k of keep)if(inc[k]!==undefined)local[k]=richer(local[k],inc[k]);for(const k of ['right','wrong','level'])local[k]=Math.max(Number(local[k]||0),Number(inc[k]||0));if(!local.created&&inc.created)local.created=inc.created;return local}
 async function snapshot(type){try{await wbPersistNow310()}catch(_){}const books=JSON.parse(JSON.stringify(D.books||[])),qs=JSON.parse(JSON.stringify(D.qs||[])),covers={};if(typeof coverGet395==='function'){for(const b of books){try{const x=await coverGet395(b.id);if(x)covers[String(b.id)]=await blobToDataURL450(x)}catch(_){}}}return{type,schemaVersion:3,appVersion:V,exportedAt:new Date().toISOString(),books,qs,covers}}
 function download(obj,name){const u=URL.createObjectURL(new Blob([JSON.stringify(obj,null,2)],{type:'application/json;charset=utf-8'}));const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500)}
-window.exportDeviceSync460=async function(){const p=await snapshot('wrongbook_device_merge_sync');download(p,'V5.1设备双向同步包.json')};
+window.exportDeviceSync460=async function(){const p=await snapshot('wrongbook_device_merge_sync');download(p,'V5.2设备双向同步包.json')};
 window.importDeviceSync460=function(){document.getElementById('syncImp460')?.click()};
 async function mergePack(raw){const incoming=normalizeImportedData(raw),localBooks=D.books||[],nameMap=new Map(localBooks.map(b=>[clean(bookName(b)),b])),idMap=new Map();let newBooks=0,newQs=0,merged=0;for(const ib of incoming.books||[]){let lb=nameMap.get(clean(bookName(ib)));if(!lb){lb=JSON.parse(JSON.stringify(ib));if(localBooks.some(x=>String(x.id)===String(lb.id)))lb.id='b'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);localBooks.push(lb);nameMap.set(clean(bookName(lb)),lb);newBooks++}idMap.set(String(ib.id),String(lb.id))}const localQMap=new Map();for(const q of D.qs||[]){const b=localBooks.find(x=>String(x.id)===String(bookIdOf(q)));localQMap.set(qKey(q,bookName(b||{})),q)}for(const iq0 of incoming.qs||[]){const iq=JSON.parse(JSON.stringify(iq0)),mapped=idMap.get(String(bookIdOf(iq)))||String(bookIdOf(iq)||'');iq.book=mapped;iq.bookId=mapped;const b=localBooks.find(x=>String(x.id)===mapped),k=qKey(iq,bookName(b||{})),lq=localQMap.get(k);if(lq){mergeQ(lq,iq);merged++;continue}if((D.qs||[]).some(x=>String(x.id)===String(iq.id)))iq.id='q'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);D.qs.push(iq);localQMap.set(k,iq);newQs++}D.books=localBooks;await wbPersistNow310();if(raw?.covers&&typeof coverPut395==='function'){for(const [oldId,data] of Object.entries(raw.covers)){try{const nid=idMap.get(String(oldId))||oldId,blob=dataURLToBlob450(data);if(blob)await coverPut395(nid,blob)}catch(_){}}}render();renderV3Books?.();hydrateCoverImages395?.();updateDataStatus?.();return{newBooks,newQs,merged}}
 function bindSyncInput(){let inp=document.getElementById('syncImp460');if(!inp){inp=document.createElement('input');inp.type='file';inp.accept='.json,application/json';inp.hidden=true;inp.id='syncImp460';document.body.appendChild(inp)}inp.onchange=()=>{let f=inp.files?.[0];if(!f)return;let r=new FileReader();r.onload=async()=>{try{let raw=JSON.parse(String(r.result||''));if(!confirm('将把这份同步包与当前题库“合并”。\n不会删除当前设备独有题目。继续吗？'))return;let x=await mergePack(raw);alert(`双向合并完成：新增 ${x.newQs} 道题，合并更新 ${x.merged} 道，新增 ${x.newBooks} 本错题本。\n现在可再导出同步包回传到另一台设备。`)}catch(err){alert('同步失败：'+(err?.message||err))}finally{inp.value=''}};r.readAsText(f)}}
@@ -7927,13 +7927,13 @@ function bindSyncInput(){let inp=document.getElementById('syncImp460');if(!inp){
 const oldFW=window.openFramework312;
 if(typeof oldFW==='function')window.openFramework312=function(){const r=oldFW.apply(this,arguments);setTimeout(()=>{const host=document.querySelector('.fw312 .fwMode312');if(host&&!document.getElementById('fwSprint460')){const d=document.createElement('div');d.id='fwSprint460';d.className='fwSprint460';d.innerHTML=`<b>考前冲刺建议：</b>不再要求每题完整默写。先看题目，用 8–12 秒回忆 L1；卡住再看 L2；最后只用完整答案校正遗漏。每天把“听读 + L1主动回忆”作为主循环。<div class="fwSprintBtns460"><button onclick="openAudio460('${fw312.book}','short')">🎧 听本书简答</button><button onclick="openAudio460('${fw312.book}','essay')">🎧 听本书论述</button></div>`;host.parentNode.insertBefore(d,host)}},0);return r};
 
-function init(){document.querySelector('meta[name="wrongbook-version"]')?.setAttribute('content',V);document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V5.1');bindSyncInput();const dm=[...document.querySelectorAll('#set .card')].find(c=>c.textContent.includes('数据管理'));if(dm&&!document.getElementById('syncCard460')){const d=document.createElement('div');d.id='syncCard460';d.className='card syncCard460';d.innerHTML='<b>设备双向同步</b><p class="small">静态网页的 IndexedDB 在 iPhone 和 iPad 上是两套独立数据库，不能凭空自动互通。V5.1 用“合并同步包”解决：哪台设备新增了题目，就从那台导出；另一台合并后不会删除自己独有的数据。</p><div class="syncBtns460"><button class="secondary" onclick="exportDeviceSync460()">导出同步包</button><button class="secondary" onclick="importDeviceSync460()">合并同步包</button></div><div class="syncHint460">推荐：学习前同步一次，学习后若另一台设备新增/修改了题目，再反向同步一次。完整备份仍保留用于整机恢复。</div>';dm.insertAdjacentElement('afterend',d)}const note=document.querySelector('#set .updateNote');if(note)note.textContent='V5.1：新增题型分流、简答/论述连续听读、长答案记忆骨架和设备双向合并同步。iPhone / iPad 本地数据库仍彼此独立，跨设备通过同步包合并，不再用旧备份互相覆盖。';const p=document.querySelector('#set .card p.small');if(p&&p.textContent.includes('当前版本'))p.textContent='当前版本：V5.1。完整备份负责整机恢复；设备同步包负责 iPhone / iPad 双向合并。错题笔记新增“选择 / 简答 / 论述”独立入口，简答和论述支持连续系统朗读。'}
+function init(){document.querySelector('meta[name="wrongbook-version"]')?.setAttribute('content',V);document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V5.2');bindSyncInput();const dm=[...document.querySelectorAll('#set .card')].find(c=>c.textContent.includes('数据管理'));if(dm&&!document.getElementById('syncCard460')){const d=document.createElement('div');d.id='syncCard460';d.className='card syncCard460';d.innerHTML='<b>设备双向同步</b><p class="small">静态网页的 IndexedDB 在 iPhone 和 iPad 上是两套独立数据库，不能凭空自动互通。V5.2 用“合并同步包”解决：哪台设备新增了题目，就从那台导出；另一台合并后不会删除自己独有的数据。</p><div class="syncBtns460"><button class="secondary" onclick="exportDeviceSync460()">导出同步包</button><button class="secondary" onclick="importDeviceSync460()">合并同步包</button></div><div class="syncHint460">推荐：学习前同步一次，学习后若另一台设备新增/修改了题目，再反向同步一次。完整备份仍保留用于整机恢复。</div>';dm.insertAdjacentElement('afterend',d)}const note=document.querySelector('#set .updateNote');if(note)note.textContent='V5.2：新增题型分流、简答/论述连续听读、长答案记忆骨架和设备双向合并同步。iPhone / iPad 本地数据库仍彼此独立，跨设备通过同步包合并，不再用旧备份互相覆盖。';const p=document.querySelector('#set .card p.small');if(p&&p.textContent.includes('当前版本'))p.textContent='当前版本：V5.2。完整备份负责整机恢复；设备同步包负责 iPhone / iPad 双向合并。错题笔记新增“选择 / 简答 / 论述”独立入口，简答和论述支持连续系统朗读。'}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 </script>
 
 <style id="v470-style">
-/* ===== V5.1：低点击冲刺复习 / 稳定连续听读 / 错题记录恢复 ===== */
+/* ===== V5.2：低点击冲刺复习 / 稳定连续听读 / 错题记录恢复 ===== */
 :root{--v47-ink:#24221f;--v47-soft:#f1efea;--v47-line:#e3dfd8;--v47-pink:#f3d8dc;--v47-yellow:#f6e8aa}
 button,input,textarea{outline:none!important;-webkit-tap-highlight-color:transparent!important}
 input:focus,textarea:focus,button:focus,button:focus-visible{outline:none!important;box-shadow:none!important}
@@ -8147,7 +8147,7 @@ function renderAudio47(){
   <div class="audioCtl460"><button onclick="moveAudio470(-1)">‹</button><button class="play460" onclick="toggleAudio470()">${A47.playing&&!A47.paused?'暂停':'继续播放'}</button><button onclick="moveAudio470(1)">›</button></div>
   <div class="audioRepeat460"><button class="${A47.repeat===1?'on':''}" onclick="repeatAudio470(1)">每题1遍</button><button class="${A47.repeat===2?'on':''}" onclick="repeatAudio470(2)">2遍</button><button class="${A47.repeat===3?'on':''}" onclick="repeatAudio470(3)">3遍</button></div>
   <div class="audioSettings470"><button class="audioPick470" onclick="pickRate470()"><small>语速</small><b>${rate47()===0.82?'慢速 0.82×':rate47()===1.04?'稍快 1.04×':rate47()===1.16?'冲刺 1.16×':'自然柔和 0.92×'}</b></button><button class="audioPick470" onclick="pickVoice470()"><small>声音</small><b>${esc47(v?.name||'系统中文女声')}</b></button></div>
-  <div class="audioAutoplay470">优先选择设备提供的自然中文女声。iPhone / iPad 可用音色由系统决定；V5.1 会优先匹配婷婷、晓晓、Mei‑Jia 等女声音色。</div></div></div>`;
+  <div class="audioAutoplay470">优先选择设备提供的自然中文女声。iPhone / iPad 可用音色由系统决定；V5.2 会优先匹配婷婷、晓晓、Mei‑Jia 等女声音色。</div></div></div>`;
 }
 function prepare47(){
   clearT47();try{speechSynthesis.cancel()}catch(_){}
@@ -8227,7 +8227,7 @@ function renderFW47(){
   }else{
     const q=qs[F47.i],m=memory47(q);content=`<div class="fw47Card"><div class="fw47Meta"><span class="fw47No">${F47.i+1}</span><span>${cat47(q)==='essay'?'论述题':'简答题'} · 共 ${qs.length} 题</span></div><div class="fw47Q">${esc47(q.text)}</div><div class="fw47Points">${m.heads.slice(0,8).map((x,j)=>`<div class="fw47Point"><i>${j+1}</i><span>${esc47(x)}</span></div>`).join('')}</div><div class="fw47Frame">背诵框架：${esc47(m.frame)}</div><button class="fw47AnswerBtn" onclick="toggleFWAns470(this)">查看完整答案校正遗漏</button><div class="fw47Answer">${esc47(ans47(q))}</div><div class="fw47SingleNav"><button onclick="fwMove470(-1)">‹</button><button class="dark" onclick="openAudio470('${F47.book}','${cat47(q)}',true)">🎧 听这一类</button><button onclick="fwMove470(1)">›</button></div></div>`;
   }
-  $('mindArea36').innerHTML=`<div class="framework470"><div class="fw47Top"><button class="circleBtn" onclick="page('home');renderV3Books()">‹</button><div><b>框架背诵</b><span>V5.1：直接看重点大点 + 一句背诵框架，不再分 L1 / L2</span></div></div><div class="fw47Books">${bookBtns}</div><div class="fw47Modes"><button class="${F47.mode==='fast'?'on':''}" onclick="fwMode470('fast')">重点速览</button><button class="${F47.mode==='single'?'on':''}" onclick="fwMode470('single')">单题背诵</button></div><div class="fw48Search"><div class="fw48SearchBox"><span>⌕</span><input id="fwSearch480" type="search" inputmode="search" autocomplete="off" placeholder="搜索题目 / 答案关键词 / 框架大点" value="${esc47(F47.query)}" oninput="fwSearch480(this.value)"><button type="button" class="${F47.query?'on':''}" onclick="fwClear480()">×</button></div><div class="fw48SearchMeta">${F47.query?`已筛出 ${qs.length} / ${baseQs.length} 题 · 搜索结果直接显示对应重点框架`:`共 ${baseQs.length} 题 · 输入关键词后立即筛选并显示框架`}</div></div><div class="fw47Hint">考前一个月建议：默认用「重点速览」快速建立题目→大点的联系；真正卡住的题再进入单题背诵或连续听读。这里不要求再次录入框架，也不需要先点 L1 再点 L2。</div>${content}</div>`;
+  $('mindArea36').innerHTML=`<div class="framework470"><div class="fw47Top"><button class="circleBtn" onclick="page('home');renderV3Books()">‹</button><div><b>框架背诵</b><span>V5.2：直接看重点大点 + 一句背诵框架，不再分 L1 / L2</span></div></div><div class="fw47Books">${bookBtns}</div><div class="fw47Modes"><button class="${F47.mode==='fast'?'on':''}" onclick="fwMode470('fast')">重点速览</button><button class="${F47.mode==='single'?'on':''}" onclick="fwMode470('single')">单题背诵</button></div><div class="fw48Search"><div class="fw48SearchBox"><span>⌕</span><input id="fwSearch480" type="search" inputmode="search" autocomplete="off" placeholder="搜索题目 / 答案关键词 / 框架大点" value="${esc47(F47.query)}" oninput="fwSearch480(this.value)"><button type="button" class="${F47.query?'on':''}" onclick="fwClear480()">×</button></div><div class="fw48SearchMeta">${F47.query?`已筛出 ${qs.length} / ${baseQs.length} 题 · 搜索结果直接显示对应重点框架`:`共 ${baseQs.length} 题 · 输入关键词后立即筛选并显示框架`}</div></div><div class="fw47Hint">考前一个月建议：默认用「重点速览」快速建立题目→大点的联系；真正卡住的题再进入单题背诵或连续听读。这里不要求再次录入框架，也不需要先点 L1 再点 L2。</div>${content}</div>`;
 }
 window.openFramework312=function(bookId=''){if(bookId)F47.book=String(bookId);renderFW47()};
 window.openFrameworkTab3125=function(btn){try{page('mind',btn)}catch(_){};F47.book=defaultBook47();F47.mode='fast';F47.i=0;renderFW47()};
@@ -8247,9 +8247,9 @@ window.toggleFWAns470=function(btn){const a=btn?.nextElementSibling;if(a){a.clas
 /* ---------- init ---------- */
 function init47(){
   document.querySelector('meta[name="wrongbook-version"]')?.setAttribute('content',V47);
-  document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V5.1');
-  const note=document.querySelector('#set .updateNote');if(note)note.textContent='V5.1：修复错题本“相册内页”保存后仍显示旧预设的问题；更换内页后会立即重新读取当前错题本保存的图片并应用，切回预设也会立即生效。';
-  const p=[...document.querySelectorAll('#set .card p.small')].find(x=>x.textContent.includes('当前版本'));if(p)p.textContent='当前版本：V5.1。题库、错题记录与双向同步继续沿用原 IndexedDB；框架背诵不再要求 L1/L2，直接由完整答案整理重点大点与背诵框架。';
+  document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V5.2');
+  const note=document.querySelector('#set .updateNote');if(note)note.textContent='V5.2：修复错题本“相册内页”保存后仍显示旧预设的问题；更换内页后会立即重新读取当前错题本保存的图片并应用，切回预设也会立即生效。';
+  const p=[...document.querySelectorAll('#set .card p.small')].find(x=>x.textContent.includes('当前版本'));if(p)p.textContent='当前版本：V5.2。题库、错题记录与双向同步继续沿用原 IndexedDB；框架背诵不再要求 L1/L2，直接由完整答案整理重点大点与背诵框架。';
   // Re-label old sync output to current version.
   if(typeof window.exportDeviceSync460==='function'){
     const old=window.exportDeviceSync460;
@@ -8262,7 +8262,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 
 <style id="v481-paper-fix">
-/* V5.1 inner-page image: always reflect the currently saved mode */
+/* V5.2 inner-page image: always reflect the currently saved mode */
 #readerArea .paper.photo481{
   background-color:#f8f5ef!important;
   background-image:var(--paper-photo481)!important;
@@ -8322,7 +8322,7 @@ async function applyInnerPage481(){
   let blob=null;
   try{
     if(b.pageImageKey && typeof coverGet395==='function') blob=await coverGet395(b.pageImageKey);
-  }catch(e){console.warn('V5.1 page image read failed',e)}
+  }catch(e){console.warn('V5.2 page image read failed',e)}
 
   let url='';
   if(blob){
@@ -8332,7 +8332,7 @@ async function applyInnerPage481(){
     url=String(b.pageImage);
   }
   if(!url){
-    console.warn('V5.1: photo inner-page selected but image data is missing',b.pageImageKey);
+    console.warn('V5.2: photo inner-page selected but image data is missing',b.pageImageKey);
     const subtitle=document.querySelector('#readerArea .readerName .small');
     if(subtitle)subtitle.textContent=subtitle.textContent.replace(/·[^·]*$/,'· 相册内页图片未读取');
     return;
@@ -8389,7 +8389,7 @@ document.addEventListener('visibilitychange',()=>{
 
 
 <style id="v500-focus-sync">
-/* ===== V5.1：保留原阅读页 + 可选专注全屏 ===== */
+/* ===== V5.2：保留原阅读页 + 可选专注全屏 ===== */
 .readerFocusEntry500{
   display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px;
 }
@@ -8542,7 +8542,7 @@ body.readerFocus500 #readerArea .pageNo{
 <script id="v490-sync-focus">
 (function(){
 'use strict';
-const V490='5.1';
+const V490='5.2';
 const SYNC_KEYS490=[
   /^wrongbook_reader_pos_/,
   /^wrongbook_reader_last_/,
@@ -8614,7 +8614,7 @@ function restoreReaderMap490(map){
   }
 }
 
-/* ----- Full backup V5.1: exact local mirror ----- */
+/* ----- Full backup V5.2: exact local mirror ----- */
 window.exportData=async function(){
   const btn=document.querySelector('button[onclick="exportData()"]');
   const old=btn?.textContent||'导出全部备份';
@@ -8666,7 +8666,7 @@ window.importBackupFile=function(file){
       const raw=JSON.parse(r.result);
       if(raw?.type!=='wrongbook_local_mirror_backup'||Number(raw?.schemaVersion)<3){
         if(typeof oldImport490==='function')return oldImport490(file);
-        throw new Error('这不是 V5.1 本地镜像备份');
+        throw new Error('这不是 V5.2 本地镜像备份');
       }
       const books=Array.isArray(raw.books)?raw.books:[];
       const qs=Array.isArray(raw.qs)?raw.qs:[];
@@ -8692,7 +8692,7 @@ window.importBackupFile=function(file){
 };
 
 
-/* ----- V5.1 Reader focus: OPTIONAL, original page remains default ----- */
+/* ----- V5.2 Reader focus: OPTIONAL, original page remains default ----- */
 let focusTouch500=null, focusHintTimer500=null;
 
 function addFocusEntry500(){
@@ -8836,9 +8836,9 @@ window.page=function(id){
 /* Version text */
 function init500(){
   document.querySelector('meta[name="wrongbook-version"]')?.setAttribute('content','5.0');
-  document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V5.1');
+  document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V5.2');
   const note=document.querySelector('#set .updateNote');
-  if(note)note.textContent='V5.1：保留原错题笔记页面和错题记录；专注全屏改为手动进入，不再强制切换。普通模式翻题保持当前位置；专注模式左右滑动换题、上下滑动查看长答案，并继续保留 V4.9 本地镜像同步。';
+  if(note)note.textContent='V5.2：保留原错题笔记页面和错题记录；专注全屏改为手动进入，不再强制切换。普通模式翻题保持当前位置；专注模式左右滑动换题、上下滑动查看长答案，并继续保留 V4.9 本地镜像同步。';
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init500,{once:true});else init500();
 })();
@@ -8846,7 +8846,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 
 <style id="v510-focus-fix">
-/* ===== V5.1 专注全屏修复：真实全屏、动态排版、可点击翻题 ===== */
+/* ===== V5.2 专注全屏修复：真实全屏、动态排版、可点击翻题 ===== */
 body.readerFocus500 #readerArea .qCard{
   justify-content:center!important;
   padding:clamp(12px,2.2vh,22px)!important;
@@ -8900,7 +8900,7 @@ body.readerFocus500 #readerArea .paperInner{
 
 /* V5.0 的翻题函数错误依赖了 V4.7 IIFE 内的私有变量 bookQs47/rf47，
    在最终脚本作用域中拿不到，所以左右按钮实际得到空题目数组。
-   V5.1 在最终作用域重新建立独立题目分类与列表，不再依赖旧私有函数。 */
+   V5.2 在最终作用域重新建立独立题目分类与列表，不再依赖旧私有函数。 */
 function cat510(q){
   const t=String(q?.type||'').toLowerCase();
   const g=String(q?.tag||q?.category||'').toLowerCase();
@@ -9066,11 +9066,359 @@ if(document.readyState==='loading'){
 /* 版本显示 */
 function init510(){
   document.querySelector('meta[name="wrongbook-version"]')?.setAttribute('content','5.1');
-  document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V5.1');
+  document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V5.2');
   const note=document.querySelector('#set .updateNote');
-  if(note)note.textContent='V5.1：修复专注全屏左右翻题按钮无响应；翻题逻辑不再依赖旧版私有题库变量。专注模式按当前内容动态放大/居中，长答案才启用内部纵向滚动，并继续支持左右滑动换题。';
+  if(note)note.textContent='V5.2：修复专注全屏左右翻题按钮无响应；翻题逻辑不再依赖旧版私有题库变量。专注模式按当前内容动态放大/居中，长答案才启用内部纵向滚动，并继续支持左右滑动换题。';
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init510,{once:true});else init510();
+})();
+</script>
+
+
+<style id="v520-focus-redesign">
+/* ===== V5.2 专注模式：独立全屏题卡，不再复用普通阅读页布局 ===== */
+#focusOverlay520{
+  position:fixed;inset:0;z-index:2147483000;display:none;
+  background:#f7f5f1;color:#24221f;
+  padding:calc(env(safe-area-inset-top) + 12px) 14px calc(env(safe-area-inset-bottom) + 12px);
+  overflow:hidden;
+}
+#focusOverlay520.on{display:flex;flex-direction:column}
+.focusTop520{
+  flex:0 0 auto;display:grid;grid-template-columns:82px 1fr 82px;
+  align-items:center;gap:10px;max-width:760px;width:100%;margin:0 auto 10px;
+}
+.focusTop520 button{
+  min-height:44px;border:1px solid #e1ddd6;background:#fff;border-radius:16px;
+  font-size:13px;font-weight:850;color:#2a2825;
+}
+.focusTop520 .title{text-align:center;min-width:0}
+.focusTop520 .title b{display:block;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.focusTop520 .title span{display:block;font-size:10px;color:#8f877f;margin-top:2px}
+.focusProgress520{
+  flex:0 0 auto;height:6px;border-radius:999px;background:#e9e5df;overflow:hidden;
+  max-width:760px;width:100%;margin:0 auto 12px;
+}
+.focusProgress520 i{display:block;height:100%;background:#d8aeb5;border-radius:999px;transition:width .2s ease}
+
+.focusShell520{
+  flex:1;min-height:0;max-width:760px;width:100%;margin:0 auto;
+  background:rgba(255,255,255,.92);border:1px solid #e5e0d8;border-radius:28px;
+  box-shadow:0 10px 35px rgba(51,43,35,.06);
+  overflow:hidden;display:flex;flex-direction:column;
+}
+.focusScroll520{
+  flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:clamp(18px,3.4vh,30px) clamp(18px,4.6vw,34px) 18px;
+  overscroll-behavior:contain;touch-action:pan-y;
+}
+.focusMeta520{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}
+.focusMeta520 .type{
+  display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:999px;
+  background:#f1eeea;color:#6f675f;font-size:11px;font-weight:820;
+}
+.focusMeta520 .num{font-size:11px;color:#918980}
+.focusQ520{
+  font-size:clamp(23px,6.3vw,34px);line-height:1.34;font-weight:900;
+  letter-spacing:-.02em;margin:8px 0 20px;
+}
+.focusOptions520{display:grid;gap:10px}
+.focusOption520{
+  width:100%;border:1px solid #ddd8d1;background:#fff;border-radius:18px;
+  padding:15px 16px;display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;
+  text-align:left;font-size:clamp(15px,4.1vw,20px);line-height:1.38;color:#2a2825;
+  min-height:58px;
+}
+.focusOption520 b{color:#a96f79;font-size:19px}
+.focusOption520.correct{border-color:#98b9a0;background:#f0f6f1}
+.focusOption520.wrong{border-color:#d9a2a2;background:#fbf0f0}
+.focusFeedback520{
+  margin-top:12px;padding:12px 14px;border-radius:15px;background:#f4f1ec;
+  font-size:12px;line-height:1.55;color:#6e665f;
+}
+.focusPoints520{display:grid;gap:9px;margin-top:4px}
+.focusPoint520{
+  display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;
+  padding:12px 13px;border-radius:16px;background:#faf8f5;border:1px solid #eee9e3;
+  font-size:clamp(14px,3.8vw,18px);line-height:1.48;font-weight:760;
+}
+.focusPoint520 i{
+  width:30px;height:30px;border-radius:11px;background:#f1d6db;
+  display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:900;
+}
+.focusAnswerToggle520{
+  width:100%;margin-top:14px;min-height:48px;border:0;border-radius:16px;
+  background:#26231f;color:#fff;font-size:14px;font-weight:850;
+}
+.focusAnswer520{
+  display:none;margin-top:12px;padding:14px;border-radius:16px;background:#f7f4ef;
+  white-space:pre-wrap;font-size:clamp(13px,3.55vw,17px);line-height:1.72;
+}
+.focusAnswer520.on{display:block}
+.focusMissing520{
+  margin-top:6px;padding:15px;border-radius:16px;background:#f7f4ef;color:#8b827a;
+  font-size:13px;line-height:1.6;text-align:center;
+}
+.focusBottom520{
+  flex:0 0 auto;max-width:760px;width:100%;margin:10px auto 0;
+  display:grid;grid-template-columns:58px 1fr 58px;gap:10px;align-items:center;
+}
+.focusBottom520 button{
+  height:54px;border:1px solid #e1ddd6;background:#fff;border-radius:18px;
+  font-size:25px;font-weight:900;color:#292722;touch-action:manipulation;
+}
+.focusBottom520 button:disabled{opacity:.28}
+.focusCount520{text-align:center;font-size:12px;color:#8b837b}
+.focusHint520{
+  position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom));
+  transform:translateX(-50%);background:rgba(38,35,31,.76);color:#fff;
+  padding:5px 9px;border-radius:999px;font-size:9px;pointer-events:none;
+  opacity:0;transition:opacity .2s;z-index:2147483002;
+}
+.focusHint520.on{opacity:1}
+@media(min-width:700px){
+  #focusOverlay520{padding-left:28px;padding-right:28px}
+  .focusQ520{font-size:34px}
+  .focusOption520{font-size:20px;padding:17px 18px}
+  .focusPoint520{font-size:18px}
+}
+</style>
+
+<div id="focusOverlay520" aria-hidden="true">
+  <div class="focusTop520">
+    <button type="button" id="focusExit520">退出</button>
+    <div class="title"><b id="focusBook520">专注做题</b><span id="focusMode520"></span></div>
+    <button type="button" id="focusAnswerTop520">答案</button>
+  </div>
+  <div class="focusProgress520"><i id="focusProgressBar520"></i></div>
+  <div class="focusShell520">
+    <div class="focusScroll520" id="focusScroll520"></div>
+  </div>
+  <div class="focusBottom520">
+    <button type="button" id="focusPrev520">‹</button>
+    <div class="focusCount520" id="focusCount520"></div>
+    <button type="button" id="focusNext520">›</button>
+  </div>
+</div>
+<div id="focusHint520" class="focusHint520">左右滑动换题 · 上下滑动看完整答案</div>
+
+<script id="v520-focus-redesign-script">
+(function(){
+'use strict';
+const F520={book:null,filter:'all',list:[],i:0,touch:null};
+
+function e520(s){
+  try{return esc(String(s??''))}catch(_){
+    return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))
+  }
+}
+function cat520(q){
+  const t=String(q?.type||'').toLowerCase(),g=String(q?.tag||q?.category||'').toLowerCase();
+  const o=q?.opts||q?.options||[];
+  if(/choice|选择/.test(t)||/选择题/.test(g)||(Array.isArray(o)&&o.length>1))return'choice';
+  if(/essay|论述/.test(t)||/论述/.test(g))return'essay';
+  if(/short|简答/.test(t)||/简答/.test(g))return'short';
+  return'other';
+}
+function answer520(q){
+  return String(
+    q?.answerText ??
+    q?.standardAnswer ??
+    q?.referenceAnswer ??
+    q?.answer ??
+    q?.ans ??
+    q?.solution ??
+    q?.analysis ??
+    ''
+  ).trim();
+}
+function optionText520(o){
+  return String(typeof o==='string'?o:(o?.text??o?.label??'')).replace(/^[A-D][\.、．\s]+/i,'').trim();
+}
+function answerLetter520(q){
+  const a=String(q?.ans??q?.answer??q?.correctAnswer??'').trim().toUpperCase();
+  if(/^[A-D]$/.test(a))return a;
+  const n=Number(q?.correctIndex??q?.answerIndex);
+  return Number.isInteger(n)&&n>=0&&n<4?'ABCD'[n]:'';
+}
+function splitPoints520(text){
+  let s=String(text||'').replace(/\r/g,'\n').trim();
+  if(!s)return[];
+  let arr=s.split(/(?=(?:^|\n|\s)(?:（\d+）|\(\d+\)|[①②③④⑤⑥⑦⑧⑨⑩]))/).map(x=>x.trim()).filter(Boolean);
+  if(arr.length<2)arr=s.split(/\n+/).map(x=>x.trim()).filter(Boolean);
+  if(arr.length<2){
+    const sem=s.split(/[；;]/).map(x=>x.trim()).filter(Boolean);
+    if(sem.length>=2)arr=sem;
+  }
+  if(arr.length<2){
+    const sentences=(s.match(/[^。！？]{5,90}[。！？]?/g)||[]).map(x=>x.trim()).filter(Boolean);
+    if(sentences.length>=2)arr=sentences;
+  }
+  return arr.slice(0,10);
+}
+function pointHead520(x){
+  let s=String(x||'').replace(/^(?:（\d+）|\(\d+\)|[①②③④⑤⑥⑦⑧⑨⑩])\s*/,'').trim();
+  s=s.replace(/^答[:：]?\s*/,'');
+  const first=s.split(/[。；：]/)[0].trim();
+  if(first.length<=50)return first||s;
+  return first.slice(0,50)+'…';
+}
+function currentFilter520(){
+  const on=document.querySelector('#readerArea .readerTypeBar460 button.on');
+  const t=String(on?.textContent||'').trim();
+  if(t.startsWith('选择'))return'choice';
+  if(t.startsWith('简答'))return'short';
+  if(t.startsWith('论述'))return'essay';
+  return'all';
+}
+function list520(book,filter){
+  const all=(D.qs||[]).filter(q=>String(bookIdOf(q))===String(book));
+  return filter==='all'?all:all.filter(q=>cat520(q)===filter);
+}
+function savePos520(){
+  try{
+    localStorage.setItem(`wrongbook_reader_pos_v470_${F520.book}_${F520.filter}`,String(F520.i));
+    localStorage.setItem(`wrongbook_reader_pos_v460_${F520.book}_${F520.filter}`,String(F520.i));
+  }catch(_){}
+  readerV3.i=F520.i;
+}
+function modeName520(f){
+  return f==='choice'?'选择题':f==='short'?'简答题':f==='essay'?'论述题':'全部题目';
+}
+function render520(){
+  const q=F520.list[F520.i];
+  const b=(D.books||[]).find(x=>String(x.id)===String(F520.book));
+  if(!q)return;
+  document.getElementById('focusBook520').textContent=b?bookTitleV3(b):'专注做题';
+  document.getElementById('focusMode520').textContent=modeName520(F520.filter);
+  document.getElementById('focusCount520').textContent=`${F520.i+1} / ${F520.list.length}`;
+  document.getElementById('focusProgressBar520').style.width=`${(F520.i+1)/Math.max(1,F520.list.length)*100}%`;
+  document.getElementById('focusPrev520').disabled=F520.i<=0;
+  document.getElementById('focusNext520').disabled=F520.i>=F520.list.length-1;
+
+  const c=cat520(q), host=document.getElementById('focusScroll520');
+  let body=`<div class="focusMeta520"><span class="type">题号 ${F520.i+1} · ${c==='choice'?'选择题':c==='short'?'简答题':c==='essay'?'论述题':'题目'}</span><span class="num">${F520.i+1}/${F520.list.length}</span></div><div class="focusQ520">${e520(q.text)}</div>`;
+
+  if(c==='choice'){
+    const opts=q.opts||q.options||[],correct=answerLetter520(q);
+    body+=`<div class="focusOptions520">${opts.map((o,i)=>`<button type="button" class="focusOption520" data-choice="${i}"><b>${'ABCD'[i]}</b><span>${e520(optionText520(o))}</span></button>`).join('')}</div><div id="focusFeedback520"></div>`;
+    document.getElementById('focusAnswerTop520').style.visibility='hidden';
+  }else{
+    const ans=answer520(q), pts=splitPoints520(ans), heads=pts.map(pointHead520).filter(Boolean);
+    if(heads.length){
+      body+=`<div class="focusPoints520">${heads.map((x,i)=>`<div class="focusPoint520"><i>${i+1}</i><span>${e520(x)}</span></div>`).join('')}</div>`;
+    }else{
+      body+=`<div class="focusMissing520">这道题当前没有读取到标准答案大点。V5.2 已兼容 answerText / standardAnswer / referenceAnswer / answer 等字段；若仍为空，则该题本身没有保存答案。</div>`;
+    }
+    body+=`<button type="button" class="focusAnswerToggle520" id="focusAnswerToggle520">查看完整答案</button><div class="focusAnswer520" id="focusAnswer520">${ans?e520(ans):'暂无标准答案'}</div>`;
+    document.getElementById('focusAnswerTop520').style.visibility='visible';
+  }
+  host.innerHTML=body;
+  host.scrollTop=0;
+
+  if(c==='choice'){
+    host.querySelectorAll('.focusOption520').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const picked='ABCD'[Number(btn.dataset.choice)],correct=answerLetter520(q);
+        host.querySelectorAll('.focusOption520').forEach((x,i)=>{
+          const l='ABCD'[i];
+          if(l===correct)x.classList.add('correct');
+          if(l===picked&&picked!==correct)x.classList.add('wrong');
+        });
+        const fb=document.getElementById('focusFeedback520');
+        if(fb)fb.innerHTML=`<div class="focusFeedback520">${picked===correct?'回答正确':'回答错误'}${correct?` · 正确答案：${correct}`:''}</div>`;
+        try{readerPick?.(q.id,Number(btn.dataset.choice))}catch(_){}
+      });
+    });
+  }else{
+    const toggle=()=>{
+      const a=document.getElementById('focusAnswer520');
+      if(!a)return;
+      a.classList.toggle('on');
+      const on=a.classList.contains('on');
+      const b=document.getElementById('focusAnswerToggle520');
+      if(b)b.textContent=on?'收起完整答案':'查看完整答案';
+      document.getElementById('focusAnswerTop520').textContent=on?'收起':'答案';
+    };
+    document.getElementById('focusAnswerToggle520')?.addEventListener('click',toggle);
+    document.getElementById('focusAnswerTop520').onclick=toggle;
+  }
+  savePos520();
+}
+function move520(d){
+  const n=F520.i+d;
+  if(n<0||n>=F520.list.length)return;
+  F520.i=n;
+  try{
+    const q=F520.list[n];
+    if(q&&typeof v390SaveReaderProgress==='function')v390SaveReaderProgress(F520.book,q.id);
+  }catch(_){}
+  render520();
+}
+window.enterReaderFocus500=function(){
+  F520.book=readerV3.book;
+  F520.filter=currentFilter520();
+  F520.list=list520(F520.book,F520.filter);
+  F520.i=Math.max(0,Math.min(Number(readerV3.i||0),Math.max(0,F520.list.length-1)));
+  const ov=document.getElementById('focusOverlay520');
+  ov.classList.add('on');ov.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  render520();
+  const h=document.getElementById('focusHint520');h.classList.add('on');setTimeout(()=>h.classList.remove('on'),850);
+};
+window.exitReaderFocus500=function(){
+  const ov=document.getElementById('focusOverlay520');
+  ov.classList.remove('on');ov.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+  readerV3.i=F520.i;savePos520();
+  try{window.drawReaderV3?.()}catch(_){}
+};
+window.toggleReaderFocus500=function(){
+  if(document.getElementById('focusOverlay520')?.classList.contains('on'))exitReaderFocus500();
+  else enterReaderFocus500();
+};
+document.getElementById('focusExit520').addEventListener('click',()=>exitReaderFocus500());
+document.getElementById('focusPrev520').addEventListener('click',()=>move520(-1));
+document.getElementById('focusNext520').addEventListener('click',()=>move520(1));
+
+const overlay520=document.getElementById('focusOverlay520');
+overlay520.addEventListener('touchstart',e=>{
+  if(e.touches.length!==1)return;
+  const t=e.touches[0];F520.touch={x:t.clientX,y:t.clientY,time:Date.now(),target:e.target};
+},{passive:true});
+overlay520.addEventListener('touchend',e=>{
+  if(!F520.touch||!e.changedTouches?.length)return;
+  const t=e.changedTouches[0],dx=t.clientX-F520.touch.x,dy=t.clientY-F520.touch.y,dt=Date.now()-F520.touch.time;
+  const fromControl=F520.touch.target?.closest?.('button,input,textarea,select');
+  F520.touch=null;
+  if(fromControl||dt>900)return;
+  if(Math.abs(dx)>58&&Math.abs(dx)>Math.abs(dy)*1.35)move520(dx<0?1:-1);
+},{passive:true});
+
+/* 让普通阅读页的“专注全屏”入口仍然存在，但由 V5.2 独立 overlay 接管。 */
+function ensureEntry520(){
+  const area=document.getElementById('readerArea');
+  if(!area||area.querySelector('.readerFocusEntry500'))return;
+  const stage=area.querySelector('.readerStage');if(!stage)return;
+  const box=document.createElement('div');box.className='readerFocusEntry500';
+  box.innerHTML='<button class="dark" type="button" onclick="enterReaderFocus500()">⛶ 专注全屏</button><button type="button" onclick="readerScrollToQuestion500?.()">放大当前题目</button>';
+  stage.parentNode.insertBefore(box,stage);
+}
+const draw520=window.drawReaderV3;
+window.drawReaderV3=function(){
+  const r=draw520.apply(this,arguments);
+  requestAnimationFrame(ensureEntry520);
+  return r;
+};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensureEntry520,{once:true});else requestAnimationFrame(ensureEntry520);
+
+function init520(){
+  document.querySelector('meta[name="wrongbook-version"]')?.setAttribute('content','5.2');
+  document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V5.2');
+  const note=document.querySelector('#set .updateNote');
+  if(note)note.textContent='V5.2：专注模式改为独立全屏题卡，参考题库App排版但保留原浅粉/米白审美；简答/论述兼容更多答案字段并直接显示答题大点，可展开完整答案；左右按钮与左右滑动均由独立逻辑控制。';
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init520,{once:true});else init520();
 })();
 </script>
 
